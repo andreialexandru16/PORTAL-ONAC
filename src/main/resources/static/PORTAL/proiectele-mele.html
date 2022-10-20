@@ -1,0 +1,562 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- CSS - jQuery -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- custom scrollbar stylesheet -->
+    <link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.min.css">
+    <!-- CSS - tagify -->
+    <link rel="stylesheet" href="assets/css/tagify.css">
+    <!-- CSS - Sweet Alert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+    <!-- Custom -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/style.css">
+
+</head>
+
+<body>
+<!--[if IE]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    your browser</a> to improve your experience and security.</p>
+<![endif]-->
+<!--
+
+ begin Header
+<div class="header">
+
+     begin Logo / Logout
+    <div class="header_top">
+        <div class="border_top">
+            <div class="container">
+
+                 begin Logo
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="assets/images/logo.png" alt="logo"/>
+                        <span>Intranet</span>
+                        <span>Oficiul Național al Registrului Comerțului</span>
+                    </a>
+                </div>
+                 end Logo
+                <div class="btns_top_header">
+
+                     begin button Home
+                    <a class="btn_home_icon" title="Homepage" href="homepage-autentificat.html"></a>
+                     end button Home
+
+                     begin button Rapoarte
+                    <a class="btn_reports_icon" title="Rapoarte" onclick="Util.openDmsPage('bi_rulare_raport.jsp','_blank')"></a>
+                     end button Rapoarte
+
+                     begin button Inbox
+                    <a class="btn_inbox_icon" title="Inbox" onclick="Util.openDmsPage('fluxuri.jsp','_blank')"></a>
+                     end button Inbox
+
+                     begin button Logout
+                    <a class="btn_logout_icon" title="Iesi din cont" href="#"></a>
+                     end button Logout
+
+                </div>
+
+            </div> end .container
+        </div> end .border_top
+    </div>
+     end Logo / Logout
+
+     begin Menu
+    <div class="box_menu">
+        <div class="container">
+
+             begin Open Menu - mobile
+            <div class="open_menu_mob">
+                <div class="icn_menu_mob">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+             end Open Menu - mobile
+
+            <div class="menu">
+
+                 begin Close Menu - mobile
+                <div class="close_menu_mob">
+                    <div class="icn_menu_mob">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                 end Close Menu - mobile
+
+                <div class="scroll_menu">
+                    <ul>
+                        <li class="menu_dropdown">
+                            <a href="javascript:void(0)"><span>DIRECTOR GENERAL</span></a>
+                            <ul>
+                                <li><a href="index.html">Legislatie</a></li>
+                                <li><a href="index.html">Documentatii</a></li>
+                                <li><a href="index.html">Recomandari</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu_dropdown">
+                            <a href="javascript:void(0)"><span>SRU</span></a>
+                            <ul>
+                                <li><a href="index.html">Legislatie</a></li>
+                                <li><a href="index.html">Documentatii</a></li>
+                                <li><a href="index.html">Recomandari</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu_dropdown">
+                            <a href="javascript:void(0)"><span>DBPI</span></a>
+                            <ul>
+                                <li><a href="index.html">Legislatie</a></li>
+                                <li><a href="index.html">Documentatii</a></li>
+                                <li><a href="index.html">Recomandari</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu_dropdown">
+                            <a href="javascript:void(0)"><span>CONTENCIOS</span></a>
+                            <ul>
+                                <li><a href="index.html">Legislatie</a></li>
+                                <li><a href="index.html">Documentatii</a></li>
+                                <li><a href="index.html">Recomandari</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu_dropdown">
+                            <a href="javascript:void(0)"><span>COMISIA DE ANALIZA</span></a>
+                            <ul>
+                                <li><a href="index.html">Legislatie</a></li>
+                                <li><a href="index.html">Documentatii</a></li>
+                                <li><a href="index.html">Recomandari</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu_dropdown">
+                            <a href="javascript:void(0)"><span>DVDRC</span></a>
+                            <ul>
+                                <li><a href="index.html">Legislatie</a></li>
+                                <li><a href="index.html">Documentatii</a></li>
+                                <li><a href="index.html">Recomandari</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu_dropdown">
+                            <a href="javascript:void(0)"><span>DTI</span></a>
+                            <ul>
+                                <li><a href="index.html">Legislatie</a></li>
+                                <li><a href="index.html">Documentatii</a></li>
+                                <li><a href="index.html">Recomandari</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu_dropdown">
+                            <a href="javascript:void(0)"><span>DMCOA</span></a>
+                            <ul>
+                                <li><a href="index.html">Legislatie</a></li>
+                                <li><a href="index.html">Documentatii</a></li>
+                                <li><a href="index.html">Recomandari</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu_dropdown">
+                            <a href="javascript:void(0)"><span>DE</span></a>
+                            <ul>
+                                <li><a href="index.html">Legislatie</a></li>
+                                <li><a href="index.html">Documentatii</a></li>
+                                <li><a href="index.html">Recomandari</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu_dropdown">
+                            <a href="javascript:void(0)"><span>AUDIT PUBLIC INTERN</span></a>
+                            <ul>
+                                <li><a href="index.html">Legislatie</a></li>
+                                <li><a href="index.html">Documentatii</a></li>
+                                <li><a href="index.html">Recomandari</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div> end .container
+    </div>
+     end Menu
+
+</div>
+ end Header
+-->
+
+<!-- begin Box Content -->
+<div class="box_content">
+    <div class="container">
+        <div class="div_container">
+
+<!--
+             begin Sidebar
+-->
+            <div class="sidebar">
+
+                 begin Show / Hide - sidebar
+                <div class="toggle_sidebar"></div>
+                 end Show / Hide - sidebar
+
+                 begin Content - sidebar
+                <div class="box_content_sidebar">
+                    <div class="content_sidebar">
+
+                         begin Image user - sidebar closed
+                        <div class="sidebar_user_closed">
+                            <div class="img_sidebar_user"><img src="assets/images/user.jpg" alt=""/></div>
+                        </div>
+                         end Image user - sidebar closed
+
+                         begin Logout - sidebar closed
+                        <div class="logout_sidebar">
+                            <div class="btn_logout_sidebar"></div>
+                        </div>
+                         end Logout - sidebar closed
+
+                         begin Search - sidebar closed
+                        <div class="search_slide">
+                            <div class="btn_search"></div>
+                        </div>
+                         end Search - sidebar closed
+
+                         begin Image user
+                        <div class="sidebar_user">
+                            <a href="user-dashboard.html">
+
+
+                                <div class="img_sidebar_user"><img src="assets/images/user.jpg" alt="" /></div>
+                                <p>Bine ai venit, <span>Andrei</span></p>
+                            </a>
+                        </div>
+                         end Image user
+
+                         begin Logout
+                        <a class="btn_blue" href="#">Iesi din cont</a>
+                         end Logout
+
+                         begin Menu - sidebar
+                        <div class="menu_sidebar">
+                            <ul>
+                                <li><a href="#">Prelucrare date cu caracter personal</a></li>
+                                <li class="active"><a href="#">Raspundere penala</a></li>
+                                <li><a href="#">Hotarari de divort</a></li>
+                                <li><a href="#">Raspundere patrimoniala</a></li>
+                                <li><a href="#">Beneficiari reali</a></li>
+                                <li><a href="#">Control intern managerial</a></li>
+                                <li><a href="#">Proceduri</a></li>
+                                <li><a href="#">Informari</a></li>
+                                <li><a href="#">Regulamente</a></li>
+                                <li><a href="#">Protocoale</a></li>
+                                <li><a href="#">Contracte de achizitii</a></li>
+                                <li><a href="#">E-mail-uri personal RC</a></li>
+                                <li><a href="#">Contacte</a></li>
+                            </ul>
+                        </div>
+                         end Menu - sidebar
+
+                         begin Search - sidebar
+                        <div class="box_search_sidebar">
+                            <div class="title_search_sidebar">Cautare</div>
+                            <form method="post" action="#">
+                                <div class="input_search_sidebar">
+                                    <input type="text" placeholder="Numar document" name="">
+                                    <button class="btn_search" type="submit"></button>
+                                </div>
+                                <div class="input_search_sidebar">
+                                    <input type="text" placeholder="Data: 20.04.2020" name="">
+                                    <button class="btn_search" type="submit"></button>
+                                </div>
+                                <div class="input_search_sidebar">
+                                    <input type="text" placeholder="Referitor" name="">
+                                    <button class="btn_search" type="submit"></button>
+                                </div>
+                            </form>
+                        </div>
+                         end Search - sidebar
+
+                         begin Documente - sidebar
+                        <div class="doc_sidebar">
+                            <div class="title_doc_sidebar">
+                                Ultimele documente adaugate
+                            </div>
+                            <ul>
+                                <li><a href="#">2548962 / 14.02.2020</a></li>
+                                <li><a href="#">6562145 / 02.03.2020</a></li>
+                                <li><a href="#">6565992 / 04.04.2020</a></li>
+                                <li><a href="#">2548962 / 14.02.2020</a></li>
+                                <li><a href="#">6562145 / 02.03.2020</a></li>
+                                <li><a href="#">6565992 / 04.04.2020</a></li>
+                            </ul>
+                        </div>
+                         end Documente - sidebar
+
+                    </div>
+                </div>
+                 end Content - sidebar
+
+            </div>
+<!--
+             end Sidebar
+-->
+            <!-- begin Right Side - content -->
+            <div class="right_side">
+                <div class="padding_content">
+                    <div class="div_content">
+
+                        <!-- begin Content -->
+                        <div class="content">
+                            <div class="second_page">
+<!--
+
+                                <div class="checkbox_proiecte">
+                                    <div>
+                                        <div>
+
+                                            &lt;!&ndash; begin Text &ndash;&gt;
+                                            <div class="txt_checkbox_pro">
+                                                Afiseaza:
+                                            </div>
+                                            &lt;!&ndash; end Text &ndash;&gt;
+
+                                            &lt;!&ndash; begin box Checkbox &ndash;&gt;
+                                            <div class="box_checkbox_pro">
+
+                                                &lt;!&ndash; begin Checkbox &ndash;&gt;
+                                                <label class="input_checkbox">
+                                                    <input id="checkbox_proiecte" name="" value="" type="checkbox" onclick="buildProjectContainerFiltered()">
+                                                    <div class="icn_check_checkbox"></div>
+                                                    <div class="txt_input_checkbox">
+                                                        <span>Proiecte</span>
+                                                    </div>
+                                                </label>
+                                                &lt;!&ndash; end Checkbox &ndash;&gt;
+
+                                                &lt;!&ndash; begin Checkbox &ndash;&gt;
+                                                <label class="input_checkbox">
+                                                    <input id="checkbox_zone" name="" value="" type="checkbox" onclick="buildProjectContainerFiltered()">
+                                                    <div class="icn_check_checkbox"></div>
+                                                    <div class="txt_input_checkbox">
+                                                        <span>Zone colaborative</span>
+                                                    </div>
+                                                </label>
+                                                &lt;!&ndash; end Checkbox &ndash;&gt;
+
+                                            </div>
+                                            &lt;!&ndash; begin box Checkbox &ndash;&gt;
+                                        </div>
+                                    </div>
+                                </div>
+-->
+
+                                <!-- begin Box Proiecte -->
+                                <div class="box_proiecte" id="box_proiecte">
+                                    <div class="proiect toggle_proiect ">
+
+                                        <!-- begin Link Proiect -->
+                                        <a class="link_proiect" href="#"></a>
+                                        <!-- end Link Proiect -->
+
+                                        <!-- begin Image -->
+                                        <div class="img_proiect">
+                                            <img src="https://i.imgur.com/HdCEuy9.jpg">
+
+                                            <!-- begin Image - hover -->
+                                            <div class="img_proiect_hov">
+
+                                                <!-- begin Users -->
+                                                <div class="users_proiect">
+                                                    <div><img src="assets/images/user1.jpg" alt=""></div>
+                                                    <div><img src="assets/images/user2.jpg" alt=""></div>
+                                                    <div><img src="assets/images/user3.jpg" alt=""></div>
+                                                    <div class="nr_users">+8</div>
+                                                </div>
+                                                <!-- end Users -->
+
+                                                <!-- begin Dots -->
+                                                <div class="dots_proiect">
+                                                    <span></span>
+                                                    <span></span>
+                                                    <span></span>
+                                                    <div class="dropdown_dots">
+                                                        <ul>
+                                                            <li><a href="#">Duplicate</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- end Dots -->
+
+                                                <!-- begin Vezi / Arhiveaza -->
+                                                <div class="btns_proiect" data-projectid="6015" data-projectnume="Proiect: Valorificare Date Registru Comertului">
+                                                    <a href="proiectele-mele-echipa.html?&amp;id=6015" class="btn_vezi_proiect">Vezi proiectul</a>
+                                                </div>
+                                                <!-- end Vezi / Arhiveaza -->
+
+                                            </div>
+                                            <!-- end Image - hover -->
+
+                                        </div>
+                                        <!-- end Image -->
+
+                                        <!-- begin Title / Calendar etc. -->
+                                        <div class="bottom_proiect">
+                                            <div class="title_proiect"><div><span>Proiect: Valorificare Date Registru Comertului</span></div></div>
+                                            <div class="details_proiect">
+                                                <div class="data_proiect"><div><span>30-03-2020</span></div></div>
+                                                <div class="mesaje_proiect"><div><span>2</span></div></div>
+                                                <div class="checked_proiect"><div><span>2</span></div></div>
+                                            </div>
+                                        </div>
+                                        <!-- end Title / Calendar etc. -->
+
+                                    </div>
+
+                                </div>
+                                <!-- end Box Proiecte -->
+
+                                <!-- begin Buttons - KPI / Proiecte -->
+                              <!--  <div class="btns_proiecte">
+                                    <div>
+                                        <a class="btn_gray_radius" href="#">Vezi KPI</a>
+                                        <a class="btn_blue_radius" href="#">Vezi toate proiectele</a>
+                                    </div>
+                                </div>-->
+                                <!-- end Buttons - KPI / Proiecte -->
+
+                            </div><!-- end .second_page -->
+                        </div>
+                        <!-- begin Content -->
+
+                    <!--     begin Footer
+                        <div class="footer">
+                            <a class="powered" href="#">Powered By Documenta DMS</a>
+                            <a class="logo_footer" href="#"><img style="height: 27px;"
+                                                                 src="assets/images/logo-documenta.png" alt=""/></a>
+                        </div>
+                         end Footer -->
+
+                    </div><!-- end .div_content -->
+                </div><!-- end .padding_content -->
+            </div>
+            <!-- end Right Side - content -->
+
+        </div><!-- end .div_container -->
+    </div><!-- end .container -->
+    <div id="hidden_project">
+        <div class="proiect toggle_proiect ">
+
+            <!-- begin Link Proiect -->
+            <a class="link_proiect" href="proiectele-mele-activitate.html"></a>
+            <!-- end Link Proiect -->
+
+            <!-- begin Image -->
+            <div class="img_proiect">
+                <img src="assets/images/img1.jpg">
+
+                <!-- begin Image - hover -->
+                <div class="img_proiect_hov">
+
+                    <!-- begin Users -->
+                    <div class="users_proiect">
+                        <div><img src="assets/images/user1.jpg" alt=""/></div>
+                        <div><img src="assets/images/user2.jpg" alt=""/></div>
+                        <div><img src="assets/images/user3.jpg" alt=""/></div>
+                        <div class="nr_users">+8</div>
+                    </div>
+                    <!-- end Users -->
+
+                    <!-- begin Dots -->
+                    <div class="dots_proiect">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <div class="dropdown_dots">
+                            <ul>
+                                <li><a href="#">Duplicate</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end Dots -->
+
+                    <!-- begin Vezi / Arhiveaza -->
+                    <div class="btns_proiect">
+                        <a href="proiectele-mele-echipa.html" class="btn_vezi_proiect">Vezi proiectul</a>
+                    </div>
+                    <!-- end Vezi / Arhiveaza -->
+
+                </div>
+                <!-- end Image - hover -->
+
+            </div>
+            <!-- end Image -->
+
+            <!-- begin Title / Calendar etc. -->
+            <div class="bottom_proiect">
+                <div class="title_proiect">
+                    <div><span>1. Proiect IT</span></div>
+                </div>
+                <div class="details_proiect">
+                    <div class="data_proiect">10.04.2020</div>
+                    <div class="mesaje_proiect">2</div>
+                    <div class="checked_proiect">5</div>
+                </div>
+            </div>
+            <!-- end Title / Calendar etc. -->
+
+        </div>
+    </div>
+</div>
+<!-- end Box Content -->
+
+
+<!-- script modernizr -->
+<script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+<!-- script jQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+<!-- script jQuery Semantic - dropdown -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.js"></script>
+
+<!-- script Datepicker - range -->
+<script src="assets/js/jquery.daterange.js"></script>
+<!-- script jQuery -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- custom scrollbar plugin -->
+<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- script tagify -->
+<script src="assets/js/jQuery.tagify.min.js"></script>
+<script src="../ONRC/assets/js/menubar.js"></script>
+<!-- script Sweet Alert -->
+<script src="assets/js/sweetalert2.min.js"></script>
+<!-- custom js -->
+<script src="assets/js/main.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="../ONRC/assets/js/project.js"></script>
+
+<!-- Testing Sweet Alerts / autocomplete / etc.  - should be deleted after -->
+<script src="assets/js/testing.js"></script>
+<!-- script Ckeditor -->
+<script src="assets/js/ckeditor/ckeditor.js"></script>
+<script src="assets/js/sample-ckeditor.js"></script>
+<script>
+    initSample();
+
+</script>
+
+</body>
+
+</html>

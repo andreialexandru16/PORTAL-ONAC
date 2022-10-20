@@ -1,0 +1,1 @@
+package ro.bithat.dms.microservices.portal.ecitizen.rehabilitationreq.api;//Open API features

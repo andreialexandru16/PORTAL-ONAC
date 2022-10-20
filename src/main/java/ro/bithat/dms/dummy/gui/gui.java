@@ -1,0 +1,1 @@
+package ro.bithat.dms.dummy.gui;//Vaadin front-end

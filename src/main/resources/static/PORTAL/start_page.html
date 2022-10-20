@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Portal</title>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+    <link href="/PORTAL/assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="/PORTAL/assets/css/jquery-ui.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="/PORTAL/assets/css/slick.css">
+    <!-- Bootstrap -->
+      <link rel="stylesheet" href="/PORTAL/assets/css/bootstrap.min.css">
+
+      <!-- Sweet Alert -->
+    <link rel="stylesheet" href="/PORTAL/assets/css/sweetalert2.min.css">
+    <!-- Custom -->
+      <link rel="stylesheet" href="/PORTAL/assets/css/main_anre.css">
+
+      <!--   main.css se adauga in mod dinamic din fisierul js: main_static.js ; daca avem setat param dmsws.unitname in application.properties va fi importat fisierul main_unitname.css -->
+
+      <link rel="stylesheet" href="/PORTAL/assets/css/captcha.css">
+      <style>
+          .authentication_page .authentication_container, .authentication_page .cbnp_cell {-webkit-transform: none !important;    -moz-transform: none !important;  -ms-transform: none !important; transform: none !important;}
+          .hide_table_sp {display: none;}
+      </style>
+
+  </head>
+  <body>
+
+    <!-- CONTENT -->
+    <div id="main-content" class="authentication_page" style="padding-top:25px">
+
+        <div class="container" style="padding-left:20px;padding-right:20px;">
+            <div class="authentication_container cbnp_tbl" style="">
+
+                <!-- Authentication Form -->
+                <div class="login_form cbnp_cell login_div" style="display: none">
+                    <div class="box_title_anre">Introduceti username si parola</div>
+                    <form id="login_form" method="POST" action="/login">
+                        <div class="form-group cbnp-icon cbnp-user-icon">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Introduceți username">
+                        </div>
+                        <div class="form-group cbnp-icon cbnp-key-icon">
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Parola">
+                        </div>
+                        <div class="form-group row no-gutters">
+                            <div class="col-6 new-account text-nowrap">
+                                <a id="createAccount" href='#' target="_blank">Creează cont</a>
+                            </div>
+                            <div class="col-6 forgotten-pwd text-nowrap">
+                                <a id="resetPpass">Recuperează parola</a>
+                            </div>
+                        </div>
+
+
+
+
+                        <!--afisare captcha - cu cheie preluata din application.properites: google.recaptcha.secretkey-->
+                        <div id="container_captcha">
+
+                            <!-- se populeaza dinamic din start-page.js-->
+
+                        </div>
+
+
+
+
+
+                        <button type="submit" id="login-btn" class="btn full_width btn_green">Autentificare</button>
+                    </form>
+                </div>
+
+                <!-- Welcome Form -->
+                <div class="login_form cbnp_cell welcome_div"  style="display: none">
+
+                        <div id="welcome_message" class="form-group cbnp-icon cbnp-user-icon">
+
+                        </div>
+
+                </div>
+
+                <div class="table_start_page hide_table_sp" >
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Categorie de mesaje</th>
+                            <th>Numar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a target="_top" href="/contul-meu/inbox">Inbox
+                                    <span id="count_inbox_red" class="unread_msg tooltip_chat">
+                                        0
+                                        <span class="tooltiptext">Mesaje necitite</span>
+                                    </span>
+                                </a>
+                            </td>
+                            <td><a id="count_inbox" target="_top" href="/contul-meu/inbox">0</a></td>
+                        </tr>
+                        <tr>
+                            <td><a target="_top" href="/contul-meu/cererile-mele">Cererile mele</a></td>
+                            <td><a id="count_my_requests" target="_top" href="/contul-meu/cererile-mele">0</a></td>
+                        </tr>
+                        <tr>
+                            <td><a target="_top" href="/contul-meu/corespondenta-petitii">Corespondenta petitii</a></td>
+                            <td><a id="count_petitii_coresp" target="_top" href="/contul-meu/corespondenta-petitii">0</a></td>
+                        </tr>
+                        <tr>
+                            <td><a target="_top" href="/contul-meu/corespondenta-control">Corespondenta control</a></td>
+                            <td><a id="count_control_coresp" target="_top" href="/contul-meu/corespondenta-control">0</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="links_start_page">
+                        <!--<a target="_top" href="/contul-meu/management-acces" class="tooltip_chat">-->
+                            <!--<i class="fas fa-users "></i>-->
+                            <!--<span class="tooltiptext">Subconturi</span>-->
+                        <!--</a>-->
+                        <!--<a target="_top" href="/contul-meu/management-acces" class="tooltip_chat">
+                            <i class="fas fa-sitemap "></i>
+                            <span class="tooltiptext">Echipa manageriala</span>
+                        </a>-->
+                        <a target="_top" href="/contul-meu/administreaza-date-cont" class="tooltip_chat">
+                            <i class="fas fa-users-cog "></i>
+                            <span class="tooltiptext">Administreaza date cont</span>
+                        </a>
+                        <a target="_top" href="/contul-meu/persoane-contact" class="tooltip_chat">
+                            <i class="fas fa-address-book "></i>
+                            <span class="tooltiptext">Persoane contact</span>
+                        </a>
+                        <a target="_top" href="/contul-meu/documente" class="tooltip_chat">
+                            <i class="fas fa-file"></i>
+                            <span class="tooltiptext">Documente</span>
+                        </a>
+                        <a target="_top" href="/ghid-de-utilizare" class="tooltip_chat ">
+                            <i class="fas fa-book "></i>
+                            <span class="tooltiptext">Ghid de utilizare</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- FOOTER SCRIPTS -->
+    <!-- SweetAlert -->
+    <script src="/PORTAL/assets/js/sweetalert2.min.js"></script>
+    <!-- jQuery -->
+    <script src="/PORTAL/assets/js/jquery-3.5.1.min.js"></script>
+    <!-- Autocomplete -->
+    <script src="/PORTAL/assets/js/jquery-ui.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="/PORTAL/assets/js/bootstrap.min.js"></script>
+    <!-- Slick Carousel -->
+    <script src="/PORTAL/assets/js/slick.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/PORTAL/assets/js/main_static.js"></script>
+    <script src="/PORTAL/assets/js/start_page.js"></script>
+    <script src="/website/assets/js/documentaPortal-util.js"></script>
+
+  <script src='https://www.google.com/recaptcha/api.js?hl=ro' async defer></script>
+<!--
+    <script src="/PORTAL/assets/js/captcha.js"></script>
+-->
+    <!-- Testing Sweet Alerts / autocomplete / etc.  - should be deleted after -->
+    <!--<script src=PORTAL/PS4/assets/js/testing.js"></script>-->
+
+  </body>
+</html>

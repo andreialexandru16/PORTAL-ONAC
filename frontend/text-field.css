@@ -1,0 +1,3 @@
+:host(.custom-style) [part="input-field"] {
+   background-color:  #ffffff;
+}

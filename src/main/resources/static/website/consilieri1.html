@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Primaria Sectorului 4</title>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+    <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+    <!-- Custom -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        .table {border-collapse:#efefef;}
+        .table th {background-color:#ccc;border:1px solid #fff !important;}
+        .table th, .table td {border:1px solid #ccc;padding:5px 20px;vertical-align:middle !important;}
+    </style>
+
+  </head>
+  <body>
+    
+    <!-- CONTENT -->
+    <div id="main-content" class="main-content">
+        <div class="container">
+            <!-- Services List -->
+            <div class="services_list_container new_request">
+                <!--<div class="services_header">-->
+                <!--    <div class="service_pictogram" style="background-image: url('assets/images/icons/document.png')"></div>-->
+                <!--    <div class="service_title">-->
+                <!--        <h2>Initiaza o cerere noua</h2>-->
+                <!--    </div>-->
+                <!--</div>-->
+                
+                <!-- REQUEST HEAD -->
+                <!--<div class="mt-4">Catre,</div>-->
+                <!--<div>Primarul Consiliul Județean Botoșani</div>-->
+                <!--<div class="mt-4 text-center font-weight-bold text-uppercase">Programare audiență</div>-->
+                <!--<div class="text-center font-weight-bold">pentru emiterea certificatului de urbanism</div>-->
+                <!-- REQUEST BODY -->
+                <!-- First row -->
+                <div class="row form-group mt-5">
+                    
+                     <div class="col-12 col-md-12 col-xl-4 cmb-lg cmb-md">
+                        <div class="if_tbl pr-12pr">
+                            <label for="req_name" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Selectare Registru</label>
+                             <select name="req_sector" id="req_sector" class="if_cell form-control chosen-select open-absolute">
+                                <option value="comisia1">Comisia nr. 1: pentru activităţi economice, buget, finanţe, administrarea domeniului public şi privat al judeţului, servicii publice şi agricultură</option>
+                                <option value="comisia2">Comisia nr. 2: pentru amenajarea teritoriului şi urbanism, lucrări publice, monumente istorice şi de arhitectură, protecţia mediului şi turism</option>
+                                <option value="comisia3">Comisia nr. 3: pentru învăţământ, sănătate, familie, muncă şi protecţie socială, culte, activităţi social-culturale, sportive, tineret şi de agrement</option>
+<option value="comisia4">Comisia nr. 4: pentru administraţia publică locală, juridică, disciplină, apărarea ordinii publice, respectarea drepturilor şi libertăţilor cetăţenilor, cooperare şi parteneriate și fonduri europene</option>
+
+                                
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12 col-xl-2">
+                        <div class="if_tbl last_item_row">
+                            <label for="req_sector" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">pe anul </label>
+                            <select name="req_sector" id="req_sector" class="if_cell form-control chosen-select open-absolute">
+                                <option value="bucuresti">2019</option>
+                                <option value="bucuresti">2020</option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                
+                </div>
+                
+                <div class="row form-group mt-5">
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nr. de înregistrare</th>
+                                <th>Data adoptării avizului/raportului</th>
+                                <th>Documentul</th>
+                                <th>Rezultatul analizei</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>...</td>
+                                <td>Aviz pentru P.H.C.L.^3 nr. ....../......... privind .....................</td>
+                                <td>Aviz favorabil cu 5 amendamente/ nefavorabil</td>
+                                <td><a href="javascript:void(0);" data-toggle="modal" data-target="#modalEditare" title="Editare"><i class="fa fa-pen"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>...</td>
+                                <td>Raport privind analiza situației ............. realizat în baza Hotărârii Consiliului Judetean nr. ....../.........</td>
+                                <td>-</td>
+                                <td><a href="javascript:void(0);" data-toggle="modal" data-target="#modalEditare" title="Editare"><i class="fa fa-pen"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>...</td>
+                                <td>Aviz pentru Petiția nr. ....../.........</td>
+                                <td>Aviz favorabil/nefavorabil</td>
+                                <td><a href="javascript:void(0);" data-toggle="modal" data-target="#modalEditare" title="Editare"><i class="fa fa-pen"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>...</td>
+                                <td>Raport privind analiza situației ............. realizat în baza Hotărârii Consiliului Judetean nr. ....../.........</td>
+                                <td>-</td>
+                                <td><a href="javascript:void(0);" data-toggle="modal" data-target="#modalEditare" title="Editare"><i class="fa fa-pen"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>...</td>
+                                <td>Raport privind analiza situației ............. realizat în baza Hotărârii Consiliului Judetean nr. ....../.........</td>
+                                <td>-</td>
+                                <td><a href="javascript:void(0);" data-toggle="modal" data-target="#modalEditare" title="Editare"><i class="fa fa-pen"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>...</td>
+                                <td>Raport privind analiza situației ............. realizat în baza Hotărârii Consiliului Judetean nr. ....../.........</td>
+                                <td>-</td>
+                                <td><a href="javascript:void(0);" data-toggle="modal" data-target="#modalEditare" title="Editare"><i class="fa fa-pen"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>...</td>
+                                <td>Raport privind analiza situației ............. realizat în baza Hotărârii Consiliului Judetean nr. ....../.........</td>
+                                <td>-</td>
+                                <td><a href="javascript:void(0);" data-toggle="modal" data-target="#modalEditare" title="Editare"><i class="fa fa-pen"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>...</td>
+                                <td>Raport privind analiza situației ............. realizat în baza Hotărârii Consiliului Judetean nr. ....../.........</td>
+                                <td>-</td>
+                                <td><a href="javascript:void(0);" data-toggle="modal" data-target="#modalEditare" title="Editare"><i class="fa fa-pen"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>...</td>
+                                <td>Raport privind analiza situației ............. realizat în baza Hotărârii Consiliului Judetean nr. ....../.........</td>
+                                <td>-</td>
+                                <td><a href="javascript:void(0);" data-toggle="modal" data-target="#modalEditare" title="Editare"><i class="fa fa-pen"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>...</td>
+                                <td>Raport privind analiza situației ............. realizat în baza Hotărârii Consiliului Judetean nr. ....../.........</td>
+                                <td>-</td>
+                                <td><a href="javascript:void(0);" data-toggle="modal" data-target="#modalEditare" title="Editare"><i class="fa fa-pen"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="col-12">
+                    <button data-toggle="modal" data-target="#modalAdauga" class="btn btn-secondary btn-block font-weight-bold" type="submit">Adauga inregistrare noua<i class="fas fa-arrow-alt-circle-right"></i></button>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination_container">
+                    <nav aria-label="Services Pagination">
+                        <ul class="pagination justify-content-end">
+                          <li class="page-item prev"><a class="page-link" href="javascript:void(0);"><i class="fas fa-chevron-left"></i></a></li>
+                          <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                          <li class="page-item active"><a class="page-link" href="javascript:void(0);">2</a></li>
+                          <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                          <li class="page-item next"><a class="page-link" href="javascript:void(0);"><i class="fas fa-chevron-right"></i></a></li>
+                        </ul>
+                      </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- begin Modal Editare -->
+    <div class="modal fade box_modal_map" id="modalEditare" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal_map" role="document">
+        <div class="modal-content">          
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            
+            <!-- Nr. crt. -->
+            <div class="col-12 md-margin sm-margin mb-3">
+                <label for="nr_crt">Nr. de înregistrare</label>
+                <input type="text" name="nr_crt" id="nr_crt" class="form-control" placeholder=""/>
+            </div>
+            <!-- Nr. crt. -->
+            
+            <!-- Data emiterii  -->
+            <div class="col-12 md-margin sm-margin mb-3">
+                <label for="data_emiterii ">Data adoptării avizului/raportului</label>
+                <input type="text" name="data_emiterii" id="data_emiterii" class="form-control" placeholder=""/>
+            </div>
+            <!-- Data emiterii  -->
+            
+            <!-- Continut pe scurt  -->
+            <div class="col-12 md-margin sm-margin mb-3">
+                <label for=" ">Documentul</label>
+                <textarea class="form-control"></textarea>
+            </div>
+            <!-- Continut pe scurt  -->
+            
+            <!-- Termen de incepere a efectului -->
+            <div class="col-12 md-margin sm-margin mb-3">
+                <label for="">Rezultatul analizei </label>
+                <textarea class="form-control"></textarea>
+            </div>
+            <!-- Termen de incepere a efectului -->
+            
+            <div class="col-12 md-margin sm-margin">
+                <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm prev font-weight-bold">Anuleaza</button>
+                <button type="submit" style="float:right;" class="btn btn-secondary btn-sm next font-weight-bold">Salveaza<i class="fas fa-arrow-alt-circle-right"></i></button>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- begin Modal Editare -->
+    
+    <!-- begin Modal Adauga -->
+    <div class="modal fade box_modal_map" id="modalAdauga" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal_map" role="document">
+        <div class="modal-content">          
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            
+            <!-- Nr. crt. -->
+            <div class="col-12 md-margin sm-margin mb-3">
+                <label for="nr_crt">Nr. de înregistrare</label>
+                <input type="text" name="nr_crt" id="nr_crt" class="form-control" placeholder=""/>
+            </div>
+            <!-- Nr. crt. -->
+            
+            <!-- Data emiterii  -->
+            <div class="col-12 md-margin sm-margin mb-3">
+                <label for="data_emiterii ">Data adoptării avizului/raportului</label>
+                <input type="text" name="data_emiterii" id="data_emiterii" class="form-control" placeholder=""/>
+            </div>
+            <!-- Data emiterii  -->
+            
+            <!-- Continut pe scurt  -->
+            <div class="col-12 md-margin sm-margin mb-3">
+                <label for=" ">Documentul</label>
+                <textarea class="form-control"></textarea>
+            </div>
+            <!-- Continut pe scurt  -->
+            
+            <!-- Termen de incepere a efectului -->
+            <div class="col-12 md-margin sm-margin mb-3">
+                <label for="">Rezultatul analizei </label>
+                <textarea class="form-control"></textarea>
+            </div>
+            <!-- Termen de incepere a efectului -->
+            
+            <div class="col-12 md-margin sm-margin">
+                <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm prev font-weight-bold">Anuleaza</button>
+                <button type="submit" style="float:right;" class="btn btn-secondary btn-sm next font-weight-bold">Adauga<i class="fas fa-arrow-alt-circle-right"></i></button>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- begin Modal Adauga -->
+
+    <!-- FOOTER SCRIPTS -->
+    <!-- SweetAlert -->
+    <script src="assets/js/sweetalert2.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Autocomplete -->
+    <script src="assets/js/jquery-ui.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Slick Carousel -->
+    <script src="assets/js/slick.min.js"></script>
+    <!-- Chosen Select -->
+    <script src="assets/js/chosen.jquery.min.js"></script>
+    <script>jQuery(document).ready(function ($) {
+/* Date Picker */
+    $(".datepicker").datepicker({
+        monthNames: ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'],
+        dayNamesMin: ['Du', 'Lu', 'Ma', 'Mi', 'Jo', 'Vi', 'Sa'], 
+        beforeShow: function (input, inst) {
+            var calendar = inst.dpDiv;
+            setTimeout(function() {
+                calendar.position({
+                    my: 'right top',
+                    at: 'right bottom',
+                    collision: 'none',
+                    of: input
+                });
+            }, 1);
+        }
+    });
+
+});</script>
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Testing Sweet Alerts / autocomplete / etc.  - should be deleted after -->
+    <script src="assets/js/testing.js"></script>
+  </body>
+</html>

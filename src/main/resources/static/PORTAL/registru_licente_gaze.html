@@ -1,0 +1,223 @@
+<!doctype html>
+<html class="no-js" lang=""> 
+
+<head>
+  <meta charset="utf-8">
+  <title>ANRE</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/favicon.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"> 
+
+  <!-- CSS -->
+  <!-- CSS - jQuery -->
+  <link rel="stylesheet" href="assets/css/jquery-ui.css">
+  <!-- CSS - DataTable -->
+  <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+  <!-- CSS Semantic - dropdown -->
+  <link rel="stylesheet" href="assets/css/dropdown.min.css">
+  <link rel="stylesheet" href="assets/css/transition.min.css">
+
+    <!--main.css se adauga in mod dinamic din fisierul js: main_static.js ; daca avem setat param dmsws.unitname in application.properties va fi importat fisierul main_unitname.css-->
+
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- begin Container -->
+  <div class="container">
+
+    <div class="title_border_bottom2 mb30">
+        Lista licente si autorizatii
+    </div>
+
+    <!-- begin Box Form -->
+    <div class="box_shadow">
+
+      <div class="flex">
+
+        <!-- begin Agenti --> 
+        <div class="width33">        
+          <div class="box_input mb20">                          
+            <input type="text" name="" placeholder="Agenti">
+          </div>
+        </div>
+        <!-- end Agenti --> 
+
+        <!-- begin Tip licenta / Autorizatie --> 
+        <div class="width33">        
+          <div class="box_input mb20">                          
+            <input type="text" name="" placeholder="Tip licenta / Autorizatie ">
+          </div>
+        </div>
+        <!-- end Tip licenta / Autorizatie --> 
+
+        <!-- begin Tip activitate --> 
+        <div class="width33">        
+          <div class="box_input mb20">                          
+            <input type="text" name="" placeholder="Tip activitate">
+          </div>
+        </div>
+        <!-- end Tip activitate --> 
+        
+      </div><!-- end .flex -->
+
+      <div class="flex">
+
+        <!-- begin Sector activitate --> 
+        <div class="width33 mb20">        
+          <div class="select " >
+            <select class="ui fluid dropdown">
+              <option value="">Sector activitate</option>
+              <option value="0">Bucuresti</option>
+              <option value="1">Brasov</option>
+              <option value="2">Sibiu</option>
+            </select>
+          </div>
+        </div>
+        <!-- end Sector activitate --> 
+
+        <!-- begin Localitate --> 
+        <div class="width33">        
+          <div class="box_input mb20">                          
+            <input type="text" name="" placeholder="Localitate">
+          </div>
+        </div>
+        <!-- end Localitate --> 
+
+        <!-- begin An --> 
+        <div class="width33">        
+          <div class="select">
+            <select class="ui fluid dropdown">
+              <option value="">Judet</option>
+              <option value="0">Bucuresti</option>
+              <option value="1">Brasov</option>
+              <option value="2">Sibiu</option>
+            </select>
+          </div>
+        </div>
+        <!-- end An -->
+
+      </div><!-- end .flex -->
+
+      <div class="flex">
+        <div>
+          <div class="float_right">
+
+            <!-- begin Cautare -->                    
+            <a href="#" class="btn_arrow_right float_left mr20">Cautare</a>    
+            <!-- end Cautare -->
+
+            <!-- begin Export Excel -->                  
+            <a href="#" class="btn_arrow_right btn_green float_left">Export Excel</a>  
+            <!-- end Export Excel -->
+
+          </div>          
+        </div>     
+      </div><!-- end .flex -->
+
+    </div>
+    <!-- end Box Form -->   
+
+    <!-- begin Table -->
+    <div class="table_scroll table_full_width table_inregistrari">
+        <!--date dinamice -> tmpl_inregistrari_list-->
+
+    </div>
+    <!-- end Table -->
+    <!-- Pagination -->
+    <div class="pagination_container">
+      <nav aria-label="Services Pagination" class="pagination_ul_container">
+        <ul class="pagination justify-content-end">
+
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- end Container -->
+  <!-- Templates Mustache-->
+  <script id="tmpl_inregistrari_list" type="x-tmpl-mustache">
+
+
+      <table class="dataTable_nosearch display" style="width: 100%">
+            <thead>
+           <tr>
+                 <th class="">Nr. crt.</th>
+                 <th class="">Societate</th>
+                 <th class="">Sediu</th>
+                 <th class="">Localitate</th>
+                 <th class="">Judet</th>
+                 <th class="">Telefon/Fax</th>
+                 <th>Nr. document</th>
+                 <th>Tip document</th>
+                 <th class="">Tip activitate</th>
+                 <th class="">Locul unde isi desfasoara activitatea</th>
+                 <th class="">Data emitere</th>
+                 <th class="">Data expirare</th>
+                 <th class="">Stare</th>
+                 <th class="">Decizie</th>
+
+
+
+            </tr>
+             </thead>
+
+                <tbody>
+  {{#data}}
+
+<tr>
+
+                <td>{{nrCrt}}</td>
+                <td>{{info9Str}}</td>
+                <td>{{tert_adresa}}</td>
+                <td>{{tert_localitate}}</td>
+                <td>{{tert_judet}}</td>
+                <td>{{tert_telefon}}</td>
+                <td>{{nr_generat}}</td>
+                <td>{{tip_doc}}</td>
+                <td>{{tip_activitate}}</td>
+                <td>{{loc_desf_activ}}</td>
+                <td>{{emitent_data}}</td>
+                <td>{{data_valabilitate}}</td>
+                <td>{{info49}}</td>
+                <td>{{referinta}}</td>
+
+            </tr>
+
+    {{/data}}
+   </tbody>
+
+          </table>
+
+</script>
+  <!-- script modernizr -->
+  <script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+  <!-- script jQuery -->
+  <script src="assets/js/jquery-3.5.1.min.js"></script>
+  <!-- script jQuery -->
+  <script src="assets/js/jquery-ui.js"></script>
+  <!-- script jQuery Semantic - dropdown -->
+  <script src="assets/js/dropdown.min.js"></script>
+  <script src="assets/js/transition.min.js"></script>
+  <!-- script Sort Table -->
+  <script type="text/javascript" src="assets/js/sort-table.js"></script>
+  <!-- script DataTable -->
+  <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script> 
+  <!-- custom js -->
+  <script src="assets/js/main_portal.js"></script>
+  <script src="assets/js/main_static.js"></script>
+  <script src="assets/js/mustache.js"></script>
+  <script src="assets/js/registru_licente_gaze.js"></script>
+  <script src="../website/assets/js/documentaPortal-util.js"></script>
+
+
+</body>
+
+</html>

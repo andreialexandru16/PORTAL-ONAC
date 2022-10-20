@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="ro">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title> Înregistrare</title>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+    <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+    <!-- Custom -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/captcha.css">
+
+</head>
+
+<body>
+
+
+
+<!-- CONTENT -->
+<div id="main-content" class="main-content box_inregistrare">
+		<!-- <button id="cmd">generate PDF and Image</button>
+        <br /> -->
+
+    <div class="container">
+        <!-- How to -->
+        <div class="how_to_info">
+            <p><strong>Pentru crearea unui cont se vor parcurge următorii pași:</strong></p>
+            <div>1. Completați CNP-ul si codul RUP.
+            </div>
+            <div>2. Apasati butonul de Validare date.
+            </div>
+            <div>3. Verificati si actualizati datele (câmpurile marcate cu <span class="text-danger">*</span> sunt
+                obligatorii)
+            </div>
+            <div>4. După ce ați completat toate datele solicitate apăsați butonul "Înregistrare". Veți primi
+                ulterior pe adresa Dumneavoastră de email, furnizată la completarea formularului, un mail pentru
+                confirmarea înscrierii. Pentru validarea contului nou creat vă rugăm să urmăriți instrucțiunile din
+                e-mail.
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <ul class="nav nav-tabs">
+            <li>
+                <a class="nav-item nav-link active" data-toggle="tab" href="#inrolare">Inrolare</a>
+            </li>
+            <li>
+                <a class="nav-item nav-link" data-toggle="tab" href="#persoana-fizica">Cont nou</a>
+            </li>
+
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <div id="inrolare" class="tab-pane fade in active show">
+                <!-- Registration Form -->
+                <form id="register_pf" action="/dmsws/utilizator/addPf" method="post" enctype="multipart/form-data">
+                    <!-- 1st Row -->
+                    <div class="form-group row">
+                        <!-- Nume -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="cnp">CNP<span class="text-danger">*</span></label>
+                            <input data-validation="onlyNumbers" type="text" name="cnp" id="cnp" class="form-control required"
+                                   placeholder="ex: 1900110110011"/>
+                        </div>
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="cod_rup">COD RUP<span class="text-danger">*</span></label>
+                            <input data-validation="onlyNumbers" type="text" name="cod_rup" id="cod_rup" class="form-control required"
+                                   placeholder="ex: "/>
+                        </div>
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="fetch_data"><strong>Validare date</strong><span class="text-danger"></span></label></br>
+                            <a id="fetch_data" onclick="fetchInfo()" ><i class="fa fa-cloud-download-alt"></i></a>
+                        </div>
+                    </div>
+                    <!-- 2nd Row -->
+                    <div class="form-group row">
+                        <!-- Nume -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="nume">Nume<span class="text-danger">*</span></label>
+                            <input data-validation="onlyLetters" type="text" name="nume" id="nume" class="form-control required"
+                                   placeholder="ex: Popescu"/>
+                        </div>
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="prenume">Prenume<span class="text-danger">*</span></label>
+                            <input data-validation="onlyLetters" type="text" name="prenume" id="prenume" class="form-control required"
+                                   placeholder="ex: Ion"/>
+                        </div>
+                    </div>
+
+
+                    <!-- 3rd Row -->
+                    <div class="form-group row">
+                        <!-- Filiala -->
+                        <div class="col-md-4 col-lg-4 sm-margin">
+                            <label for="filiala">Filiala<span class="text-danger">*</span></label>
+                            <select name="filiala" id="filiala" class="form-control chosen-select required">
+                                <!-- AICI FILIALE -->
+
+                            </select>
+                        </div>
+
+                        <!-- FILIALA TEXT -->
+                        <!--<div class="col-md-8 col-lg-4 md-margin sm-margin">-->
+                            <!--<label for="filiala">Filiala<span class="text-danger">*</span></label>-->
+                            <!--<input type="text" name="filiala" id="filiala2" class="form-control required" placeholder=""/>-->
+                        <!--</div>-->
+
+                        <!-- Județ filiala -->
+                        <div class="col-md-4 col-lg-3 sm-margin">
+                            <label for="region_filiala">Județ filiala<span class="text-danger">*</span></label>
+                            <select name="region_filiala" id="region_filiala" class="form-control chosen-select required">
+                                <!-- AICI JUDETE -->
+
+                            </select>
+                        </div>
+                        <!-- Localitate filiala -->
+                        <div class="col-md-4 col-lg-4">
+                            <label for="city_filiala">Localitate filiala<span class="text-danger">*</span></label>
+                            <select name="city_filiala" id="city_filiala" class="form-control chosen-select required">
+                                <!-- AICI LOCALITATI -->
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--<div class="title_section">-->
+                        <!--<label class="label" >Date personale</label>-->
+                    <!--</div>-->
+
+
+                    <!-- 4th Row -->
+                    <div class="form-group row">
+                        <!-- Street -->
+                        <div class="col-md-8 col-lg-4 md-margin sm-margin">
+                            <label for="street">Strada domiciliu<span class="text-danger">*</span></label>
+                            <input type="text" name="street" id="street" class="form-control required" placeholder=""/>
+                        </div>
+                        <!-- Street Number -->
+                        <div class="col-md-2 col-lg-1 md-margin sm-margin">
+                            <label for="nr_street">Nr. domiciliu<span class="text-danger">*</span></label>
+                            <input type="text" name="nr_street" id="nr_street" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Bloc -->
+                        <div class="col-md-4 col-lg-2 sm-margin">
+                            <label for="bloc">Bloc domiciliu</label>
+                            <input type="text" name="bloc" id="bloc" class="form-control" placeholder=""/>
+                        </div>
+                        <!-- Scara -->
+                        <div class="col-md-2 col-lg-2 sm-margin">
+                            <label for="scara">Scară domiciliu</label>
+                            <input type="text" name="scara" id="scara" class="form-control" placeholder=""/>
+                        </div>
+                        <!-- Etaj -->
+                        <div class="col-md-2 col-lg-1">
+                            <label for="etaj">Etaj domiciliu</label>
+                            <input type="text" name="etaj" id="etaj" class="form-control" placeholder=""/>
+                        </div>
+                        <div class="col-md-2 col-lg-2 sm-margin">
+                            <label for="apartament">Apartament domiciliu</label>
+                            <input type="text" name="apartament" id="apartament" class="form-control"
+                                   placeholder=""/>
+                        </div>
+                    </div>
+
+                    <!-- 5th Row -->
+                    <div class="form-group row">
+                        <!-- Judet -->
+                        <div class="col-md-4 col-lg-3 sm-margin">
+                            <label for="region">Județ domiciliu<span class="text-danger">*</span></label>
+                            <select name="region" id="region" class="form-control chosen-select required">
+                                <!-- AICI JUDETE -->
+
+                            </select>
+                        </div>
+                        <!-- Oras -->
+                        <div class="col-md-4 col-lg-3">
+                            <label for="city">Localitate/Sector domiciliu<span class="text-danger">*</span></label>
+                            <select name="city" id="city" class="form-control chosen-select required">
+                                <!-- AICI JUDETE -->
+
+                            </select>
+                        </div>
+                        <!-- Prefix -->
+                        <!--<div class="col-md-2 col-lg-1 md-margin sm-margin">-->
+                            <!--<label for="tel">Prefix<span class="text-danger">*</span></label>-->
+                            <!--<input type="text" name="prefixtel" id="prefixtel" class="form-control required" placeholder="" readonly="true"/>-->
+                        <!--</div>-->
+                        <!-- Telefon -->
+                        <div class="col-md-6 col-lg-3 sm-margin">
+                            <label for="tel">Telefon<span class="text-danger">*</span></label>
+                            <input data-validation="onlyNumbers" type="text" name="tel" id="tel" class="form-control required" placeholder="(ex:730xxxxxx)"/>
+                        </div>
+                        <!-- Email -->
+                        <div class="col-md-6 col-lg-3">
+                            <label for="email">Email<span class="text-danger">*</span></label>
+                            <input type="email" name="email" id="email" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                    </div>
+
+                    <!-- 6th Row -->
+                    <div class="form-group row">
+                        <!-- Denumire -->
+                        <div class="col-md-6 col-lg-5">
+                            <label for="den_munca">Denumire loc munca</label>
+                            <input name="den_munca" id="den_munca" class="form-control"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Judet -->
+                        <div class="col-md-4 col-lg-3 sm-margin">
+                            <label for="region_munca">Județ munca</label>
+                            <select name="region_munca" id="region_munca" class="form-control chosen-select">
+                                <!-- AICI JUDETE -->
+
+                            </select>
+                        </div>
+                        <!-- Oras -->
+                        <div class="col-md-4 col-lg-4">
+                            <label for="city_munca">Localitate munca</label>
+                            <select name="city_munca" id="city_munca" class="form-control chosen-select">
+                                <!-- AICI JUDETE -->
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- 7th Row -->
+                    <div class="form-group row">
+                        <!-- Street -->
+                        <div class="col-md-6 col-lg-4 md-margin sm-margin">
+                            <label for="street_munca">Strada munca</label>
+                            <input type="text" name="street_munca" id="street_munca" class="form-control" placeholder=""/>
+                        </div>
+                        <!-- Street Number -->
+                        <div class="col-md-2 col-lg-1 md-margin sm-margin">
+                            <label for="nr_street_munca">Nr. munca</label>
+                            <input type="text" name="nr_street_munca" id="nr_street_munca" class="form-control"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Bloc -->
+                        <div class="col-md-4 col-lg-2 sm-margin">
+                            <label for="bloc_munca">Bloc munca</label>
+                            <input type="text" name="bloc_munca" id="bloc_munca" class="form-control" placeholder=""/>
+                        </div>
+                        <!-- Scara -->
+                        <div class="col-md-2 col-lg-2 sm-margin">
+                            <label for="scara_munca">Scară munca</label>
+                            <input type="text" name="scara_munca" id="scara_munca" class="form-control" placeholder=""/>
+                        </div>
+                        <!-- Etaj -->
+                        <div class="col-md-2 col-lg-1">
+                            <label for="etaj_munca">Etaj munca</label>
+                            <input type="text" name="etaj_munca" id="etaj_munca" class="form-control" placeholder=""/>
+                        </div>
+                        <!-- Apartament -->
+                        <div class="col-md-2 col-lg-2 sm-margin">
+                            <label for="apartament_munca">Apartament munca</label>
+                            <input type="text" name="apartament_munca" id="apartament_munca" class="form-control"
+                                   placeholder=""/>
+                        </div>
+
+                    </div>
+
+                    <!-- 9th Row -->
+                    <div class="form-group row">
+
+                        <!-- Universitatea absolvita (licenta) -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="universitate_licenta">Universitatea absolvita (licenta)<span class="text-danger">*</span></label>
+                            <input type="text" name="universitate_licenta" id="universitate_licenta" class="form-control required"
+                                   placeholder="ex: "/>
+                        </div>
+                        <!-- Facultatea (licenta) -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="facultatea_licenta">Facultatea (licenta)<span class="text-danger">*</span></label>
+                            <input type="text" name="facultatea_licenta" id="facultatea_licenta" class="form-control required"
+                                   placeholder="ex: "/>
+                        </div>
+                        <!-- Specializarea (din diploma de licenta) -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="specializare_licenta">Specializarea (din diploma de licenta)<span class="text-danger">*</span></label>
+                            <input type="text" name="specializare_licenta" id="specializare_licenta" class="form-control required"
+                                   placeholder="ex: "/>
+                        </div>
+                        <!-- An obtinere licenta -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="an_obtinere_licenta">An obtinere licenta<span class="text-danger">*</span></label>
+                            <input type="text" name="an_obtinere_licenta" id="an_obtinere_licenta" class="form-control required"
+                                   placeholder="ex: "/>
+                        </div>
+                    </div>
+
+                    <!-- 10th Row -->
+                    <div class="form-group row">
+
+                        <!-- Universitatea absolvita (master) -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="universitate_master">Universitatea absolvita (master)</label>
+                            <input type="text" name="universitate_master" id="universitate_master" class="form-control"
+                                   placeholder="ex: "/>
+                        </div>
+                        <!-- Facultatea (master) -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="facultatea_master">Facultatea (master)</label>
+                            <input type="text" name="facultatea_master" id="facultatea_master" class="form-control"
+                                   placeholder="ex: "/>
+                        </div>
+                        <!--Denumirea masteratului -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="denumire_master">Denumirea masteratului (din diploma de master)</label>
+                            <input type="text" name="denumire_master" id="denumire_master" class="form-control "
+                                   placeholder="ex: "/>
+                        </div>
+                        <!-- An sustinere disertatie -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="an_obtinere_disertatie">An sustinere disertatie</label>
+                            <input type="text" name="an_obtinere_disertatie" id="an_obtinere_disertatie" class="form-control"
+                                   placeholder="ex: "/>
+                        </div>
+                    </div>
+
+                    <!-- 11th Row -->
+                    <div class="form-group row">
+
+
+                        <!-- Denumire furnizor formare complementara -->
+                        <div class="col-md-2 col-lg-5 sm-margin">
+                            <label for="furnizor_formare">Denumire furnizor formare complementara</label>
+                            <input type="text" name="furnizor_formare" id="furnizor_formare" class="form-control" placeholder=""/>
+                        </div>
+
+                        <!-- Specialitatea-->
+                        <div class="col-md-2 col-lg-4 sm-margin">
+                            <label for="specialitate_formare">Specialitatea (formare complementara)</label>
+                            <input type="text" name="specialitate_formare" id="specialitate_formare" class="form-control" placeholder=""/>
+                        </div>
+
+                        <!-- Specializarea-->
+                        <div class="col-md-2 col-lg-3 sm-margin">
+                            <label for="specializare_formare">Specializarea (formare complementara)</label>
+                            <input type="text" name="specializare_formare" id="specializare_formare" class="form-control" placeholder=""/>
+                        </div>
+                    </div>
+
+                    <!-- 12th Row -->
+
+                        <div class="form-group row">
+
+
+                        <!-- Seria -->
+                        <div class="col-md-2 col-lg-2">
+                            <label for="serie_formare">Seria (formare complementara)</label>
+                            <input type="text" name="serie_formare" id="serie_formare" class="form-control" placeholder=""/>
+                        </div>
+
+                        <div class="col-md-2 col-lg-2">
+                            <label for="data_emitere_formare">Data emiterii </label>
+                            <input type="text" class="if_cell form-control rm-side-paddings datepicker_default" name="data_emitere_formare" id="data_emitere_formare" />
+                        </div>
+
+                        <!-- Treapta (formare complementara)-->
+                        <div class="col-md-2 col-lg-4 sm-margin">
+                            <label for="treapta_formare">Treapta (formare complementara)</label>
+                            <input type="text" name="treapta_formare" id="treapta_formare" class="form-control" placeholder=""/>
+                        </div>
+
+                        <!-- Regim-->
+                        <div class="col-md-2 col-lg-4 sm-margin">
+                            <label for="regim_formare">Regim (formare complementara)</label>
+                            <input type="text" name="regim_formare" id="regim_formare" class="form-control" placeholder=""/>
+                        </div>
+                    </div>
+
+                    <!-- 13th Row -->
+                    <div class="form-group row">
+
+                        <!-- Universitatea absolvita (doctorat) -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="universitate_doctorat">Universitatea absolvita (doctorat)</label>
+                            <input type="text" name="universitate_doctorat" id="universitate_doctorat" class="form-control "
+                                   placeholder="ex: "/>
+                        </div>
+                        <!-- Domeniul (doctorat) -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="domeniu_doctorat">Domeniul (doctorat)</label>
+                            <input type="text" name="domeniu_doctorat" id="domeniu_doctorat" class="form-control"
+                                   placeholder="ex: "/>
+                        </div>
+                        <!--Denumire tema doctorat -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="denumire_tema_doctorat">Denumire tema doctorat</label>
+                            <input type="text" name="denumire_tema_doctorat" id="denumire_tema_doctorat" class="form-control"
+                                   placeholder="ex: "/>
+                        </div>
+                        <!-- An sustinere lucrare -->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="an_obtinere_doctorat">An sustinere lucrare</label>
+                            <input type="text" name="an_obtinere_doctorat" id="an_obtinere_doctorat" class="form-control"
+                                   placeholder="ex: "/>
+                        </div>
+                    </div>
+                    <!-- 8th Row -->
+                    <div class="form-group row">
+                        <!-- Password -->
+                        <div class="col-md-6 sm-margin">
+                            <label for="pwd1">Parolă <span class="text-danger">*</span></label>
+                            <input type="password" name="pwd1" id="pwd1" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Repeat Password -->
+                        <div class="col-md-6">
+                            <label for="pwd2">Confirmare parolă <span class="text-danger">*</span></label>
+                            <input type="password" name="pwd2" id="pwd2" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <strong>Parola trebuie să conțină: cel puțin 8 caractere; cel puțin un caracter numeric; cel puțin o literă mare; cel puțin o literă mică; cel puțin un caracter special (=, ^, !, @, #, $, &, *)</strong>
+                        </div>
+                    </div>
+                    <!-- Upload Files -->
+                    <div class="form-group row" >
+                        <div class="col-md-6 sm-margin">
+<!--                            <form id="fileinfo" enctype="multipart/form-data" method="post" name="fileinfo">-->
+                                <label for="ci_file">Carte de identitate</label>
+                                <input type="file" name="ci_file" id="ci_file" class="form-control file-control"
+                                       upload-text="Incarca documentul" method="post" enctype="multipart/form-data"/>
+<!--                            </form>-->
+                        </div>
+                    </div>
+                    <!-- TOS -->
+                    <div class="custom-control custom-checkbox form-group">
+                        <input type="checkbox" class="custom-control-input" id="tos">
+                        <label class="custom-control-label" for="tos">Sunt de acord cu termenii și condițiile <span
+                                class="text-danger">*</span></label>
+                    </div>
+                    <div>
+                        <input type="hidden" name="checker" id="checker"/>
+                    </div>
+
+
+
+                    <!-- Submit -->
+                    <div class="form-group">
+                        <button id="register" style="display:none" class="btn btn-secondary btn-block font-weight-bold"
+                                type="submit">Înregistrare<i class="fas fa-arrow-alt-circle-right"></i></button>
+                    </div>
+
+                    <!-- Country -->
+                    <div style="display: none" class="col-md-4 col-lg-4 sm-margin">
+                        <label for="country">Țară <span class="text-danger">*</span></label>
+                        <select name="country" id="country" class="form-control chosen-select required">
+                            <!-- AICI TARI -->
+
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div id="persoana-fizica" class="tab-pane fade">
+                <!-- Registration Form -->
+                <form id="register_pf2"  action="/dmsws/utilizator/addPf" method="post" enctype="multipart/form-data">
+
+                    <div class="section_separator"><br><a class="section-separator">Date personale</a><br></div>
+
+                    <!-- First Row -->
+                    <div class="form-group row">
+                        <!-- Nume -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="nume">Nume <span class="text-danger">*</span></label>
+                            <input type="text" name="nume"  class="form-control required"
+                                   placeholder="ex: Popescu"/>
+                        </div>
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="prenume">Prenume <span class="text-danger">*</span></label>
+                            <input type="text" name="prenume"  class="form-control required"
+                                   placeholder="ex: Ion"/>
+                        </div>
+                        <!-- Cnp -->
+                        <div class="col-md-6 col-lg-4 sm-margin">
+                            <label for="cnp">Cod numeric personal <span class="text-danger">*</span></label>
+                            <input type="text" name="cnp"  class="form-control required" placeholder=""/>
+                        </div>
+                        <!-- Serie -->
+                        <div class="col-md-3 col-lg-2 sm-margin">
+                            <label for="serie"> Serie act identitate <span class="text-danger">*</span></label>
+                            <input type="text" name="serie" id="serie" class="form-control required" placeholder=""/>
+                        </div>
+                        <!-- Numar -->
+                        <div class="col-md-3 col-lg-2">
+                            <label for="numar">Numar act identitate <span class="text-danger">*</span></label>
+                            <input type="text" name="numar" id="numar" class="form-control required" placeholder=""/>
+                        </div>
+                    </div>
+                    <!-- Second Row -->
+                    <div class="form-group row">
+                        <!-- Country -->
+                        <div class="col-md-4 col-lg-4 sm-margin">
+                            <label for="country">Țară <span class="text-danger">*</span></label>
+                            <select name="country"  id="country-pfa" class="form-control chosen-select required">
+                                <!-- AICI TARI -->
+
+                            </select>
+                        </div>
+                        <!-- Judet -->
+                        <div class="col-md-4 col-lg-3 sm-margin">
+                            <label for="region">Județ <span class="text-danger">*</span></label>
+                            <select  name="region"  id="region-pfa" class="form-control chosen-select required">
+                                <!-- AICI JUDETE -->
+
+                            </select>
+                        </div>
+                        <!-- Oras -->
+                        <div class="col-md-4 col-lg-5">
+                            <label for="city">Localitate <span class="text-danger">*</span></label>
+                            <select name="city"   id="city-pfa" class="form-control chosen-select required">
+                                <!-- AICI JUDETE -->
+
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Third Row -->
+                    <div class="form-group row">
+                        <!-- Street -->
+                        <div class="col-md-8 col-lg-4 md-margin sm-margin">
+                            <label for="street">Strada <span class="text-danger">*</span></label>
+                            <input type="text" name="street"  class="form-control required" placeholder=""/>
+                        </div>
+                        <!-- Street Number -->
+                        <div class="col-md-2 col-lg-1 md-margin sm-margin">
+                            <label for="nr_street">Nr <span class="text-danger">*</span></label>
+                            <input type="text" name="nr_street" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Bloc -->
+                        <div class="col-md-4 col-lg-2 sm-margin">
+                            <label for="bloc">Bloc</label>
+                            <input type="text" name="bloc" class="form-control" placeholder=""/>
+                        </div>
+                        <!-- Scara -->
+                        <div class="col-md-2 col-lg-2 sm-margin">
+                            <label for="scara">Scară</label>
+                            <input type="text" name="scara" class="form-control" placeholder=""/>
+                        </div>
+                        <div class="col-md-2 col-lg-2 sm-margin">
+                            <label for="apartament">Apartament</label>
+                            <input type="text" name="apartament" class="form-control"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Etaj -->
+                        <div class="col-md-2 col-lg-1">
+                            <label for="etaj">Etaj</label>
+                            <input type="text" name="etaj" class="form-control" placeholder=""/>
+                        </div>
+                    </div>
+                    <!-- Fourth Row -->
+                    <div class="form-group row">
+                        <!-- Telefon -->
+                        <div class="col-md-6 sm-margin">
+                            <label for="tel">Telefon <span class="text-danger">*</span></label>
+                            <input type="text" name="tel" class="form-control required" placeholder=""/>
+                        </div>
+                        <!-- Email -->
+                        <div class="col-md-6">
+                            <label for="email">Email <span class="text-danger">*</span></label>
+                            <input type="email" name="email"  id="email-pf2" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                    </div>
+
+                    <div class="section_separator"><br><a class="section-separator">Parolă</a><br></div>
+
+                    <!-- Fifth Row -->
+                    <div class="form-group row">
+                        <!-- Password -->
+                        <div class="col-md-6 sm-margin">
+                            <label for="pwd1-pf2">Parolă <span class="text-danger">*</span></label>
+                            <input type="password" name="pwd1" id="pwd1-pf2" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Repeat Password -->
+                        <div class="col-md-6">
+                            <label for="pwd2-pf2">Confirmare parolă <span class="text-danger">*</span></label>
+                            <input type="password" name="pwd2"   id="pwd2-pf2" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <!-- Password -->
+                        <!-- Repeat Password -->
+                        <div class="col-md-12">
+                            <strong>Parola trebuie să conțină: cel puțin 8 caractere; cel puțin un caracter numeric; cel puțin o literă mare; cel puțin o literă mică; cel puțin un caracter special (#,*,^ ...)</strong>
+                        </div>
+                    </div>
+                    <!-- Upload Files -->
+                    <div class="section_separator"><br><a class="section-separator">Documente</a><br></div>
+                    <div class="form-group row" >
+                        <div class="col-md-6 sm-margin">
+                            <!--                            <form id="fileinfo" enctype="multipart/form-data" method="post" name="fileinfo">-->
+                            <label for="ci_file_1">Carte de identitate <span class="text-danger">*</span></label>
+                            <input type="file" name="ci_file_1" id="ci_file_1"  class="form-control file-control required"
+                                   upload-text="Incarca documentul" method="post" enctype="multipart/form-data"/>
+                            <!--                            </form>-->
+                        </div>
+                        <div class="col-md-6 sm-margin">
+                            <a class="link_gdpr" href="https://www.anre.ro/ro/gdpr" target="_blank">Link către GDPR</a>
+                        </div>
+                    </div>
+                    <!-- TOS -->
+                    <div class="custom-control custom-checkbox form-group">
+                        <input type="checkbox" class="custom-control-input" id="tos-pf2">
+                        <label class="custom-control-label" for="tos-pf2">Sunt de acord cu termenii și condițiile
+                            <span class="text-danger">*</span></label>
+                    </div>
+                    <div>
+                        <input type="hidden" name="checker" id="checker-pfa"/>
+                    </div>
+
+                    <div class="form-group row" >
+                        <div class="col-md-6 nota_info">
+                            <span class="text-danger">*</span> activitatea de prelucrare a datelor cu caracter personal este necesară în vederea îndeplinirii obligației legale a ANRE în temeiul prevederilor art. 10 alin. (1) lit. d), f) şi i) din Ordonanța de urgență a Guvernului nr. 33/2007 privind organizarea şi funcţionarea Autorităţii Naţionale de Reglementare în Domeniul Energiei, aprobată cu modificări şi completări prin Legea nr. 160/2012, publicată în Monitorul Oficial al României, Partea I, nr. 685/03.10.2012, pentru îndeplinirea unei sarcini ce servește unui interes public care rezultă din exercitarea autorității publice cu care ANRE este investită.
+                        </div>
+                    </div>
+                    <!--afisare captcha - cu cheie preluata din application.properites: google.recaptcha.secretkey-->
+                    <div id="container_captcha">
+
+                        <!-- se populeaza dinamic din bithat-inregistrare.js-->
+
+                    </div>
+
+
+                    <!-- Submit -->
+                    <div class="form-group">
+                        <button id="register-pf2" class="btn btn_green min_width250"
+                                type="submit">Înregistrare</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="g-recaptcha" id="captcha" data-sitekey="6Lf7NqkaAAAAAEcaWtsCezi3_WprEVIl7lXCY5AI"></div>
+            <!--<a data-toggle="modal" data-target="#captchaModal" class="btn btn-secondary btn-block font-weight-bold" onclick="generate()"><span style="color:white">Verificare</span></a>-->
+
+            <!--<div class="modal fade" style="width: 1000px;left:30%" id="captchaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >-->
+                <!--<div class="modal-dialog" role="document" style="max-width: 100%">-->
+                    <!--<div class="modal-content" style="max-width: 100%">-->
+                        <!--<div class="modal-header">-->
+                            <!--<h5 class="modal-title" id="exampleModalLabel"></h5>-->
+                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                                <!--<span aria-hidden="true">&times;</span>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                        <!--<div class="modal-body">-->
+                            <!--<div><input type="text" readonly id="status"></div>-->
+                            <!--<div >-->
+                                <!--<input type="text" readonly id="generated-captcha">-->
+                            <!--</div>-->
+                            <!--<div>-->
+                                <!--<input type="text" id="entered-captcha" placeholder="Enter the captcha..">-->
+                            <!--</div>-->
+                            <!--<button type="button" onclick="check()">-->
+                                <!--Verifica-->
+                            <!--</button>-->
+                            <!--<button type="button" onclick="generate()" id="gen">-->
+                                <!--Genereaza din nou-->
+                            <!--</button>-->
+                        <!--</div>-->
+                        <!--<div class="modal-footer">-->
+                            <!--<button type="button" class="btn_blue_radius" data-dismiss="modal">Inchide</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        </div>
+    </div>
+</div>
+
+<div class="gap-30"></div>
+
+
+
+<!-- FOOTER SCRIPTS -->
+<!-- SweetAlert -->
+<script src="assets/js/sweetalert2.min.js"></script>
+<!-- jQuery -->
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<!-- Autocomplete -->
+<script src="assets/js/jquery-ui.min.js"></script>
+
+<!-- Chosen Select -->
+<script src="assets/js/chosen.jquery.min.js"></script>
+
+<!-- Custom JS -->
+<script src="assets/js/main_static.js"></script>
+
+<script src="../website/assets/js/documentaPortal-util.js"></script>
+<script src="assets/js/bithat-inregistrare-cpr.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- Slick Carousel -->
+<script src="assets/js/slick.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src='https://www.google.com/recaptcha/api.js?hl=ro' async defer></script>
+<script src="assets/js/captcha.js"></script>
+<script src="assets/js/util.js"></script>
+
+<!-- Testing Sweet Alerts / autocomplete / etc.  - should be deleted after -->
+<!--<script src="assets/js/testing.js"></script>-->
+</body>
+
+</html>

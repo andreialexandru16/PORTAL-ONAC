@@ -1,0 +1,71 @@
+
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+</button>
+<div>
+    <!-- begin Circumscriptie-->
+    <div class="row form-group">
+
+        <div class="col-12">
+            <div class="last_item_row mb-4">
+                <label for="user_audienta" class=" text-nowrap pr-2 mb-3 font-weight-bold">Selectează persoana pentru audiență: </label>
+                <select name="user_audienta" id="user_audienta" class=" form-control chosen-select open-absolute" style="max-width:340px;" onchange="onChangePersoana()">
+                    <!--<option selected>Pers 1</option>-->
+                    <!--<option value="x">Persoana 2 Ioana</option>-->
+                    <!--<option value="y">Federovici doina</option>-->
+                </select>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- end Circumscriptie -->
+<div class="box_calendar">
+    <label class="text-nowrap pr-2 font-weight-bold if_cell">Data programării <span class="text-danger">*</span> </label>
+    <div class="datepicker" id="calendar_audienta" onChange="onChangeDate()"></div>
+</div>
+<div id="hours_frame" class="box_calendar" style="margin-right:0px;">
+    <label class="text-nowrap pr-2 font-weight-bold if_cell">Ora programării <span class="text-danger">*</span> </label>
+    <div class="ora_prog">
+        <ul class="ore_custom">
+            <li>8:00</li>
+            <li>8:15</li>
+            <li>8:30</li>
+            <li>8:45</li>
+            <li class="busy">9:00</li>
+            <li>9:15</li>
+            <li>9:30</li>
+            <li class="busy">9:45</li>
+            <li>10:00</li>
+            <li>10:15</li>
+            <li>10:30</li>
+            <li>10:45</li>
+            <li>11:00</li>
+            <li>11:15</li>
+            <li>11:30</li>
+            <li>11:45</li>
+            <li>12:00</li>
+            <li>12:15</li>
+            <li>12:30</li>
+            <li>12:45</li>
+            <li>13:00</li>
+            <li>13:15</li>
+            <li>13:30</li>
+            <li>13:45</li>
+            <li>14:00</li>
+            <li>14:15</li>
+            <li>14:30</li>
+            <li>14:45</li>
+            <li>15:00</li>
+            <li>15:15</li>
+            <li>15:30</li>
+            <li>15:45</li>
+            <li>16:00</li>
+            <li>16:15</li>
+            <li>16:30</li>
+            <li>16:45</li>
+            <li>17:00</li>
+        </ul>
+    </div>
+</div>
+</div>

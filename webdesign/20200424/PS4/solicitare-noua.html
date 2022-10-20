@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>SVU</title>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+    <link href="../PS4/assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="../PS4/assets/css/jquery-ui.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="../PS4/assets/css/slick.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../PS4/assets/css/bootstrap.min.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="../PS4/assets/css/sweetalert2.min.css">
+    <!-- Custom -->
+    <link rel="stylesheet" href="../PS4/assets/css/main.css">
+
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header id="main-header">
+        <!-- Identitate Vizuala -->
+        <div class="visual_identity">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 ue">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PS4/assets/images/logos/uniunea-europeana.png" alt="logo uniunea europeana" />
+                        </a>
+                    </div>
+                    <div class="col-3 gov text-center">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PS4/assets/images/logos/guvernul-romaniei.png" alt="logo guvernul romaniei" />
+                        </a>
+                    </div>
+                    <div class="col-5 poca text-center">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PS4/assets/images/logos/poca.png" alt="logo programul operational capacitate administrativa" />
+                        </a>
+                    </div>
+                    <div class="col-2 is text-right">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PS4/assets/images/logos/instrumente-structurale.png" alt="logo instrumente structurale" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Bar -->
+        <div class="main_header_container">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo -->
+                    <div class="col-8 col-sm-6 col-md-4 col-lg-2 logo">
+                        <a href="index.html">
+                            <img src="../PS4/assets/images/logos/logo.png" alt="logo primaria sectorului 4">
+                        </a>
+                    </div>
+                    <!-- Menu -->
+                    <div class="col-4 col-sm-6 col-md-8 col-lg-10 menu_container">
+                        <nav class="navbar navbar-expand-xl navbar-dark">
+
+                            <!-- Collapse button -->
+                            <div class="empty_element"></div>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-wrap" aria-controls="menu-wrap" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <!-- Menu Wrapper -->
+                            <div id="menu-wrap" class="row collapse navbar-collapse">
+                                <!-- Main Menu -->
+                                <div class="col-xl-8">
+                                    <div class="main_menu">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item active">
+                                                <a href="index.html" class="nav-link">Acasă</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">Servicii Online</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">Înrebări frecvente</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">Contact</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Secondary Menu -->
+                                <div class="col-xl-4">
+                                    <nav class="secondary_top_menu">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item">
+                                                <a href="autentificare.html" class="nav-link login-icon text-nowrap"><i class="fas fa-user"></i> Autentificare</a>
+                                            </li>
+                                            <!-- Language Selector -->
+                                            <li class="nav-item dropdown language-select">
+                                                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="languageSelect" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img src="../PS4/assets/images/flags/romania-flag.png" alt="romanian flag"> RO
+                                                </a>
+                                                <!-- Language Dropdown -->
+                                                <div class="dropdown-menu" aria-labelledby="languageSelect">
+                                                    <a class="dropdown-item" href="javascript:void(0);">
+                                                        <img src="../PS4/assets/images/flags/romania-flag.png" alt="romanian flag"> EN
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="javascript:void(0);">
+                                                        <img src="../PS4/assets/images/flags/romania-flag.png" alt="romanian flag"> TR
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="javascript:void(0);">
+                                                        <img src="../PS4/assets/images/flags/romania-flag.png" alt="romanian flag"> FR
+                                                    </a>
+                                                </div>
+                                              </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BREADCRUMBS -->
+    <div class="breadcrumbs_container">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Acasă</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Contul meu</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Initiere cerere noua</li>
+                </ol>
+                </nav>
+        </div>
+    </div>
+    
+    <!-- CONTENT -->
+    <div id="main-content" class="main-content">
+        <div class="container">
+            <!-- Services List -->
+            <div class="services_list_container new_request">
+                <div class="services_header">
+                    <div class="service_pictogram" style="background-image: url('assets/images/icons/document.png')"></div>
+                    <div class="service_title">
+                        <h2>Initiaza o cerere noua</h2>
+                    </div>
+                </div>
+                <!-- REQUEST HEAD -->
+                <div class="mt-4">Catre,</div>
+                <div>Primarul Sectorului 4 al Municipiului Bucuresti</div>
+                <div class="mt-4 text-center font-weight-bold text-uppercase">Cerere</div>
+                <div class="text-center font-weight-bold">pentru emiterea certificatului de urbanism</div>
+                <!-- REQUEST BODY -->
+                <!-- First row -->
+                <div class="row form-group mt-5">
+                    <div class="col-12 col-md-5 col-xl-4 cmb-lg cmb-md">
+                        <div class="if_tbl pr-12pr">
+                            <label for="req_name" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Subsemnatul <sup>(1)</sup></label>
+                            <input type="text" class="form-control if_cell" id="req_name" name="req_name" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-2 cmb-lg cmb-md">
+                        <div class="if_tbl">
+                            <label for="req_cnp" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">CNP/CUI</label>
+                            <input type="text" class="form-control if_cell" id="req_cnp" name="req_cnp" />
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-6 col-xl-4">
+                        <div class="if_tbl">
+                            <label for="req_oras_domiciliu" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell text-center">Cu sediul social / <br>domiciliu in</label>
+                            <select name="req_oras_domiciliu" id="req_oras_domiciliu" class="if_cell form-control chosen-select mw-200px open-absolute">
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-2">
+                        <div class="if_tbl last_item_row">
+                            <label for="req_sector" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Sector</label>
+                            <select name="req_sector" id="req_sector" class="if_cell form-control chosen-select open-absolute">
+                                <option value="bucuresti">1</option>
+                                <option value="bucuresti">2</option>
+                                <option value="bucuresti">3</option>
+                                <option value="bucuresti">4</option>
+                                <option value="bucuresti">5</option>
+                                <option value="bucuresti">6</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Second row -->
+                <div class="row form-group row-no-2">
+                    <div class="col-md-5 col-lg-4 col-xl-3 cmb-lg cmb-md">
+                        <div class="if_tbl pr-12pr">
+                            <label for="req_street" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Strada</label>
+                            <input type="text" class="if_cell form-control" id="req_street" name="req_street" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1 cmb-lg cmb-md">
+                        <div class="if_tbl">
+                            <label for="req_snr" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Nr.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_snr" name="req_snr" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1 cmb-lg cmb-md">
+                        <div class="if_tbl">
+                            <label for="req_bl" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Bl.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_bl" name="req_bl" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1 cmb-lg cmb-md">
+                        <div class="if_tbl">
+                            <label for="req_sc" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Sc.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_sc" name="req_sc" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1 cmb-lg">
+                        <div class="if_tbl">
+                            <label for="req_et" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Et.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_et" name="req_et" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1">
+                        <div class="if_tbl">
+                            <label for="req_ap" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Ap.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_ap" name="req_ap" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                        <div class="if_tbl last_item_row">
+                            <label for="req_tel" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Telefon/Fax</label>
+                            <input type="text" class="if_cell form-control" id="req_tel" name="req_tel" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Third row -->
+                <div class="row form-group">
+                    <div class="col-md-5 col-lg-3 cmb-md">
+                        <div class="if_tbl">
+                            <label for="req_email" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">E-mail</label>
+                            <input type="email" class="if_cell form-control" id="req_email" name="req_email" />
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-6 cmb-md">
+                        <div class="if_tbl row3-mid-col">
+                            <label for="req_reprezentant" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">In calitate de / reprezentat al</label>
+                            <input type="email" class="if_cell form-control" id="req_reprezentant" name="req_reprezentant" />
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="if_tbl">
+                            <label for="req_cc" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">CUI/CNP</label>
+                            <input type="email" class="if_cell form-control" id="req_cc" name="req_cc" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Text group -->
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="text-1" class="font-weight-bold">In conformitate cu prevederile Legii nr. 50/1991, privind autorizarea executarii lucrarilor de constructii, republicata, cu modificarile si completarile ulterioare, solicit emiterea certificatului de urbanism in scopul:</label>
+                        <textarea id="text-1" name="text-1" cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+                </div>
+                <!-- Label -->
+                <div class="row form-group">
+                    <div class="col-12">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_1" name="req_check_1">
+                            <label class="custom-control-label font-weight-bold" for="req_check_1">1. Elaborarea documentatiei pentru autorizarea executarii lucrarilor de constructii, in conformitate cu prevederile art. 3 alin. (1) din Lege, privind:</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Groups 1, 1.1 & 1.2 -->
+                <div class="row form-group">
+                    <div class="col-12 custom_check_group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_11" name="req_check_11">
+                            <label class="custom-control-label font-weight-bold" for="req_check_11">
+                                1.1 Lucrari de construire
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_12" name="req_check_12">
+                            <label class="custom-control-label font-weight-bold" for="req_check_12">
+                                1.2 Lucrari de desfiintare
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_12a" name="req_check_12a">
+                            <label class="custom-control-label" for="req_check_12a">
+                                a) lucrari de construire, reocnstruire, consolidare, modificare, extindere, reabilitare, schimbare de destinatie sau de reparare a constructiilor de orice fel, precum si a instalatiilor aferente acestora cu exceptia celor prevazute la art. 12 din legea nr. 50/1991;
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_12b" name="req_check_12b">
+                            <label class="custom-control-label" for="req_check_12b">
+                                b) lucrari de construire, reconstruire, extindere, reparare, consolidare protejare, restaurare, conservare, precum si orice alte lucrari, indiferen de valoarea lor, care urmeaza sa fie efectuate la constructii reprezentand monumente istorice, stabilite potrivit legii;
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_12c" name="req_check_12c">
+                            <label class="custom-control-label" for="req_check_12c">
+                                c) lucrari de construire, reconstruire, modificare, extindere, reparare, modernizare si reabilitarea privind caile de comunicatie de orice fel, drumurile forestiere, lucrarile de arta, retelele si dotarile tehnico-edilitare, lucrarile hidrotehnice, amenajarile de albii, lucrarile de imbunatatiri funciare, lucrarile de instalatii de infrastructura, lucrarile pentru noi capacitate de producere, transport, distributie a energiei electrice si/sau termice, precum si de reabilitare si retehnologizare a celor existente;
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_12d" name="req_check_12d">
+                            <label class="custom-control-label" for="req_check_12d">
+                                d) imprejmuiri si mobilier urban, amenajari de spatii verzi, parcuri, piete si alte lucrari de amenajare a spatiilor publice;
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_12e" name="req_check_12e">
+                            <label class="custom-control-label" for="req_check_12e">
+                                e) lucrari de foraje si excavari necesare pentru efectuarea studiilor geotehnice si a prospectiunilor geologice, proiectarea si deschiderea exploatarilor de cariere si balastiere, a sondelor de gaze si petrol, precum si a altor exploatari de suprafata sau subterane;
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_12f" name="req_check_12f">
+                            <label class="custom-control-label" for="req_check_12f">
+                                f) lucrari, amenajari si constructii cu caracter provizoriu, necesare in vederea organizarii executarii lucrarilor, in conditiile prevazute la art. 7 alin. (11) din Legea nr. 50/1991;
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_12g" name="req_check_12g">
+                            <label class="custom-control-label" for="req_check_12g">
+                                g) organizarea de tabere de corturi, casute sau rulote;
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_12h" name="req_check_12h">
+                            <label class="custom-control-label" for="req_check_12h">
+                                h) lucrari de constructii cu caracter provizoriu, chioscuri, tonete, cabine, spatii de expunere situate pe caile si spatiile publice, corpuri si panouri de afisaj, firme si reclame, precum si anexele gospodaresti ale exploatatiilor agricole situate in extravila;
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_12i" name="req_check_12i">
+                            <label class="custom-control-label" for="req_check_12i">
+                                i) cimitire - noi si extinderi.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Group 2 -->
+                <div class="row form-group">
+                    <div class="col-12 custom_check_group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_2" name="req_check_2">
+                            <label class="custom-control-label font-weight-bold" for="req_check_2">
+                                2. Operatiuni notariale privind circulatia imobiliara;
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_21" name="req_check_21">
+                            <label class="custom-control-label" for="req_check_21">
+                                vanzari, cumparari, concesionari, cesionari, dezmembrari, parcelari, comasari, partaje, succesiuni etc.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Group 3 -->
+                <div class="row form-group">
+                    <div class="col-12 custom_check_group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_3" name="req_check_3">
+                            <label class="custom-control-label font-weight-bold" for="req_check_3">
+                                3. Adjudecarea prin licitatie a proiectarii lucrarilor publice (denumire)***
+                            </label>
+                        </div>
+                        <textarea name="text-2" id="text-2" cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+                </div>
+                <!-- Group 4 -->
+                <div class="row form-group">
+                    <div class="col-12 custom_check_group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_4" name="req_check_4">
+                            <label class="custom-control-label font-weight-bold" for="req_check_4">
+                                4. Cereri in justitie
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Group 5 -->
+                <div class="row form-group">
+                    <div class="col-12 custom_check_group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_5" name="req_check_5">
+                            <label class="custom-control-label font-weight-bold" for="req_check_5">
+                                5. Alte scopuri prevazute de lege (definire)***
+                            </label>
+                        </div>
+                        <textarea name="text-3" id="text-3" cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+                </div>
+                <!-- Row 4 -->
+                <div class="row form-group row-no-4">
+                    <div class="col-md-4 col-lg-3 col41 cmb-md">
+                        <div class="if_tbl auto mh-50">
+                            <label class="if_cell font-weight-bold pr-2 mb-0">pentru imobilul</label>
+                            <div class="custom-control custom-checkbox if_cell">
+                                <input type="checkbox" class="custom-control-input" id="req_teren" name="req_teren">
+                                <label class="custom-control-label font-weight-bold" for="req_teren">teren</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3 col42 cmb-md">
+                        <div class="if_tbl auto mh-50">
+                            <label class="if_cell font-weight-bold pr-2 mb-0">si/sau</label>
+                            <div class="custom-control custom-checkbox if_cell">
+                                <input type="checkbox" class="custom-control-input" id="req_constructii" name="req_constructii">
+                                <label class="custom-control-label font-weight-bold" for="req_constructii">constructii,</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col43">
+                        <div class="if_tbl auto">
+                            <label for="req_ts" class="if_cell font-weight-bold pr-2 mb-0 text-nowrap">situat in, municipiul</label>
+                            <select name="req_ts" id="req_ts" class="if_cell  mws-200 form-control chosen-select open-absolute">
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-2 col44">
+                        <div class="if_tbl last_item_row auto">
+                            <label for="req_sector_bot" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Sector</label>
+                            <select name="req_sector_bot" id="req_sector_bot" class="if_cell mws-200 form-control chosen-select open-absolute">
+                                <option value="bucuresti">1</option>
+                                <option value="bucuresti">2</option>
+                                <option value="bucuresti">3</option>
+                                <option value="bucuresti">4</option>
+                                <option value="bucuresti">5</option>
+                                <option value="bucuresti">6</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row 5 -->
+                <div class="row form-group row-no-5">
+                    <div class="col-md-5 col-lg-4 col-xl-3 cmb-lg cmb-md">
+                        <div class="if_tbl auto">
+                            <label for="req_cp_bot" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">cod postal</label>
+                            <input type="text" class="if_cell form-control" id="req_cp_bot" name="req_cp_bot" />
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-lg-4 col-xl-4 modc_1 cmb-lg cmb-md">
+                        <div class="if_tbl auto">
+                            <label for="req_street_bot" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Strada</label>
+                            <input type="text" class="if_cell form-control" id="req_street_bot" name="req_street_bot" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1 cmb-lg cmb-md">
+                        <div class="if_tbl">
+                            <label for="req_snr_bot" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Nr.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_snr_bot" name="req_snr_bot" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1 cmb-lg">
+                        <div class="if_tbl">
+                            <label for="req_bl_bot" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Bl.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_bl_bot" name="req_bl_bot" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1">
+                        <div class="if_tbl">
+                            <label for="req_sc_bot" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Sc.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_sc_bot" name="req_sc_bot" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1">
+                        <div class="if_tbl">
+                            <label for="req_et_bot" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Et.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_et_bot" name="req_et_bot" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1">
+                        <div class="if_tbl">
+                            <label for="req_ap_bot" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Ap.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_ap_bot" name="req_ap_bot" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Row 6 -->
+                <div class="row form-group">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="if_tbl auto">
+                            <label for="req_ip_bot" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">
+                                sau identificat prin<sup>3)</sup>
+                            </label>
+                            <input type="text" class="if_cell form-control" id="req_ip_bot" name="req_ip_bot" />
+                        </div>
+                    </div>
+                    <div class="col-xs-8"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-12 font-weight-bold">In sprijinul identificarii imobilului anexez:</div>
+                </div>
+                <!-- Row 7 -->
+                <div class="row form-group row-no-7">
+                    <div class="col-md-9 col-xl-5 cmb-lg cmb-md">
+                        <div class="if_tbl auto">
+                            <label for="req_pct" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">
+                                - planul cadastral / topografic actualizat la zi, scara 1:
+                            </label>
+                            <div class="if_cell">
+                                <input type="text" class="form-control small_width" id="req_pct" name="req_pct" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xl-2 cmb-lg cmb-md">
+                        <div class="if_tbl auto cml-auto">
+                            <label for="req_bot1" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">
+                                si 1:
+                            </label>
+                            <div class="if_cell">
+                                <input type="text" class="form-control small_width" id="req_bot1" name="req_bot1" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="if_tbl auto cml-auto">
+                            <label for="req_extras_cf" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">
+                                - extrasul de carte funciara <br>pentru informare, eliberat de OCPI:
+                            </label>
+                            <div class="if_cell">
+                                <input type="text" class="form-control small_width" id="req_extras_cf" name="req_extras_cf" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Row 8 -->
+                <div class="row form-group">
+                    <div class="col-12 col-xl-6">
+                        <div class="if_tbl auto">
+                            <label for="req_suprafata" class="if_cell text-nowrap pr-4 mb-0 font-weight-bold cwrap-md">
+                                Suprafata terenului si/sau constructiei pentru <br>care solicit certificatul de urbanism este de
+                            </label>
+                            <div class="if_cell">
+                                <input type="text" class="form-control small_width" id="req_suprafata" name="req_suprafata" />
+                            </div>
+                            <div class="if_cell font-weight-bold pl-4">m2.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row 9 -->
+                <div class="row form-group mt-5 mb-5">
+                    <div class="col-12 col-md-6">
+                        <div class="if_tbl auto">
+                            <label for="req_data" class="if_cell text-nowrap pr-5 mb-0 font-weight-bold">
+                                DATA
+                            </label>
+                            <input type="text" class="if_cell form-control medium_width" id="req_data" name="req_data" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="if_tbl auto cml-auto cml-auto-md">
+                            <label for="req_semnatura" class="if_cell text-nowrap pr-5 mb-0 font-weight-bold">
+                                SEMNATURA<sup>5</sup>
+                            </label>
+                            <input type="text" class="if_cell form-control medium_width" id="req_semnatura" name="req_semnatura" />
+                        </div>
+                    </div>
+                </div>
+                <div class="font-weight-bold">
+                    **) Se introduce "X" in caseta si se anuleaza ce nu corespunde
+                </div>
+                <div class="font-weight-bold">
+                    ***) Se face precizarea dupa caz:
+                </div>
+                <div class="font-weight-bold">
+                    F-AH-UB-008
+                </div>
+
+                <!-- Custom Buttons -->
+                <div class="btn_footer_container">
+                    <div class="btn_info">
+                        <div class="background clearfix">
+                            <div class="prev_info">
+                                <strong>Serviciul:</strong> Eliberare adeverinta privind datele din registrul agricol
+                            </div>
+                            <div class="next_info">
+                                <strong>Pasul:</strong> Completare cerere
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="buttons_container">
+                        <form action="" method="post">
+                            <button type="submit" name="prev_page" class="btn btn-primary btn-sm prev"><i class="fas fa-arrow-alt-circle-left"></i>Pasul anterior</button>
+                            <button type="submit" name="next_page" class="btn btn-secondary btn-sm next">Pasul urmator<i class="fas fa-arrow-alt-circle-right"></i></button>
+                        </form>
+                    </div> -->
+                    <div class="buttons_container">
+                        <a href="javascript:void(0)" class="btn btn-primary btn-sm prev"><i class="fas fa-arrow-alt-circle-left"></i>Pasul anterior</a>
+                        <a href="javascript:void(0)" class="btn btn-secondary btn-sm next">Pasul urmator<i class="fas fa-arrow-alt-circle-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="gap-50"></div>
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <!-- COPYRIGHTS -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 copyright">
+                    <a href="https://www.documenta.ro/" target="_blank">Powered by documenta DMS</a>
+                </div>
+                <div class="col-sm-6">
+                    <div class="logo_footer text-right">
+                        <a href="index.html">
+                            <img src="../PS4/assets/images/logos/logo.png" alt="logo primaria sectorului 4">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FOOTER SCRIPTS -->
+    <!-- SweetAlert -->
+    <script src="../PS4/assets/js/sweetalert2.min.js"></script>
+    <!-- jQuery -->
+    <script src="../PS4/assets/js/jquery-3.4.1.min.js"></script>
+    <!-- Autocomplete -->
+    <script src="../PS4/assets/js/jquery-ui.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="../PS4/assets/js/bootstrap.min.js"></script>
+    <!-- Slick Carousel -->
+    <script src="../PS4/assets/js/slick.min.js"></script>
+    <!-- Chosen Select -->
+    <script src="../PS4/assets/js/chosen.jquery.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../PS4/assets/js/main.js"></script>
+
+    <!-- Testing Sweet Alerts / autocomplete / etc.  - should be deleted after -->
+    <script src="../PS4/assets/js/testing.js"></script>
+  </body>
+</html>

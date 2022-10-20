@@ -1,0 +1,16 @@
+.swal-wide {
+    width:850px !important;
+}
+
+.xml_errors_div {
+    height: 400px;
+    overflow: auto;
+    width: 800px;
+    display: block;
+}
+
+.xml_errors_tbl > tbody > tr > td {
+    border-top: 1px solid lightblue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

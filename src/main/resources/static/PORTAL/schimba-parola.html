@@ -1,0 +1,156 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>Manage Access</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+    <link href="../PORTAL/assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/jquery-ui.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/slick.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/bootstrap.min.css">
+
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/sweetalert2.min.css">
+
+    <!-- CSS - Fancybox -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/jquery.fancybox.min.css">
+    <!-- Custom -->
+    <!--   main.css se adauga in mod dinamic din fisierul js: main_static.js ; daca avem setat param dmsws.unitname in application.properties va fi importat fisierul main_unitname.css -->
+
+    <style>
+        .schimba_parola input {width:100%;border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 4px;
+            margin: 5px 0;}
+    </style>
+
+</head>
+
+<body>
+<!--[if IE]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+
+<div id="overlay"></div>
+
+<!-- begin Box Content -->
+
+<div class="container">
+
+    <div class="services_list_container my-account-data">
+
+        <!-- begin Title -->
+        <div class="services_header"><div class="service_title"><h2>Schimba parola</h2></div></div>
+        <!-- end Title -->
+
+        <div class="service_body">
+            <div class="if_tbl">
+                <div class="if_cell image"><img src="assets/images/manage_access.png"></div>
+                <div class="if_cell content">
+
+                    <!-- begin Right Side - content -->
+                    <div class="right_side">
+
+                        <!-- begin Content -->
+                        <div class="content" style="padding:0px;">
+                            <div class="">
+
+
+                                <!-- begin Box Checklist -->
+                                <div class="table_scroll">
+
+                                    <!-- begin Box Table -->
+
+
+                                        <!-- begin Table -->
+                                        <table class="table table_date_contact schimba_parola">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="th_text1">Parola veche:</th>
+                                                    <td><input type="password" name="parola_veche" id="parola_veche" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="th_text1">Parola noua:</th>
+                                                    <td><input type="password" name="parola_noua" id="parola_noua" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="th_text1">Confirma parola:</th>
+                                                    <td><input type="password" name="confirma_parola" id="confirma_parola" /></td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                        <!-- end Table -->
+
+
+
+                                    <!-- begin Title -->
+                                    <div class="title_table">
+                                        <!--<span class="editable_text" contenteditable="true">Management acces</span>-->
+                                        <a class="btn_arrow_left float_left mt30" style="color:#fff;" onclick="PageManager.goBack()">Anuleaza</a>
+                                        <a style="color:#fff;" class="btn btn_green float_right mt30" onclick="PageManager.reset()">Schimba parola</a>
+
+                                    </div>
+                                    <!-- end Title -->
+                                </div>
+                                <!-- end Box Checklist -->
+
+
+
+                            </div><!-- end .second_page -->
+                        </div>
+                        <!-- begin Content -->
+
+                    </div>
+                    <!-- end Right Side - content -->
+
+                </div>
+            </div>
+        </div>
+    </div><!-- end .div_container -->
+</div><!-- end .container -->
+
+<!-- end Box Content -->
+
+<!-- FOOTER SCRIPTS -->
+<!-- SweetAlert -->
+<script src="../PORTAL/assets/js/sweetalert2.min.js"></script>
+<!-- jQuery -->
+<script src="../PORTAL/assets/js/jquery-3.5.1.min.js"></script>
+<!-- Autocomplete -->
+<script src="../PORTAL/assets/js/jquery-ui.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="../PORTAL/assets/js/bootstrap.min.js"></script>
+<!-- Slick Carousel -->
+<script src="../PORTAL/assets/js/slick.min.js"></script>
+<script src="assets/js/main_static.js"></script>
+
+<script src="assets/js/mustache.js"></script>
+<script src="assets/js/weblib.js"></script>
+<script src="../website/assets/js/documentaPortal-util.js"></script>
+<script src="assets/js/leave_page.js"></script>
+<script src="assets/js/schimba-parola.js"></script>
+
+<!-- script Fancybox -->
+<script type="text/javascript"
+        src="assets/js/jquery.fancybox.min.js"></script>
+
+
+</body>
+
+</html>

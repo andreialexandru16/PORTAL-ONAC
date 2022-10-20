@@ -1,0 +1,682 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>ANRE</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/favicon.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <!-- CSS - jQuery -->
+  <link rel="stylesheet" href="assets/css/jquery-ui.css">
+  <!-- CSS - DataTable -->
+  <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+  <!-- CSS Semantic - dropdown -->
+  <link rel="stylesheet" href="assets/css/dropdown.min.css">
+  <link rel="stylesheet" href="assets/css/transition.min.css">
+
+  <!-- CSS - Fancybox -->
+  <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
+  <!-- Custom -->
+  <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!--main.css se adauga in mod dinamic din fisierul js: main_static.js ; daca avem setat param dmsws.unitname in application.properties va fi importat fisierul main_unitname.css-->
+  <!-- Sweet Alert -->
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+
+  <style>
+    .chosen-container-single .chosen-single div b{
+      background: none;
+    }
+    .file_name_textarea {
+      resize: none;
+      width: 300px !important;
+      height: 50px;
+      display: block;
+    }
+
+    .file_name_buttons {
+      width:300px !important;
+      display: block;
+    }
+
+    .file_name_textarea_holder {
+      width:300px !important;
+      display: block;
+    }
+
+    .high-swal {
+      z-index: 9999999999;
+    }
+  </style>
+</head>
+
+<body>
+<!--[if IE]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+<!-- begin Container -->
+<div class="container">
+  <div class="services_list_container my-account-data">
+
+    <!-- begin Title -->
+    <div class="services_header"><div class="service_title"><h2>Documente</h2></div></div>
+    <!-- end Title -->
+
+
+    <div class="service_body">
+      <div class="if_tbl">
+        <div class="if_cell image" style="text-align: center;"><img style="max-width:100px;" src="assets/images/document.png"></div>
+        <div class="if_cell content">
+
+          <!-- begin Tabs -->
+          <div class="tabs">
+
+            <!-- begin Tabs - menu -->
+            <ul>
+              <li><a href="#tabs-1" onclick="FileManager.setZona('')">Generale</a></li>
+              <li id="tab-gn" style="display: none"><a href="#tabs-2" onclick="FileManager.setZona('GN')">Gaze naturale</a></li>
+              <li id="tab-ee" style="display: none"><a href="#tabs-3" onclick="FileManager.setZona('EE')">Energie electrica</a></li>
+              <li id="tab-et" style="display: none"><a href="#tabs-4" onclick="FileManager.setZona('ET')">Energie termica</a></li>
+            </ul>
+            <!-- end Tabs - menu -->
+
+            <!-- begin Tabs 1 -->
+            <div id="tabs-1">
+
+              <!-- begin Documente generale -->
+              <div class=" padd_right0">
+                <div id="container_doc_generale" class="">
+
+                </div>
+              </div>
+
+              <div class="box_buttons_row">
+                <div class="buttons_row">
+
+                  <div style="width: 100%;">
+                    <a href="#" data-fancybox="" data-src="#adauga_rand_nou" onclick="FileManager.resizeIframe()" class="btn btn_green float_right mt30" style="color: #fff;">Adauga document</a>
+                    <a href="#" onclick="FileManager.goBack()" style="color: white;"  class="btn_arrow_left float_left mt30" >Inapoi</a>
+                  </div>
+                </div>
+              </div>
+              <!-- begin Documente generale -->
+
+            </div>
+            <!-- end Tabs 1 -->
+
+            <!-- begin Tabs 2 -->
+            <!-- begin Tabs 1 -->
+            <div id="tabs-2">
+
+
+              <!-- begin Documente gaze -->
+              <div class=" padd_right0">
+                <div id="container_doc_gn" class="">
+
+                </div>
+              </div>
+
+              <div class="box_buttons_row">
+                <div class="buttons_row">
+
+                  <div style="width: 100%;">
+                    <a href="#" data-fancybox="" data-src="#adauga_rand_nou_zona" onclick="FileManager.resizeIframe()" class="btn btn_green float_right mt30" style="color: #fff;">Adauga document</a>
+                    <a href="#" onclick="FileManager.goBack()" style="color: white;"  class="btn_arrow_left float_left mt30" >Inapoi</a>
+                  </div>
+                </div>
+              </div>
+              <!-- begin Documente gaze -->
+
+            </div>      <!-- end Tabs 1 -->
+            <!-- end Tabs 2 -->
+
+            <!-- begin Tabs 3 -->
+            <div id="tabs-3">
+
+
+              <!-- begin Documente ee -->
+              <div class=" padd_right0">
+                <div id="container_doc_ee" class="">
+
+                </div>
+              </div>
+
+              <div class="box_buttons_row">
+                <div class="buttons_row">
+
+                  <div style="width: 100%;">
+                    <a href="#" data-fancybox="" data-src="#adauga_rand_nou_zona"  onclick="FileManager.resizeIframe()" class="btn btn_green float_right mt30" style="color: #fff;">Adauga document</a>
+                    <a href="#" onclick="FileManager.goBack()" style="color: white;"  class="btn_arrow_left float_left mt30" >Inapoi</a>
+                  </div>
+                </div>
+              </div>
+              <!-- begin Documente ee -->
+
+            </div>
+            <!-- end Tabs 3 -->
+
+            <!-- begin Tabs 4 -->
+            <div id="tabs-4">
+
+
+              <!-- begin Documente et -->
+              <div class=" padd_right0">
+                <div id="container_doc_et" class="">
+
+                </div>
+              </div>
+
+              <div class="box_buttons_row">
+                <div class="buttons_row">
+
+                  <div style="width: 100%;">
+                    <a href="#" data-fancybox="" data-src="#adauga_rand_nou_zona" onclick="FileManager.resizeIframe()" class="btn btn_green float_right mt30" style="color: #fff;">Adauga document</a>
+                    <a href="#" onclick="FileManager.goBack()" style="color: white;"  class="btn_arrow_left float_left mt30" >Inapoi</a>
+                  </div>
+                </div>
+              </div>
+              <!-- begin Documente et -->
+
+            </div>
+            <!-- end Tabs 4 -->
+
+
+          </div>
+          <!-- end Tabs -->
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- end Table Validare / Transmitere date -->
+  </div>
+</div>
+<!-- end Container -->
+<!-- begin Popup - Adauga rand nou -->
+<div class="modal_add" style="display: none;" id="adauga_rand_nou">
+
+  <!-- begin Popup - content -->
+  <div class="box_rand_nou">
+
+    <!-- begin Tip document -->
+    <div class="flex_full_width">
+      <p>Tip document<span style="color:red">*</span></p>
+      <select class="ui fluid dropdown dropdown_inbox" id="container_select_tip_document">
+        <!--  date dinamice - aduse din tmpl_tip_document-->
+
+      </select>
+    </div>
+    <!-- end Tip document -->
+
+    <div class="flex_width50">
+      <p>Valabil de la</p>
+      <input id="valabil_de_la" type="text" class="datepicker" value=""  autocomplete="off">
+    </div>
+
+    <div class="flex_width50">
+      <p>Valabil pana la</p>
+      <input id="valabil_pana_la" type="text" class="datepicker" value="" autocomplete="off">
+    </div>
+
+    <div class="flex_full_width">
+      <label>
+        <input type="file" name="file" id="input_file">
+        <!--
+                    <button type="submit" id="submit_file" style="display: none;">Submit<i class="fas fa-arrow-alt-circle-right"></i></button>
+        -->
+      </label>
+
+    </div>
+
+  </div>
+  <!-- end Popup - content -->
+
+  <button class="btn btn_green mt20 float_right" id="btn_adauga" onclick="FileManager.continueUploadFile();">Adauga</button>
+
+</div>
+<!-- Script-uri Mustache -->
+
+<!-- begin Popup - Adauga rand nou -->
+<div class="modal_add" style="display: none;" id="adauga_rand_nou_zona">
+
+  <!-- begin Popup - content -->
+  <div class="box_rand_nou">
+
+    <!-- begin Tip document -->
+    <div class="flex_full_width">
+      <p>Tip document<span style="color:red">*</span></p>
+      <select class="ui fluid dropdown dropdown_inbox" id="container_select_tip_document_zona">
+        <!--  date dinamice - aduse din tmpl_tip_document-->
+
+      </select>
+    </div>
+    <!-- end Tip document -->
+
+    <div class="flex_width50">
+      <p>Valabil de la</p>
+      <input id="valabil_de_la_zona" type="text" class="datepicker" value=""  autocomplete="off">
+    </div>
+
+    <div class="flex_width50">
+      <p>Valabil pana la</p>
+      <input id="valabil_pana_la_zona" type="text" class="datepicker" value="" autocomplete="off">
+    </div>
+    <div class="flex_width50">
+      <p>Nr. ANRE</p>
+      <input id="nr_anre_zona" type="text" value=""  autocomplete="off">
+    </div>
+
+    <div class="flex_width50">
+      <p>Data ANRE</p>
+      <input id="data_anre_zona" type="text" class="datepicker" value="" autocomplete="off">
+    </div>
+    <div class="flex_width50">
+      <p>Nr. document</p>
+      <input id="nr_doc_zona" type="text" value=""  autocomplete="off">
+    </div>
+
+    <div class="flex_width50">
+      <p>Data document</p>
+      <input id="data_doc_zona" type="text" class="datepicker" value="" autocomplete="off">
+    </div>
+    <div class="flex_full_width">
+      <label>
+        <input type="file" name="file" id="input_file_zona">
+        <!--
+                    <button type="submit" id="submit_file" style="display: none;">Submit<i class="fas fa-arrow-alt-circle-right"></i></button>
+        -->
+      </label>
+
+    </div>
+
+  </div>
+  <!-- end Popup - content -->
+
+  <button class="btn btn_green mt20 float_right" id="btn_adauga_zona" onclick="FileManager.continueUploadFileZona();">Adauga</button>
+
+</div>
+<!-- Script-uri Mustache -->
+<div class="modal_expertiza" style="display: none;" id="editeaza_rand">
+
+  <!-- begin Popup - content -->
+  <div class="box_rand_nou">
+
+    <!-- begin Tip document -->
+    <div class="flex_full_width">
+      <p>Tip document</p>
+      <input id="tip_document" type="text" value="" readonly disabled autocomplete="off">
+      <input id="id_tip_document_hidden" style="display: none" type="hidden" value="" readonly disabled autocomplete="off">
+      <input id="id_document_cont_hidden" style="display: none" type="hidden" value="" readonly disabled autocomplete="off">
+    </div>
+    <!-- end Tip document -->
+
+    <div class="flex_width50">
+      <p>Valabil de la</p>
+      <input id="valabil_de_la_edit" type="text" class="datepicker" value=""  autocomplete="off">
+    </div>
+
+    <div class="flex_width50">
+      <p>Valabil pana la</p>
+      <input id="valabil_pana_la_edit" type="text" class="datepicker" value="" autocomplete="off">
+    </div>
+
+    <div class="flex_full_width">
+      <label>
+        <input type="file" name="file" id="input_file_edit">
+      </label>
+
+    </div>
+
+  </div>
+  <!-- end Popup - content -->
+
+  <button class="btn btn_green mt20 float_right" id="btn_edit" onclick="FileManager.continueUploadFileEdit();">Actualizeaza</button>
+
+</div>
+<div class="modal_expertiza" style="display: none;" id="editeaza_rand_zona">
+
+  <!-- begin Popup - content -->
+  <div class="box_rand_nou">
+
+    <!-- begin Tip document -->
+    <div class="flex_full_width">
+      <p>Tip document</p>
+      <input id="tip_document_zona" type="text" value="" readonly disabled autocomplete="off">
+      <input id="id_tip_document_hidden_zona" style="display: none" type="hidden" value="" readonly disabled autocomplete="off">
+      <input id="id_document_cont_hidden_zona" style="display: none" type="hidden" value="" readonly disabled autocomplete="off">
+    </div>
+    <!-- end Tip document -->
+
+    <div class="flex_width50">
+      <p>Valabil de la</p>
+      <input id="valabil_de_la_edit_zona" type="text" class="datepicker" value=""  autocomplete="off">
+    </div>
+
+    <div class="flex_width50">
+      <p>Valabil pana la</p>
+      <input id="valabil_pana_la_edit_zona" type="text" class="datepicker" value="" autocomplete="off">
+    </div>
+    <div class="flex_width50">
+      <p>Nr. ANRE</p>
+      <input id="nr_anre_edit_zona" type="text" value=""  autocomplete="off">
+    </div>
+
+    <div class="flex_width50">
+      <p>Data ANRE</p>
+      <input id="data_anre_edit_zona" type="text" class="datepicker" value="" autocomplete="off">
+    </div>
+    <div class="flex_width50">
+      <p>Nr. document</p>
+      <input id="nr_doc_edit_zona" type="text" value=""  autocomplete="off">
+    </div>
+
+    <div class="flex_width50">
+      <p>Data document</p>
+      <input id="data_doc_edit_zona" type="text" class="datepicker" value="" autocomplete="off">
+    </div>
+    <div class="flex_full_width">
+      <label>
+        <input type="file" name="file" id="input_file_edit_zona">
+      </label>
+
+    </div>
+
+  </div>
+  <!-- end Popup - content -->
+
+  <button class="btn btn_green mt20 float_right" id="btn_edit_zona" onclick="FileManager.continueUploadFileEditZona();">Actualizeaza</button>
+
+</div>
+
+<script id="tmpl_formulare_list" type="x-tmpl-mustache">
+<div class="table_scroll">
+  <table class="dataTable_generale display"  style="width: 100%">
+        <thead>
+        <tr>
+          <th class="th_sort2" style="padding: 10px 10px;"><span>Tip document</span></th>
+          <th class="th_sort2 text-left "><span>Denumire</span></th>
+          <th class="th_sort2"><span>Incarcat la</span></th>
+          <th class="th_sort2"><span>Incarcat de</span></th>
+          <th class="th_sort2"><span>Valabil de la</span></th>
+          <th class="th_sort2"><span>Valabil pana la</span></th>
+          <th class="th_sort2"><span>Descarca</span></th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+   {{#documenteContList}}
+    <tr class="link_doc">
+
+                <td style="padding: 8px 10px;"><span>{{document}}</span></td>
+                <td><span class="text-left">{{denumire}}</span></td>
+                <td><span>{{creatLa}}</span></td>
+                <td><span>{{creatDe}}</span></td>
+                <td><span>{{valabilDeLa}}</span></td>
+                <td><span>{{valabilPanaLa}}</span></td>
+                 <td style="    font-size: 18px;">
+                  <div class="buttons">
+                    <a   href="{{downloadLink}}" target="_blank" class="btn_blue"  style="margin:2px"><i class="fas fa-download tooltip_chat"><span class="tooltiptext">Descarca</span></i></a>
+                    <a href="#" onclick="FileManager.deleteDocument({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
+                    <a href="#" onclick="FileManager.getDocumentInfo({{id}})" data-fancybox data-src="#editeaza_rand"  class="btn_blue" style="margin:2px"><i class="fas fa-tasks tooltip_chat_right"><span class="tooltiptext_right">Editeaza</span></i></a>
+
+                  </div>
+                </td>
+
+              </tr>
+ {{/documenteContList}}
+
+        </tbody>
+      </table>
+      </div>
+</script>
+<script id="tmpl_formulare_list_gn" type="x-tmpl-mustache">
+<div class="table_scroll">
+  <table class="dataTable_gn display"  style="width: 100%">
+        <thead>
+        <tr>
+          <th class="th_sort2" style="padding: 10px 10px;"><span>Tip document</span></th>
+          <th class="th_sort2 text-left "><span>Denumire</span></th>
+          <th class="th_sort2"><span>Incarcat la</span></th>
+          <th class="th_sort2"><span>Incarcat de</span></th>
+          <th class="th_sort2"><span>Valabil de la</span></th>
+          <th class="th_sort2"><span>Valabil pana la</span></th>
+          <th class="th_sort2"><span>Nr. ANRE</span></th>
+          <th class="th_sort2"><span>Data ANRE</span></th>
+          <th class="th_sort2"><span>Nr. document</span></th>
+          <th class="th_sort2"><span>Data document</span></th>
+          <th class="th_sort2"><span>Descarca</span></th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+   {{#documenteContListGn}}
+    <tr class="link_doc">
+
+                <td style="padding: 8px 10px;"><span>{{document}}</span></td>
+                <td><span class="text-left">{{denumire}}</span></td>
+                <td><span>{{creatLa}}</span></td>
+                <td><span>{{creatDe}}</span></td>
+                <td><span>{{valabilDeLa}}</span></td>
+                <td><span>{{valabilPanaLa}}</span></td>
+                <td><span>{{nrAnre}}</span></td>
+                <td><span>{{dataAnre}}</span></td>
+                <td><span>{{nrDoc}}</span></td>
+                <td><span>{{dataDoc}}</span></td>
+                 <td style="    font-size: 18px;">
+                  <div class="buttons">
+                    <a   href="{{downloadLink}}" target="_blank" class="btn_blue"  style="margin:2px"><i class="fas fa-download tooltip_chat"><span class="tooltiptext">Descarca</span></i></a>
+                    <a href="#" onclick="FileManager.deleteDocument({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
+                    <a href="#" onclick="FileManager.getDocumentInfo({{id}})" data-fancybox data-src="#editeaza_rand_zona"  class="btn_blue" style="margin:2px"><i class="fas fa-tasks tooltip_chat_right"><span class="tooltiptext_right">Editeaza</span></i></a>
+
+                  </div>
+                </td>
+
+              </tr>
+ {{/documenteContListGn}}
+
+        </tbody>
+      </table>
+      </div>
+</script>
+<script id="tmpl_formulare_list_ee" type="x-tmpl-mustache">
+<div class="table_scroll">
+  <table class="dataTable_ee display"  style="width: 100%">
+        <thead>
+        <tr>
+          <th class="th_sort2" style="padding: 10px 10px;"><span>Tip document</span></th>
+          <th class="th_sort2 text-left "><span>Denumire</span></th>
+          <th class="th_sort2"><span>Incarcat la</span></th>
+          <th class="th_sort2"><span>Incarcat de</span></th>
+          <th class="th_sort2"><span>Valabil de la</span></th>
+          <th class="th_sort2"><span>Valabil pana la</span></th>
+             <th class="th_sort2"><span>Nr. ANRE</span></th>
+          <th class="th_sort2"><span>Data ANRE</span></th>
+          <th class="th_sort2"><span>Nr. document</span></th>
+          <th class="th_sort2"><span>Data document</span></th>
+          <th class="th_sort2"><span>Descarca</span></th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+   {{#documenteContListEe}}
+    <tr class="link_doc">
+
+                <td style="padding: 8px 10px;"><span>{{document}}</span></td>
+                <td><span class="text-left">{{denumire}}</span></td>
+                <td><span>{{creatLa}}</span></td>
+                <td><span>{{creatDe}}</span></td>
+                <td><span>{{valabilDeLa}}</span></td>
+                <td><span>{{valabilPanaLa}}</span></td>
+                      <td><span>{{nrAnre}}</span></td>
+                <td><span>{{dataAnre}}</span></td>
+                <td><span>{{nrDoc}}</span></td>
+                <td><span>{{dataDoc}}</span></td>
+                 <td style="    font-size: 18px;">
+                  <div class="buttons">
+                    <a   href="{{downloadLink}}" target="_blank" class="btn_blue"  style="margin:2px"><i class="fas fa-download tooltip_chat"><span class="tooltiptext">Descarca</span></i></a>
+                    <a href="#" onclick="FileManager.deleteDocument({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
+                    <a href="#" onclick="FileManager.getDocumentInfo({{id}})" data-fancybox data-src="#editeaza_rand_zona"  class="btn_blue" style="margin:2px"><i class="fas fa-tasks tooltip_chat_right"><span class="tooltiptext_right">Editeaza</span></i></a>
+
+                  </div>
+                </td>
+
+              </tr>
+ {{/documenteContListEe}}
+
+        </tbody>
+      </table>
+      </div>
+</script>
+<script id="tmpl_formulare_list_et" type="x-tmpl-mustache">
+<div class="table_scroll">
+  <table class="dataTable_et display"  style="width: 100%">
+        <thead>
+        <tr>
+          <th class="th_sort2" style="padding: 10px 10px;"><span>Tip document</span></th>
+          <th class="th_sort2 text-left "><span>Denumire</span></th>
+          <th class="th_sort2"><span>Incarcat la</span></th>
+          <th class="th_sort2"><span>Incarcat de</span></th>
+          <th class="th_sort2"><span>Valabil de la</span></th>
+          <th class="th_sort2"><span>Valabil pana la</span></th>
+          <th class="th_sort2"><span>Nr. ANRE</span></th>
+          <th class="th_sort2"><span>Data ANRE</span></th>
+          <th class="th_sort2"><span>Nr. document</span></th>
+          <th class="th_sort2"><span>Data document</span></th>
+          <th class="th_sort2"><span>Descarca</span></th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+
+   {{#documenteContListEt}}
+    <tr class="link_doc">
+
+                <td style="padding: 8px 10px;"><span>{{document}}</span></td>
+                <td><span class="text-left">{{denumire}}</span></td>
+                <td><span>{{creatLa}}</span></td>
+                <td><span>{{creatDe}}</span></td>
+                <td><span>{{valabilDeLa}}</span></td>
+                <td><span>{{valabilPanaLa}}</span></td>
+                      <td><span>{{nrAnre}}</span></td>
+                <td><span>{{dataAnre}}</span></td>
+                <td><span>{{nrDoc}}</span></td>
+                <td><span>{{dataDoc}}</span></td>
+                 <td style="min-width:120px;font-size: 18px;">
+                  <div class="buttons">
+                    <a   href="{{downloadLink}}" target="_blank" class="btn_blue"  style="margin:2px"><i class="fas fa-download tooltip_chat"><span class="tooltiptext">Descarca</span></i></a>
+                    <a href="#" onclick="FileManager.deleteDocument({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
+                    <a href="#" onclick="FileManager.getDocumentInfo({{id}})" data-fancybox data-src="#editeaza_rand_zona"  class="btn_blue" style="margin:2px"><i class="fas fa-tasks tooltip_chat_right"><span class="tooltiptext_right">Editeaza</span></i></a>
+
+                  </div>
+                </td>
+
+              </tr>
+ {{/documenteContListEt}}
+
+        </tbody>
+      </table>
+      </div>
+</script>
+
+
+<!-- Template Mustache - Lista departament (select)-->
+<script id="tmpl_tip_document" type="x-tmpl-mustache">
+            <option selected value="">Cauta tip document </option>
+
+    {{#documentList}}
+
+            <option value="{{id}}">{{denumire}}</option>
+
+    {{/documentList}}
+
+</script>
+
+<!-- End Script-uri Mustache -->
+<!-- SweetAlert -->
+<script src="assets/js/sweetalert2.min.js"></script>
+<script src="../website/assets/js/util.js"></script>
+<!-- script modernizr -->
+<script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-ui.js"></script>
+<!-- script jQuery Semantic - dropdown -->
+<script src="assets/js/dropdown.min.js"></script>
+<script src="assets/js/transition.min.js"></script>
+<!-- script Sort Table -->
+<script type="text/javascript" src="assets/js/sort-table.js"></script>
+<!-- script DataTable -->
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<!-- custom js -->
+<!-- script Fancybox -->
+<script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
+<!-- Chosen Select -->
+<script src="assets/js/chosen.jquery.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/main_static.js"></script>
+
+<script src="assets/js/weblib.js"></script>
+
+<script src="assets/js/mustache.js"></script>
+<script src="../website/assets/js/documentaPortal-util.js"></script>
+<script src="assets/js/documente_cont.js"></script>
+<script src="assets/js/leave_page.js"></script>
+<script>
+    // Tabs
+    $( ".tabs" ).tabs({
+        activate: function( event, ui ) {
+            try {
+                $('#resize_iframe', window.parent.document).trigger('click');
+                window.parent.parent.scrollTo(0, 0);
+            } catch (e) {
+            }
+        }
+    });
+</script>
+<script>jQuery(document).ready(function ($) {
+  /* Date Picker */
+    $(".datepicker").datepicker({
+        monthNames: ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'],
+        dayNamesMin: ['Du', 'Lu', 'Ma', 'Mi', 'Jo', 'Vi', 'Sa'],
+        beforeShow: function (input, inst) {
+            var calendar = inst.dpDiv;
+            setTimeout(function() {
+                calendar.position({
+                    my: 'right top',
+                    at: 'right bottom',
+                    collision: 'none',
+                    of: input
+                });
+            }, 1);
+        },
+        dateFormat: 'dd.mm.yy'
+    });
+
+
+    $("#container_select_tip_document").chosen({
+        no_results_text: "Nu a fost găsit : "
+    });
+    $("#container_select_tip_document_zona").chosen({
+        no_results_text: "Nu a fost găsit : "
+    });
+
+});</script>
+</body>
+
+</html>

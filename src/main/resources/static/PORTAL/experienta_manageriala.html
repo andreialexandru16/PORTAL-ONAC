@@ -1,0 +1,285 @@
+<!doctype html>
+<html class="no-js" lang=""> 
+
+<head>
+  <meta charset="utf-8">
+  <title>ANRE</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/favicon.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"> 
+  <link href="assets/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+  <!-- CSS -->
+  <!-- CSS - jQuery -->
+  <link rel="stylesheet" href="assets/css/jquery-ui.css">
+  <!-- CSS - DataTable -->
+  <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+  <!-- CSS Semantic - dropdown -->
+  <link rel="stylesheet" href="assets/css/dropdown.min.css">
+  <link rel="stylesheet" href="assets/css/transition.min.css">
+  <!-- CSS - Fancybox -->
+  <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
+  <!-- CSS - Yearpicker -->
+  <link rel="stylesheet" href="assets/css/yearpicker.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+
+  <!-- Custom -->
+  <link rel="stylesheet" href="assets/css/main_anre.css">
+
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- begin Container -->
+  <div class="container">
+
+    <!-- begin Inbox -->
+    <div class="services_list_container my-account-data">
+
+        <!-- begin Title -->
+        <div class="services_header"><div class="service_title"><h2> Experienta manageriala</h2></div></div>
+        <!-- end Title -->
+
+        <div class="service_body">
+            <div class="if_tbl">
+                <div class="if_cell image"><img src="assets/images/contacte.png"></div>
+                <div class="if_cell content">
+                  <!-- begin Tabs -->
+                  <div class="tabs">
+
+                    <!-- begin Tabs - menu -->
+                    <ul>
+                      <li><a href="#tabs-1">Experienta manageriala</a></li>
+                    </ul>
+                    <!-- end Tabs - menu -->
+
+                    <!-- begin Tabs 1 -->
+                    <div id="tabs-1">
+            <!--
+
+                       begin Cauta Operator
+                      <div class="div_dropdown_search">
+                        <div class="select minwidth250">
+                          <select class="ui fluid search dropdown">
+                            <option value="">Cauta </option>
+                            <option value="0">Actual Connect</option>
+                            <option value="1">TIMGAZ</option>
+                            <option value="2">DISTRIGAZ</option>
+                            <option value="3">Dolor</option>
+                            <option value="4">Lorem</option>
+                            <option value="5">Dolor</option>
+                          </select>
+                        </div>
+                      </div>
+                       end Cauta Operator
+            -->
+
+                      <!-- begin Table -->
+                      <div   class="table_inbox table_inregistrari">
+                          <!--date dinamice -> tmpl_inregistrari_list-->
+
+                      </div>
+                      <!-- end Table -->
+
+                    </div>
+
+
+                  </div>
+                  <!-- end Tabs -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- end Inbox --> 
+
+  </div>
+  <!-- end Container -->
+
+  <!-- begin Popup - Adauga rand nou -->
+
+
+  <div class="modal_expertiza" style="display: none;" id="adauga_rand_nou">
+
+      <form id="form_adauga">
+          <!-- begin Popup - content -->
+          <div class="box_rand_nou">
+
+              <!-- begin Nume -->
+              <div class="flex_width50">
+                  <p>Firma<span style="color:red">*</span></p>
+                  <input id="firma" class="" type="text" autocomplete="off" required>
+              </div>
+              <!-- end Nume -->
+              <!-- begin Descriere -->
+              <div class="flex_width50">
+                  <p>Functie</p>
+                  <input id="functie" class="" type="text" value="">
+              </div>
+              <!-- end Descriere -->
+
+
+
+              <!-- begin Studii -->
+              <div class="flex_full_width">
+                  <p>Activitati desfasurate</p>
+                  <textarea id="activitati_desfasurate" class=""></textarea>
+              </div>
+              <!-- end Studii -->
+
+
+
+              <!-- begin Data adresa CV -->
+              <div class="flex_width33">
+                  <p>De la</p>
+                  <input id="de_la" type="text" class="datepicker">
+              </div>
+              <!-- end Data adresa CV -->
+              <!-- begin Data adresa CV -->
+              <div class="flex_width33">
+                  <p>Pana la</p>
+                  <input id="pana_la" type="text" class="datepicker">
+              </div>
+              <!-- end Data adresa CV -->
+              <!-- begin Resp. tehnic -->
+              <div class="flex_width33">
+                  <p>Prezent</p>
+                  <label class="checkbox notxt">
+                      <input id="prezent" name="" value="" type="checkbox">
+                      <div class="icn_checkbox"></div>
+                  </label>
+              </div>
+              <!-- end Resp. tehnic -->
+
+          </div>
+          <!-- end Popup - content -->
+
+          <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaContact()" id="btn_adauga" type="submit">Adauga</button>
+
+      </form>
+
+
+
+  </div>
+  <!-- end Popup - Adauga rand nou -->
+
+
+  <!-- Templates Mustache-->
+
+ <!-- Template Mustache - Lista inregistrari (tabel)-->
+  <script id="tmpl_inregistrari_list" type="x-tmpl-mustache">
+<div class="table_scroll">
+       <table class="dataTable_nosearch display"  style="width: 100%">
+
+  <thead>
+                    <tr>
+                       <th class="">Firma</th>
+                       <th class="">Functie</th>
+                       <th class="">De la</th>
+                       <th class="sorting_disabled">Pana la</th>
+                       <th class="sorting_disabled">Activitati</th>
+					<th class="sorting_disabled sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 126px;"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+  {{#data}}
+                    <tr>
+                        <td>{{firma}}</td>
+                        <td>{{functie}}</td>
+                        <td>{{de_la}}</td>
+                        <td>{{pana_la}}</td>
+                        <td>{{activitati_desfasurate}}</td>
+  <td>
+                        <a  data-fancybox data-src="#adauga_rand_nou"  href="#" onclick="PageManager.getExperienta({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-edit tooltip_chat"><span class="tooltiptext">Editeaza</span></i></a>
+                        <a href="#" onclick="PageManager.deleteExperienta({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
+
+                        </td>
+
+                    </tr>
+
+    {{/data}}
+   </tbody>
+
+    </table>
+    </div>
+          <a class="btn_arrow_left float_left mt30" style="color:#fff;" href="persoane_contact.html"  id="btn_inapoi" type="submit">inapoi</a>
+
+      <button onclick="PageManager.resetExperienta()" data-fancybox data-src="#adauga_rand_nou"  class="btn btn_green float_right mt30">+ adauga rand nou</button>
+
+
+</script>
+  <!-- Template Mustache - Lista departament (select)-->
+  <script id="tmpl_departament" type="x-tmpl-mustache">
+            <option selected value="">Cauta departament </option>
+
+    {{#data}}
+
+            <option value="{{valoare}}">{{valoare}}</option>
+
+    {{/data}}
+
+
+</script>
+  <!-- SweetAlert -->
+  <script src="assets/js/sweetalert2.min.js"></script>
+  <!-- script modernizr -->
+  <script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+  <!-- script jQuery -->
+  <script src="assets/js/jquery-3.5.1.min.js"></script>
+  <!-- script jQuery -->
+  <script src="assets/js/jquery-ui.js"></script>
+  <!-- script jQuery Semantic - dropdown -->
+  <script src="assets/js/dropdown.min.js"></script>
+  <script src="assets/js/transition.min.js"></script>
+  <!-- script Sort Table -->
+  <script type="text/javascript" src="assets/js/sort-table.js"></script>
+  <!-- script DataTable -->
+  <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script> 
+  <!-- script Fancybox -->
+  <script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
+  <!-- script Yearpicker -->
+  <script src="assets/js/yearpicker.js"></script>
+  <!-- custom js -->
+  <script src="assets/js/main_portal.js"></script>
+  <!-- script Mustache -->
+  <script src="assets/js/mustache.js"></script>
+
+  <script src="assets/js/experienta_manageriala.js"></script>
+  <script src="../website/assets/js/documentaPortal-util.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+  <script src="assets/js/leave_page.js"></script>
+  <script>jQuery(document).ready(function ($) {
+      /* Date Picker */
+      $(".datepicker").datepicker({
+          monthNames: ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'],
+          dayNamesMin: ['Du', 'Lu', 'Ma', 'Mi', 'Jo', 'Vi', 'Sa'],
+          beforeShow: function (input, inst) {
+              var calendar = inst.dpDiv;
+              setTimeout(function() {
+                  calendar.position({
+                      my: 'right top',
+                      at: 'right bottom',
+                      collision: 'none',
+                      of: input
+                  });
+              }, 1);
+          }
+      });
+
+  });</script>
+
+
+</body>
+
+</html>

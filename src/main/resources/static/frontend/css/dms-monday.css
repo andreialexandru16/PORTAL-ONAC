@@ -1,0 +1,503 @@
+vaadin-dialog-overlay {
+    z-index:  1000003;
+    overflow: hidden;
+}
+
+.dms-dialog-title-bar {
+    width: 100%;
+    border-bottom: 2px solid #5CB3DE;
+}
+
+.dialog-node {
+  z-index:  1000003;
+  position: absolute;
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  border: 1px solid #d3d3d3;
+  left: 0px;
+  top: 0px;
+}
+
+.draggable-dialog-nodeheader {
+  padding: 5px;
+  cursor: move;
+  z-index: 1000003;
+  color: #fff;
+}
+
+.dms-application {
+    width: 100%;
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.dms-application .dms-application-layers {
+    width: 100%;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    position: relative;
+}
+
+.dms-application .dms-application-layers .dms-surface {
+    position: absolute;
+    background-color: #1175b3;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.dms-application .dms-application-layers .dms-surface .dms-surface-control {
+    width: 66px;
+    height: 100%;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
+
+.dms-application .dms-application-layers .dms-surface .dms-surface-content {
+    height: 100%;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    padding-right: 30px;
+    min-width: 0;
+}
+
+.dms-surface-content-component {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 64px 64px 0px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.dms-application .dms-application-layers .dms-first-level {
+    position: absolute;
+    background-color: #ffffff;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    left: 66px;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transition: left 100ms ease;
+    -o-transition: left 100ms ease;
+    transition: left 100ms ease;
+    overflow: hidden;
+    border-radius: 12px 0px 0px 0px;
+}
+
+.dms-application .dms-application-layers .dms-first-level.is-collapsed {
+    left: calc(100% - 30px);
+    overflow: visible;
+}
+
+.dms-first-level-control-component {
+  height: 100%;
+  position: absolute;
+  border-right: 1px solid #E1E1E1;
+  z-index: 1000001;
+  background-color: #ffffff;
+  width: 30px;
+  transition: width 200ms ease;
+
+}
+
+.dms-first-level-control-component:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 1000002;
+    pointer-events: none;
+}
+
+.dms-first-level-control-component.is-expanded {
+    width: 255px;
+}
+
+.dms-first-level-control-component.is-expanded .dms-first-level-control-content {
+      opacity: 1;
+}
+
+.dms-first-level-control-component.is-expanded:not(.is-pinned)::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 100%;
+      width: 40px;
+}
+
+.dms-first-level-control-component .dms-first-level-control-content {
+    height: 100%;
+    overflow-x: hidden;
+    opacity: 0;
+    transition: opacity 200ms ease;
+ }
+
+.dms-collapse-first-leve-button-component {
+  border: 1px solid #E1E1E1;
+  border-radius: 20px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 4px 10px;
+  position: absolute;
+  top: 18px;
+  z-index: 100;
+  transition: background-color 200ms ease, padding-left 200ms ease, padding-right 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.dms-collapse-first-leve-button-component:not(.is-disabled):hover {
+    background-color: #009AFF;
+    border-color: #009AFF;
+    color: #ffffff;
+}
+
+.dms-collapse-first-leve-button-component:not(.is-disabled):hover.is-pinned {
+      padding-right: 20px;
+}
+
+.dms-collapse-first-leve-button-component:not(.is-disabled):hover.is-pinned.adjust-pin-button {
+    padding-right: 14px;
+}
+
+.dms-collapse-first-leve-button-component:not(.is-disabled):hover:not(.is-pinned) {
+      padding-left: 20px;
+}
+
+.dms-collapse-first-leve-button-component.is-disabled {
+    background-color: #f5f6f8;
+    pointer-events: none;
+    color: #c5c7d0;
+}
+
+.dms-collapse-first-leve-button-component.is-pinned {
+    right: -14px;
+}
+
+.dms-collapse-first-leve-button-component.is-pinned .dms-collapse-icon {
+      transform: rotate(-180deg);
+}
+
+.dms-collapse-first-leve-button-component:not(.is-pinned) {
+    left: calc(100% - 14px);
+}
+
+.dms-collapse-first-leve-button-component .dms-collapse-icon {
+    font-size: 18px;
+    transition: transform 200ms ease;
+ }
+
+.dms-first-level-expand-button-component {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 1000002;
+  background-color: #ffffff;
+  border-radius: 12px 0px 0px 0px;
+  cursor: pointer;
+}
+
+.dms-first-level-expand-button-component .dms-first-level-expand-button {
+    background-color: #ffffff;
+    border: 1px solid #C4C4C4;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: calc(100% - 16px);
+    padding: 5px 12px;
+    transition: padding-right 200ms ease;
+}
+
+.dms-first-level-expand-button-component .dms-first-level-expand-button:hover {
+      padding-right: 22px;
+}
+
+.dms-first-level-expand-button-component .dms-first-level-expand-button .dms-first-level-expand-icon {
+      font-size: 20px;
+      color: #292f4c;
+}
+
+.dms-first-level-control-component .dms-first-level-control-content {
+    height: 100%;
+    overflow-x: hidden;
+    opacity: 0;
+    transition: opacity 200ms ease;
+}
+
+.dms-home-control-component {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow-x: hidden;
+}
+
+.dms-application .dms-application-layers .dms-first-level .dms-first-level-content-wrapper {
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: relative;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    min-width: 0;
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: margin-left 200ms ease, visibility 200ms ease, opacity 200ms ease;
+    -o-transition: margin-left 200ms ease, visibility 200ms ease, opacity 200ms ease;
+    transition: margin-left 200ms ease, visibility 200ms ease, opacity 200ms ease;
+}
+
+.dms-application .dms-application-layers .dms-first-level .dms-first-level-content-wrapper.dms-first-level-control-unpinned {
+    margin-left: 30px;
+}
+
+.dms-application .dms-application-layers .dms-first-level .dms-first-level-content-wrapper.dms-first-level-control-pinned {
+    margin-left: 255px;
+}
+
+.dms-application .dms-application-layers .dms-first-level .dms-first-level-content-wrapper .dms-first-level-content {
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+}
+
+.dms-surface-notifications-component {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.dms-surface-navigation-dialog-item-component {
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 100ms ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.dms-surface-navigation-dialog-item-component:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.dms-surface-navigation-dialog-item-component.is-selected {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dms-surface-navigation-dialog-item-component .item-counter {
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    background-color: #E44258;
+    padding: 1px 5px 0px 5px;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 11px;
+}
+
+.dms-surface-navigation-dialog-item-component .navigation-dialog-item-icon {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+
+
+.dms-surface-control-component {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.dms-surface-control-component.is-desktop-app {
+    padding-top: 30px;
+}
+
+.dms-surface-control-component .dms-surface-upgrade-button-component-wrapper,
+  .dms-surface-control-component .dms-work-os-feature-button-component-wrapper {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+}
+
+.dms-surface-control-component .dms-surface-action-icon-wrapper {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.dms-surface-control-component .dms-surface-view-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.dms-surface-control-component .dms-surface-company-logo-component-wrapper {
+    margin: 12px 0px 14px;
+    display: flex;
+    justify-content: center;
+}
+
+.dms-surface-control-component .dms-customization-navigation-items-area {
+    flex-grow: 1;
+}
+
+.dms-surface-control-component .dms-permanent-navigation-items-area {
+    flex-shrink: 0;
+}
+
+.dms-surface-control-component .dms-permanent-navigation-items-area .dms-surface-avatar-menu-connector-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 16px;
+}
+
+.dms-surface-control-component .dms-surface-control-on-boarding-cover {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 100;
+}
+
+
+.dms-surface-avatar-menu-component {
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+
+.dms-surface-avatar-menu-component:hover .dms-avatar-photo-button-wrapper .dms-avatar-photo-dot {
+    transition: top 200ms ease, right 200ms ease, transform 200ms ease;
+    right: 2px;
+    top: 2px;
+    transform: scale(0.9);
+ }
+
+.dms-surface-avatar-menu-component:hover .dms-avatar-photo-button-wrapper .dms-person-bullet-component {
+    transition: transform 200ms ease;
+    transform: scale(0.9);
+ }
+
+.dms-surface-avatar-menu-component.is-open .dms-avatar-photo-button-wrapper {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dms-surface-avatar-menu-component.is-open .dms-avatar-photo-button-wrapper .dms-avatar-photo-dot {
+      right: 2px;
+      top: 2px;
+      transition: transform 100ms ease;
+      transform: scale(0.85);
+}
+
+.dms-surface-avatar-menu-component.is-open .dms-avatar-photo-button-wrapper .dms-person-bullet-component {
+      transition: transform 100ms ease, opacity 100ms ease;
+      transform: scale(0.85);
+      opacity: 0.8;
+}
+
+.dms-surface-avatar-menu-component .dms-avatar-photo-button-wrapper {
+    position: relative;
+    border-radius: 50%;
+    transition: background-color 100ms ease;
+}
+
+.dms-surface-avatar-menu-component .dms-avatar-photo-button-wrapper .dms-avatar-photo-dot {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      z-index: 1;
+      border: 2px solid #292f4c;
+ }
+
+.dms-surface-avatar-menu-component .dms-avatar-photo-button-wrapper .dms-avatar-photo-dot.red-dot {
+        background-color: #E44258;
+}
+
+.dms-surface-avatar-menu-component .dms-avatar-photo-button-wrapper .dms-avatar-photo-dot.green-dot {
+        background-color: #00CA72;
+}
+
+.dms-surface-avatar-menu-component .dms-avatar-photo-button-wrapper .dms-person-bullet-component {
+      height: 44px;
+      width: 44px;
+}
+
+.dms-surface-avatar-menu-component .dms-avatar-photo-button-wrapper .dms-person-bullet-image {
+      border: 2px solid #ffffff;
+}
+
+.dms-person-bullet-component {
+    position: relative;
+    display: flex;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+}
+
+.dms-surface-navigation-action-item-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  width: 44px;
+  color: #ffffff;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dms-surface-navigation-action-item-component:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.dms-surface-navigation-action-item-component.is-selected {
+    background-color: rgba(255, 255, 255, 0.1);
+}

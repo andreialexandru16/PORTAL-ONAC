@@ -1,0 +1,1 @@
+package ro.bithat.dms.microservices.portal.ecitizen.faq.api;//Open API features

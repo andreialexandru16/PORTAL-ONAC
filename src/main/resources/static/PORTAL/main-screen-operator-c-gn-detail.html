@@ -1,0 +1,431 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>ANRE</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- CSS - jQuery -->
+    <link rel="stylesheet" href="assets/css/jquery-ui.css">
+    <!-- CSS - DataTable -->
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+    <!-- CSS Semantic - dropdown -->
+    <link rel="stylesheet" href="assets/css/dropdown.min.css">
+    <link rel="stylesheet" href="assets/css/transition.min.css">
+    <!-- Custom -->
+    <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!--main.css se adauga in mod dinamic din fisierul js: main_static.js ; daca avem setat param dmsws.unitname in application.properties va fi importat fisierul main_unitname.css-->
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+
+    <style>
+        .table_anre .pretty_table {
+            padding: 20px !important;
+        }
+
+        /*  .table_anre .pretty_table .pretty_td {
+            font-size: 18px !important;
+          }*/
+
+        .input_valoare_declarata {
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        .camp_contact {
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        .bg_gray {
+            background-color: #F9F9F9;
+        }
+
+        .doc_obligatoriu {
+            color: #ff4802 !important;
+        }
+
+        .documente_title {
+            margin-bottom: 15px;
+            border-top: 1px solid #ccc;
+            margin-top: 5px;
+            padding-top: 10px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .tdo_file_list {
+            margin-top: 10px;
+            display: block;
+            overflow: hidden;
+            color: black;
+            text-align: left;
+        }
+
+        .tdo_file {
+            margin-top: 10px;
+        }
+
+        .file_name_textarea {
+            resize: none;
+            width: 300px;
+            height: 50px;
+        }
+
+        .mandatory_star_div {
+            display: inline-block;
+            font-size: 25px;
+            color: red;
+            position: relative;
+            top: -14px;
+        }
+
+        .btn_up {
+            margin-bottom: 13px !important;
+        }
+    </style>
+
+</head>
+
+<body>
+<!--[if IE]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+<!-- begin Container -->
+<div class="container">
+
+    <!-- begin Operator -->
+    <div>
+        <div class="select minwidth250" id="container_select_operator" style="display: none;">
+            <select class="form-control chosen-select" id="select_tert"
+                    onChange="FileManager.triggerClickBtn('#btn_actualizare')">
+                <!-- dinamic-->
+            </select>
+        </div>
+    </div>
+    <!-- end Operator -->
+
+    <!-- begin buton Actualizare -->
+    <div class="maxwidth200">
+        <a href="#" id="btn_actualizare" class="btn btn_green" style="display: none"
+           onclick="FileManager.loadFormulareDetailData()">Actualizare</a>
+    </div>
+    <!-- end buton Actualizare -->
+
+    <div class="flex">
+        <div class="width50">
+            <a class="btn btn_arrow_left float_left" onclick="FileManager.backToMaster()">Inapoi</a>
+        </div>
+        <div class="width50">
+            <a id="buton_depune_declaratie_finala" class="btn btn_green float_right float_left_mob"
+               onclick="FileManager.depuneDeclaratieFinala()">Salveaza si depune</a>
+        </div>
+    </div>
+
+    <div class="message-box-table-container">
+
+    </div>
+
+
+    <div style="padding-top: 40px;" class="page-wrapper">
+
+
+        <!-- First row -->
+        <div class="row form-group">
+            <div class="col-md-12">
+
+                <div class="" style=" width: 33%; display: inline-block;">
+                    <label for="operator" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Operator</label>
+                    <input type="text" disabled="" style="/* width: 1155px */width: 80%;" class="if_cell form-control"
+                           id="operator" name="operator">
+                </div>
+                <div class="" style=" width: 33%; display: inline-block;">
+                    <label for="cui_operator" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">CUI</label>
+                    <input type="text" disabled="" style="width: 80%;" class="if_cell form-control" id="cui_operator"
+                           name="cui_operator">
+                </div>
+                <div class="" style=" width: 33%; display: inline-block;">
+
+                    <label for="localitate_operator"
+                           class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Localitate</label>
+                    <input type="text" disabled="" style="width: 80%;" class="if_cell form-control"
+                           id="localitate_operator" name="localitate_operator">
+                </div>
+            </div>
+        </div>
+
+
+        <!-- begin Table Validare / Transmitere date -->
+        <div class="table_doc padd_right0">
+            <div class="table_scroll table_anre">
+                <table class="table table_form pretty_table">
+                    <thead>
+                    <tr>
+                        <th class="th_sort2 pretty_td"><span>Nr. crt.</span></th>
+                        <!--<th class="th_sort2"><span>Fisa documenta</span></th>-->
+                        <th class="th_sort2 pretty_td" style="max-width: 400px;"><span>Activitate</span></th>
+                        <th class="th_sort2 pretty_td" style="max-width: 400px;"><span>Baza de calcul</span></th>
+                        <th class="th_sort2 pretty_td" style="min-width: 90px;"><span>U.M.</span></th>
+                        <th class="th_sort2 pretty_td"><span>Cantitate</span></th>
+                        <th class="th_sort2 pretty_td"><span>Coeficient</span></th>
+                        <th class="th_sort2 pretty_td"><span>Valoare minima RON</span></th>
+                        <th class="th_sort2 pretty_td"><span>Valoare contributie RON</span></th>
+                    </tr>
+                    </thead>
+                    <tbody id="container_formular">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--   begin Reprezentant legal -->
+        <div class="table_doc padd_right0">
+            <div class="">
+                <div class=""><h2>Reprezentatul legal</h2></div>
+            </div>
+            <div class="table_scroll table_anre">
+                <table class="table table_form pretty_table">
+                    <thead>
+                    <tr>
+                        <th class="th_sort2 pretty_td"><span></span></th>
+                        <th class="th_sort2 pretty_td" style="max-width: 400px;"><span></span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="pretty_td"><span> Numele si prenumele</span></td>
+
+                        <td class="pretty_td"><span>
+
+                <input class="camp_contact" id="nume_rep" type="text" value=""
+                       onblur="FileManager.updateReprezentant('nume_rep');"/></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pretty_td"><span>Functia</span></td>
+
+                        <td class="pretty_td"><span>
+                <input class="camp_contact" id="functie_rep" type="text" value=""
+                       onblur="FileManager.updateReprezentant('functie_rep');"/></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pretty_td"><span>Numar de telefon</span></td>
+
+                        <td class="pretty_td"><span>
+                <input class="camp_contact" id="telefon_rep" type="text" value=""
+                       onblur="FileManager.updateReprezentant('telefon_rep');"/></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="pretty_td"><span>Adresa de e-mail</span></td>
+
+                        <td class="pretty_td"><span>
+                <input class="camp_contact" id="mail_rep" type="text" value="" placeholder="email@email.ro"
+                       onblur="FileManager.updateReprezentant('mail_rep');"/></span>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--   end  Reprezentant legal -->
+        <!--   begin   Persoana de contact -->
+        <div class="table_doc padd_right0">
+            <div class="">
+                <div class=""><h2>Persoana de contact, alta decat Reprezentatul legal</h2></div>
+            </div>
+            <div class="table_scroll table_anre">
+                <table class="table table_form pretty_table">
+                    <thead>
+                    <tr>
+                        <th class="th_sort2 pretty_td"><span></span></th>
+                        <th class="th_sort2 pretty_td" style="max-width: 400px;"><span></span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="pretty_td"><span> Numele si prenumele</span></td>
+
+                        <td class="pretty_td"><span>
+
+                <input class="camp_contact" id="nume_contact" type="text" value=""
+                       onblur="FileManager.updatePersoanaContact('nume_contact');"/></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pretty_td"><span>Functia</span></td>
+
+                        <td class="pretty_td"><span>
+                <input class="camp_contact" id="functie_contact" type="text" value=""
+                       onblur="FileManager.updatePersoanaContact('functie_contact');"/></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pretty_td"><span>Numar de telefon</span></td>
+
+                        <td class="pretty_td"><span>
+                <input class="camp_contact" id="telefon_contact" type="text" value=""
+                       onblur="FileManager.updatePersoanaContact('telefon_contact');"/></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="pretty_td"><span>Adresa de e-mail</span></td>
+
+                        <td class="pretty_td"><span>
+                <input class="camp_contact" id="mail_contact" type="text" value="" placeholder="email@email.ro"
+                       onblur="FileManager.updatePersoanaContact('mail_contact');"/></span>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--   end   Persoana de contact -->
+
+        <!--   begin  mentiuni -->
+        <div class="">
+            <div class=""><h2>Mentiuni</h2></div>
+            <textarea id="mentiuni" style="width: 100%" cols="30" rows="4" class="form-control"
+                      onblur="FileManager.updateMentiuni('mentiuni');">
+          </textarea>
+        </div>
+        <!--   end   mentiuni -->
+
+
+        <!-- begin Table Documente -->
+        <div class="table_doc padd_right0">
+            <div class="services_header">
+                <div class="service_title"><h2>Documente</h2></div>
+            </div>
+            <a id="buton_descarca_cererea" style="margin:20px 0;" class="btn btn_green float_right"
+               onclick="FileManager.descarcaDeclaratie()">Descarca declaratia</a>
+
+            <div class="table_scroll table_anre">
+                <table class="table table_form pretty_table">
+                    <thead>
+                    <tr>
+                        <th class="th_sort2 pretty_td"><span>Denumire</span></th>
+                        <th class="th_sort2 pretty_td"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="container_documente">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Table Validare / Transmitere date -->
+
+<!-- end Container -->
+
+<!-- Script-uri Mustache -->
+
+<script id="tmpl_formulare_detail_list" type="x-tmpl-mustache">
+   {{#contribGnList}}
+   {{#detailList}}
+    <tr class="link_doc {{^activ}}bg_gray{{/activ}}" data-id={{id}} data-id_contrib_gn={{id_contrib_gn}} data-activ={{activ}}>
+        <td class="pretty_td"><span>{{nr_crt}}</span></td>
+        <!--<td><span>{{nume_document}}</span></td>-->
+        <td class="pretty_td" style="text-align: left; max-width: 400px;"><span>{{denumire_licenta}}</span><span class="span_nota">{{mesaj_conditie_speciala}}</span></td>
+        <td class="pretty_td" style="text-align: left; max-width: 400px;"><span>{{criteriu_fundamentare}}</span></td>
+        <td class="pretty_td"><span>{{um}}</span></td>
+
+         {{#depusa}}
+             <td class="pretty_td"><span>{{valoare_declarata_view}}</span></td>
+         {{/depusa}}
+         {{^depusa}}
+             {{#activ}}
+             <td class="pretty_td" style="text-align: right;"><span><input class="input_valoare_declarata" id="input_valoare_declarata_{{id}}" type="text" value="{{valoare_declarata}}" onblur="FileManager.updateValoareCalculata({{id}},{{id_contrib_gn}},{{coeficient}},{{valoare_minima}},'input_valoare_declarata_{{id}}','input_calculat_lei_{{id}}');"/></span></td>
+             {{/activ}}
+             {{^activ}}
+              <td class="pretty_td" style="text-align: right;"><span style="text-align: right;">{{valoare_declarata}}</span></td>
+             {{/activ}}
+         {{/depusa}}
+
+        <td class="pretty_td" style="text-align: right;"><span style="text-align: right;">{{coeficient}}</span></td>
+        <td class="pretty_td" style="text-align: right;"><span style="text-align: right;">{{valoare_minima_view}}</span></td>
+        <td class="pretty_td" style="text-align: right;"><span style="text-align: right;" class="input_calculat_lei" id="input_calculat_lei_{{id}}">{{calculat_lei}}</span></td>
+  </tr>
+ {{/detailList}}
+ {{/contribGnList}}
+
+</script>
+
+
+<script id="tmpl_documente_contributii" type="x-tmpl-mustache">
+{{#tipuriDocumente}}
+    <tr class="link_doc" data-id={{id}}>
+        <td class="pretty_td" style="width:300px; max-width:300px">
+          <div style="text-align: left;">{{denumire}}</div>
+        </td>
+
+        <td class="pretty_td" style="width:300px; max-width:800px">
+          <input type="file" style="display: none;" class="form-control upload_file_control" id="upload_file_{{id}}" data-id="{{id}}">
+          <textarea class="file_name_textarea" id="file_name_{{fileIdParinte}}">{{{fileName}}}</textarea>
+          {{#showUploadBtn}}<a class="btn_up btn_upload tooltip_chat" onclick="FileManager.startUploadFile({{id}});"><span class="tooltiptext">Încarcă</span></a>{{/showUploadBtn}}
+          {{#showMandatoryStar}}<div class="btn_up mandatory_star_div">*</div class>{{/showMandatoryStar}}
+          {{#showDownloadBtn}}<a class="btn_up btn_download_sablon tooltip_chat" href="#" onClick="$UTIL.downloadFileByVaadin('{{fileName}}','{{fileDownloadLink}}');" target="_blank"><span class="tooltiptext">Descarcă</span></a>{{/showDownloadBtn}}
+          {{#showDeleteBtn}}<a class="btn_up btn_delete tooltip_chat" onclick="FileManager.deleteAttachedFile({{fileId}}, {{fileIdParinte}});"><span class="tooltiptext">Șterge</span></a>{{/showDeleteBtn}}
+          {{#showSaveBtn}}<a class="btn_up btn_save tooltip_chat" onclick="FileManager.saveAttachedFileName({{fileId}}, {{fileIdParinte}});"><span class="tooltiptext">Salvează descriere fișier</span></a>{{/showSaveBtn}}
+          {{#showCheckMark}}<div class="btn_up icon_check"><i class="fas fa-check"></i></div>{{/showCheckMark}}
+        </td>
+    </tr>
+{{/tipuriDocumente}}
+
+</script>
+
+
+<!-- End Script-uri Mustache -->
+<!-- SweetAlert -->
+<script src="assets/js/sweetalert2.min.js"></script>
+<script src="assets/js/weblib.js"></script>
+<script src="../website/assets/js/util.js"></script>
+<!-- script modernizr -->
+<script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-ui.js"></script>
+<!-- script jQuery Semantic - dropdown -->
+<script src="assets/js/dropdown.min.js"></script>
+<script src="assets/js/transition.min.js"></script>
+<!-- script Sort Table -->
+<script type="text/javascript" src="assets/js/sort-table.js"></script>
+<!-- script DataTable -->
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<!-- custom js -->
+
+<!-- Chosen Select -->
+<script src="assets/js/chosen.jquery.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/main_static.js"></script>
+
+<script src="assets/js/mustache.js"></script>
+<script src="assets/js/jquery.number.min.js"></script>
+<script src="../website/assets/js/documentaPortal-util.js"></script>
+<script src="assets/js/main-screen-operator-c-gn-detail.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <!-- FONTS -->
+
+  <link href="/website/assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+  <!-- CSS -->
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="/website/assets/css/jquery-ui.min.css">
+  <!-- Slick Slider -->
+  <link rel="stylesheet" href="/website/assets/css/slick.css">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="/website/assets/css/bootstrap.min.css">
+  <!-- Sweet Alert -->
+  <link rel="stylesheet" href="/website/assets/css/sweetalert2.min.css">
+
+  <!-- Custom -->
+  <!--<link rel="stylesheet" href="/PORTAL//website/assets/css/main.css">-->
+  <!--main.css se adauga in mod dinamic din fisierul js: main_static.js ; daca avem setat param dmsws.unitname in application.properties va fi importat fisierul main_unitname.css-->
+  <style>
+    .hide_inreg, .hide_logout, .hide_contul_meu, .hide_utilizator {display:none!important;}
+  </style>
+</head>
+<body id="iframe_background" style="height: 20px" >
+<div class="box_utilizator">
+  <label id="iframe_utilizator" class="hide_utilizator"> </label>
+  <div class="btns_utilizator">
+    <button onclick="PageManager.inregistrare()" class="btn hide_inreg"
+            id="iframe_inreg">Inregistrare </button>
+    <button onclick="PageManager.logout()" class="btn hide_logout"
+            id="iframe_logout">Log-out  <i class="fas fa-sign-out-alt"></i></button>
+    <button onclick="PageManager.goToPage('/contul-meu')" class="btn hide_contul_meu"
+            id="iframe_contul_meu">Contul meu <i class="fas fa-user"></i></button>
+
+    <!-- begin Operator -->
+    <div class="select minwidth250 width40 hide_utilizator" id="container_select_operator" style=" float: right;width: 30%;">
+      <select class="form-control chosen-select" id="select_tert"  onChange="PageManager.actualizareDateContCurent()" >
+        <!-- generat dinamic tmpl_tert-->
+      </select>
+    </div>
+    <!-- end Operator -->
+  </div>
+
+</div>
+
+
+<!-- FOOTER SCRIPTS -->
+
+<!-- SweetAlert -->
+
+<script id="tmpl_tert" type="x-tmpl-mustache">
+            <option value="">Cauta operator </option>
+
+    {{#persoanaFizicaJuridicaList}}
+
+            <option value="{{idTertParinte}}">{{numeCompletParinte}}</option>
+
+    {{/persoanaFizicaJuridicaList}}
+
+
+</script>
+<script src="/website/assets/js/mustache.js"></script>
+
+<script src="/website/assets/js/sweetalert2.min.js"></script>
+<!-- jQuery -->
+<script src="/website/assets/js/jquery-3.5.1.min.js"></script>
+<script src="/website/assets/js/utilizator.js"></script>
+
+<script src="/website/assets/js/documentaPortal-util.js"></script>
+<!-- Custom JS -->
+<script src="/website/assets/js/main_static.js"></script>
+</body>
+</html>

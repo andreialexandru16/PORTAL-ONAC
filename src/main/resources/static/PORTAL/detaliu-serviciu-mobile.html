@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>SVU</title>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+    <link href="../PORTAL/assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/jquery-ui.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/slick.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/bootstrap.min.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/sweetalert2.min.css">
+    <!-- Custom -->
+         <!--   main.css se adauga in mod dinamic din fisierul js: main_static.js ; daca avem setat param dmsws.unitname in application.properties va fi importat fisierul main_unitname.css -->
+
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header id="main-header">
+        <!-- Identitate Vizuala -->
+        <div class="visual_identity">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 ue">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PORTAL/assets/images/logos/uniunea-europeana.png" alt="logo uniunea europeana" />
+                        </a>
+                    </div>
+                    <div class="col-3 gov text-center">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PORTAL/assets/images/logos/guvernul-romaniei.png" alt="logo guvernul romaniei" />
+                        </a>
+                    </div>
+                    <div class="col-5 poca text-center">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PORTAL/assets/images/logos/poca.png" alt="logo programul operational capacitate administrativa" />
+                        </a>
+                    </div>
+                    <div class="col-2 is text-right">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PORTAL/assets/images/logos/instrumente-structurale.png" alt="logo instrumente structurale" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Bar -->
+        <div class="main_header_container">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo -->
+                    <div class="col-8 col-sm-6 col-md-4 col-lg-2 logo">
+                        <a href="index.html">
+                            <img src="../PORTAL/assets/images/logos/logo.png" alt="logo primaria sectorului 4">
+                        </a>
+                    </div>
+                    <!-- Menu -->
+                    <div class="col-4 col-sm-6 col-md-8 col-lg-10 menu_container">
+                        <nav class="navbar navbar-expand-xl navbar-dark">
+
+                            <!-- Collapse button -->
+                            <div class="empty_element"></div>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-wrap" aria-controls="menu-wrap" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <!-- Menu Wrapper -->
+                            <div id="menu-wrap" class="row collapse navbar-collapse">
+                                <!-- Main Menu -->
+                                <div class="col-xl-8">
+                                    <div class="main_menu">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item active">
+                                                <a href="index.html" class="nav-link">Acasă</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">Servicii Online</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">Înrebări frecvente</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">Contact</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Secondary Menu -->
+                                <div class="col-xl-4">
+                                    <nav class="secondary_top_menu">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item">
+                                                <a href="autentificare.html" class="nav-link login-icon text-nowrap"><i class="fas fa-user"></i> Autentificare</a>
+                                            </li>
+                                            <!-- Language Selector -->
+                                            <li class="nav-item dropdown language-select">
+                                                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="languageSelect" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img src="../PORTAL/assets/images/flags/romania-flag.png" alt="romanian flag"> RO
+                                                </a>
+                                                <!-- Language Dropdown -->
+                                                <div class="dropdown-menu" aria-labelledby="languageSelect">
+                                                    <a class="dropdown-item" href="javascript:void(0);">
+                                                        <img src="../PORTAL/assets/images/flags/romania-flag.png" alt="romanian flag"> EN
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="javascript:void(0);">
+                                                        <img src="../PORTAL/assets/images/flags/romania-flag.png" alt="romanian flag"> TR
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="javascript:void(0);">
+                                                        <img src="../PORTAL/assets/images/flags/romania-flag.png" alt="romanian flag"> FR
+                                                    </a>
+                                                </div>
+                                              </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BREADCRUMBS -->
+    <div class="breadcrumbs_container">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Acasă</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Listă de servicii</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Eliberare edeverinta privind datele din registrul agricol</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- CONTENT -->
+    <div id="main-content" class="main-content">
+        <div class="container">
+            <!-- Services List -->
+            <div class="services_list_container detaliu-serviciu">
+                <!-- Catalog servicii urbanism -->
+                <div class="services_header">
+                    <div class="service_pictogram" style="background-image: url('assets/images/icons/hotel.png')"></div>
+                    <div class="service_title">
+                        <h2>Catalog servicii urbanism - Eliberare edeverinta privind datele din registrul agricol</h2>
+                    </div>
+                </div>
+
+                <!-- begin Table - mobile -->
+                <div class="table_mob_1col">
+                    <div>
+                        <div class="title_1col">Tip Persoane</div>
+                        <div class="txt_1col">Persoana fizica</div>
+                    </div>
+                    <div>
+                        <div class="title_1col">Denumire completa a serviciului</div>
+                        <div class="txt_1col">Eliberare edeverinta privind datele din registrul agricol</div>
+                    </div>
+                    <div>
+                        <div class="title_1col">Descrierea serviciului</div>
+                        <div class="txt_1col">Serviciul presupune eliberarea adeverinţelor care atestă înscrierile din registrul agricol necesare la întocmirea dosarelor de bursă, şomaj, ajutor social, evidenţa populaţiei şi la diverse instituţii (Electrica, Eon Gaz, telefonia mobilă etc.).</div>
+                    </div>
+                    <div>
+                        <div class="title_1col">Serviciu/compartiment responsabil</div>
+                        <div class="txt_1col">Serviciul Urbanism si Amenajarea Teritoriului</div>
+                    </div>
+                    <div>
+                        <div class="title_1col">Timp de solutionare</div>
+                        <div class="txt_1col">30 zile calendaristice</div>
+                    </div>
+                    <div>
+                        <div class="title_1col">Termen de arhivare</div>
+                        <div class="txt_1col">3 ani</div>
+                    </div>
+                    <div>
+                        <div class="title_1col">Termen de completare dosar</div>
+                        <div class="txt_1col">15 zile calendaristice</div>
+                    </div>
+                    <div>
+                        <div class="title_1col">Adresa si datele de contact ale prestatorului</div>
+                        <div class="txt_1col">Primăria Orasului Chitila, Judetul Ilfov Serviciul Urbanism și Amenajarea Teritoriului Adresa: Telefon/fax:</div>
+                    </div>
+                    <div>
+                        <div class="title_1col">Costul serviciului</div>
+                        <div class="txt_1col">Valoarea taxei pentru eliberarea adeverintei: 10 lei</div>
+                    </div>
+                </div>
+                <!-- end Table - mobile -->
+                
+                <h2>Documente necesare pentru prestarea serviciului</h2>
+                <!-- begin Table documente - mobile -->
+                <div>
+                    <div class="table_mob_4col nr_crt">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Nume document</th>
+                                <th>Descriere document</th>
+                                <th>Opțiuni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Copie CI / BL <sup>*</sup></td>
+                                <td>Descriere document</td>
+                                <td>
+                                    <div class="btns_table_mobile">
+                                        <a class="btn_download_sablon" href="#"></a>
+                                        <a class="btn_upload" href="#"></a>
+                                        <a class="btn_delete" href="#"></a>
+                                        <a class="btn_download" href="#"></a>
+                                        <div class="icon_check"><i class="fas fa-check"></i></div>                                        
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Taxă</td>
+                                <td>Chitanța care să ateste achitarea taxei aferente prestării serviciului</td>
+                                <td>
+                                    <div class="btns_table_mobile">
+                                        <a class="btn_download_sablon" href="#"></a>
+                                        <a class="btn_upload" href="#"></a>
+                                        <a class="btn_delete" href="#"></a>
+                                        <a class="btn_download" href="#"></a>
+                                        <div class="icon_warning"><i class="fas fa-exclamation-circle"></i></div>                                        
+                                    </div>                                        
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+                <!-- end Table documente - mobile -->
+
+                <h2>Acte normative</h2>
+                <!-- begin Table Acte normative - mobile -->
+                <div class="table_mob_2col">
+                    <table>
+                        <tr>
+                            <td>Nr. crt.</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Nume document</td>
+                            <td>Legea nr. 50 din 1991 privind autorizarea executarii lucrarilor de constructii</td>
+                        </tr>
+                        <tr>
+                            <td>Descriere document</td>
+                            <td>Legea nr. 50 din 1991 privind autorizarea executarii lucrarilor de constructii</td>
+                        </tr>
+                        <tr>
+                            <td>Opțiuni</td>
+                            <td><a href="javascript:void(0);" class="btn_view"><i class="fas fa-eye"></i>Vizualizeaza</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>Nr. crt.</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Nume document</td>
+                            <td>Legea nr. 50 din 1991 privind autorizarea executarii lucrarilor de constructii</td>
+                        </tr>
+                        <tr>
+                            <td>Descriere document</td>
+                            <td>Legea nr. 50 din 1991 privind autorizarea executarii lucrarilor de constructii</td>
+                        </tr>
+                        <tr>
+                            <td>Opțiuni</td>
+                            <td><a href="javascript:void(0);" class="btn_view"><i class="fas fa-eye"></i>Vizualizeaza</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>Nr. crt.</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Nume document</td>
+                            <td>Legea nr. 50 din 1991 privind autorizarea executarii lucrarilor de constructii</td>
+                        </tr>
+                        <tr>
+                            <td>Descriere document</td>
+                            <td>Legea nr. 50 din 1991 privind autorizarea executarii lucrarilor de constructii</td>
+                        </tr>
+                        <tr>
+                            <td>Opțiuni</td>
+                            <td><a href="javascript:void(0);" class="btn_view"><i class="fas fa-eye"></i>Vizualizeaza</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>Nr. crt.</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>Nume document</td>
+                            <td>Legea nr. 50 din 1991 privind autorizarea executarii lucrarilor de constructii</td>
+                        </tr>
+                        <tr>
+                            <td>Descriere document</td>
+                            <td>Legea nr. 50 din 1991 privind autorizarea executarii lucrarilor de constructii</td>
+                        </tr>
+                        <tr>
+                            <td>Opțiuni</td>
+                            <td><a href="javascript:void(0);" class="btn_view"><i class="fas fa-eye"></i>Vizualizeaza</a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="clearfix"></div>  
+                <!-- end Table Acte normative - mobile -->    
+                
+                <!-- begin Box Notificari -->
+                <div class="box_notif">
+
+                    <!-- begin Nu aveti notificari -->
+                    <div class="notif_green">
+                        <div class="notif_bell">                            
+                        </div>
+                        <div class="txt_notif">
+                            <p>Nu aveți notificari! Pentru a vedea toate notificarile accesați acest <a href="#">link</a></p>
+                        </div>
+                    </div>
+                    <!-- end Nu aveti notificari -->
+
+                    <div class="clearfix"></div>
+                    
+                    <!-- begin Aveti notificari -->
+                    <div class="notif_red">
+                        <div class="notif_bell">
+                        </div>
+                        <div class="txt_notif">
+                            <p>Aveti 2 notificari necitite! Vă rugăm să o citiți accesând acest <a href="#">link</a></p>
+                        </div>
+                    </div>
+                    <!-- end Aveti notificari -->
+
+                </div>
+                <div class="clearfix"></div>
+                <!-- end Box Notificari -->
+
+                <!-- Custom Buttons -->
+                <div class="btn_footer_container sn">
+                    <div class="buttons_container">
+                        <a href="javascript:void(0)" class="btn btn-primary btn-sm prev"><i class="fas fa-arrow-alt-circle-left"></i>Înapoi</a>
+                        <a href="javascript:void(0)" class="btn btn-secondary btn-sm next">Lansează solicitarea<i class="fas fa-arrow-alt-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="gap-50"></div>
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <!-- COPYRIGHTS -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 copyright">
+                    <a href="https://www.documenta.ro/" target="_blank">Powered by documenta DMS</a>
+                </div>
+                <div class="col-sm-6">
+                    <div class="logo_footer text-right">
+                        <a href="index.html">
+                            <img src="../PORTAL/assets/images/logos/logo.png" alt="logo primaria sectorului 4">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FOOTER SCRIPTS -->
+    <!-- SweetAlert -->
+    <script src="../PORTAL/assets/js/sweetalert2.min.js"></script>
+    <!-- jQuery -->
+    <script src="../PORTAL/assets/js/jquery-3.5.1.min.js"></script>
+    <!-- Autocomplete -->
+    <script src="../PORTAL/assets/js/jquery-ui.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="../PORTAL/assets/js/bootstrap.min.js"></script>
+    <!-- Slick Carousel -->
+    <script src="../PORTAL/assets/js/slick.min.js"></script>
+    <!-- Chosen Select -->
+    <script src="../PORTAL/assets/js/chosen.jquery.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../PORTAL/assets/js/main_static.js"></script>
+
+    <!-- Testing Sweet Alerts / autocomplete / etc.  - should be deleted after -->
+    <script src="../PORTAL/assets/js/testing.js"></script>
+  </body>
+</html>

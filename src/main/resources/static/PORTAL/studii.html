@@ -1,0 +1,735 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>ANRE</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="assets/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- CSS - jQuery -->
+    <link rel="stylesheet" href="assets/css/jquery-ui.css">
+    <!-- CSS - DataTable -->
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+    <!-- CSS Semantic - dropdown -->
+    <link rel="stylesheet" href="assets/css/dropdown.min.css">
+    <link rel="stylesheet" href="assets/css/transition.min.css">
+    <!-- CSS - Fancybox -->
+    <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
+    <!-- CSS - Yearpicker -->
+    <link rel="stylesheet" href="assets/css/yearpicker.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+
+    <!-- Custom -->
+    <link rel="stylesheet" href="assets/css/main_anre.css">
+    <style>.swal2-container {
+        z-index: 777777;
+    }</style>
+</head>
+
+<body>
+<!--[if IE]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+<!-- begin Container -->
+<div class="container">
+
+    <!-- begin Inbox -->
+    <div class="services_list_container my-account-data">
+
+        <!-- begin Title -->
+        <div class="services_header">
+            <div class="service_title"><h2>Studii | Adeverinte | Cursuri</h2></div>
+        </div>
+        <!-- end Title -->
+        <div class="service_body">
+            <div class="if_tbl">
+                <div class="if_cell image"><img src="assets/images/studii.png"></div>
+                <div class="if_cell content">
+                    <!-- begin Tabs -->
+                    <div class="tabs">
+
+                        <!-- begin Tabs - menu -->
+                        <ul>
+                            <li><a href="#tabs-1">Studii</a></li>
+                            <li><a href="#tabs-2">Adeverinte</a></li>
+                            <li><a href="#tabs-3">Cursuri</a></li>
+                            <li id="alte_documente_tab" style="display: none;"><a href="#tabs-4">Documente cerere</a></li>
+
+                        </ul>
+                        <!-- end Tabs - menu -->
+
+                        <!-- begin Tabs 1 -->
+                        <div id="tabs-1">
+                            <!--
+
+                                       begin Cauta Operator
+                                      <div class="div_dropdown_search">
+                                        <div class="select minwidth250">
+                                          <select class="ui fluid search dropdown">
+                                            <option value="">Cauta </option>
+                                            <option value="0">Actual Connect</option>
+                                            <option value="1">TIMGAZ</option>
+                                            <option value="2">DISTRIGAZ</option>
+                                            <option value="3">Dolor</option>
+                                            <option value="4">Lorem</option>
+                                            <option value="5">Dolor</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                       end Cauta Operator
+                            -->
+
+                            <!-- begin Table -->
+                            <div class="table_inbox table_inregistrari">
+                                <!--date dinamice -> tmpl_inregistrari_list-->
+
+                            </div>
+                            <!-- end Table -->
+
+                        </div>
+                        <div id="tabs-2">
+                            <!--
+
+                                       begin Cauta Operator
+                                      <div class="div_dropdown_search">
+                                        <div class="select minwidth250">
+                                          <select class="ui fluid search dropdown">
+                                            <option value="">Cauta </option>
+                                            <option value="0">Actual Connect</option>
+                                            <option value="1">TIMGAZ</option>
+                                            <option value="2">DISTRIGAZ</option>
+                                            <option value="3">Dolor</option>
+                                            <option value="4">Lorem</option>
+                                            <option value="5">Dolor</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                       end Cauta Operator
+                            -->
+
+                            <!-- begin Table -->
+                            <div class="table_inbox table_inregistrari_adeverinte">
+                                <!--date dinamice -> tmpl_inregistrari_list-->
+
+                            </div>
+                            <!-- end Table -->
+
+                        </div>
+                        <div id="tabs-3">
+                            <!--
+
+                                       begin Cauta Operator
+                                      <div class="div_dropdown_search">
+                                        <div class="select minwidth250">
+                                          <select class="ui fluid search dropdown">
+                                            <option value="">Cauta </option>
+                                            <option value="0">Actual Connect</option>
+                                            <option value="1">TIMGAZ</option>
+                                            <option value="2">DISTRIGAZ</option>
+                                            <option value="3">Dolor</option>
+                                            <option value="4">Lorem</option>
+                                            <option value="5">Dolor</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                       end Cauta Operator
+                            -->
+
+                            <!-- begin Table -->
+                            <div class="table_inbox table_inregistrari_cursuri">
+                                <!--date dinamice -> tmpl_inregistrari_list-->
+
+                            </div>
+                            <!-- end Table -->
+
+                        </div>
+                        <div id="tabs-4">
+
+
+                            <!-- begin Table -->
+                            <div class="table_inbox table_inregistrari_alte_documente">
+                                <!--date dinamice -> tmpl_inregistrari_list-->
+
+                            </div>
+                            <!-- end Table -->
+
+                        </div>
+                    </div>
+                    <!-- end Tabs -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Inbox -->
+
+</div>
+<!-- end Container -->
+
+<!-- begin Popup - Adauga rand nou -->
+
+
+<div class="modal_expertiza" style="display: none;height: 100%;" id="adauga_rand_nou">
+
+    <form autocomplete="off">
+        <!-- begin Popup - content -->
+        <div class="box_rand_nou">
+            <span class="ui-helper-hidden-accessible"><input type="text"/> </span>
+
+            <div class="flex_width33">
+                <p>Nivel<span class="text-danger">*</span></p>
+                <select class="ui fluid dropdown search dropdown_inbox" id="container_select_nivel">
+
+                </select>
+            </div>
+            <div class="flex_width33">
+                <p>Specialitate<span class="text-danger">*</span></p>
+                <select class="ui fluid dropdown search dropdown_inbox" id="container_select_specialitate" onchange="PageManager.onChangeSpecialitate(this.value)">
+
+                </select>
+            </div>
+            <div class="flex_width33">
+                <p>Programa(doar in cazul profilurilor conexe)</p>
+                <select class="ui fluid dropdown search dropdown_inbox" id="container_select_programa">
+
+                </select>
+            </div>
+
+
+            <div class="flex_width33">
+                <p>Universitate</p>
+
+
+                <input id="container_select_universitate" class="" type="text" value="">
+
+
+            </div>
+
+
+            <div class="flex_width33">
+                <p>Loc. universitate</p>
+                <input id="container_select_loc_universitate" class="" type="text" value="">
+
+            </div>
+
+
+            <div class="flex_width33">
+                <p>Nr/Serie/Data diploma</p>
+                <input id="nr_serie_data" class="" type="text" value="">
+            </div>
+            <div class="flex_width33">
+                <p id="label_doc_file">Încarcă documentul<span class="text-danger">*</span></p>
+                <input type="file" name="doc_file" id="doc_file" class="form-control file-control"
+                       upload-text="Încarcă documentul"/>
+            </div>
+
+        </div>
+        <!-- end Popup - content -->
+
+        <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaContact(); return false;"
+                id="btn_adauga" type="submit">Adauga
+        </button>
+
+    </form>
+
+
+</div>
+<div class="modal_expertiza" style="display: none;height: 100%;" id="adauga_rand_nou_cursuri">
+
+    <form autocomplete="off">
+        <!-- begin Popup - content -->
+        <div class="box_rand_nou">
+            <div class="flex_width33">
+                <p>Firma</p>
+                <input id="firma" class="" type="text" value="">
+            </div>
+            <div class="flex_width33">
+                <p>Grad<span class="text-danger">*</span></p>
+                <select class="ui fluid dropdown search dropdown_inbox" id="container_select_grad">
+
+                </select>
+            </div>
+            <div class="flex_width33">
+                <p>Data certificat curs</p>
+                <input type="text" name="data_certificat_curs" id="data_certificat_curs" class="form-control datepicker"
+                       data-provide="datepicker"/>
+
+                </select>
+            </div>
+            <div class="flex_width33">
+                <p>Numar certificat curs</p>
+                <input id="numar_certificat_curs" class="" type="text" value="">
+            </div>
+
+
+            <div class="flex_width33">
+                <p>Tip curs<span class="text-danger">*</span></p>
+
+
+                <select class="ui fluid dropdown search dropdown_inbox" id="tip_curs">
+
+                </select>
+
+            </div>
+
+
+            <div class="flex_width33">
+                <p>Încarcă documentul<span class="text-danger">*</span></p>
+                <input type="file" name="doc_file" id="doc_curs" class="form-control file-control"
+                       upload-text="Încarcă documentul"/>
+            </div>
+
+        </div>
+        <!-- end Popup - content -->
+
+        <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaCurs(); return false;"
+                id="btn_adauga_curs" type="submit">Adauga
+        </button>
+
+    </form>
+
+
+</div>
+<div class="modal_expertiza" style="display: none;height: 100%;" id="adauga_rand_nou_adeverinte">
+
+    <form autocomplete="off">
+        <!-- begin Popup - content -->
+        <div class="box_rand_nou">
+            <div class="flex_width33">
+                <p>Numar adeverinta</p>
+                <input id="numar_adeverinte" class="" type="text" value="">
+            </div>
+            <div class="flex_width33">
+                <p>Data adeverinta</p>
+                <input type="text" name="data_adeverinta" id="data_adeverinta" class="form-control datepicker"
+                       data-provide="datepicker"/>
+
+
+            </div>
+            <div class="flex_width33">
+                <p>Grad vechime</p>
+                <select class="ui fluid dropdown search dropdown_inbox" id="container_select_grad_vechime">
+
+                </select>
+            </div>
+            <div class="flex_width33">
+                <p>Tip adeverinta</p>
+                <select class="ui fluid dropdown search dropdown_inbox" id="container_select_tip_adeverinta">
+
+                </select>
+            </div>
+            <div class="flex_width33">
+                <p>Data inceput<span class="text-danger">*</span></p>
+                <input type="text" name="data_inceput" id="data_inceput" class="form-control datepicker"
+                       data-provide="datepicker"/>
+
+                </select>
+            </div>
+            <div class="flex_width33">
+                <p>Data sfarsit<span class="text-danger">*</span></p>
+                <input type="text" name="data_sfarsit" id="data_sfarsit" class="form-control datepicker"
+                       data-provide="datepicker"/>
+
+                </select>
+            </div>
+
+            <div class="flex_width33">
+                <p>Firma<span class="text-danger">*</span></p>
+
+
+                <select class="ui fluid dropdown search dropdown_inbox" id="id_firma">
+
+                </select>
+
+            </div>
+
+
+            <div class="flex_width33">
+                <p>Încarcă documentul<span class="text-danger">*</span></p>
+                <input type="file" name="doc_adeverinta" id="doc_adeverinta" class="form-control file-control"
+                       upload-text="Încarcă documentul"/>
+            </div>
+
+        </div>
+        <!-- end Popup - content -->
+
+        <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaAdeverinta(); return false;"
+                id="btn_adauga_adeverinta" type="submit">Adauga
+        </button>
+
+    </form>
+
+
+</div>
+<!-- end Popup - Adauga rand nou -->
+
+<div class="modal_documente" style="display: none;height: 50%; width: 50%" id="adauga_rand_nou_documente">
+
+    <form autocomplete="off">
+        <!-- begin Popup - content -->
+        <div>
+            <p>Încarcă documentul<span class="text-danger">*</span></p>
+
+            <div class="flex_width100">
+                <input type="file" name="doc_adeverinta" id="doc_anexat" class="form-control file-control"
+                       upload-text="Încarcă documentul"/>
+            </div>
+
+        </div>
+        <!-- end Popup - content -->
+
+        <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaDocAnexat(); return false;"
+                id="btn_adauga_doc_anexat" type="submit">Adauga
+        </button>
+
+    </form>
+
+
+</div>
+<!-- Templates Mustache-->
+
+<!-- Template Mustache - Lista inregistrari (tabel)-->
+<script id="tmpl_inregistrari_list" type="x-tmpl-mustache">
+<div class="table_scroll">
+       <table id="studii_table" class="dataTable_nosearch display"  style="width: 100%">
+
+  <thead>
+                    <tr>
+                       <th class="">Nivel</th>
+                       <th class="">Universitate</th>
+                       <th class="">Din localitatea</th>
+                       <th class="sorting_disabled">Programa</th>
+                       <th class="sorting_disabled">Specialitate</th>
+                                              <th class="sorting_disabled">Nr/Serie/data diploma</th>
+
+					<th class="sorting_disabled sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 126px;"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+  {{#data}}
+                    <tr>
+                        <td>{{nivel}}</td>
+                        <td>{{universitate}}</td>
+                        <td>{{loc_universitate}}</td>
+                        <td>{{programa}}</td>
+                        <td>{{specialitate}}</td>
+                                                <td>{{nr_serie_data}}</td>
+
+  <td>
+                          {{#linkDownload}}<a href="{{linkDownload}}" target="_blank"  class="btn_blue" style="margin:2px"><i class="fas fa-download tooltip_chat"><span class="tooltiptext">Descarca</span></i></a>{{/linkDownload}}
+
+                        <a href="#" onclick="PageManager.deleteExperienta({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
+
+                        </td>
+
+                    </tr>
+
+    {{/data}}
+   </tbody>
+
+    </table>
+</div>
+
+      <button onclick="PageManager.resetExperienta()" data-fancybox data-src="#adauga_rand_nou"  class="btn btn_green float_left mt30">+ adauga rand nou</button>
+      <button onclick="PageManager.trimiteCompletari()" style="display:none;    margin-left: 5px;" class="btn btn_green float_right mt30 trimite_completari">Trimite completari</button>
+      <button onclick="PageManager.redirectCereri()" class="btn btn_green float_right mt30">Inapoi la cereri</button>
+
+
+
+</script>
+<script id="tmpl_inregistrari_list_adeverinte" type="x-tmpl-mustache">
+<div class="table_scroll">
+       <table id="adeverinte_table" class="dataTable_nosearch display"  style="width: 100%">
+
+  <thead>
+                    <tr>
+                       <th class="">Numar adeverinta</th>
+                       <th class="">Data adeverinta</th>
+                       <th class="">Grad vechime</th>
+                       <th class="sorting_disabled">Tip adeverinta</th>
+                       <th >Data inceput</th>
+                                              <th >Data sfarsit</th>
+ <th >Firma</th>
+					<th class="sorting_disabled sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 126px;"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+  {{#data}}
+                    <tr>
+                        <td>{{numar_adeverinte}}</td>
+                        <td>{{data_adeverinta}}</td>
+                        <td>{{grad_vechime}}</td>
+                        <td>{{tip_adeverinta}}</td>
+                        <td>{{data_inceput}}</td>
+                                                <td>{{data_sfarsit}}</td>
+                                                                                                <td>{{firma}}</td>
+
+
+  <td>
+                          <a href="{{linkDownload}}" target="_blank"  class="btn_blue" style="margin:2px"><i class="fas fa-download tooltip_chat"><span class="tooltiptext">Descarca</span></i></a>
+
+                        <a href="#" onclick="PageManager.deleteAdeverinte({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
+
+                        </td>
+
+                    </tr>
+
+    {{/data}}
+   </tbody>
+
+    </table>
+</div>
+
+      <button onclick="PageManager.resetAdeverinte()" data-fancybox data-src="#adauga_rand_nou_adeverinte"  class="btn btn_green float_left mt30">+ adauga rand nou</button>
+      <button onclick="PageManager.trimiteCompletari()" style="display:none;    margin-left: 5px;" class="btn btn_green float_right mt30 trimite_completari">Trimite completari</button>
+
+      <button onclick="PageManager.redirectCereri()" class="btn btn_green float_right mt30">Inapoi la cereri</button>
+
+
+
+</script>
+<script id="tmpl_inregistrari_list_cursuri" type="x-tmpl-mustache">
+<div class="table_scroll">
+       <table id="cursuri_table" class="dataTable_nosearch display"  style="width: 100%">
+
+  <thead>
+                    <tr>
+                       <th class="">Firma</th>
+                       <th class="">Grad</th>
+                       <th class="">Data certificat curs</th>
+                       <th class="sorting_disabled">Numar certificat curs</th>
+                       <th class="sorting_disabled">Tip curs</th>
+
+					<th class="sorting_disabled sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 126px;"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+  {{#data}}
+                    <tr>
+                        <td>{{firma}}</td>
+                        <td>{{grad}}</td>
+                        <td>{{data_certificat_curs}}</td>
+                        <td>{{numar_certificat_curs}}</td>
+                        <td>{{tip_curs}}</td>
+
+
+  <td>
+                          <a href="{{linkDownload}}" target="_blank"  class="btn_blue" style="margin:2px"><i class="fas fa-download tooltip_chat"><span class="tooltiptext">Descarca</span></i></a>
+
+                        <a href="#" onclick="PageManager.deleteCursuri({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
+
+                        </td>
+
+                    </tr>
+
+    {{/data}}
+   </tbody>
+
+    </table>
+</div>
+
+      <button onclick="PageManager.resetCursuri()" data-fancybox data-src="#adauga_rand_nou_cursuri"  class="btn btn_green float_left mt30">+ adauga rand nou</button>
+      <button onclick="PageManager.trimiteCompletari()" style="display:none;    margin-left: 5px;" class="btn btn_green float_right mt30 trimite_completari">Trimite completari</button>
+
+      <button onclick="PageManager.redirectCereri()" class="btn btn_green float_right mt30">Inapoi la cereri</button>
+
+
+
+</script>
+
+<script id="tmpl_inregistrari_list_alte_documente" type="x-tmpl-mustache">
+<div class="table_scroll">
+       <table id="documente_cerere_table" class="dataTable_nosearch display"  style="width: 100%">
+
+  <thead>
+                    <tr>
+                       <th class="">Nume fisier</th>
+
+					<th class="sorting_disabled sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 126px;"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+  {{#data}}
+                    <tr>
+                        <td>{{name}}</td>
+
+
+  <td>
+                          <a href="{{fisierObj.download_url}}" target="_blank"  class="btn_blue" style="margin:2px"><i class="fas fa-download tooltip_chat"><span class="tooltiptext">Descarca</span></i></a>
+
+
+                        </td>
+
+                    </tr>
+
+    {{/data}}
+   </tbody>
+
+    </table>
+</div>
+
+      <button onclick="PageManager.resetDocumenteCerere()" data-fancybox data-src="#adauga_rand_nou_documente"  class="btn btn_green float_left mt30">+ adauga rand nou</button>
+      <button onclick="PageManager.trimiteCompletari()" style="display:none;    margin-left: 5px;" class="btn btn_green float_right mt30 trimite_completari">Trimite completari</button>
+
+      <button onclick="PageManager.redirectCereri()" class="btn btn_green float_right mt30">Inapoi la cereri</button>
+
+
+
+</script>
+<!-- Template Mustache - Lista departament (select)-->
+<script id="tmpl_id_nivel" type="x-tmpl-mustache">
+            <option selected value="">Cauta ... </option>
+
+    {{#data}}
+
+            <option value="{{id}}">{{valoare}}</option>
+
+    {{/data}}
+
+
+
+</script>
+<script id="tmpl_document" type="x-tmpl-mustache">
+            <option selected value="">Cauta tip document </option>
+
+      {{#data}}
+
+            <option value="{{id}}">{{valoare}}</option>
+
+    {{/data}}
+
+
+</script>
+
+<script id="tmpl_universitate" type="x-tmpl-mustache">
+            <option selected value="">Cauta universitate </option>
+
+    {{#data}}
+
+            <option value="{{valoare}}">{{valoare}}</option>
+
+    {{/data}}
+
+
+
+</script>
+
+<script id="tmpl_loc_universitate" type="x-tmpl-mustache">
+            <option selected value="">Cauta Loc. universitate </option>
+
+    {{#data}}
+
+            <option value="{{valoare}}">{{valoare}}</option>
+
+    {{/data}}
+
+
+
+</script>
+
+<script id="tmpl_facultate" type="x-tmpl-mustache">
+            <option selected value="">Cauta </option>
+
+    {{#data}}
+
+            <option value="{{valoare}}">{{valoare}}</option>
+
+    {{/data}}
+
+
+
+</script>
+<script id="tmpl_programa" type="x-tmpl-mustache">
+            <option selected value="">Cauta programa </option>
+
+    {{#data}}
+
+            <option value="{{id}}">{{valoare}}</option>
+
+    {{/data}}
+
+
+
+</script>
+
+
+<script id="tmpl_specialitate" type="x-tmpl-mustache">
+            <option selected value="">Cauta specialitate </option>
+
+    {{#data}}
+
+            <option value="{{id}}">{{valoare}}</option>
+
+    {{/data}}
+
+
+
+</script>
+<!-- SweetAlert -->
+<script src="assets/js/sweetalert2.min.js"></script>
+<!-- script modernizr -->
+<script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-ui.js"></script>
+<!-- script jQuery Semantic - dropdown -->
+<script src="assets/js/dropdown.min.js"></script>
+<script src="assets/js/transition.min.js"></script>
+<!-- script Sort Table -->
+<script type="text/javascript" src="assets/js/sort-table.js"></script>
+<!-- script DataTable -->
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<!-- script Fancybox -->
+<script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
+<!-- script Yearpicker -->
+<script src="assets/js/yearpicker.js"></script>
+<!-- custom js -->
+<script src="assets/js/main_portal.js"></script>
+<!-- script Mustache -->
+<script src="assets/js/mustache.js"></script>
+
+<script src="assets/js/studii.js"></script>
+<script src="../website/assets/js/documentaPortal-util.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script src="assets/js/leave_page.js"></script>
+<script>jQuery(document).ready(function ($) {
+    /* Date Picker */
+    $(".datepicker").datepicker({
+        monthNames: ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'],
+        dayNamesMin: ['Du', 'Lu', 'Ma', 'Mi', 'Jo', 'Vi', 'Sa'],
+        beforeShow: function (input, inst) {
+            var calendar = inst.dpDiv;
+            setTimeout(function () {
+                calendar.position({
+                    my: 'right top',
+                    at: 'right bottom',
+                    collision: 'none',
+                    of: input
+                });
+            }, 1);
+        }
+    });
+
+});</script>
+
+
+</body>
+
+</html>

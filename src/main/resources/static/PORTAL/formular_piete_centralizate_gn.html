@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="ro">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>SVU</title>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+    <link href="../PORTAL/assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/jquery-ui.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/slick.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/bootstrap.min.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/sweetalert2.min.css">
+
+
+</head>
+<body>
+<!-- HEADER -->
+
+
+<!-- CONTENT -->
+<div id="main-content" class="main-content">
+    <div class="container">
+        <!-- Services List -->
+        <div id="formular" class="services_list_container new_request">
+            <div class="services_header">
+                <div class="service_pictogram" style="background-image: url('assets/images/icons/document.png')"></div>
+                <div class="service_title">
+                    <h2>Raportare</h2>
+                </div>
+            </div>
+            <!-- REQUEST HEAD -->
+            <div>ANEXA 9 - Formularul privind tranzacțiile încheiate și ofertele de pe piețele centralizate de gaze
+                naturale
+            </div>
+            <!-- REQUEST BODY -->
+            <!-- First row -->
+            <div class="row form-group mt-5">
+
+                <div class="col-12 col-md-6 col-xl-6 cmb-lg cmb-md">
+                    <div class=" pr-12pr" id="container_select_id_perioada_contabila">
+                        <label for="id_perioada_contabila" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Perioada
+                            raportare*</label>
+                        <select saveable name="id_perioada_contabila" id="id_perioada_contabila"
+                                class="if_cell form-control chosen-select mw-200px open-absolute">
+                            <!-- dinamic tmpl_lov-->
+
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Second row -->
+            <div class="row form-group row-no-2">
+                <div class="col-3 col-md-3 col-xl-3 cmb-lg cmb-md">
+
+                    <div class=" pr-12pr select" id="container_select_id_parinte_user_curent">
+                        <label for="id_parinte_user_curent" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Operator
+                            economic*</label>
+                        <select saveable name="id_parinte_user_curent" id="id_parinte_user_curent"
+                                class="form-control chosen-select">
+                            <!-- dinamic tmpl_lov-->
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                    <div class="pr-12pr" id="container_select_id_user_curent">
+                        <label for="id_user_curent"
+                               class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Subsemnatul</label>
+                        <select saveable name="id_user_curent" id="id_user_curent"
+                                class="if_cell form-control chosen-select mw-200px open-absolute">
+                            <!-- dinamic tmpl_lov-->
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3 cmb-lg cmb-md">
+                    <div class=" pr-12pr">
+                        <label for="email" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Email*</label>
+                        <input saveable type="text" class="if_cell form-control" id="email" name="email"/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xl-3 cmb-lg cmb-md">
+                    <div class=" pr-12pr">
+                        <label for="telefon_fax" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Telefon*</label>
+                        <input saveable type="text" class="if_cell form-control rm-side-paddings" id="telefon_fax"
+                               name="telefon_fax"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3th row Tabel A-->
+
+            <div class="smart-form-size">
+                <div class="if_tbl">
+                    <label class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Tabel A - Produse standardizate și
+                        produse flexibile pe termen mediu şi lung</label>
+                </div>
+                <div class="row form-group smart-form-control">
+
+                    <div class="table-responsive vaadin-ps4-theme"
+                         style="width: 100%;">
+                        <table id="tab_formulare_produse_tml">
+                            <thead>
+                            <tr></tr>
+                            <tr>
+                                <th class="text-border-center"><label>Actiune</label></th>
+                                <th class="text-border-center"><label>Nr. crt.</label></th>
+                                <th class="text-border-center"><label>Data ședintei de tranzacționare</label></th>
+                                <th class="text-border-center"><label>Platforma</label></th>
+                                <th class="text-border-center"><label>Cod Activ/Produs</label></th>
+                                <th class="text-border-center"><label>Inițiatorul ordinului</label></th>
+                                <th class="text-border-center"><label>Cod ACER Inițiator</label></th>
+                                <th class="text-border-center"><label>Tipul ofertei*</label></th>
+                                <th class="text-border-center" colspan="2"><label>Cantitatea ofertată spre cumpărare /
+                                    vânzare (MWh)</label></th>
+                                <th class="text-border-center"><label>Formula ajustare pret**</label></th>
+                                <th class="text-border-center"><label>Preţul ofertat</label></th>
+                                <th class="text-border-center"><label>Moneda (Lei/MWh; Eur/MWh; USd/MWh)</label></th>
+                                <th class="text-border-center"><label>Denumire Cumpărător / Vânzător</label></th>
+                                <th class="text-border-center"><label>Cod ACER Cumpărător / Vânzător</label></th>
+                                <th class="text-border-center" colspan="2"><label>Cantitatea tranzacţionată[MWh]</label>
+                                </th>
+                                <th class="text-border-center"><label>Preţ tranzacție</label></th>
+                                <th class="text-border-center"><label>Moneda (Lei/MWh; Eur/MWh; USd/MWh)</label></th>
+                                <th class="text-border-center"><label>Perioada de livrare</label></th>
+                                <th class="text-border-center" colspan="12"><label style="width:600px">Grafic lunar de
+                                    livrare*** [MWh]</label></th>
+                                <th class="text-border-center"><label>Rezultatul ședinței de tranzacționare </label>
+                                </th>
+                                <th class="text-border-center"><label>Numărul ordinului</label></th>
+                                <th class="text-border-center"><label>Numărul tranzactiei</label></th>
+                                <th class="text-border-center"><label>Moment creare ordin</label></th>
+                            </tr>
+                            <tr>
+                                <th class="text-border-center"><a td-class="text-center"><i class="fas fa-plus"></i></a>
+                                </th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label>cantitate zilnică [MWh/zi]</label></th>
+                                <th class="text-border-center"><label>cantitate totală [MWh]</label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label>cantitate zilnică [MWh/zi]</label></th>
+                                <th class="text-border-center"><label>cantitate totală [MWh]</label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <!--       start grafic lunar-->
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <!--       end grafic lunar-->
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="totalColumn_vanzare">
+                                <td class="text-border-row">Total vanzare</td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row total"></td>  <!--cant oferta total-->
+                                <td class="text-border-row"></td>  <!--pret ofertat-->
+                                <td class="text-border-row"></td>  <!--cumparator-->
+                                <td class="text-border-row"></td>  <!--cod acer cump-->
+                                <td class="text-border-row"></td>  <!--cant tranz zilnic-->
+                                <td class="text-border-row total"></td>  <!--cant tranz total-->
+                                <td class="text-border-row"></td>  <!--pret tranz-->
+                                <!-- grafic-->
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <!-- end grafic-->
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+
+
+                            </tr>
+                            <tr class="totalColumn_cumparare">
+                                <td class="text-border-row">Total cumparare</td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row total"></td>  <!--cant oferta total-->
+                                <td class="text-border-row"></td>  <!--pret ofertat-->
+                                <td class="text-border-row"></td>  <!--cumparator-->
+                                <td class="text-border-row"></td>  <!--cod acer cump-->
+                                <td class="text-border-row"></td>  <!--cant tranz zilnic-->
+                                <td class="text-border-row total"></td>  <!--cant tranz total-->
+                                <td class="text-border-row"></td>  <!--pret tranz-->
+                                <!-- grafic-->
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <!-- end grafic-->
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- 4th row Tabel B-->
+
+            <div class="smart-form-size">
+                <div class="if_tbl">
+                    <label class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Tabel B - Produse standardizate pe
+                        termen scurt (PZU şi PI) </label>
+                </div>
+                <div class="row form-group smart-form-control">
+
+                    <div class="table-responsive vaadin-ps4-theme"
+                         style="width: 100%;">
+                        <table id="tab_formulare_produse_ts">
+                            <thead>
+                            <tr></tr>
+                            <tr>
+                                <th class="text-border-center"><label>Nr. crt.</label></th>
+                                <th class="text-border-center"><label>Data ședintei de tranzacționare</label></th>
+                                <th class="text-border-center"><label>Platforma</label></th>
+                                <th class="text-border-center"><label>Cod Activ/Produs</label></th>
+                                <th class="text-border-center"><label>Inițiatorul ordinului</label></th>
+                                <th class="text-border-center"><label>Cod ACER Inițiator</label></th>
+                                <th class="text-border-center"><label>Tipul ofertei*</label></th>
+                                <th class="text-border-center"><label>Cantitatea ofertată spre cumpărare / vânzare
+                                    (MWh)</label></th>
+                                <th class="text-border-center"><label>Preţul ofertat (Lei/MWh)</label></th>
+                                <th class="text-border-center"><label>Denumire Cumpărător / Vânzător</label></th>
+                                <th class="text-border-center"><label>Cod ACER Cumpărător / Vânzător</label></th>
+                                <th class="text-border-center"><label>Cantitatea tranzacţionată[MWh]</label></th>
+                                <th class="text-border-center"><label>Preţ tranzacție [lei/MWh]</label></th>
+                                <th class="text-border-center"><label>Numărul ordinului</label></th>
+                                <th class="text-border-center"><label>Numărul tranzactiei</label></th>
+                                <th class="text-border-center"><label>Moment creare ordin</label></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--
+                                                        <tr>
+                                                            <td class="text-border-center"><label td-class="text-border-center">1</label></td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="total_cumulat_inceput_an" value="" style="border:0"></input>
+
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="total_cumulat_inceput_an" value="" style="border:0"></input>
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="val_luna_raportare" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                        </tr>-->
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- 5th row Tabel C-->
+
+            <div class="smart-form-size">
+                <div class="if_tbl">
+                    <label class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Tabel C - Produse standardizate pe
+                        termen mediu și lung, în condițiile utilizării unei case de clearing/contrapărți
+                        centrale</label>
+                </div>
+                <div class="row form-group smart-form-control">
+
+                    <div class="table-responsive vaadin-ps4-theme"
+                         style="width: 100%;">
+                        <table id="tab_formulare_produse_tml_clearing">
+                            <thead>
+                            <tr></tr>
+                            <tr>
+                                <th class="text-border-center"><label>Nr. crt.</label></th>
+                                <th class="text-border-center"><label>Data ședintei de tranzacționare</label></th>
+                                <th class="text-border-center"><label>Platforma</label></th>
+                                <th class="text-border-center"><label>Cod Activ/Produs</label></th>
+                                <th class="text-border-center"><label>Inițiatorul ordinului</label></th>
+                                <th class="text-border-center"><label>Cod ACER Inițiator</label></th>
+                                <th class="text-border-center"><label>Tipul ofertei*</label></th>
+                                <th class="text-border-center" colspan="2"><label>Cantitatea ofertată spre cumpărare /
+                                    vânzare (MWh)</label></th>
+                                <th class="text-border-center"><label>Preţul ofertat (Lei/MWh)</label></th>
+                                <th class="text-border-center"><label>Denumire Cumpărător / Vânzător</label></th>
+                                <th class="text-border-center"><label>Cod ACER Cumpărător / Vânzător</label></th>
+                                <th class="text-border-center" colspan="2"><label>Cantitatea tranzacţionată[MWh]</label>
+                                </th>
+                                <th class="text-border-center"><label>Preţ tranzacție [lei/MWh]</label></th>
+                                <th class="text-border-center"><label>Perioada de livrare</label></th>
+                                <th class="text-border-center"><label>Grafic lunar de livrare** [MWh]</label></th>
+                                <th class="text-border-center"><label>Numărul ordinului</label></th>
+                                <th class="text-border-center"><label>Numărul tranzactiei</label></th>
+                                <th class="text-border-center"><label>Moment creare ordin</label></th>
+                            </tr>
+                            <tr>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label>cantitate zilnică [MWh/zi]</label></th>
+                                <th class="text-border-center"><label>cantitate totală [MWh]</label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label>cantitate zilnică [MWh/zi]</label></th>
+                                <th class="text-border-center"><label>cantitate totală [MWh]</label></th>
+                                <th class="text-border-center"><label></label></th>
+
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                                <th class="text-border-center"><label></label></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--
+                                                        <tr>
+                                                            <td class="text-border-center"><label td-class="text-border-center">1</label></td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="total_cumulat_inceput_an" value="" style="border:0"></input>
+
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="total_cumulat_inceput_an" value="" style="border:0"></input>
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="val_luna_raportare" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                            <td class="text-border">
+                                                                <input type="text" saveableTd  name="nr_data_doc_plata" value="" style="border:0"></input>
+
+                                                            </td>
+                                                        </tr>-->
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- 6th row Tabel C-->
+
+            <div class="smart-form-size">
+                <div class="if_tbl">
+                    <label class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Tabel D - Produse
+                        nestandardizate</label>
+                </div>
+                <div class="row form-group smart-form-control">
+
+                    <div class="table-responsive vaadin-ps4-theme"
+                         style="width: 100%;">
+                        <table id="tab_formulare_produse_nest">
+                            <thead>
+                            <tr></tr>
+                            <tr>
+                                <th class="text-border-center"><label>Actiune</label></th>
+                                <th class="text-border-center"><label>Nr. crt.</label></th>
+                                <th class="text-border-center"><label>Data ședintei de tranzacționare</label></th>
+                                <th class="text-border-center"><label style="width:300px">Platforma</label></th>
+                                <th class="text-border-center"><label style="width:300px">Cod Activ/Produs</label></th>
+                                <th class="text-border-center"><label style="width:300px">Tipul tranzactiei</label></th>
+                                <th class="text-border-center"><label style="width:300px">Inițiatorul ordinului</label></th>
+                                <th class="text-border-center"><label style="width:300px">Denumire Cumpărător / Vânzător</label></th>
+                                <th class="text-border-center"><label>Cantitatea tranzacţionată[MWh]</label></th>
+                                <th class="text-border-center"><label>Preţ tranzacție [lei/MWh]</label></th>
+                                <th class="text-border-center"><label>Perioada de livrare</label></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-border-center"><a td-class="text-center" onclick="FileManager.renderRowFromTemplate('tmpl_row_tab_formulare_produse_nest','#tab_formulare_produse_nest')"><i class="fas fa-plus"></i></a></td>
+                                <td class="text-border"></td>
+                                <td class="text-border"></td>
+                                <td class="text-border"></td>
+                                <td class="text-border"></td>
+                                <td class="text-border"></td>
+                                <td class="text-border"></td>
+                                <td class="text-border"></td>
+                                <td class="text-border"></td>
+                                <td class="text-border"></td>
+                                <td class="text-border"></td>
+                            </tr>
+                            <tr class="empty_row_to_add"></tr>
+                            <tr class="totalColumn_nest">
+                                <td class="text-border-row">Total</td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row"></td>
+                                <td class="text-border-row total"></td> <!--total cant tranz-->
+                                <td class="text-border-row pmp"></td>
+                                <td class="text-border-row"></td>
+
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Custom Buttons -->
+            <div class="btn_footer_container">
+                <div class="btn_info">
+                    <div class="background clearfix">
+                        <div class="prev_info">
+                            <strong>Serviciul:</strong> Raportare privind contributia datorata si virata la Fondul de
+                            garantare a asiguratilor
+                        </div>
+                        <div class="next_info">
+                            <strong>Pasul:</strong> Completare raport
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="buttons_container">
+                    <form action="" method="post">
+                        <button type="submit" name="prev_page" class="btn btn-primary btn-sm prev"><i class="fas fa-arrow-alt-circle-left"></i>Pasul anterior</button>
+                        <button type="submit" name="next_page" class="btn btn-secondary btn-sm next">Pasul urmator<i class="fas fa-arrow-alt-circle-right"></i></button>
+                    </form>
+                </div> -->
+                <div class="buttons_container">
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm prev"><i
+                            class="fas fa-arrow-alt-circle-left"></i>Pasul anterior</a>
+                    <a href="javascript:void(0)" onclick="FileManager.salveazaCerere()" id="btn_next_step"
+                       class="btn btn-secondary btn-sm next">Pasul urmator<i
+                            class="fas fa-arrow-alt-circle-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Templates -->
+
+<!--Template LOV -->
+<script id="tmpl_lov" type="x-tmpl-mustache">
+            <option value="">Cauta</option>
+
+    {{#lov}}
+
+            <option  {{selected}} value="{{id}}">{{valoare}}</option>
+
+    {{/lov}}
+
+
+
+</script>
+
+<!--Template Row tabel -->
+
+<script id="tmpl_row_tab_formulare_produse_nest" type="x-tmpl-mustache">
+
+  {{#data}}
+     <td class="text-border"></td>
+     <td class="text-border"><input type="text" saveableTd  name="nr_crt" value="" style="border:0">{{nrCrt}}</input></td>
+     <td class="text-border"><input type="text" saveableTd  name="data_sedinta_tranzactionare" value="" style="border:0"></input></td>
+     <td class="text-border" >                    <div name="container_select_id_platforma">
+                                    <select  saveableTd name="id_platforma"
+                                             class=" if_cell form-control chosen-select mw-200px open-absolute">
+                                                  <!--      dinamic tmpl_lov-->
+                                    </select>
+                                    </div>
+     </td>
+    <td class="text-border" >                    <div class="container_select_id_produs">
+                                    <select  saveableTd name="id_produs"
+                                             class=" if_cell form-control chosen-select mw-200px open-absolute">
+                                                  <!--      dinamic tmpl_lov-->
+                                    </select>
+                                    </div>
+     </td>
+ <td class="text-border" >                    <div class="container_select_id_tip_tranzactie">
+                                    <select  saveableTd name="id_tip_tranzactie"
+                                             class=" if_cell form-control chosen-select mw-200px open-absolute">
+                                                  <!--      dinamic tmpl_lov-->
+                                    </select>
+                                    </div>
+     </td>
+      <td class="text-border" >                    <div class="container_select_id_initiator">
+                                    <select  saveableTd name="id_initiator"
+                                             class=" if_cell form-control chosen-select mw-200px open-absolute">
+                                                  <!--      dinamic tmpl_lov-->
+                                    </select>
+                                    </div>
+     </td>
+    <td class="text-border" >                    <div class="container_select_id_cumparator">
+                                    <select  saveableTd name="id_cumparator"
+                                             class=" if_cell form-control chosen-select mw-200px open-absolute">
+                                                  <!--      dinamic tmpl_lov-->
+                                    </select>
+                                    </div>
+     </td>
+          <td class="text-border"><input type="text" saveableTd  name="cantitate_tranzactionata" value="" style="border:0"></input></td>
+          <td class="text-border"><input type="text" saveableTd  name="pret_tranzactie" value="" style="border:0"></input></td>
+          <td class="text-border"><input type="text" saveableTd  name="perioada_livrare" value="" style="border:0"></input></td>
+   {{/data}}
+
+</script>
+<div class="gap-50"></div>
+
+
+<!-- End Script-uri Mustache -->
+<!-- SweetAlert -->
+<script src="assets/js/sweetalert2.min.js"></script>
+<script src="assets/js/weblib.js"></script>
+<script src="../website/assets/js/util.js"></script>
+<!-- script modernizr -->
+<script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-ui.js"></script>
+<!-- script jQuery Semantic - dropdown -->
+<script src="assets/js/dropdown.min.js"></script>
+<script src="assets/js/transition.min.js"></script>
+<!-- script Sort Table -->
+<script type="text/javascript" src="assets/js/sort-table.js"></script>
+<!-- script DataTable -->
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<!-- custom js -->
+
+<!-- Chosen Select -->
+<script src="assets/js/chosen.jquery.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/main_static.js"></script>
+
+<script src="assets/js/mustache.js"></script>
+<script src="../website/assets/js/documentaPortal-util.js"></script>
+<script src="../PORTAL/assets/js/formular_piete_centralizate_gn.js"></script>
+</body>
+</html>

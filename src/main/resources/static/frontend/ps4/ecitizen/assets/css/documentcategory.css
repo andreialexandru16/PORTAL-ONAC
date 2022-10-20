@@ -1,0 +1,115 @@
+
+.categorii_homepage .sg_category.reabilitare .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/reabilitare_black.png"); }
+  .categorii_homepage .sg_category.reabilitare:hover .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/reabilitare_green.png"); }
+
+.categorii_homepage .sg_category.transport .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/transport_black.png"); }
+  .categorii_homepage .sg_category.transport:hover .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/transport_green.png"); }
+
+
+.categorii_homepage .sg_category.urbanism .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/urbanism_black.png"); }
+  .categorii_homepage .sg_category.urbanism:hover .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/urbanism_green.png"); }
+
+
+.categorii_homepage .sg_category.hotarari_consiliu .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/hotarari_consiliu_black.png"); }
+  .categorii_homepage .sg_category.hotarari_consiliu:hover .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/hotarari_consiliu_green.png"); }
+
+.categorii_homepage .sg_category.dispozitii .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/dispozitii_black.png"); }
+  .categorii_homepage .sg_category.dispozitii:hover .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/dispozitii_green.png"); }
+
+.categorii_homepage .sg_category.investitii .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/investitii_black.png"); }
+  .categorii_homepage .sg_category.investitii:hover .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/investitii_green.png"); }
+
+.categorii_homepage .sg_category.bugetare_participativa .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/investitii_black.png"); }
+.categorii_homepage .sg_category.bugetare_participativa:hover .pictograma {
+    background-image: url("/frontend/ps4/ecitizen/assets/images/icons/documentcategory/investitii_green.png"); }
+
+.categorii_homepage .sg_category.documente_urbanistice_emise .pictograma {
+    background-image: url("/PS4/assets/images/svg/mobilitate-urbana.svg"); }
+.categorii_homepage .sg_category.documente_urbanistice_emise:hover .pictograma {
+    background-image: url("/PS4/assets/images/svg/mobilitate-urbana-hov.svg"); }
+
+/* Background Images */
+/*
+.picto_parent.urbanism .pictograma {
+  background-image: url("../../assets/images/icons/urbanism.png"); }
+.picto_parent.domeniul-public .pictograma {
+  background-image: url("../../assets/images/icons/domeniul-public.png"); }
+.picto_parent.ep .pictograma {
+  background-image: url("../../assets/images/icons/ep.png"); }
+.picto_parent.tp .pictograma {
+  background-image: url("../../assets/images/icons/transport.png"); }
+.picto_parent.sc .pictograma {
+  background-image: url("../../assets/images/icons/sc.png"); }
+.picto_parent.psc .pictograma {
+  background-image: url("../../assets/images/icons/psc.png"); }
+.picto_parent.tsi .pictograma {
+  background-image: url("../../assets/images/icons/tsi.png"); }
+.picto_parent.tutela .pictograma {
+  background-image: url("../../assets/images/icons/tutela.png"); }
+.picto_parent.ss .pictograma {
+  background-image: url("../../assets/images/icons/ss.png"); }
+.picto_parent.iia .pictograma {
+  background-image: url("../../assets/images/icons/iia.png"); }
+.picto_parent.ip .pictograma {
+  background-image: url("../../assets/images/icons/ip.png"); }
+.picto_parent.dp .pictograma {
+  background-image: url("../../assets/images/icons/dp.png"); }
+*/
+
+/*
+
+  .categorii_homepage .sg_category.domeniul-public .pictograma {
+    background-image: url("../../assets/images/icons/domeniul-public.png"); }
+  .categorii_homepage .sg_category.domeniul-public:hover .pictograma {
+    background-image: url("../../assets/images/icons/domeniul-public-hover.png"); }
+  .categorii_homepage .sg_category.ep .pictograma {
+    background-image: url("../../assets/images/icons/ep.png"); }
+  .categorii_homepage .sg_category.ep:hover .pictograma {
+    background-image: url("../../assets/images/icons/ep-hover.png"); }
+  .categorii_homepage .sg_category.sc .pictograma {
+    background-image: url("../../assets/images/icons/sc.png"); }
+  .categorii_homepage .sg_category.sc:hover .pictograma {
+    background-image: url("../../assets/images/icons/sc-hover.png"); }
+  .categorii_homepage .sg_category.psc .pictograma {
+    background-image: url("../../assets/images/icons/psc.png"); }
+  .categorii_homepage .sg_category.psc:hover .pictograma {
+    background-image: url("../../assets/images/icons/psc-hover.png"); }
+  .categorii_homepage .sg_category.tsi .pictograma {
+    background-image: url("../../assets/images/icons/tsi.png"); }
+  .categorii_homepage .sg_category.tsi:hover .pictograma {
+    background-image: url("../../assets/images/icons/tsi-hover.png"); }
+  .categorii_homepage .sg_category.tutela .pictograma {
+    background-image: url("../../assets/images/icons/tutela.png"); }
+  .categorii_homepage .sg_category.tutela:hover .pictograma {
+    background-image: url("../../assets/images/icons/tutela-hover.png"); }
+  .categorii_homepage .sg_category.ss .pictograma {
+    background-image: url("../../assets/images/icons/ss.png"); }
+  .categorii_homepage .sg_category.ss:hover .pictograma {
+    background-image: url("../../assets/images/icons/ss-hover.png"); }
+  .categorii_homepage .sg_category.iia .pictograma {
+    background-image: url("../../assets/images/icons/iia.png"); }
+  .categorii_homepage .sg_category.iia:hover .pictograma {
+    background-image: url("../../assets/images/icons/iia-hover.png"); }
+  .categorii_homepage .sg_category.ip .pictograma {
+    background-image: url("../../assets/images/icons/ip.png"); }
+  .categorii_homepage .sg_category.ip:hover .pictograma {
+    background-image: url("../../assets/images/icons/ip-hover.png"); }
+  .categorii_homepage .sg_category.dp .pictograma {
+    background-image: url("../../assets/images/icons/dp.png"); }
+  .categorii_homepage .sg_category.dp:hover .pictograma {
+    background-image: url("../../assets/images/icons/dp-hover.png"); }
+
+    */

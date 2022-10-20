@@ -1,0 +1,7 @@
+:host(.upload-no-info )  [part="info"]  {
+    display: none;
+}
+
+:host(.upload-no-info )  [part="file-list"]  {
+    display: none;
+}

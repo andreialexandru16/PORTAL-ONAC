@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title> Confirmare Email</title>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+    <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+    <!-- Custom -->
+    <link rel="stylesheet" href="assets/css/main.css">
+
+  </head>
+  <body>
+
+  <!--&lt;!&ndash; HEADER &ndash;&gt;-->
+  <!--<header id="main-header">-->
+      <!--&lt;!&ndash; Identitate Vizuala &ndash;&gt;-->
+      <!--<div class="visual_identity">-->
+          <!--<div class="container">-->
+              <!--<div class="row">-->
+                  <!--<div class="col-2 ue">-->
+                      <!--<a href="javascript:void(0)" target="_blank">-->
+                          <!--<img src="../PORTAL/assets/images/logos/uniunea-europeana.png" alt="logo uniunea europeana"/>-->
+                      <!--</a>-->
+                  <!--</div>-->
+                  <!--<div class="col-3 gov text-center">-->
+                      <!--<a href="javascript:void(0)" target="_blank">-->
+                          <!--<img src="../PORTAL/assets/images/logos/guvernul-romaniei.png" alt="logo guvernul romaniei"/>-->
+                      <!--</a>-->
+                  <!--</div>-->
+                  <!--<div class="col-5 poca text-center">-->
+                      <!--<a href="javascript:void(0)" target="_blank">-->
+                          <!--<img src="../PORTAL/assets/images/logos/poca.png"-->
+                               <!--alt="logo programul operational capacitate administrativa"/>-->
+                      <!--</a>-->
+                  <!--</div>-->
+                  <!--<div class="col-2 is text-right">-->
+                      <!--<a href="javascript:void(0)" target="_blank">-->
+                          <!--<img src="../PORTAL/assets/images/logos/instrumente-structurale.png"-->
+                               <!--alt="logo instrumente structurale"/>-->
+                      <!--</a>-->
+                  <!--</div>-->
+              <!--</div>-->
+          <!--</div>-->
+      <!--</div>-->
+
+      <!--&lt;!&ndash; Main Bar &ndash;&gt;-->
+      <!--<div class="main_header_container">-->
+          <!--<div class="container">-->
+              <!--<div class="row">-->
+                  <!--&lt;!&ndash; Logo &ndash;&gt;-->
+                  <!--<div class="col-8 col-sm-6 col-md-4 col-lg-2 logo">-->
+                      <!--<a href="http://wp.genom-postgres.documenta.ro/home/">-->
+                          <!--<img src="../PORTAL/assets/images/logos/logo.png" alt="logo primaria sectorului 4">-->
+                      <!--</a>-->
+                  <!--</div>-->
+                  <!--&lt;!&ndash; Menu &ndash;&gt;-->
+                  <!--<div class="col-4 col-sm-6 col-md-8 col-lg-10 menu_container">-->
+                      <!--<nav class="navbar navbar-expand-xl navbar-dark">-->
+
+                          <!--&lt;!&ndash; Collapse button &ndash;&gt;-->
+                          <!--<div class="empty_element"></div>-->
+                          <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-wrap"-->
+                                  <!--aria-controls="menu-wrap" aria-expanded="false" aria-label="Toggle navigation">-->
+                              <!--<span class="navbar-toggler-icon"></span>-->
+                          <!--</button>-->
+                          <!--&lt;!&ndash; Menu Wrapper &ndash;&gt;-->
+                          <!--<div id="menu-wrap" class="row collapse navbar-collapse">-->
+                              <!--&lt;!&ndash; Main Menu &ndash;&gt;-->
+                              <!--<div class="col-xl-8">-->
+                                  <!--<div class="main_menu">-->
+                                      <!--<ul class="navbar-nav">-->
+
+                                      <!--</ul>-->
+                                  <!--</div>-->
+                              <!--</div>-->
+                              <!--&lt;!&ndash; Secondary Menu &ndash;&gt;-->
+                              <!--<div class="col-xl-4">-->
+                                  <!--<nav class="secondary_top_menu">-->
+                                      <!--<ul class="navbar-nav">-->
+
+                                      <!--</ul>-->
+                                  <!--</nav>-->
+                              <!--</div>-->
+                          <!--</div>-->
+                      <!--</nav>-->
+                  <!--</div>-->
+              <!--</div>-->
+          <!--</div>-->
+      <!--</div>-->
+  <!--</header>-->
+
+
+  <!-- BREADCRUMBS -->
+    <div class="breadcrumbs_container">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Confirma email</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- CONTENT -->
+    <div id="main-content" class="main-content">
+        <div class="container">
+            <!-- Services List -->
+            <div class="services_list_container reset_password">
+                <div class="services_header">
+                    <div class="service_pictogram"><i class="fas fa-key"></i></div>
+                    <div class="service_title">
+                        <h2>Confirma email</h2>
+                    </div>
+                </div>
+                <div class="service_body">
+                        <button id="btn_confirma" onclick="PageManager.sendFluxById()" class="btn btn-secondary btn-block">Confirmare email<i class="fas fa-arrow-alt-circle-right"></i></button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="gap-50"></div>
+
+
+  <!--&lt;!&ndash; FOOTER &ndash;&gt;-->
+  <!--<footer id="main-footer">-->
+      <!--&lt;!&ndash; COPYRIGHTS &ndash;&gt;-->
+      <!--<div class="container">-->
+          <!--<div class="row">-->
+              <!--<div class="col-sm-12 col-md-4 col-lg-2 copyright">-->
+                  <!--<a href="https://www.documenta.ro/" target="_blank">Powered by documenta DMS</a>-->
+              <!--</div>-->
+              <!--<div class="col-sm-12 col-md-8 col-lg-8 links_footer">-->
+                  <!--<div class="row">-->
+
+                  <!--</div>-->
+              <!--</div>-->
+              <!--<div class="col-sm-12 col-md-12 col-lg-2">-->
+                  <!--<div class="logo_footer text-right">-->
+                      <!--<a href="../">-->
+                          <!--<img src="../PORTAL/assets/images/logos/logo.png" alt="logo">-->
+                      <!--</a>-->
+                  <!--</div>-->
+              <!--</div>-->
+          <!--</div>-->
+      <!--</div>-->
+  <!--</footer>-->
+  <!-- FOOTER -->
+
+    <!-- FOOTER SCRIPTS -->
+    <!-- SweetAlert -->
+    <script src="assets/js/sweetalert2.min.js"></script>
+    <!-- jQuery -->
+    <script src="assets/js/jquery-3.5.1.min.js"></script>
+    <!-- Autocomplete -->
+    <script src="assets/js/jquery-ui.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Slick Carousel -->
+    <script src="assets/js/slick.min.js"></script>
+    <!-- Chosen Select -->
+    <script src="assets/js/chosen.jquery.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/main_static.js"></script>
+    <script src="assets/js/pagina-validare-email.js"></script>
+    <script src="assets/js/documentaPortal-util.js"></script>
+
+
+  </body>
+</html>

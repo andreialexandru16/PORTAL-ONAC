@@ -1,0 +1,266 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>ANRE</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/favicon.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <!-- CSS - jQuery -->
+  <link rel="stylesheet" href="assets/css/jquery-ui.css">
+  <!-- CSS - DataTable -->
+  <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+  <!-- CSS Semantic - dropdown -->
+  <link rel="stylesheet" href="assets/css/dropdown.min.css">
+  <link rel="stylesheet" href="assets/css/transition.min.css">
+  <!-- Custom -->
+  <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!--main.css se adauga in mod dinamic din fisierul js: main_static.js ; daca avem setat param dmsws.unitname in application.properties va fi importat fisierul main_unitname.css-->
+  <!-- Sweet Alert -->
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+  <link rel="stylesheet" href="assets/css/main-screen-operator-gn.css">
+
+</head>
+
+<body>
+<!--[if IE]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+<!-- begin Container -->
+<div class="container">
+
+  <div class="title_border_bottom2 mb30">
+    Raportare conform OUG nr.118/2021, OUG nr.3/2022, OUG nr.27/2022, OUG nr.119/2022
+  </div>
+
+  <!-- begin zona cautare operator / selectare an / selectare luna -->
+  <div class="box_shadow">
+
+    <div class="flex">
+
+      <!-- begin Perioada -->
+      <div class="width20">
+        <div id="container_perioada">
+
+        </div>
+      </div>
+      <!-- end Perioada -->
+
+      <!-- begin Operator -->
+      <div class="select minwidth250 width40" id="container_select_operator" style="display: none;">
+        <select class="form-control chosen-select" id="select_tert" onChange="FileManager.triggerClickBtn('#btn_actualizare')">
+          <!-- dinamic-->
+        </select>
+      </div>
+      <!-- end Operator -->
+
+      <!-- begin Message -->
+      <div class="width20">
+        <div id="container_stare_luna" class="float_left">
+
+
+        </div>
+      </div>
+      <!-- end Message -->
+
+      <!-- begin buton Actualizare -->
+      <div class="width20">
+        <div class="maxwidth200 float_right">
+          <a href="#" id="btn_actualizare" class="btn_arrow_right" style="display: none" onclick="FileManager.loadFormulareData()">Actualizare</a>
+        </div>
+      </div>
+      <!-- end buton Actualizare -->
+
+      </div><!-- end .flex -->
+    <div class="msg_info_alert">
+      Conform  OUG nr.118/2021, OUG nr.3/2022, OUG nr.27/2022, OUG nr.119/2022 - Răspunderea privind corectitudinea şi modul de calcul al sumelor solicitate la decontare revine furnizorilor.
+    </div>
+  </div>
+  <!-- end zona cautare operator / selectare an / selectare luna -->
+
+
+<div class="page-wrapper ">
+  <!-- begin Table Validare / Transmitere date -->
+  <div class="table_doc padd_right0">
+    <div class="table_scroll table_anre">
+      <table class="table table_form">
+        <thead>
+        <tr>
+          <th class="th_sort2"><span>Status</span></th>
+          <th class="th_sort2"><span>Denumire formular</span></th>
+          <th class="th_sort2"><span>Descarca declaratie</span></th>
+          <th class="th_sort2"><span>Actiuni</span></th>
+          <th class="th_sort2"><span>Data transmiterii</span></th>
+          <th class="th_sort2"><span>Termen</span></th>
+        </tr>
+        </thead>
+        <tbody id="container_formular">
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="box_buttons_row">
+  <div class="buttons_row">
+
+    <div>
+      <a href="#" class="btn btn_green" onclick="FileManager.valideazaDateSiTrimite()">Transmite date</a>
+    </div>
+  </div>
+</div>
+<!-- end Table Validare / Transmitere date -->
+
+</div>
+<!-- end Container -->
+
+<!-- Script-uri Mustache -->
+
+<script id="tmpl_formulare_list" type="x-tmpl-mustache">
+
+
+   {{#formularRaportareList}}
+    <tr class="link_doc">
+
+
+                <td class="status_row"><i style='color: {{colorStatus}}'><span>{{status}}</span></td>
+                <td><span>{{tipDoc}}</span></td>
+                  <td style="font-size: 18px !important;">
+                  <div class="buttons_row">
+                  <div class="buttons">
+                    <a href="#" onclick="$UTIL.downloadFileByVaadin('Model declaratie.docx','{{downloadLinkTemplateFile}}')" style="display:{{displayDownloadLinkTemplateFile}}" target="_self"><i class="fas fa-file-excel tooltip_chat"><span class="tooltiptext">Descarca template</span></i></a>
+                  </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="buttons_row">
+                  <div class="buttons">
+                   <a id="a_view_formular" onClick="FileManager.viewFormular({{idTipDoc}},{{idClasaDoc}},'{{request}}')" href="#"><i class="fas fa-eye tooltip_chat"><span class="tooltiptext">Vizualizare</span></i></a>
+
+                     {{#permiteEditarePortal}}
+                    <a id="a_open_formular" onClick="FileManager.openFormular({{idTipDoc}},{{idClasaDoc}},'{{request}}')" href="#"><i class="fas fa-pen tooltip_chat"><span class="tooltiptext">Incarcare online</span></i></a>
+                  {{/permiteEditarePortal}}
+
+                    {{#areFisierExcel}}
+                    <a id="a_open_formular"  href="{{request}}"><i class="fas fa-download tooltip_chat"><span class="tooltiptext">Vezi formular excel incarcat</span></i></a>
+                    {{/areFisierExcel}}
+
+
+                    {{#areFisierXml}}
+                    <a id="a_open_formular"  href="{{request}}" target="_blank"><i class="fas fa-download tooltip_chat"><span class="tooltiptext">Vezi formular xml incarcat</span></i></a>
+                    {{/areFisierXml}}
+
+                    {{#permiteDoarIncarcareExcel}}
+                      <form id="register_pfa" target="dummyframe" class="button-action"  action="/dmsws/file/uploadFisierByIdTipDoc" method="post" enctype="multipart/form-data">
+                        <label>
+                          <input type="file" name="file" id="file" onChange="FileManager.uploadFileChange({{idTipDoc}})" style="display:none">
+                          <i class="fas fa-file-excel tooltip_chat"><span class="tooltiptext">Incarcare Excel</span></i>
+                          <input hidden value="{{idTipDoc}}" name="idDocType">
+                          <button type="submit" id="submit_file_{{idTipDoc}}" style="display: none;">Submit<i class="fas fa-arrow-alt-circle-right"></i></button>
+                        </label>
+                        <input hidden class="idPerioadaHidden" name="idPerioada">
+                      </form>
+                    {{/permiteDoarIncarcareExcel}}
+
+                    {{#hasErrors}}
+                    <a href="#" onClick="FileManager.veziErori({{id}})" class="tooltip_chat" style="width:50px;"><i class="fas fa-exclamation" style="color:red;"></i><span class="tooltiptext" >Vezi erorile de parasare ale xml-ului incarcat</span></a>
+                    {{/hasErrors}}
+
+                    {{#hasWarnings}}
+                    <a href="#" onClick="FileManager.veziAtentionari({{id}})" class="tooltip_chat" style="width:50px;"><i class="fas fa-info" style="color:#ffc107;"></i><span class="tooltiptext">Vezi atentionarile de parasare ale xml-ului incarcat</span></a>
+                    {{/hasWarnings}}
+
+                    {{#hasOk}}
+                    <a href="{{request}}" target="_blank" class="tooltip_chat" style="width:50px;"><i class="fas fa-check" style="color:green;"></i><span class="tooltiptext">Xml incarcat este validat si corect</span></a>
+                    {{/hasOk}}
+
+                    {{#permiteDoarIncarcareXml}}
+                      <form id="register_pfa" target="dummyframe" class="button-action"  action="/dmsws/file/uploadFisierByIdTipDocXml" method="post" enctype="multipart/form-data">
+                        <label>
+                          <input type="file" name="file" id="file_{{idTipDoc}}" onChange="FileManager.uploadFileChangeXml({{idTipDoc}})" style="display:none">
+                          <i class="fas fa-file-excel tooltip_chat"><span class="tooltiptext">Incarcare Xml</span></i>
+                        </label>
+                      </form>
+                    {{/permiteDoarIncarcareXml}}
+                  </div>
+                  </div>
+                </td>
+                 <td><span>{{modificatLa}}</span></td>
+                 <td><span>{{termen}}</span></td>
+                 <td  style="display:none"><input type="hidden" class="id_fisier" style="display:none" readonly    value="{{id}}"></td>
+
+              </tr>
+ {{/formularRaportareList}}
+
+</script>
+
+<script id="tmpl_perioada" type="x-tmpl-mustache">
+
+  <div class="select">
+          <select class="form-control chosen-select" id="select_perioada" onChange="FileManager.triggerClickBtnPerioada('#btn_actualizare')">
+            <option value="">Selecteaza perioada</option>
+   {{#perioadaList}}
+
+            <option  {{selected}} value="{{id}}">{{denumire}}</option>
+
+ {{/perioadaList}}
+   </select>
+        </div>
+</script>
+
+
+<script id="tmpl_tert_raportare" type="x-tmpl-mustache">
+            <option value="">Cauta operator </option>
+
+    {{#tertList}}
+
+            <option  {{selected}} value="{{id}}">{{nume}}</option>
+
+    {{/tertList}}
+
+
+</script>
+
+<!-- End Script-uri Mustache -->
+<!-- SweetAlert -->
+<script src="assets/js/sweetalert2.min.js"></script>
+<script src="assets/js/weblib.js"></script>
+<script src="../website/assets/js/util.js"></script>
+<!-- script modernizr -->
+<script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-ui.js"></script>
+<!-- script jQuery Semantic - dropdown -->
+<script src="assets/js/dropdown.min.js"></script>
+<script src="assets/js/transition.min.js"></script>
+<!-- script Sort Table -->
+<script type="text/javascript" src="assets/js/sort-table.js"></script>
+<!-- script DataTable -->
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<!-- custom js -->
+
+<!-- Chosen Select -->
+<script src="assets/js/chosen.jquery.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/main_static.js"></script>
+
+<script src="assets/js/mustache.js"></script>
+<script src="../website/assets/js/documentaPortal-util.js"></script>
+<script src="assets/js/main-screen-operator-compensari.js"></script>
+<script src="assets/js/leave_page.js"></script>
+</body>
+
+</html>

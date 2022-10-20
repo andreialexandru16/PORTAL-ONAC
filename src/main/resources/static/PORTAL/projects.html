@@ -1,0 +1,228 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="assets/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- CSS - jQuery -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- custom scrollbar stylesheet -->
+    <link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.min.css">
+    <!-- CSS - tagify -->
+    <!-- CSS - Sweet Alert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+    <!-- Custom -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/style.css">
+
+    <link rel="stylesheet" href="../PORTAL/assets/css/slick.css">
+    <!-- Bootstrap -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../PORTAL/assets/css/bootstrap.min.css">
+         <!--   main.css se adauga in mod dinamic din fisierul js: main_static.js ; daca avem setat param dmsws.unitname in application.properties va fi importat fisierul main_unitname.css -->
+
+
+</head>
+
+<body>
+<!--[if IE]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+
+<!-- BREADCRUMBS -->
+<div class="breadcrumbs_container">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/index">Acasă</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Vizualizare proiecte Bugetare Participativă</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+
+<!-- begin Box Content -->
+<div class="box_content">
+    <div class="container">
+        <div class="div_container">
+
+            <!-- begin sidebar -->
+            <div class="sidebar">
+
+                <div class="toggle_sidebar"></div>
+
+                <div class="box_content_sidebar">
+                    <div class="content_sidebar">
+
+                        <!--  begin Logout-->
+                        <a id="btn_depune_proiect" class="btn_blue" onclick="openDepunereProiect()" style="cursor:pointer;color: white">Propune un proiect!</a>
+                        <!--   end Logout-->
+                        <!--  begin Logout-->
+                        <a id="btn_vizualizare_proiecte" class="btn_blue"  onclick="openHartaProiect()"  style="cursor:pointer;color: white">Vezi harta proiectelor</a>
+                        <!--   end Logout-->
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- end sidebar -->
+            <!-- begin Right Side - content -->
+            <div class="right_side">
+                <div class="padding_content">
+                    <div class="div_content">
+
+                        <!-- begin Content -->
+                        <div class="content"  style="display: grid">
+                            <div class="second_page">
+
+                                <!-- begin Box Proiecte -->
+                                <div class="box_proiecte" id="box_proiecte">
+
+
+                                    <!--
+                                                                        dinamic content here
+                                    -->
+                                </div>
+                                <!-- end Box Proiecte -->
+
+                            </div><!-- end .second_page -->
+                            <!-- Pagination -->
+                            <div class="pagination_container">
+                                <nav aria-label="Services Pagination" class="pagination_ul_container">
+                                    <ul class="pagination justify-content-end">
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- begin Content -->
+
+                    </div><!-- end .div_content -->
+                </div><!-- end .padding_content -->
+            </div>
+            <!-- end Right Side - content -->
+
+        </div><!-- end .div_container -->
+        <div class="clearfix"></div>
+
+    </div><!-- end .container -->
+    <div id="hidden_project">
+        <div class="proiect toggle_proiect ">
+
+            <!-- begin Link Proiect -->
+            <a class="link_proiect" href="proiectele-mele-activitate.html"></a>
+            <!-- end Link Proiect -->
+
+            <!-- begin Image -->
+            <div class="img_proiect">
+                <img>
+
+                <!-- begin Image - hover -->
+                <div class="img_proiect_hov">
+
+                    <!--     begin Users
+                        <div class="users_proiect">
+                            <div><img src="assets/images/user1.jpg" alt=""/></div>
+                            <div><img src="assets/images/user2.jpg" alt=""/></div>
+                            <div><img src="assets/images/user3.jpg" alt=""/></div>
+                            <div class="nr_users">+8</div>
+                        </div>
+                         end Users -->
+
+                    <!-- begin Dots -->
+                    <div class="dots_proiect">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <div class="dropdown_dots">
+                            <ul>
+                                <li><a href="#">Duplicate</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end Dots -->
+
+                    <!-- begin Vezi / Arhiveaza -->
+                    <div class="btns_proiect">
+                        <a href="/detaliu-proiect" class="btn_vezi_proiect">Vezi proiectul</a>
+                    </div>
+                    <!-- end Vezi / Arhiveaza -->
+
+                </div>
+                <!-- end Image - hover -->
+
+            </div>
+            <!-- end Image -->
+
+            <!-- begin Title / Calendar etc. -->
+            <div class="bottom_proiect">
+                <div class="categorie_proiect">
+                    <div><span>1. Proiect IT</span></div>
+                </div>
+                <div class="title_proiect">
+                    <div><span>1. Proiect IT</span></div>
+                </div>
+                <div class="details_proiect">
+                    <div class="data_proiect">10.04.2020</div>
+                    <div class="mesaje_proiect">2</div>
+                    <div class="checked_proiect">5</div>
+                </div>
+            </div>
+            <!-- end Title / Calendar etc. -->
+
+        </div>
+    </div>
+    <div class="gap-50"></div>
+    <div class="clearfix"></div>
+
+
+
+</div>
+<!-- end Box Content -->
+
+
+<!-- script modernizr -->
+<!-- script jQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+<!-- script jQuery Semantic - dropdown -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.js"></script>
+
+<!-- script Datepicker - range -->
+<!-- script jQuery -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- custom scrollbar plugin -->
+<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- script tagify -->
+<!-- script Sweet Alert -->
+<script src="assets/js/sweetalert2.min.js"></script>
+<!-- custom js -->
+<script src="assets/js/main.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="../PORTAL/assets/js/project.js"></script>
+<script src="../website/assets/js/documentaPortal-util.js"></script>
+
+<!-- Testing Sweet Alerts / autocomplete / etc.  - should be deleted after -->
+<script src="assets/js/testing.js"></script>
+<!-- script Ckeditor -->
+
+
+</body>
+
+</html>

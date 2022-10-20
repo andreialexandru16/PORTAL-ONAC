@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="ro">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>SVU</title>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link href="../PORTAL/assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/jquery-ui.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/slick.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/bootstrap.min.css">
+
+
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="../PORTAL/assets/css/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="../frontend/js/pdfjs.js"></script>
+
+<style>
+    .bg_gray_td, .bg_gray_td input {background-color:#cbd3da;}
+    .bg_gray_td input {width:100%;}
+</style>
+</head>
+<body>
+<!-- HEADER -->
+
+
+<!-- CONTENT -->
+<div id="main-content" class="main-content">
+    <div class="container">
+        <!-- Services List -->
+        <div id="formular" class="services_list_container new_request">
+            <div class="services_header">
+                <div class="service_pictogram" style="background-image: url('assets/images/icons/document.png')"></div>
+                <div class="service_title">
+                    <h2>Raportare</h2>
+                </div>
+            </div>
+            <!-- REQUEST HEAD -->
+            <div class="mt-4">RAPORTARE</div>
+            <div>privind contributia datorata si virata la Fondul de rezolutie a asiguratilor</div>
+            <!-- REQUEST BODY -->
+            <!-- First row -->
+            <div class="row form-group mt-5">
+                <div class="col-12 col-md-6 col-xl-6 cmb-lg cmb-md">
+
+                    <div class="col-md-6 col-lg-6 cmb-md">
+                        <div class="pr-12pr">
+                            <label for="denumireSocietate" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Denumire societate</label>
+                            <input   type="text" disabled style="width: 700px" class="if_cell form-control" id="denumireSocietate" name="denumireSocietate"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-6 cmb-lg cmb-md">
+                    <div class=" pr-12pr" id="container_select_id_perioada_contabila">
+                        <label for="id_perioada_contabila" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Luna
+                            raportare<span style="color:red">*</span></label>
+                        <select saveable disabled onchange="FileManager.checkPerioada()" name="id_perioada_contabila" id="id_perioada_contabila"
+                                class="if_cell form-control chosen-select mw-200px open-absolute">
+                            <!-- dinamic tmpl_lov-->
+
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Second row -->
+            <div class="row form-group row-no-2">
+                <div class="col-md-4 col-lg-4 col-xl-4">
+                    <div class="pr-12pr" id="container_select_id_sediu_social">
+                        <label for="id_sediu_social" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Cu sediul
+                            social / domiciliu in</label>
+                        <select saveable disabled name="id_sediu_social" id="id_sediu_social"
+                                class="if_cell form-control chosen-select mw-200px open-absolute">
+                            <!-- dinamic tmpl_lov-->
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-5 col-xl-5 cmb-lg cmb-md">
+                    <div class=" pr-12pr">
+                        <label for="strada" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Strada</label>
+                        <input saveable disabled type="text" class="if_cell form-control" id="strada" name="strada"/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xl-3 cmb-lg cmb-md">
+                    <div class=" pr-12pr">
+                        <label for="nr_strada" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Nr.</label>
+                        <input  saveable disabled type="text" class="if_cell form-control rm-side-paddings" id="nr_strada" name="nr_strada"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+
+                <div class="col-md-3 col-xl-3 cmb-lg cmb-md">
+                    <div class="if_tbl">
+                        <label for="bl_adresa" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Bl.</label>
+                        <input saveable  disabled type="text" class="if_cell form-control rm-side-paddings" id="bl_adresa" name="bl_adresa"/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xl-3 cmb-lg cmb-md">
+                    <div class="if_tbl">
+                        <label for="sc_adresa" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Sc.</label>
+                        <input saveable  disabled type="text" class="if_cell form-control rm-side-paddings" id="sc_adresa" name="sc_adresa"/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xl-3 cmb-lg">
+                    <div class="if_tbl">
+                        <label for="et_adresa" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Et.</label>
+                        <input saveable disabled type="text" class="if_cell form-control rm-side-paddings" id="et_adresa" name="et_adresa"/>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xl-3">
+                    <div class="if_tbl">
+                        <label for="ap_adresa" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Ap.</label>
+                        <input saveable disabled type="text" class="if_cell form-control rm-side-paddings" id="ap_adresa" name="ap_adresa"/>
+                    </div>
+                </div>
+
+            </div>
+            <!-- 3th row -->
+            <div class="row form-group">
+                <div class="col-md-12 col-xl-12">
+                    <div class=" pr-12pr">
+                        <label for="persoana_contact" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Persoana
+                            contact</label>
+                        <input saveable disabled type="text" class="if_cell form-control" id="persoana_contact" name="persoana_contact"/>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- 4th row -->
+            <div class="row form-group">
+                <div class="col-md-6 col-xl-6">
+                    <div class=" if_tbl">
+                        <label for="telefon_fax" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Telefon/Fax</label>
+                        <input  saveable  disabled type="text" class="if_cell form-control" id="telefon_fax" name="telefon_fax"/>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-6 cmb-md">
+                    <div class="if_tbl">
+                        <label for="email" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">E-mail</label>
+                        <input saveable disabled type="email" class="if_cell form-control" id="email" name="email"/>
+                    </div>
+                </div>
+
+            </div>
+            <div class="smart-form-size">
+                <div class="if_tbl" style="margin-bottom:10px;">
+                    <label class="if_cell text-nowrap pr-2 mb-0 font-weight-bold" style="width:auto;">Tabela pentru contributii datorate si
+                        virate</label>
+                    <div class="if_cell" ><a onclick="FileManager.reseteazaValoriTabel()" style="float:right;padding:5px;border:1px solid #ccc" href="#">Reseteaza <i style="font-size:16px;padding-left:5px;" class="fas fa-sync-alt"></i></a></div>
+                </div>
+                <div class="row form-group smart-form-control">
+
+                    <div class="table-responsive vaadin-ps4-theme"
+                         style="width: 100%;">
+                        <table id="tab_contributie_datorata">
+                            <thead>
+                            <tr></tr>
+                            <tr>
+                                <th class="text-border-center"><label>Nr. crt.</label></th>
+                                <th class="text-border-center"><label>Specificatii</label></th>
+                                <th class="text-border-center"><label>Total cumulat de la inceputul anului</label></th>
+                                <th class="text-border-center"><label>Din care pentru luna de raportare</label></th>
+                                <th class="text-border-center"><label>Numarul si data documentului de plata</label></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><label style="width: 50px;"></label></td>
+                                <td><label style="width: 600px;"></label></td>
+                                <td><label style="width: 100px;"></label></td>
+                                <td><label style="width: 100px;"></label></td>
+                                <td><label style="width: 100px;"></label></td>
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center">1</label></td>
+                                <td class="text-border">
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="1">Prime brute incasate din asigurari directe:</option>
+
+                                    </select>
+
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text" saveableTd numberCell  id="prima_bruta_total" readonly  name="total_cumulat_inceput_an" value="" style="border:0"></input>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text" saveableTd numberCell  readonly name="val_luna_raportare" id="prima_luna_rap_curenta" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd  name="nr_data_doc_plata" id="nr_doc_prime_brute" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center"></label></td>
+                                <td class="text-border">
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="2">- asigurari generale<span style="color: #c82333;">*</span></option>
+
+                                    </select>
+
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text" saveableTd numberCell readonly id="total_asig_gen_suma" name="total_cumulat_inceput_an" value="" style="border:0;"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd numberCell  name="val_luna_raportare" id="asig_gen_prime_luna_raportare" onkeyup ="FileManager.calculZonaPrimeAsigGen();"   value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd  name="nr_data_doc_plata" id="nr_doc_asg_gen_prm" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center"></label></td>
+                                <td class="text-border">
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="3">- asigurari de viata<span style="color: #c82333;">*</span></option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text"  saveableTd numberCell id="total_asig_viata_sum" readonly name="total_cumulat_inceput_an" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd numberCell  name="val_luna_raportare" id="asig_viata_prime_luna_raportare" onkeyup="FileManager.calculZonaPrimeAsiViata();" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd  name="nr_data_doc_plata" id="nr_doc_plata_asg_viata_prime"  value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center">2</label></td>
+                                <td class="text-border">
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="4">Cota procentuala stabilita de Autoritatea de Supraveghere Financiara pentru:</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text"  saveableTd numberCell readonly name="total_cumulat_inceput_an" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text" saveableTd numberCell readonly name="val_luna_raportare"  value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd  name="nr_data_doc_plata" id="nr_doc_cote1" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center"></label></td>
+                                <td class="text-border">
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="5">- asigurari generale</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text"  saveableTd numberCell readonly  name="total_cumulat_inceput_an" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd numberCell readonly name="val_luna_raportare" id="cota_asg" value="" style="border:0;text-align:right;width:50px"></input>%
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd  name="nr_data_doc_plata" id="nr_doc_asg_gen_cota" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center"></label></td>
+                                <td class="text-border">
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="6">- asigurari de viata</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text" saveableTd numberCell readonly  name="total_cumulat_inceput_an"  value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd numberCell readonly name="val_luna_raportare" id="cota_asv" value="" style="border:0;text-align: right;width: 50px"></input>%
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd  name="nr_data_doc_plata" id="nr_doc_asg_viata_cota"  value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center">3</label></td>
+                                <td class="text-border">
+
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="7">Contributie datorata la Fondul de garantare a asiguratilor pentru:</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text" saveableTd numberCell readonly id="total_cota_sum" name="total_cumulat_inceput_an"  value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text" saveableTd numberCell readonly name="val_luna_raportare" id="prima_luna_rap_curenta_contrib" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text"  saveableTd  name="nr_data_doc_plata" id="nr_doc_contrib_dat" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center"></label></td>
+                                <td class="text-border">
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="8">- asigurari generale<span style="color: #c82333;">*</span></option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text"  saveableTd numberCell readonly id="total_asig_gen_cota"  name="total_cumulat_inceput_an" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd numberCell  name="val_luna_raportare" id="asig_gen_prime_luna_raportare_contrib" onkeyup="FileManager.changeValAsigGenContrib()" onChange="FileManager.verificaCota1();"  value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text"  saveableTd  name="nr_data_doc_plata" id="nr_doc_asg_gen_contrib" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center"></label></td>
+                                <td class="text-border">
+
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="9">- asigurari de viata<span style="color: #c82333;">*</span></option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text"  saveableTd numberCell readonly id="total_asig_viata_cot" name="total_cumulat_inceput_an" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border ">
+                                    <input type="text" saveableTd numberCell  name="val_luna_raportare" id="asig_viata_prime_luna_raportare_contrib"  onkeyup="FileManager.changeValAsigViataContrib()" onChange="FileManager.verificaCota2();" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text"  saveableTd  name="nr_data_doc_plata" id="nr_doc_contrib_asg_viata" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center">4</label></td>
+                                <td class="text-border">
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="10">Dobanzi si penalitati de intarziere datorate<span style="color: #c82333;">*</span></option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text" saveableTd numberCell readonly id="dobanzi_pen" name="total_cumulat_inceput_an"  value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd numberCell  name="val_luna_raportare" id="dobanda_luna_curenta" onkeyup="FileManager.sumDobanda()" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd  name="nr_data_doc_plata" id="nr_doc_dobanzi" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center">5</label></td>
+                                <td class="text-border" onclick="FileManager.calculeazaSumaR6R7();" id="sum_zone">
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="11"  >Suma virata -total, din care:</option>
+                                    </select>
+
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text"  saveableTd numberCell readonly id="suma_virata" name="total_cumulat_inceput_an" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text" saveableTd numberCell  readonly name="val_luna_raportare" id="suma_virata_total_luna_curenta"  value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd  name="nr_data_doc_plata" id="nr_doc_suma_virata"  value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center">6</label></td>
+                                <td class="text-border">
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="12">- aferenta contributiei datorate la Fondul de garantare a asiguratilor:</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text" saveableTd numberCell  readonly id="afer_contrib" name="total_cumulat_inceput_an"  value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text" saveableTd numberCell readonly name="val_luna_raportare"  id="sum_vizata_total" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text"  saveableTd  name="nr_data_doc_plata" id="nr_doc_aferenta_contrib_dat" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center"></label></td>
+                                <td class="text-border">
+
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="13">- asigurari generale<span style="color: #c82333;">*</span></option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text"  saveableTd numberCell readonly id="asig_gen_af" name="total_cumulat_inceput_an" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd numberCell  name="val_luna_raportare" id="asig_gen_sm"  onkeyup="FileManager.calculSumaVirataZonaGen();" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd  name="nr_data_doc_plata" id="nr_doc_asg_gen_afr_contrb" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center"></label></td>
+                                <td class="text-border">
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="14">- asigurari de viata<span style="color: #c82333;">*</span></option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text"  saveableTd numberCell readonly id="asig_viata_af" name="total_cumulat_inceput_an" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd numberCell  name="val_luna_raportare" id="asig_viata_suma" onkeyup="FileManager.calculSumaVirataZonaViata();"value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text"  saveableTd  name="nr_data_doc_plata" id="nr_doc_afr_contr_asg_viata" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-border-center"><label td-class="text-border-center">7</label></td>
+                                <td class="text-border">
+
+
+                                    <select  saveableTd name="id_specificatie" disabled
+                                             class="if_cell form-control chosen-select mw-200px open-absolute">
+                                        <option value="15">- aferenta dobanzilor si penalitatilor de intarziere datorate<span style="color: #c82333;">*</span></option>
+
+                                    </select>
+                                </td>
+                                <td class="text-border bg_gray_td">
+                                    <input type="text"  saveableTd numberCell readonly id="af_dob_pen" name="total_cumulat_inceput_an" value="" style="border:0;"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text" saveableTd numberCell  name="val_luna_raportare"  id="r7_luna_curenta" onkeyup="FileManager.changeSumaVAf()" value="" style="border:0"></input>
+
+                                </td>
+                                <td class="text-border">
+                                    <input type="text"  saveableTd  name="nr_data_doc_plata" id="nr_doc_af_dob_pen" value="" style="border:0"></input>
+
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- 6th row -->
+            <div class="row form-group">
+                <div class="col-md-12 col-lg-12 cmb-md">
+
+                    Subsemnatul<span style="color:red">*</span>
+                    <input style="display: inline-block;width:auto;"  saveable type="text" class="if_cell form-control" id="subsemnatul" name="subsemnatul"/>,
+                    in calitate de<span style="color:red">*</span>
+                    <input style="display: inline-block;width:auto;"  saveable type="text" class="if_cell form-control" id="in_calitate_de" name="in_calitate_de"/>
+                    , cunoscand prevederile Legii nr. 286/2009 privind Codul penal, cu modificarile si completarile ulterioare,
+                    declar pe propia raspundere ca toate informatiile si documentele sunt completate in conformitate cu realitatea si ca nu exista alte fapte relevante
+                    care trebuie aduse la cunostinta Fondului.
+                    <br />
+                    <br />
+                    Semnatura <br />
+                    Stampila societatii
+                    <br />
+                    <br />
+
+                    <span style="border-bottom:1px solid #000;float:left;display:inline-block;clear:both;width:150px;margin-bottom:10px;"></span>
+                    <span style="clear:both;display:block;"></span>
+                    *) In coloana 2 se inscriu primele brute incasate, cumulate de la inceputul anului, inclusiv cele aferente lunii pentru care se face raportarea.<br />
+                    **) In coloana 3 se inscriu primele brute incasate aferente lunii pentru care se face raportarea.<br />
+                    ***) ori de cate ori se efectueaza viramente se va transmite si copia documentului de plata, cu urmatoarele specificatii: suma total virata, din care: aferenta contributiei datorate la Fond, aferenta dobanzilor si penalitatilor de intarziere datorate si luna pentru care se efectueaza viramentul.
+                </div>
+                <!--<div class="col-md-6 col-lg-6 cmb-md">-->
+                    <!--<div class="pr-12pr">-->
+                        <!--<label for="subsemnatul" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Subsemnatul</label>-->
+                        <!--<input  saveable type="text" class="if_cell form-control" id="subsemnatul" name="subsemnatul"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-6 col-lg-6 cmb-md">-->
+                    <!--<div class="pr-12pr">-->
+                        <!--<label for="in_calitate_de" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">in calitate-->
+                            <!--de</label>-->
+                        <!--<input  saveable type="text" class="if_cell form-control" id="in_calitate_de" name="in_calitate_de"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+            </div>
+
+            <div class="form-group row" >
+                <div class="flex_full_width">
+                    <label>
+                        <label for="input_file">Document justificativ<span class="text-danger">*</span></label>
+
+                        <input type="file" name="file" id="input_file">
+                        <!--
+                                    <button type="submit" id="submit_file" style="display: none;">Submit<i class="fas fa-arrow-alt-circle-right"></i></button>
+                        -->
+                    </label>
+
+                </div>
+            </div>
+
+            <div class="btn_footer_container">
+                <div class="btn_info">
+                    <div class="background clearfix">
+                        <div class="prev_info">
+                            <strong>Serviciul:</strong> Raportare privind contributia datorata si virata la Fondul de
+                            garantare a asiguratilor
+                        </div>
+                        <div class="next_info">
+                            <strong>Pasul:</strong> Completare raport
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="buttons_container">
+                    <form action="" method="post">
+                        <button type="submit" name="prev_page" class="btn btn-primary btn-sm prev"><i class="fas fa-arrow-alt-circle-left"></i>Pasul anterior</button>
+                        <button type="submit" name="next_page" class="btn btn-secondary btn-sm next">Pasul urmator<i class="fas fa-arrow-alt-circle-right"></i></button>
+                    </form>
+                </div> -->
+                <div class="buttons_container">
+                    <a href="javascript:void(0)" onclick="FileManager.print()" class="btn btn-primary btn-sm prev"><i
+                            class="fas fa-arrow-alt-circle"></i>Print</a>
+                    <a href="javascript:void(0)" onclick="FileManager.salveazaCerere()" id="btn_next_step" class="btn btn-secondary btn-sm next">Trimite raportare<i
+                            class="fas fa-arrow-alt-circle-right"></i></a>
+                    <!--<a href="javascript:void(0)" onclick="FileManager.uploadFileRap()" id="btn_trim_fisier" class="btn btn-secondary btn-sm next">IncarcaFisier<i-->
+                            <!--class="fas fa-arrow-alt-circle-right"></i></a>-->
+                </div>
+            </div>
+
+        </div>
+        <!-- Custom Buttons -->
+
+    </div>
+</div>
+
+
+<script id="tmpl_lov" type="x-tmpl-mustache">
+            <option value="">Cauta</option>
+
+    {{#lov}}
+
+            <option  {{selected}} value="{{id}}">{{valoare}}</option>
+
+    {{/lov}}
+
+
+</script>
+<div class="gap-50"></div>
+
+
+<!-- End Script-uri Mustache -->
+<!-- SweetAlert -->
+<script src="assets/js/sweetalert2.min.js"></script>
+<script src="assets/js/weblib.js"></script>
+<script src="../website/assets/js/util.js"></script>
+<!-- script modernizr -->
+<script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<!-- script jQuery -->
+<script src="assets/js/jquery-ui.js"></script>
+<!-- script jQuery Semantic - dropdown -->
+<script src="assets/js/dropdown.min.js"></script>
+<script src="assets/js/transition.min.js"></script>
+<!-- script Sort Table -->
+<script type="text/javascript" src="assets/js/sort-table.js"></script>
+<!-- script DataTable -->
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<!-- custom js -->
+
+<!-- Chosen Select -->
+<script src="assets/js/chosen.jquery.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/main_static.js"></script>
+<script src="assets/js/jquery.number.min.js"></script>
+<script src="assets/js/mustache.js"></script>
+<script src="../website/assets/js/documentaPortal-util.js"></script>
+<script src="../PORTAL/assets/js/raportare_contributie_rezolutie.js"></script>
+<script>
+    /* Upload Files */
+    $(document).find(".file-control").each(function () {
+        let currentFile = $(this);
+        let uploadText = $(this).attr("upload-text");
+        currentFile.after("<div class='cbnp_upload_file form-control'><span>" + uploadText + "</span><i class='fas fa-upload'></i></div>");
+    });
+    $(document).on("click", ".cbnp_upload_file", function () {
+        $(this).prev().trigger("click");
+    });
+    $(document).on("change", ".file-control", function () {
+        let fileName = $(this).val().split("\\");
+        let uploadFileName = fileName[fileName.length - 1];
+        if ( uploadFileName.length > 20 ) {
+            uploadFileName = uploadFileName.substr(0, 20) + "...";
+        }
+        $(this).next().find("span").text(uploadFileName);
+    });
+</script>
+</body>
+</html>

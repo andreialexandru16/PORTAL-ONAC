@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Primaria Sectorului 4</title>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+    <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+    <!-- Custom -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        .box_calendar {float:left;display:inline-block;margin-right:20px;}
+        .box_calendar label {margin-bottom:10px;}
+        .ui-datepicker-week-end a { background-color: #d92027 !important;color: #fff !important;}
+        .ora_prog {border:1px solid #ccc;width:150px;max-height:277px;overflow:auto;}
+        .ora_prog ul {list-style:none;padding:0;margin:0;}
+        .ora_prog li {cursor:pointer;padding:3px 20px;text-align:center;}
+        .ora_prog li:hover {color: #fff;background-color: #0e69ab;}
+        .ora_prog .active {color: #fff;background-color: #0e69ab;}
+        .ui-datepicker {border:1px solid #ccc !important;}
+        div.ui-datepicker .ui-datepicker-header, div.ui-datepicker .ui-datepicker-calendar {border:0px !important;}
+    </style>
+
+  </head>
+  <body>
+    
+    <!-- CONTENT -->
+    <div id="main-content" class="main-content">
+        <div class="container">
+            <!-- Services List -->
+            <div class="services_list_container new_request">
+                <div class="services_header">
+                    <div class="service_pictogram" style="background-image: url('assets/images/icons/document.png')"></div>
+                    <div class="service_title">
+                        <h2>Initiaza o cerere noua</h2>
+                    </div>
+                </div>
+                
+                <!-- REQUEST HEAD -->
+                
+                <div class="row form-group mt-5">
+                    <div class="col-12 col-md-6 col-xl-4 cmb-lg cmb-md">
+                <div class="mt-4">Catre,</div>
+                <div>Presedintele Consiliului Județean Botoșani</div>
+                </div>
+                 
+                <div class="col-12 col-md-6 col-xl-4 cmb-lg cmb-md">
+                        <div class=" pr-12pr"  style="max-width:200px;margin-bottom:10px;float:right;">
+                            <label for="req_name" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Nr. inreg. solicitant</label>
+                            <input type="text" style="max-width:200px;" class="form-control if_cell" id="req_name" name="req_name" />
+                        </div>
+                        <div class="clearfix"></div>
+                         <div class=" pr-12pr" style="max-width:200px;float:right;">
+                            <label for="req_name" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Data solicitarii</label>
+                            <input type="text" style="max-width:200px;"  class="form-control if_cell" id="req_name" name="req_name" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-center font-weight-bold text-uppercase">INITIAZA O CERERE NOUA</div>
+               
+                    
+                <!--<div class="text-center font-weight-bold">pentru emiterea certificatului de urbanism</div>-->
+                <!-- REQUEST BODY -->
+                <!-- First row -->
+                <div class="row form-group mt-5">
+                    <div class="col-12 col-md-6 col-xl-4 cmb-lg cmb-md">
+                        <div class="if_tbl pr-12pr">
+                            <label for="req_name" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Numele complet  <span class="text-danger">*</span> </label>
+                            <input type="text" class="form-control if_cell" id="req_name" name="req_name" />
+                        </div>
+                    </div>
+                     <div class="col-md-6 col-xl-2">
+                        <div class="if_tbl last_item_row">
+                            <label for="req_sector" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Tip document identitate  <span class="text-danger">*</span></label>
+                            <select name="req_sector" id="req_sector" class="if_cell form-control chosen-select open-absolute">
+                                <option value="bucuresti">Tip document 1</option>
+                                <option value="bucuresti">Tip document 2</option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                     <div class="col-12 col-md-4 col-xl-4 cmb-lg cmb-md">
+                        <div class="if_tbl pr-12pr">
+                            <label for="req_name" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Serie document identitate <span class="text-danger">*</span> </label>
+                            <input type="text" class="form-control if_cell" id="req_name" name="req_name" />
+                        </div>
+                    </div>
+                    
+             
+                    
+                    <div class="col-12 col-md-6 col-xl-4 cmb-lg cmb-md">
+                        <div class="if_tbl pr-12pr">
+                            <label for="req_name" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Numar document identitate <span class="text-danger">*</span> </label>
+                            <input type="text" class="form-control if_cell" id="req_name" name="req_name" />
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-6 col-xl-4 cmb-lg cmb-md">
+                        <div class="if_tbl pr-12pr">
+                            <label for="req_name" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell">Cod fisacal (in cazul in care este PJ) </label>
+                            <input type="text" class="form-control if_cell" id="req_name" name="req_name" />
+                        </div>
+                    </div>
+                    
+                     <div class="col-md-4 col-xl-4">
+                        <div class="if_tbl">
+                            <label for="req_oras_domiciliu" class="text-nowrap pr-2 mb-0 font-weight-bold if_cell text-center">Cu sediul social / <br>domiciliu in</label>
+                            <select name="req_oras_domiciliu" id="req_oras_domiciliu" class="if_cell form-control chosen-select mw-200px open-absolute">
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                                <option value="bucuresti">Bucuresti</option>
+                            </select>
+                        </div>
+                    </div>
+                
+
+                    
+                    <div class="col-md-4 col-xl-2">
+                        <div class="if_tbl last_item_row">
+                            <label for="req_sector" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Județul de reședință</label>
+                            <select name="req_sector" id="req_sector" class="if_cell form-control chosen-select open-absolute">
+                                <option value="bucuresti">Bucuresti</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 col-xl-2">
+                        <div class="if_tbl last_item_row">
+                            <label for="req_sector" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Țară de reședință</label>
+                            <select name="req_sector" id="req_sector" class="if_cell form-control chosen-select open-absolute">
+                                <option value="bucuresti">România</option>
+                            </select>
+                        </div>
+                    </div>
+                   
+                </div>
+                <!-- Second row -->
+                <div class="row form-group row-no-2">
+                    <div class="col-md-4 col-lg-4 col-xl-3 cmb-lg cmb-md">
+                        <div class="if_tbl pr-12pr">
+                            <label for="req_street" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Strada</label>
+                            <input type="text" class="if_cell form-control" id="req_street" name="req_street" />
+                        </div>
+                    </div>
+                    <div class="col-md-1 col-xl-1 cmb-lg cmb-md">
+                        <div class="if_tbl">
+                            <label for="req_snr" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Nr.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_snr" name="req_snr" />
+                        </div>
+                    </div>
+                    <div class="col-md-1 col-xl-1 cmb-lg cmb-md">
+                        <div class="if_tbl">
+                            <label for="req_bl" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Bl.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_bl" name="req_bl" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1 cmb-lg cmb-md">
+                        <div class="if_tbl">
+                            <label for="req_sc" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Sc.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_sc" name="req_sc" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1 cmb-lg">
+                        <div class="if_tbl">
+                            <label for="req_et" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Et.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_et" name="req_et" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xl-1">
+                        <div class="if_tbl">
+                            <label for="req_ap" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Ap.</label>
+                            <input type="text" class="if_cell form-control rm-side-paddings" id="req_ap" name="req_ap" />
+                        </div>
+                    </div>
+                  
+                </div>
+                <!-- Third row -->
+                <div class="row form-group">
+                      
+                    <div class="col-md-6 col-xl-3">
+                        <div class="if_tbl last_item_row">
+                            <label for="req_tel" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Număr de telefon mobil</label>
+                            <input type="text" class="if_cell form-control" id="req_tel" name="req_tel" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 cmb-md">
+                        <div class="if_tbl">
+                            <label for="req_email" class="if_cell text-nowrap pr-2 mb-0 font-weight-bold">Adresa de email <span class="text-danger">*</span></label>
+                            <input type="email" class="if_cell form-control" id="req_email" name="req_email" />
+                        </div>
+                    </div>
+                    
+                </div>
+                 <div class="row form-group">
+                   <div class="col-md-6 cmb-md">
+                                <label for="doc_file">Incarcare fisiere</label>
+                                <input type="file" name="doc_file" id="doc_file" class="form-control file-control" upload-text="Selecteaza documentul" />
+                            </div>
+                    
+                    </div>
+                <div class="row form-group">
+                    <div class="col-12">
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm prev">Adauga fisier</a>
+                    </div>
+        
+                </div>
+                <!-- Text group -->
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="text-1" class="font-weight-bold">Conținut <span class="text-danger">*</span></label>
+                        <textarea id="text-1" name="text-1" cols="10" rows="5" class="form-control"></textarea>
+                    </div>
+                </div>
+                <!-- Label -->
+                <div class="row form-group">
+                    <div class="col-12">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_1" name="req_check_1">
+                            <label class="custom-control-label font-weight-bold" for="req_check_1">Acord prelucrare date personale conform GDPR <span class="text-danger">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_2" name="req_check_2">
+                            <label class="custom-control-label font-weight-bold" for="req_check_2">Acord Termeni și condiții <span class="text-danger">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="req_check_3" name="req_check_3">
+                            <label class="custom-control-label font-weight-bold" for="req_check_3">Confirmare corectitudine date <span class="text-danger">*</span></label>
+                        </div>
+                    </div>
+ 
+                </div>
+              
+                <!-- Custom Buttons -->
+                <div class="btn_footer_container">
+                    <div class="btn_info">
+                        <div class="background clearfix">
+                            <div class="prev_info">
+                                <strong>Serviciul:</strong> Audiențe
+                            </div>
+                            <div class="next_info">
+                                <strong>Pasul:</strong> Lansează solicitare
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="buttons_container">
+                        <form action="" method="post">
+                            <button type="submit" name="prev_page" class="btn btn-primary btn-sm prev"><i class="fas fa-arrow-alt-circle-left"></i>Pasul anterior</button>
+                            <button type="submit" name="next_page" class="btn btn-secondary btn-sm next">Pasul urmator<i class="fas fa-arrow-alt-circle-right"></i></button>
+                        </form>
+                    </div> -->
+                    <div class="buttons_container">
+                        <a href="javascript:void(0)" class="btn btn-primary btn-sm prev"><i class="fas fa-arrow-alt-circle-left"></i>Pasul anterior</a>
+                        <a href="javascript:void(0)" class="btn btn-secondary btn-sm next">Pasul urmator<i class="fas fa-arrow-alt-circle-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER SCRIPTS -->
+    <!-- SweetAlert -->
+    <script src="assets/js/sweetalert2.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Autocomplete -->
+    <script src="assets/js/jquery-ui.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Slick Carousel -->
+    <script src="assets/js/slick.min.js"></script>
+    <!-- Chosen Select -->
+    <script src="assets/js/chosen.jquery.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main_static.js"></script>
+
+    <!-- Testing Sweet Alerts / autocomplete / etc.  - should be deleted after -->
+    <script src="assets/js/testing.js"></script>
+  </body>
+</html>

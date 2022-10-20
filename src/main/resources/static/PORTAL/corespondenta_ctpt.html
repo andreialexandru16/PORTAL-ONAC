@@ -1,0 +1,555 @@
+<!doctype html>
+<html class="no-js" lang=""> 
+
+<head>
+  <meta charset="utf-8">
+  <title>ANRE</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/favicon.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"> 
+  <link href="assets/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+  <!-- CSS -->
+  <!-- CSS - jQuery -->
+  <link rel="stylesheet" href="assets/css/jquery-ui.css">
+  <!-- CSS - DataTable -->
+  <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+  <!-- CSS Semantic - dropdown -->
+  <link rel="stylesheet" href="assets/css/dropdown.min.css">
+  <link rel="stylesheet" href="assets/css/transition.min.css">
+  <!-- CSS - Fancybox -->
+  <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
+  <!-- CSS - Yearpicker -->
+  <link rel="stylesheet" href="assets/css/yearpicker.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+
+  <!-- Custom -->
+  <link rel="stylesheet" href="assets/css/main_anre.css">
+
+  <style>
+      .file_name_textarea {
+          resize: none;
+          width: 300px !important;
+          height: 50px;
+          display: block;
+      }
+
+      .file_name_buttons {
+          width:300px !important;
+          display: block;
+      }
+
+      .file_name_textarea_holder {
+          width:300px !important;
+          display: block;
+      }
+
+      .reqtd {
+
+      }
+
+      .rasptd {
+
+      }
+
+      .multianex {
+          margin-top: 5px;
+          display:block;
+      }
+
+      #DataTables_Table_0 > tbody > tr > td:nth-child(11){
+          border-left: 1px solid darkgray;
+      }
+
+      .uplbph{
+          min-width: 50px;
+          max-width: 50px;
+      }
+
+      .uplbpt{
+          min-width: 50px;
+          max-width: 50px;
+      }
+
+      .uplbph1{
+          min-width: 25px;
+          max-width: 25px;
+      }
+
+      .uplbpt1{
+          min-width: 25px;
+          max-width: 25px;
+      }
+
+      .mindoch{
+          min-width:150px;
+      }
+
+      .mindoct{
+          min-width:150px;
+      }
+      .bg_blue {background-color: #0A6CB2 !important;color:#fff;
+          border-left: 1px solid #0A6CB2 !important;
+          border-top: 2px solid #fff !important;
+          border-right: 2px solid #fff !important;}
+      .bg_green {background-color: #18C25A !important;color:#fff;
+          border-left: 2px solid #fff !important;
+          border-top: 2px solid #fff !important;
+          border-right: 1px solid #18C25A !important;}
+      thead tr:nth-child(2) th.bg_green {border-bottom:2px solid #18C25A !important;}
+
+      thead tr:nth-child(2) th.bg_blue {border-bottom:2px solid #0A6CB2 !important;}
+      .sep_table {border-right:2px solid #034b95;}
+      .sep_table_blue {border-right:2px solid #0A6CB2;
+          position: relative;}
+      .sep_table_blue:after {background-color: #18C25A;content: "";top:0;right:-2px;bottom: 0;width:1px;position: absolute;}
+      .sep_table_green {border-left:1px solid #18C25A;}
+      .table_petitii > tbody > tr > td:first-child {border-left:1px solid #0A6CB2;}
+      .table_petitii > tbody > tr > td:last-child {border-right:1px solid #18C25A;}
+      th.tooltip_chat, th.tooltip_chat_left {display: table-cell;}
+      th.tooltip_chat .tooltiptext {width: 160px;margin-left:-80px;}
+      .box_top_petitii {position: relative;}
+      .box_top_petitii ul {padding-right: 210px;}
+      .ghid_utilizare_petitii {position: absolute;
+          top: -20px;
+          font-size: 14px;
+          letter-spacing: 1px;
+          right: 0;
+          font-weight: 600;
+          background-color: #034b95;
+          color: #fff !important;
+          text-decoration: none;
+          text-transform: uppercase;
+          border-radius: 3px;
+          padding: 12px 20px;}
+      .ghid_utilizare_petitii i {font-size: 16px;}
+      .sep_table_blue .multianex {margin-top:0px;}
+      /*table.table_petitii {margin-top:0px !important;}*/
+      table.table_petitii { margin-top: 25px !important;}
+      .services_list_container .service_body {padding:30px 20px;}
+
+      .swal2-container {
+          z-index: 99999;
+      }
+
+      tfoot input {
+          width: 100%;
+          padding: 3px;
+          box-sizing: border-box;
+      }
+
+</style>
+
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- begin Container -->
+  <div class="container">
+
+    <!-- begin Inbox -->
+    <div class="services_list_container my-account-data">
+
+      <!-- begin Title -->
+        <div class="services_header"><div class="service_title"><h2><i class="fas fa-mail-bulk"></i> Corespondenta petiții</h2></div></div>
+      <!-- end Title -->
+
+      <div class="service_body">
+          <div class="if_tbl">
+              <!--<div class="if_cell image"><img src="assets/images/contacte.png"></div>-->
+              <div class="if_cell content" style="padding:0px;">
+                  <!-- begin Tabs -->
+                  <div class="tabs">
+
+                      <!-- begin Tabs - menu -->
+                      <div class="box_top_petitii">
+                          <ul>
+                              <li><a href="#tabs-10">In lucru</a></li>
+                              <li><a href="#tabs-11">Istoric</a></li>
+
+                          </ul>
+                          <a class="ghid_utilizare_petitii" href="PDF/Ghid-Utilizare-Portal-Reclamatii-ANRE-Operatori-Economici.pdf" target="_blank">Ghid de utilizare <i class="fas fa-book"></i></a>
+                      </div>
+                    <!-- end Tabs - menu -->
+
+                      <div id="tabs-10" style="padding-left:0px;padding-right:0px;">
+
+
+                          <!-- begin Table -->
+                          <div   class="table_inbox table_inregistrari_date_in_lucru table_scroll">
+                              <!--date dinamice -> tmpl_documente_noi-->
+
+                          </div>
+
+
+                      </div>
+
+                      <div id="tabs-11"  style="padding-left:0px;padding-right:0px;">
+
+
+                          <!-- begin Table -->
+                          <div   class="table_inbox table_inregistrari_date_istoric table_scroll">
+                              <!--date dinamice -> tmpl_documente_noi-->
+
+                          </div>
+
+
+                      </div>
+
+                  </div>
+                  <!-- end Tabs -->
+              </div>
+          </div>
+      </div>
+
+    </div>
+    <!-- end Inbox --> 
+
+  </div>
+  <!-- end Container -->
+
+<script id="tmpl_date_in_lucru" type="x-tmpl-mustache">
+
+<table class="dataTable_nosearch_date_in_lucru display table_petitii "  style="width: 100%">
+    <thead class="header_petitii">
+  <tr role="row">
+            <th colspan="9" class="bg_blue sep_table"> Intrare de la ANRE </th>
+            <th colspan="5" class="bg_green"> Raspuns </th>
+        </tr>
+        <tr role="row">
+            <th class="sorting bg_blue tooltip_chat_left" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Petent: activate to sort column descending" style="width: 106px;display:table-cell;"><span class="tooltiptext_left" style="left:0;margin-left:0;">În această zonă este înscris numele petentului</span>Petent</th>
+            <th class="sorting bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Nr: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Număr de înregistrare ANRE</span>Nr. ANRE</th>
+            <th class="sorting bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Data: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Data de înregistrare ANRE</span>Data ANRE</th>
+            <th class="sorting sorting_asc bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Termen: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext" style="width:100px;margin-left:-50px;">Termen</span>Termen</th>
+            <th class="sorting mindoch bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Document: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">În această zonă se regăseste documentul, apăsați click pentru a-l descărca</span>Document</th>
+            <th class="sorting bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Postat: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Data postării</span>Postat la</th>
+            <th class="sorting bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Nr inregistrare operator economic: activate to sort column ascending" style="max-width: 80px;"><span class="tooltiptext">Nr. inregistrare operator economic</span>Nr. inregistrare operator economic</th>
+            <th class="sorting bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Data inregistrare operator economic: activate to sort column ascending" style="max-width: 80px;"><span class="tooltiptext">Data inregistrare operator economic</span>Data inregistrare operator economic</th>
+
+            <th class="sorting mindoch bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Anexe: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Documente anexate</span>Anexe</th>
+
+
+            <th class="sorting mindoch bg_green tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Document: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Document răspuns de la operatorul economic</span>Document</th>
+            <th class="sorting bg_green tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Postat: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Data postării răspunsului de către operatorul economic</span>Postat de</th>
+            <th class="sorting bg_green tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Postat: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Data postării răspunsului de către operatorul economic</span>Postat la</th>
+
+            <th class="sorting mindoch bg_green tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Anexe: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Anexele operatorului economic</span>Anexe</th>
+
+            <th class="sorting_disabled uplbph1 bg_green"></th>
+        </tr>
+
+    </thead>
+    <tbody>
+      {{#data}}
+        <tr>
+            <td class="raqptd">{{petent}}</td>
+            <td class="raqptd">{{nrCerere}}</td>
+            <td class="raqptd">{{dataCerere}}</td>
+            <td class="reqtd sorting_1">{{dataTermen}}</td>
+            <td class="raqptd mindoct">
+             {{#idFisierCerere}}
+                 <button class="btn_link" onClick="$UTIL.downloadFileByVaadin('{{document_cerere}}','{{downloadLinkCerere}}')">{{document_cerere}}</button>
+             {{/idFisierCerere}}
+            </td>
+            <td class="raqptd">{{cerereCreatLa}}</td>
+            <td class="rasptd">{{nrDocExtern2}}</td>
+            <td class="rasptd">
+                <div class="box_paddr30">
+                    {{dataDocExtern2}}
+                     <div class="savenr1">
+                       {{#showSaveNrDataBtn}}<a class="btn_up btn_save_icon tooltip_chat" data-fancybox data-src="#save_nr_data"  href="#" onclick="PageManager.prepareSaveNrData({{id}});"><span class="tooltiptext">Introdu nr. si data inregistrare document</span><i class="fa fa-save"></i></a>{{/showSaveNrDataBtn}}
+                       {{#showEditNrDataBtn}}<a class="btn_up btn_edit_icon tooltip_chat" data-fancybox data-src="#save_nr_data" href="#" onclick="PageManager.prepareEditNrData({{id}});"><span class="tooltiptext">Modifică nr. si data inregistrare document</span><i class="fa fa-pen"></i></a>{{/showEditNrDataBtn}}
+                    </div>
+                </div>
+            </td>
+
+            <td class="raqptd mindoct sep_table_blue">
+              {{#fisiereSecundareCerere}}
+                 <div class="tooltip_chat clear_float_left"><span class="tooltiptext">{{document}}</span>
+                    <button class="btn_link multianex txt_ellipsis" onClick="$UTIL.downloadFileByVaadin('{{document}}','{{downloadLink}}')" >{{document}}</button>
+                 </div>
+              {{/fisiereSecundareCerere}}
+            </td>
+            <td class="rasptd mindoct td_link_doc">
+                <div>
+                   <input type="file" style="display: none;" class="form-control upload_file_control_principal" accept=".pdf,.doc,.docx" id="upload_fisier_principal_{{id}}" data-id="{{id}}">
+                   {{#idFisierRaspuns}}
+                     <div class="tooltip_chat float_left"><span class="tooltiptext">{{document_raspuns}}</span>
+                     <button class="btn_link txt_ellipsis" onClick="$UTIL.downloadFileByVaadin('{{document_raspuns}}','{{downloadLinkRaspuns}}')" >{{document_raspuns}}</button>
+                     </div>
+                   {{/idFisierRaspuns}}
+                   {{#showDeleteBtnPrincipal}}<a class="btn_up btn_delete btn_x_delete tooltip_chat" onclick="PageManager.deleteFilePrincipal({{id_link_fisier_raspuns}});"><span class="tooltiptext">Șterge document de răspuns</span></a>{{/showDeleteBtnPrincipal}}
+                   <div class="uplbpt">
+                   {{#showUploadBtnPrincipal}}<a class="btn_up btn_upload_icon tooltip_chat" onclick="PageManager.startUploadFilePrincipal({{id}});"><span class="tooltiptext">Încarcă document de răspuns</span><i class="fa fa-upload"></i></a>{{/showUploadBtnPrincipal}}
+                   </div>
+                </div>
+            </td>
+            <td class="rasptd">{{raspunsCreatDe}}</td>
+            <td class="rasptd">{{raspunsCreatLa}}</td>
+
+            <td class="rasptd mindoct">
+                <div class="box_paddr30">
+                    <table>
+                        {{#fisiereSecundareRaspuns}}
+                            <tr>
+                                <td class="td_link_doc">
+                                    <div>
+                                         {{#idFisier}}
+                                         <div class="tooltip_chat float_left"><span class="tooltiptext">{{document}}</span>
+                                         <button class="btn_link txt_ellipsis" onClick="$UTIL.downloadFileByVaadin('{{document}}','{{downloadLink}}')">{{document}}</button>
+                                         </div>
+                                        {{/idFisier}}
+                                        {{#showDeleteBtnSecundar}}<a class="btn_up btn_delete btn_x_delete tooltip_chat" onclick="PageManager.deleteFileSecundar({{id}});"><span class="tooltiptext">Șterge anexă</span></a>{{/showDeleteBtnSecundar}}
+                                    </div>
+                                </td>
+                            </tr>
+                         {{/fisiereSecundareRaspuns}}
+                    </table>
+                    <div class="uplbpt1">
+                        <input type="file" style="display: none;" class="form-control upload_file_control_secundar" id="upload_fisier_secundar_{{idRaspuns}}" data-id="{{idRaspuns}}">
+                        {{#showUploadBtnSecundar}}<a class="btn_up btn_upload_icon tooltip_chat" onclick="PageManager.startUploadFileSecundar({{idRaspuns}});"><span class="tooltiptext">Încarcă anexă</span><i class="fa fa-upload"></i></a>{{/showUploadBtnSecundar}}
+                    </div>
+                </div>
+            </td>
+
+            <td class="raqptd uplbpt1">
+               {{#showSaveBtn}}<a class="btn_up btn_save_icon tooltip_chat_right" data-fancybox data-src="#finalizeaza_raspuns"  href="#" onclick="PageManager.prepareFinish({{id}});"><span class="tooltiptext_right">Finalizează</span><i class="fa fa-save"></i></a>{{/showSaveBtn}}
+            </td>
+        </tr>
+      {{/data}}
+    </tbody>
+    <tfoot>
+            <tr role="row">
+                <th>Petent</th>
+                <th>Nr. ANRE</th>
+                <th>Data ANRE</th>
+                <th>Termen</th>
+                <th>Document</th>
+                <th>Postat la</th>
+                <th>Nr. inregistrare operator economic</th>
+                <th>Data inregistrare operator economic</th>
+                <th>Anexe</th>
+                <th>Document</th>
+                <th>Postat de</th>
+                <th>Postat la</th>
+                <th>Anexe</th>
+                <th></th>
+            </tr>
+        </tfoot>
+</table>
+
+</script>
+
+
+<script id="tmpl_date_istoric" type="x-tmpl-mustache">
+
+<table class="dataTable_nosearch_date_istoric display table_petitii"  style="width: 100%">
+    <thead>
+        <tr role="row">
+            <th colspan="9" class="bg_blue sep_table"> Intrare de la ANRE </th>
+            <th colspan="8" class="bg_green"> Raspuns </th>
+        </tr>
+        <tr role="row">
+            <th class="sorting bg_blue tooltip_chat_left" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Petent: activate to sort column descending" style="width: 106px;display:table-cell;"><span class="tooltiptext_left">În această zonă este înscris numele petentului</span>Petent</th>
+            <th class="sorting bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Nr: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Număr de înregistrare ANRE</span>Nr</th>
+            <th class="sorting bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Data: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Data de înregistrare ANRE</span>Data</th>
+            <th class="sorting sorting_asc bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Termen: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext" style="width:100px;margin-left:-50px;">Termen</span>Termen</th>
+            <th class="sorting mindoch bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Document: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">În această zonă se regăseste documentul, apăsați click pentru a-l descărca</span>Document</th>
+            <th class="sorting bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Postat: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Data postării</span>Postat la</th>
+            <th class="sorting bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Nr inregistrare operator economic: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Nr. inregistrare operator economic</span>Nr. inregistrare operator economic</th>
+            <th class="sorting bg_blue tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Data inregistrare operator economic: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Data inregistrare operator economic</span>Data inregistrare operator economic</th>
+            <th class="sorting mindoch bg_blue tooltip_chat " tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Anexe: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Documente anexate</span>Anexe</th>
+
+            <th class="sorting mindoch bg_green tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Document: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Document răspuns de la operatorul economic</span>Document</th>
+            <th class="sorting bg_green tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Nr: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Numar</span>Nr</th>
+            <th class="sorting bg_green tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Data: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Data</span>Data</th>
+            <th class="sorting bg_green tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Postat: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Data postării răspunsului de către operatorul economic</span>Postat de</th>
+            <th class="sorting bg_green tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Postat: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Data postării răspunsului de către operatorul economic</span>Postat la</th>
+            <th class="sorting bg_green tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Nr inregistrare operator economic: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Nr. inregistrare operator economic</span>Nr. inregistrare operator economic</th>
+            <th class="sorting bg_green tooltip_chat" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Data inregistrare operator economic: activate to sort column ascending" style="width: 81px;"><span class="tooltiptext">Data inregistrare operator economic</span>Data inregistrare operator economic</th>
+            <th class="sorting mindoch bg_green tooltip_chat_right" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Anexe: activate to sort column ascending" style="width: 81px;display:table-cell;"><span class="tooltiptext_right" >Anexele operatorului economic</span>Anexe</th>
+        </tr>
+    </thead>
+    <tbody>
+      {{#data}}
+        <tr>
+            <td class="raqptd">{{petent}}</td>
+            <td class="raqptd">{{nrCerere}}</td>
+            <td class="raqptd">{{dataCerere}}</td>
+            <td class="reqtd sorting_1">{{dataTermen}}</td>
+            <td class="raqptd mindoct">
+             {{#idFisierCerere}}
+                 <button class="btn_link" onClick="$UTIL.downloadFileByVaadin('{{document_cerere}}','{{downloadLinkCerere}}')" >{{document_cerere}}</button>
+             {{/idFisierCerere}}
+            </td>
+            <td class="raqptd">{{cerereCreatLa}}</td>
+            <td class="rasptd">{{nrDocExtern2}}</td>
+            <td class="rasptd">{{dataDocExtern2}}</td>
+            <td class="raqptd mindoct sep_table_blue">
+              {{#fisiereSecundareCerere}}
+                 <div class="tooltip_chat clear_float_left"><span class="tooltiptext">{{document}}</span>
+                    <button class="btn_link multianex txt_ellipsis" onClick="$UTIL.downloadFileByVaadin('{{document}}','{{downloadLink}}')" >{{document}}</button>
+                 </div>
+              {{/fisiereSecundareCerere}}
+            </td>
+
+            <td class="rasptd mindoct ">
+                   {{#idFisierRaspuns}}
+                     <div class="tooltip_chat float_left"><span class="tooltiptext">{{document_raspuns}}</span>
+                     <button class="btn_link txt_ellipsis" onClick="$UTIL.downloadFileByVaadin('{{document_raspuns}}','{{downloadLinkRaspuns}}')" >{{document_raspuns}}</button>
+                     </div>
+                   {{/idFisierRaspuns}}
+            </td>
+            <td class="rasptd">{{nrRaspuns}}</td>
+            <td class="rasptd">{{dataRaspuns}}</td>
+            <td class="rasptd">{{raspunsCreatDe}}</td>
+            <td class="rasptd">{{raspunsCreatLa}}</td>
+            <td class="rasptd">{{nrDocExtern}}</td>
+            <td class="rasptd">{{dataDocExtern}}</td>
+
+            <td class="rasptd mindoct">
+            <table style="background-color: transparent;">
+                        {{#fisiereSecundareRaspuns}}
+                            <tr>
+                                <td class="td_link_doc">
+                                    <div>
+                                         {{#idFisier}}
+                                         <div class="tooltip_chat float_left"><span class="tooltiptext">{{document}}</span>
+                                         <button class="btn_link txt_ellipsis" onClick="$UTIL.downloadFileByVaadin('{{document}}','{{downloadLink}}')">{{document}}</button>
+                                         </div>
+                                        {{/idFisier}}
+                                    </div>
+                                </td>
+                            </tr>
+                         {{/fisiereSecundareRaspuns}}
+              </table>
+            </td>
+        </tr>
+      {{/data}}
+    </tbody>
+    <tfoot>
+		<tr role="row">
+            <th>Petent</th>
+            <th>Nr</th>
+            <th>Data</th>
+            <th>Termen</th>
+            <th>Document</th>
+            <th>Postat la</th>
+            <th>Nr. inregistrare operator economic</th>
+            <th>Data inregistrare operator economic</th>
+            <th>Anexe</th>
+            <th>Document</th>
+            <th>Nr</th>
+            <th>Data</th>
+            <th>Postat de</th>
+            <th>Postat la</th>
+            <th>Nr. inregistrare operator economic</th>
+            <th>Data inregistrare operator economic</th>
+            <th>Anexe</th>
+        </tr>
+	</tfoot>
+</table>
+
+</script>
+
+  <!-- begin Popup -->
+  <div class="modal_nr_data" style="display: none;width:400px" id="save_nr_data">
+
+      <!-- begin Popup - content -->
+      <div class="box_rand_nou">
+
+          <!-- begin NR -->
+          <div class="flex_width50">
+              <p>Nr. inregistrare operator economic</p>
+              <input id="nr_inreg_operator2" class="" type="text" value="">
+          </div>
+          <!-- end NR -->
+          <!-- begin DATA -->
+          <div class="flex_width50">
+              <p>Data inregistrare operator economic</p>
+              <input id="data_inreg_operator2" type="text" class="datepicker" value="">
+          </div>
+          <!-- end DATA -->
+
+      </div>
+      <!-- end Popup - content -->
+
+      <button class="btn btn_green mt20 float_right" onclick="PageManager.saveNrData()">Finalizeaza</button>
+
+  </div>
+  <!-- end Popup - -->
+
+  <!-- begin Popup -->
+  <div class="modal_finalizare" style="display: none;width:400px" id="finalizeaza_raspuns">
+
+      <!-- begin Popup - content -->
+      <div class="box_rand_nou">
+
+          <!-- begin NR -->
+          <div class="flex_width50">
+              <p>Nr. inregistrare operator economic</p>
+              <input id="nr_inreg_operator" class="" type="text" value="">
+          </div>
+          <!-- end NR -->
+          <!-- begin DATA -->
+          <div class="flex_width50">
+              <p>Data inregistrare operator economic</p>
+              <input id="data_inreg_operator" type="text" class="datepicker" value="">
+          </div>
+          <!-- end DATA -->
+
+      </div>
+      <!-- end Popup - content -->
+
+      <button class="btn btn_green mt20 float_right" onclick="PageManager.finish()">Finalizeaza</button>
+
+  </div>
+  <!-- end Popup - -->
+
+
+  <!-- SweetAlert -->
+  <script src="assets/js/sweetalert2.min.js"></script>
+  <!-- script modernizr -->
+  <script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+  <!-- script jQuery -->
+  <script src="assets/js/jquery-3.5.1.min.js"></script>
+  <!-- script jQuery -->
+  <script src="assets/js/jquery-ui.js"></script>
+  <!-- script jQuery Semantic - dropdown -->
+  <script src="assets/js/dropdown.min.js"></script>
+  <script src="assets/js/transition.min.js"></script>
+  <!-- script Sort Table -->
+  <script type="text/javascript" src="assets/js/sort-table.js"></script>
+  <!-- script DataTable -->
+  <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+  <!--<script type="text/javascript" src="assets/js/dataTables.fixedHeader.min.js"></script>-->
+  <!-- script Fancybox -->
+  <script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
+  <!-- script Yearpicker -->
+  <script src="assets/js/yearpicker.js"></script>
+  <!-- custom js -->
+  <script src="assets/js/main_portal.js"></script>
+  <!-- script Mustache -->
+  <script src="assets/js/mustache.js"></script>
+  <script src="assets/js/chosen.jquery.min.js"></script>
+  <script src="assets/js/weblib.js"></script>
+
+  <script src="assets/js/corespondenta_ctpt.js"></script>
+  <script src="../website/assets/js/documentaPortal-util.js"></script>
+  <script src="assets/js/leave_page.js"></script>
+
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+
+</body>
+
+</html>

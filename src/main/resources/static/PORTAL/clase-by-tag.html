@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>ANRE - Alege categorie</title>
+  <meta name="description" content="ANRE - alegere categorie">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+
+  <!--main.css se adauga in mod dinamic din fisierul js: main_static.js ; daca avem setat param dmsws.unitname in application.properties va fi importat fisierul main_unitname.css-->
+
+
+<body>
+<div id="page-container">
+  <div id="content">
+    <div id="page-content-stripe">
+      <!-- <h2 id="page-title-stripe" >Alege serviciul</h2> -->
+      <div class="widget-container-stripe" id="container_categorii">
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--  Script-uri Mustache -->
+
+<script id="tmpl_doc" type="x-tmpl-mustache">
+    {{#tipDocumentList}}
+      <a href="#" class="widget" onClick="FileManager.showPopupInfo('{{cod}}','{{linkUrl}}')">
+          <i style="color: #1175B3;" class="fas fa-list active"></i>
+          <div class="widget-text-container">
+            <h1>{{denumire}}</h1>
+          </div>
+        </a>
+         {{/tipDocumentList}}
+
+
+</script>
+
+<!-- End Script-uri Mustache -->
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<script src="assets/js/sweetalert2.min.js"></script>
+
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/tippy-bundle.umd.min.js"></script>
+<script src="assets/js/main_static.js"></script>
+
+<script src="assets/js/mustache.js"></script>
+<script src="../website/assets/js/documentaPortal-util.js"></script>
+<script src="assets/js/clase-by-tag.js"></script>
+
+</body>
+
+</html>

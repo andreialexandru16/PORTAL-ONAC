@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>SVU</title>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
+    <link href="../PS4/assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="../PS4/assets/css/jquery-ui.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="../PS4/assets/css/slick.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../PS4/assets/css/bootstrap.min.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="../PS4/assets/css/sweetalert2.min.css">
+    <!-- Custom -->
+    <link rel="stylesheet" href="../PS4/assets/css/main.css">
+
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header id="main-header">
+        <!-- Identitate Vizuala -->
+        <div class="visual_identity">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 ue">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PS4/assets/images/logos/uniunea-europeana.png" alt="logo uniunea europeana" />
+                        </a>
+                    </div>
+                    <div class="col-3 gov text-center">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PS4/assets/images/logos/guvernul-romaniei.png" alt="logo guvernul romaniei" />
+                        </a>
+                    </div>
+                    <div class="col-5 poca text-center">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PS4/assets/images/logos/poca.png" alt="logo programul operational capacitate administrativa" />
+                        </a>
+                    </div>
+                    <div class="col-2 is text-right">
+                        <a href="javascript:void(0)" target="_blank">
+                            <img src="../PS4/assets/images/logos/instrumente-structurale.png" alt="logo instrumente structurale" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Bar -->
+        <div class="main_header_container">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo -->
+                    <div class="col-8 col-sm-6 col-md-4 col-lg-2 logo">
+                        <a href="index.html">
+                            <img src="../PS4/assets/images/logos/logo.png" alt="logo primaria sectorului 4">
+                        </a>
+                    </div>
+                    <!-- Menu -->
+                    <div class="col-4 col-sm-6 col-md-8 col-lg-10 menu_container">
+                        <nav class="navbar navbar-expand-xl navbar-dark">
+
+                            <!-- Collapse button -->
+                            <div class="empty_element"></div>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-wrap" aria-controls="menu-wrap" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <!-- Menu Wrapper -->
+                            <div id="menu-wrap" class="row collapse navbar-collapse">
+                                <!-- Main Menu -->
+                                <div class="col-xl-8">
+                                    <div class="main_menu">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item active">
+                                                <a href="index.html" class="nav-link">Acasă</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">Servicii Online</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">Înrebări frecvente</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0);" class="nav-link">Contact</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Secondary Menu -->
+                                <div class="col-xl-4">
+                                    <nav class="secondary_top_menu">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item">
+                                                <a href="autentificare.html" class="nav-link login-icon text-nowrap"><i class="fas fa-user"></i> Autentificare</a>
+                                            </li>
+                                            <!-- Language Selector -->
+                                            <li class="nav-item dropdown language-select">
+                                                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="languageSelect" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img src="../PS4/assets/images/flags/romania-flag.png" alt="romanian flag"> RO
+                                                </a>
+                                                <!-- Language Dropdown -->
+                                                <div class="dropdown-menu" aria-labelledby="languageSelect">
+                                                    <a class="dropdown-item" href="javascript:void(0);">
+                                                        <img src="../PS4/assets/images/flags/romania-flag.png" alt="romanian flag"> EN
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="javascript:void(0);">
+                                                        <img src="../PS4/assets/images/flags/romania-flag.png" alt="romanian flag"> TR
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="javascript:void(0);">
+                                                        <img src="../PS4/assets/images/flags/romania-flag.png" alt="romanian flag"> FR
+                                                    </a>
+                                                </div>
+                                              </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BREADCRUMBS -->
+    <div class="breadcrumbs_container">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Acasă</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Listă de servicii</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Eliberare edeverinta privind datele din registrul agricol</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- CONTENT -->
+    <div id="main-content" class="main-content">
+        <div class="container">
+            <!-- Services List -->
+            <div class="services_list_container detaliu-serviciu solicitare-revizie-finala">
+                <!-- Rezumat Cerere -->
+                <div class="rc_container">
+                    <div class="rc_tbl">
+                        <div class="rc_cell steps">
+                            <!-- Steps -->
+                            <div class="steps_container">
+                                <div class="step_arrow_down complete">
+                                    <div class="single_step step_complete">
+                                        <i class="sicon fas fa-pencil-alt"></i>
+                                        <div class="step_title">Completare formular</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_complete">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down complete">
+                                    <div class="single_step step_complete">
+                                        <i class="sicon fas fa-upload"></i>
+                                        <div class="step_title">Atasarea documentelor</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_complete">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down complete">
+                                    <div class="single_step step_complete">
+                                        <i class="sicon far fa-credit-card"></i>
+                                        <div class="step_title">Plata</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_complete">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down complete">
+                                    <div class="single_step step_complete">
+                                        <i class="sicon fas fa-arrow-right"></i>
+                                        <div class="step_title">Transmitere cerere</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_complete">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down final">
+                                    <div class="single_step step_final">
+                                        <i class="sicon fas fa-stamp"></i>
+                                        <div class="step_title">Validare preliminara</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_final">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down blank">
+                                    <div class="single_step step_blank">
+                                        <i class="sicon fas fa-sign-in-alt"></i>
+                                        <div class="step_title">Inregistrare</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_blank">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down blank">
+                                    <div class="single_step step_blank">
+                                        <i class="sicon fas fa-sign-in-alt"></i>
+                                        <div class="step_title">Inregistrare</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_blank">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down blank">
+                                    <div class="single_step step_blank">
+                                        <i class="sicon fas fa-flag"></i>
+                                        <div class="step_title">Comisie 1</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_blank">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down warning">
+                                    <div class="single_step step_warning">
+                                        <i class="sicon fas fa-flag"></i>
+                                        <div class="step_title">Comisie 2</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_warning">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down blank">
+                                    <div class="single_step step_blank">
+                                        <i class="sicon fas fa-flag"></i>
+                                        <div class="step_title">Raspuns</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_blank">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down blank">
+                                    <div class="single_step step_blank">
+                                        <i class="sicon fas fa-flag"></i>
+                                        <div class="step_title">Semnare</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_blank">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down complete">
+                                    <div class="single_step step_complete">
+                                        <i class="sicon fas fa-flag"></i>
+                                        <div class="step_title">Inregistrare iesire</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_complete">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                                <div class="step_arrow_down final">
+                                    <div class="single_step step_final">
+                                        <i class="sicon fas fa-check-double"></i>
+                                        <div class="step_title">Livrare document</div>
+                                        <div class="step_date">
+                                            <span class="date">20.02.2020</span>
+                                            <span class="sep">/</span>
+                                            <span class="hour">10:22</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom_arrow step_final">
+                                        <span class="show_arrow show_left"></span>
+                                        <span class="show_arrow show_right"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rc_cell rc_content">
+                            <!-- Content -->
+                            <div class="services_header">
+                                <div class="service_pictogram" style="background-image: url('assets/images/icons/document.png')"></div>
+                                <div class="service_title">
+                                    <h2>Rezumat cerere</h2>
+                                </div>
+                            </div>
+                            <div class="service_body">
+                                <table class="table dark-head auto-mw rc_table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Subsemnatul</th>
+                                            <td>Andreea Popescu</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CNP / CUI</th>
+                                            <td>1920803170025</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Sediul social / Domiciliul</th>
+                                            <td>Galati</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Sector</th>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Strada</th>
+                                            <td>Podul Inalt</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Numarul</th>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bloc</th>
+                                            <td>P5</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Scara</th>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Etaj</th>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Apartament</th>
+                                            <td>76</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Telefon</th>
+                                            <td>0755215136</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email</th>
+                                            <td>andreea.popescu@gmail.com</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Calitate / Reprezentant</th>
+                                            <td>Administrator</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CUI / CNP</th>
+                                            <td>4150166</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Document emis</th>
+                                            <td>Certificat de urbanism</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2">
+                                                <span class="text-uppercase">Documente</span>
+                                                <ul class="blue-squares mt-1">
+                                                    <li>Lucrari de construire</li>
+                                                    <li>Lucrari de desfiintare</li>
+                                                    <li>Imprejmuiri si mobilier urban</li>
+                                                </ul>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>Imobil</th>
+                                            <td>constructie</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Situat in</th>
+                                            <td>Bucuresti</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Sector</th>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Cod postal</th>
+                                            <td>800001</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Strada</th>
+                                            <td>Podul Inalt</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Numarul</th>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bloc</th>
+                                            <td>P5</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Scara</th>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Etaj</th>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Apartament</th>
+                                            <td>76</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Plan Cadastral</th>
+                                            <td>2000 si 500</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Extras carte funciara</th>
+                                            <td>OCP</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Suprafata teren</th>
+                                            <td>20 m2</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Data</th>
+                                            <td>20.02.2020</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documente necesare -->
+                <div class="table-responsive mt-3">
+                    <table class="table dark-head has-buttons">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-nowrap">Nr. crt.</th>
+                                <th class="text-nowrap">Nume document</th>
+                                <th class="text-nowrap">Descriere document</th>
+                                <th class="options">Opțiuni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Copie CI / BL <sup>*</sup></td>
+                                <td>Descriere document</td>
+                                <td>
+                                    <a href="javascript:void(0);" class="btn btn-primary btn-secondary-hover btn-xsm btn-1wl">
+                                        <span class="custom-icon icon-down"></span>Descarcă șablon</a>
+                                    <a href="javascript:void(0);" class="btn btn-primary btn-secondary-hover btn-xsm">
+                                        <span class="custom-icon icon-up"></span>Upload</a>
+                                    <a href="javascript:void(0);" class="btn btn-primary btn-secondary-hover btn-xsm">
+                                        <span class="custom-icon icon-down"></span>Descarcă</a>
+                                    <a href="javascript:void(0);" class="btn btn-primary btn-secondary-hover btn-xsm">
+                                        <span class="custom-icon icon-delete"></span>Șterge</a>
+                                    <i class="fas fa-check"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Taxă</td>
+                                <td>Chitanța care să ateste achitarea taxei aferente prestării serviciului</td>
+                                <td>
+                                    <a href="javascript:void(0);" class="btn btn-primary btn-secondary-hover btn-xsm btn-1wl">
+                                        <span class="custom-icon icon-down"></span>Descarcă șablon</a>
+                                    <a href="javascript:void(0);" class="btn btn-primary btn-secondary-hover btn-xsm">
+                                        <span class="custom-icon icon-up"></span>Upload</a>
+                                    <a href="javascript:void(0);" class="btn btn-primary btn-secondary-hover btn-xsm">
+                                        <span class="custom-icon icon-down"></span>Descarcă</a>
+                                    <a href="javascript:void(0);" class="btn btn-primary btn-secondary-hover btn-xsm">
+                                        <span class="custom-icon icon-delete"></span>Șterge</a>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Valoare de plata -->
+                <div class="table-responsive mt-3">
+                    <table class="table dark-head coins">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-nowrap">Nr. crt.</th>
+                                <th class="text-nowrap">Nume document</th>
+                                <th class="text-nowrap">Descriere document</th>
+                                <th class="text-nowrap">Valoare de plata</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Copie CI / BL <sup>*</sup></td>
+                                <td>Descriere document</td>
+                                <td><i class="fas fa-coins"></i>40 lei</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Taxă</td>
+                                <td>Chitanța care să ateste achitarea taxei aferente prestării serviciului</td>
+                                <td><i class="fas fa-coins"></i>40 lei</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">Total general de plata</td>
+                                <td><i class="fas fa-coins"></i>80 lei</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Custom Buttons -->
+                <div class="btn_footer_container">
+                    <div class="btn_info">
+                        <div class="background clearfix">
+                            <div class="prev_info">
+                                <strong>Serviciul:</strong> Eliberare adeverinta privind datele din registrul agricol
+                            </div>
+                            <div class="next_info">
+                                <strong>Pasul:</strong> -
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons_container">
+                        <a href="javascript:void(0)" class="btn btn-primary btn-sm prev"><i class="fas fa-arrow-alt-circle-left"></i>Înapoi la pasul 1</a>
+                        <a href="javascript:void(0)" class="btn btn-secondary btn-sm next">Pasul următor<i class="fas fa-arrow-alt-circle-right"></i></a>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="gap-50"></div>
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <!-- COPYRIGHTS -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 copyright">
+                    <a href="https://www.documenta.ro/" target="_blank">Powered by documenta DMS</a>
+                </div>
+                <div class="col-sm-6">
+                    <div class="logo_footer text-right">
+                        <a href="index.html">
+                            <img src="../PS4/assets/images/logos/logo.png" alt="logo primaria sectorului 4">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FOOTER SCRIPTS -->
+    <!-- SweetAlert -->
+    <script src="../PS4/assets/js/sweetalert2.min.js"></script>
+    <!-- jQuery -->
+    <script src="../PS4/assets/js/jquery-3.4.1.min.js"></script>
+    <!-- Autocomplete -->
+    <script src="../PS4/assets/js/jquery-ui.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="../PS4/assets/js/bootstrap.min.js"></script>
+    <!-- Slick Carousel -->
+    <script src="../PS4/assets/js/slick.min.js"></script>
+    <!-- Chosen Select -->
+    <script src="../PS4/assets/js/chosen.jquery.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../PS4/assets/js/main.js"></script>
+
+    <!-- Testing Sweet Alerts / autocomplete / etc.  - should be deleted after -->
+    <script src="../PS4/assets/js/testing.js"></script>
+  </body>
+</html>

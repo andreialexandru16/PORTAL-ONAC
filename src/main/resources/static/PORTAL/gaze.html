@@ -1,0 +1,379 @@
+<!doctype html>
+<html class="no-js" lang=""> 
+
+<head>
+  <meta charset="utf-8">
+  <title>ANRE</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/favicon.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"> 
+
+  <!-- CSS -->
+  <!-- CSS - jQuery -->
+  <link rel="stylesheet" href="assets/css/jquery-ui.css">
+  <!-- CSS - DataTable -->
+  <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+  <!-- CSS Semantic - dropdown -->
+  <link rel="stylesheet" href="assets/css/dropdown.min.css">
+  <link rel="stylesheet" href="assets/css/transition.min.css">
+
+
+    <!--main.css se adauga in mod dinamic din fisierul js: main_static.js ; daca avem setat param dmsws.unitname in application.properties va fi importat fisierul main_unitname.css-->
+
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- begin Container -->
+  <div class="container">
+
+    <div class="title_border_bottom2 mb30">
+        Lista licente si autorizatii
+    </div>
+
+    <!-- begin Box Form -->
+    <div class="box_shadow">
+
+      <div class="flex">
+
+        <!-- begin Agenti --> 
+        <div class="width25">        
+          <div class="box_input mb20">                          
+            <input type="text" name="" placeholder="Agenti">
+          </div>
+        </div>
+        <!-- end Agenti --> 
+
+        <!-- begin Tip activitate --> 
+        <div class="width25">        
+          <div class="box_input mb20">                          
+            <input type="text" name="" placeholder="Tip activitate">
+          </div>
+        </div>
+        <!-- end Tip activitate --> 
+
+        <!-- begin Tip document --> 
+        <div class="width25">        
+          <div class="box_input mb20">                          
+            <input type="text" name="" placeholder="Tip document">
+          </div>
+        </div>
+        <!-- end Tip document --> 
+
+        <!-- begin Stare document --> 
+        <div class="width25">        
+          <div class="box_input mb20">                          
+            <input type="text" name="" placeholder="Stare document">
+          </div>
+        </div>
+        <!-- end Stare document --> 
+        
+      </div><!-- end .flex -->
+
+      <div class="flex">
+
+        <!-- begin Localitate --> 
+        <div class="width30 mb20">        
+          <div class="select">
+            <select class="ui fluid dropdown">
+              <option value="">Localitate unde isi desfasoara activitatea</option>
+              <option value="0">Bucuresti</option>
+              <option value="1">Brasov</option>
+              <option value="2">Sibiu</option>
+            </select>
+          </div>
+        </div>
+        <!-- end Localitate --> 
+
+        <!-- begin Judet unde isi desfasoara activitatea --> 
+        <div class="width30 mb20">        
+          <div class="select">
+            <select class="ui fluid dropdown">
+              <option value="">Judet unde isi desfasoara activitatea</option>
+              <option value="0">Bucuresti</option>
+              <option value="1">Brasov</option>
+              <option value="2">Sibiu</option>
+            </select>
+          </div>
+        </div>
+        <!-- end Judet unde isi desfasoara activitatea --> 
+
+        <!-- begin Localitate sediu social --> 
+        <div class="width20">        
+          <div class="box_input mb20">                          
+            <input type="text" name="" placeholder="Localitate sediu social">
+          </div>
+        </div>
+        <!-- end Localitate sediu social --> 
+
+        <!-- begin Judet sediu social --> 
+        <div class="width20">        
+          <div class="select">
+            <select class="ui fluid dropdown">
+              <option value="">Judet sediu social</option>
+              <option value="0">Bucuresti</option>
+              <option value="1">Brasov</option>
+              <option value="2">Sibiu</option>
+            </select>
+          </div>
+        </div>
+        <!-- end Judet sediu social -->
+
+      </div><!-- end .flex -->
+
+      <div class="flex">
+        <div>
+          <div class="float_right">
+
+            <!-- begin Cautare -->                    
+            <a href="#" class="btn_search float_left mr20">Cautare</a>
+            <!-- end Cautare -->
+
+            <!-- begin Export Excel -->                  
+            <a href="#" class="btn_excel float_left">Export Excel</a>
+            <!-- end Export Excel -->
+
+          </div>          
+        </div>     
+      </div><!-- end .flex -->
+
+    </div>
+    <!-- end Box Form -->  
+
+    <!-- begin Table -->
+    <div class="table_scroll table_full_width">
+      <table class="dataTable_nosearch display" style="width: 100%">
+          <thead>
+              <tr>
+                 <th rowspan="2" class="sorting_disabled">Nr. crt.</th>
+                 <th rowspan="2" class="sorting_disabled">Societate</th>
+                 <th rowspan="2" class="sorting_disabled">Sediu</th>
+                 <th rowspan="2" class="sorting_disabled">Localitate</th>
+                 <th rowspan="2" class="sorting_disabled">Judet</th>
+                 <th rowspan="2" class="sorting_disabled">Telefon/Fax</th>
+                 <th rowspan="" colspan="8" class="sorting_disabled">Detalii document</th>
+              </tr>
+              <tr>
+                 <th class="sorting_disabled">Nr. Document</th>
+                 <th class="sorting_disabled">Tip document</th>
+                 <th class="sorting_disabled">Tip activitate</th>
+                 <th class="sorting_disabled">Localitate unde isi desfasoara activitatea</th>
+                 <th class="sorting_disabled">Data emitere</th>
+                 <th class="sorting_disabled">Data expirare</th>
+                 <th class="sorting_disabled">Stare</th>
+                 <th class="sorting_disabled">Decizie</th>
+              </tr>                   
+          </thead>
+          <tbody>
+            <tr>                        
+                <td>1</td>     
+                <td>A.E.P. GIURGIU PORT</td>  
+                <td>ZONA PORT CORP ADMINISTRATIV BIROU 3 CP145400</td>   
+                <td>Zimnicea</td>           
+                <td>Teleorman</td>
+                <td>0246/211399 021/3124041</td>
+                <td>2186</td>
+                <td>Licenta</td>
+                <td>Furnizare gaze naturale</td>
+                <td>Loc: -, Com: -, Jud:</td>
+                <td>02/08/2018</td>
+                <td>01/08/2021</td>
+                <td>Acordat</td>
+                <td>Nr. Dec. 1882</td>
+            </tr>
+            <tr>                        
+                <td>2</td>     
+                <td>A.E.P. GIURGIU PORT</td>  
+                <td>ZONA PORT CORP ADMINISTRATIV BIROU 3 CP145400</td>   
+                <td>Zimnicea</td>           
+                <td>Teleorman</td>
+                <td>0246/211399 021/3124041</td>
+                <td>2186</td>
+                <td>Licenta</td>
+                <td>Furnizare gaze naturale</td>
+                <td>Loc: -, Com: -, Jud:</td>
+                <td>02/08/2018</td>
+                <td>01/08/2021</td>
+                <td>Acordat</td>
+                <td>Nr. Dec. 1882</td>
+            </tr>
+            <tr>                        
+                <td>3</td>     
+                <td>A.E.P. GIURGIU PORT</td>  
+                <td>ZONA PORT CORP ADMINISTRATIV BIROU 3 CP145400</td>   
+                <td>Zimnicea</td>           
+                <td>Teleorman</td>
+                <td>0246/211399 021/3124041</td>
+                <td>2186</td>
+                <td>Licenta</td>
+                <td>Furnizare gaze naturale</td>
+                <td>Loc: -, Com: -, Jud:</td>
+                <td>02/08/2018</td>
+                <td>01/08/2021</td>
+                <td>Acordat</td>
+                <td>Nr. Dec. 1882</td>
+            </tr>
+            <tr>                        
+                <td>4</td>     
+                <td>A.E.P. GIURGIU PORT</td>  
+                <td>ZONA PORT CORP ADMINISTRATIV BIROU 3 CP145400</td>   
+                <td>Zimnicea</td>           
+                <td>Teleorman</td>
+                <td>0246/211399 021/3124041</td>
+                <td>2186</td>
+                <td>Licenta</td>
+                <td>Furnizare gaze naturale</td>
+                <td>Loc: -, Com: -, Jud:</td>
+                <td>02/08/2018</td>
+                <td>01/08/2021</td>
+                <td>Acordat</td>
+                <td>Nr. Dec. 1882</td>
+            </tr>
+            <tr>                        
+                <td>5</td>     
+                <td>A.E.P. GIURGIU PORT</td>  
+                <td>ZONA PORT CORP ADMINISTRATIV BIROU 3 CP145400</td>   
+                <td>Zimnicea</td>           
+                <td>Teleorman</td>
+                <td>0246/211399 021/3124041</td>
+                <td>2186</td>
+                <td>Licenta</td>
+                <td>Furnizare gaze naturale</td>
+                <td>Loc: -, Com: -, Jud:</td>
+                <td>02/08/2018</td>
+                <td>01/08/2021</td>
+                <td>Acordat</td>
+                <td>Nr. Dec. 1882</td>
+            </tr>
+            <tr>                        
+                <td>6</td>     
+                <td>A.E.P. GIURGIU PORT</td>  
+                <td>ZONA PORT CORP ADMINISTRATIV BIROU 3 CP145400</td>   
+                <td>Zimnicea</td>           
+                <td>Teleorman</td>
+                <td>0246/211399 021/3124041</td>
+                <td>2186</td>
+                <td>Licenta</td>
+                <td>Furnizare gaze naturale</td>
+                <td>Loc: -, Com: -, Jud:</td>
+                <td>02/08/2018</td>
+                <td>01/08/2021</td>
+                <td>Acordat</td>
+                <td>Nr. Dec. 1882</td>
+            </tr>
+            <tr>                        
+                <td>7</td>     
+                <td>A.E.P. GIURGIU PORT</td>  
+                <td>ZONA PORT CORP ADMINISTRATIV BIROU 3 CP145400</td>   
+                <td>Zimnicea</td>           
+                <td>Teleorman</td>
+                <td>0246/211399 021/3124041</td>
+                <td>2186</td>
+                <td>Licenta</td>
+                <td>Furnizare gaze naturale</td>
+                <td>Loc: -, Com: -, Jud:</td>
+                <td>02/08/2018</td>
+                <td>01/08/2021</td>
+                <td>Acordat</td>
+                <td>Nr. Dec. 1882</td>
+            </tr>
+            <tr>                        
+                <td>8</td>     
+                <td>A.E.P. GIURGIU PORT</td>  
+                <td>ZONA PORT CORP ADMINISTRATIV BIROU 3 CP145400</td>   
+                <td>Zimnicea</td>           
+                <td>Teleorman</td>
+                <td>0246/211399 021/3124041</td>
+                <td>2186</td>
+                <td>Licenta</td>
+                <td>Furnizare gaze naturale</td>
+                <td>Loc: -, Com: -, Jud:</td>
+                <td>02/08/2018</td>
+                <td>01/08/2021</td>
+                <td>Acordat</td>
+                <td>Nr. Dec. 1882</td>
+            </tr>
+            <tr>                        
+                <td>9</td>     
+                <td>A.E.P. GIURGIU PORT</td>  
+                <td>ZONA PORT CORP ADMINISTRATIV BIROU 3 CP145400</td>   
+                <td>Zimnicea</td>           
+                <td>Teleorman</td>
+                <td>0246/211399 021/3124041</td>
+                <td>2186</td>
+                <td>Licenta</td>
+                <td>Furnizare gaze naturale</td>
+                <td>Loc: -, Com: -, Jud:</td>
+                <td>02/08/2018</td>
+                <td>01/08/2021</td>
+                <td>Acordat</td>
+                <td>Nr. Dec. 1882</td>
+            </tr>
+            <tr>                        
+                <td>10</td>     
+                <td>A.E.P. GIURGIU PORT</td>  
+                <td>ZONA PORT CORP ADMINISTRATIV BIROU 3 CP145400</td>   
+                <td>Zimnicea</td>           
+                <td>Teleorman</td>
+                <td>0246/211399 021/3124041</td>
+                <td>2186</td>
+                <td>Licenta</td>
+                <td>Furnizare gaze naturale</td>
+                <td>Loc: -, Com: -, Jud:</td>
+                <td>02/08/2018</td>
+                <td>01/08/2021</td>
+                <td>Acordat</td>
+                <td>Nr. Dec. 1882</td>
+            </tr>
+            <tr>                        
+                <td>11</td>     
+                <td>A.E.P. GIURGIU PORT</td>  
+                <td>ZONA PORT CORP ADMINISTRATIV BIROU 3 CP145400</td>   
+                <td>Zimnicea</td>           
+                <td>Teleorman</td>
+                <td>0246/211399 021/3124041</td>
+                <td>2186</td>
+                <td>Licenta</td>
+                <td>Furnizare gaze naturale</td>
+                <td>Loc: -, Com: -, Jud:</td>
+                <td>02/08/2018</td>
+                <td>01/08/2021</td>
+                <td>Acordat</td>
+                <td>Nr. Dec. 1882</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- end Table -->
+
+  </div>
+  <!-- end Container -->
+
+  <!-- script modernizr -->
+  <script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+  <!-- script jQuery -->
+  <script src="assets/js/jquery-3.5.1.min.js"></script>
+  <!-- script jQuery -->
+  <script src="assets/js/jquery-ui.js"></script>
+  <!-- script jQuery Semantic - dropdown -->
+  <script src="assets/js/dropdown.min.js"></script>
+  <script src="assets/js/transition.min.js"></script>
+  <!-- script Sort Table -->
+  <script type="text/javascript" src="assets/js/sort-table.js"></script>
+  <!-- script DataTable -->
+  <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script> 
+  <!-- custom js -->
+  <script src="assets/js/main_portal.js"></script>
+  <script src="assets/js/main_static.js"></script>
+
+</body>
+
+</html>
