@@ -69,65 +69,144 @@
 
                     <!-- First Row -->
                     <div class="form-group row">
-                        <!-- Tip_Utilizator -->
-                        <div class="col-md-4 col-lg-4 sm-margin">
-                            <label for="tip_utilizator">Tip utilizator <span class="text-danger">*</span></label>
-                            <select name="tip_utilizator" id="tip_utilizator" class="form-control chosen-select required">
+                        <!-- Tip Utilizator -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="id_tip_utilizator">Tip utilizator</label>
+                            <select name="id_tip_utilizator" id="id_tip_utilizator" class="form-control chosen-select required">
                                 <option value="1">Utilizator principal</option>
                                 <option value="0">Utilizator secundar</option>
-
+                            </select>
+                        </div>
+                        <!-- Denumire/Cif -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="id_institutie_solicitanta">Denumire/Cif</label>
+                            <select name="id_institutie_solicitanta" id="id_institutie_solicitanta" class="form-control chosen-select required">
+                                <option value="1">Utilizator principal</option>
+                                <option value="0">Utilizator secundar</option>
                             </select>
                         </div>
                         <div class="col-lg-2 md-margin sm-margin">
-                            <label for="prenume">Prenume <span class="text-danger">*</span></label>
-                            <input type="text" name="prenume" id="prenume" class="form-control required"
-                                   placeholder="ex: Ion"/>
+                            <label for="id_tip_ordonator_credite">Tip ordonator de credite</label>
+                            <select name="id_tip_ordonator_credite" id="id_tip_ordonator_credite" class="form-control chosen-select required">
+                                <option value="1">Utilizator principal</option>
+                                <option value="0">Utilizator secundar</option>
+                            </select>
                         </div>
-                        <!-- Cnp -->
-                        <div class="col-md-6 col-lg-4 sm-margin">
-                            <label for="cnp">Cod numeric personal <span class="text-danger">*</span></label>
-                            <input type="text" name="cnp" id="cnp" class="form-control required" placeholder=""/>
-                        </div>
-                        <!-- Serie -->
+                        <!-- Website -->
                         <div class="col-md-3 col-lg-2 sm-margin">
-                            <label for="serie"> Serie act identitate <span class="text-danger">*</span></label>
-                            <input type="text" name="serie" id="serie" class="form-control required" placeholder=""/>
+                            <label for="website">Website<span class="text-danger">*</span></label>
+                            <input type="text" name="website" id="website" class="form-control required" placeholder=""/>
                         </div>
-                        <!-- Numar -->
+                        <!-- Telefon sediu -->
                         <div class="col-md-3 col-lg-2">
-                            <label for="numar">Numar act identitate <span class="text-danger">*</span></label>
-                            <input type="text" name="numar" id="numar" class="form-control required" placeholder=""/>
+                            <label for="tl_sediu">Telefon sediu<span class="text-danger">*</span></label>
+                            <input type="text" name="tl_sediu" id="tl_sediu" class="form-control required" placeholder=""/>
+                        </div>
+                        <!-- FAX -->
+                        <div class="col-md-3 col-lg-2">
+                            <label for="fax">Fax<span class="text-danger">*</span></label>
+                            <input type="text" name="fax" id="fax" class="form-control required" placeholder=""/>
                         </div>
                     </div>
-                    <!-- Second Row -->
+                    <div class="section_separator"><br><a class="section-separator">Informatii reprezentant si persoane de contact(Datele persoanei de contact trebuie sa fie cele din mandat)</a><br></div>
+
                     <div class="form-group row">
-                        <!-- Country -->
-                        <div class="col-md-4 col-lg-4 sm-margin">
-                            <label for="country">Țară <span class="text-danger">*</span></label>
-                            <select name="country" id="country" class="form-control chosen-select required">
-                                <!-- AICI TARI -->
-
-                            </select>
+                        <!-- Nume reprezentant legal -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="nume_rp">Nume reprezentant legal<span class="text-danger">*</span></label>
+                            <input type="text" name="nume_rp" id="nume_rp" class="form-control required"
+                                   placeholder=""/>
                         </div>
-                        <!-- Judet -->
-                        <div class="col-md-4 col-lg-3 sm-margin">
-                            <label for="region">Județ <span class="text-danger">*</span></label>
-                            <select name="region" id="region" class="form-control chosen-select required">
-                                <!-- AICI JUDETE -->
-
-                            </select>
+                        <!-- Prenume reprezentant legal -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="prenume_rp">Prenume reprezentant legal<span class="text-danger">*</span></label>
+                            <input type="text" name="prenume_rp" id="prenume_rp" class="form-control required"
+                                   placeholder=""/>
                         </div>
-                        <!-- Oras -->
-                        <div class="col-md-4 col-lg-5">
-                            <label for="city">Localitate <span class="text-danger">*</span></label>
-                            <select name="city" id="city" class="form-control chosen-select required">
-                                <!-- AICI JUDETE -->
-
-                            </select>
+                        <!-- Functie reprezentant legal -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="functie_rp">Functie reprezentant legal<span class="text-danger">*</span></label>
+                            <input type="text" name="functie_rp" id="functie_rp" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Email reprezentant legal -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="email_rp">Email reprezentant legal<span class="text-danger">*</span></label>
+                            <input type="text" name="email_rp" id="email_rp" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Nume contact1 -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="nume_c1">Nume persoana de contact-1<span class="text-danger">*</span></label>
+                            <input type="text" name="nume_c1" id="nume_c1" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Prenume contact1 -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="prenume_c1">Prenume persoana de contact-1<span class="text-danger">*</span></label>
+                            <input type="text" name="prenume_c1" id="prenume_c1" class="form-control required"
+                                   placeholder=""/>
                         </div>
                     </div>
-                    <!-- Third Row -->
                     <div class="form-group row">
+                        <!-- Email contact1 -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="email_c1">Email persoana de contact-1<span class="text-danger">*</span></label>
+                            <input type="text" name="email_c1" id="email_c1" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Telefon contact1 -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="telefon_c1">Telefon persoana de contact-1<span class="text-danger">*</span></label>
+                            <input type="text" name="telefon_c1" id="telefon_c1" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Nume contact2 -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="nume_c2">Nume persoana de contact-2<span class="text-danger">*</span></label>
+                            <input type="text" name="nume_c2" id="nume_c2" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Prenume contact2 -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="prenume_c2">Prenume persoana de contact-2<span class="text-danger">*</span></label>
+                            <input type="text" name="prenume_c2" id="prenume_c2" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Email contact2 -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="email_c2">Email persoana de contact-2<span class="text-danger">*</span></label>
+                            <input type="text" name="email_c2" id="email_c2" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+                        <!-- Telefon contact2 -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="telefon_c2">Telefon persoana de contact-2<span class="text-danger">*</span></label>
+                            <input type="text" name="telefon_c2" id="telefon_c2" class="form-control required"
+                                   placeholder=""/>
+                        </div>
+
+                    </div>
+
+
+                    <div class="section_separator"><br><a class="section-separator">Informatii despre adresa sediului</a><br></div>
+                    <div class="form-group row">
+                        <!-- Judet sediu -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="id_judet">Judet</label>
+                            <select name="id_judet" id="id_judet" class="form-control chosen-select required">
+                                <option value="1">Utilizator principal</option>
+                                <option value="0">Utilizator secundar</option>
+                            </select>
+                        </div>
+                        <!-- Localitate sediu -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="id_localitate">Localitate</label>
+                            <select name="id_localitate" id="id_localitate" class="form-control chosen-select required">
+                                <option value="1">Utilizator principal</option>
+                                <option value="0">Utilizator secundar</option>
+                            </select>
+                        </div>
                         <!-- Street -->
                         <div class="col-md-8 col-lg-4 md-margin sm-margin">
                             <label for="street">Strada <span class="text-danger">*</span></label>
@@ -144,6 +223,9 @@
                             <label for="bloc">Bloc</label>
                             <input type="text" name="bloc" id="bloc" class="form-control" placeholder=""/>
                         </div>
+
+                    </div>
+                    <div class="form-group row">
                         <!-- Scara -->
                         <div class="col-md-2 col-lg-2 sm-margin">
                             <label for="scara">Scară</label>
@@ -159,21 +241,13 @@
                             <label for="etaj">Etaj</label>
                             <input type="text" name="etaj" id="etaj" class="form-control" placeholder=""/>
                         </div>
-                    </div>
-                    <!-- Fourth Row -->
-                    <div class="form-group row">
-                        <!-- Telefon -->
-                        <div class="col-md-6 sm-margin">
-                            <label for="tel">Telefon <span class="text-danger">*</span></label>
-                            <input type="text" name="tel" id="tel" class="form-control required" placeholder=""/>
-                        </div>
-                        <!-- Email -->
-                        <div class="col-md-6">
-                            <label for="email">Email <span class="text-danger">*</span></label>
-                            <input type="email" name="email" id="email" class="form-control required"
-                                   placeholder=""/>
+                        <!-- Cod -->
+                        <div class="col-md-2 col-lg-1">
+                            <label for="cod">Cod</label>
+                            <input type="text" name="cod" id="cod" class="form-control" placeholder=""/>
                         </div>
                     </div>
+
 
                     <div class="section_separator"><br><a class="section-separator">Parolă</a><br></div>
 
@@ -205,39 +279,47 @@
                     <div class="form-group row" >
                         <div class="col-md-6 sm-margin">
 <!--                            <form id="fileinfo" enctype="multipart/form-data" method="post" name="fileinfo">-->
-                                <label for="ci_file">Carte de identitate <span class="text-danger">*</span></label>
+                                <label for="ci_file">Incarca mandat<span class="text-danger">*</span></label>
                                 <input type="file" accept=".gif,.jpg,.jpeg,.png,.doc,.docx,.pdf,.tiff,.svg,.tif"
                                        name="ci_file" id="ci_file" class="form-control file-control required"
                                        upload-text="Incarca documentul" method="post" enctype="multipart/form-data"/>
 <!--                            </form>-->
                         </div>
                         <div class="col-md-6 sm-margin">
-                            <a class="link_gdpr" href="https://www.anre.ro/ro/gdpr" target="_blank">Link către GDPR</a>
+                            <a class="link_gdpr" href="https://www.anre.ro/ro/gdpr" target="_blank">Download model sablon</a>
                         </div>
                     </div>
                     <!-- TOS -->
                     <div class="custom-control custom-checkbox form-group">
-                        <input type="checkbox" class="custom-control-input" id="tos">
-                        <label class="custom-control-label" for="tos">Sunt de acord cu termenii și condițiile <span
+                        <input type="checkbox" class="custom-control-input" id="tos1">
+                        <label class="custom-control-label" for="tos1">Am citit si sunt de acord cu Termenii si Conditiile<span
+                                class="text-danger">*</span></label>
+                    </div>
+                    <div class="custom-control custom-checkbox form-group">
+                        <input type="checkbox" class="custom-control-input" id="tos2">
+                        <label class="custom-control-label" for="tos2">Am citit si sunt de acord cu Politica de confidentialitate si de prelucrare a datelor cu caracter personal(GDPR)<span
+                                class="text-danger">*</span></label>
+                    </div>
+                    <div class="custom-control custom-checkbox form-group">
+                        <input type="checkbox" class="custom-control-input" id="tos3">
+                        <label class="custom-control-label" for="tos3">Am citit si sunt de acord cu Politica de utilizare cookie-uri<span
                                 class="text-danger">*</span></label>
                     </div>
                     <div>
                         <input type="hidden" name="checker" id="checker"/>
                     </div>
 
-                    <div class="form-group row" >
-                        <div class="col-md-6 nota_info">
-                            <span class="text-danger">*</span> activitatea de prelucrare a datelor cu caracter personal este necesară în vederea îndeplinirii obligației legale a ANRE în temeiul prevederilor art. 10 alin. (1) lit. d), f) şi i) din Ordonanța de urgență a Guvernului nr. 33/2007 privind organizarea şi funcţionarea Autorităţii Naţionale de Reglementare în Domeniul Energiei, aprobată cu modificări şi completări prin Legea nr. 160/2012, publicată în Monitorul Oficial al României, Partea I, nr. 685/03.10.2012, pentru îndeplinirea unei sarcini ce servește unui interes public care rezultă din exercitarea autorității publice cu care ANRE este investită.
-                        </div>
-                    </div>
+                    <!--<div class="form-group row" >-->
+                        <!--<div class="col-md-6 nota_info">-->
+                            <!--<span class="text-danger">*</span> activitatea de prelucrare a datelor cu caracter personal este necesară în vederea îndeplinirii obligației legale a ANRE în temeiul prevederilor art. 10 alin. (1) lit. d), f) şi i) din Ordonanța de urgență a Guvernului nr. 33/2007 privind organizarea şi funcţionarea Autorităţii Naţionale de Reglementare în Domeniul Energiei, aprobată cu modificări şi completări prin Legea nr. 160/2012, publicată în Monitorul Oficial al României, Partea I, nr. 685/03.10.2012, pentru îndeplinirea unei sarcini ce servește unui interes public care rezultă din exercitarea autorității publice cu care ANRE este investită.-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <!--afisare captcha - cu cheie preluata din application.properites: google.recaptcha.secretkey-->
                     <div id="container_captcha">
 
                         <!-- se populeaza dinamic din bithat-inregistrare.js-->
 
                     </div>
-
-
                     <!-- Submit -->
                     <div class="form-group">
                         <button id="register" class="btn btn_green min_width250"
@@ -248,7 +330,6 @@
             <div id="persoana-juridica" class="tab-pane fade">
                 <form id="register_pfa" action="/dmsws/utilizator/addPj" method="post" enctype="multipart/form-data">
                     <div class="section_separator"><br><a class="section-separator">Companie</a><br></div>
-
                     <!-- Row 0  -->
                     <div class="form-group row">
                         <div class="col-lg-6 md-margin sm-margin">
@@ -455,7 +536,7 @@
                     <!-- TOS -->
                     <div class="custom-control custom-checkbox form-group">
                         <input type="checkbox" class="custom-control-input" id="tos-pfa">
-                        <label class="custom-control-label" for="tos-pfa">Sunt de acord cu termenii și condițiile
+                        <label class="custom-control-label" for="tos-pfa">Entitate cu personalitate juridica
                             <span class="text-danger">*</span></label>
                     </div>
                     <div>
