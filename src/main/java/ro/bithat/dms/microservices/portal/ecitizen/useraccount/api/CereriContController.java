@@ -1,34 +1,5 @@
 package ro.bithat.dms.microservices.portal.ecitizen.useraccount.api;
 
-import net.minidev.json.JSONObject;
-import net.minidev.json.parser.JSONParser;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpClientErrorException.BadRequest;
-import org.springframework.web.server.ServerWebInputException;
-import ro.bithat.dms.microservices.dmsws.file.BaseModel;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.AddUtilizatorSecurityService;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.CereriContService;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsAddUtilizatorService;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.JudetList;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.PersoanaFizicaJuridica;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.Psiholog;
-import ro.bithat.dms.security.SecurityUtils;
-import ro.bithat.dms.service.URLUtil;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.*;
-import java.util.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,11 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import ro.bithat.dms.microservices.dmsws.file.BaseModel;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
+import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.CereriContService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsNomenclatorService;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.FilialaList;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.JudetList;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.TaraList;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.LocalitateList;
+import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.*;
 
 @RestController
 public class CereriContController {
@@ -52,19 +21,28 @@ public class CereriContController {
     private CereriContService serviceCereri;
 
 
-    @Value("${dmsws.unitname:}")
-    private String unitate;
-
     public static final String ERROR_TEXT = "Error Status Code ";
     public static final String[] ALLOWED_EXTENSIONS = {"docx","doc","pdf","jpg","jpeg","png","svg","tif","tiff",".gif"};
 
-    @GetMapping("/dmsws/cererionac/getListJudete")
+    @GetMapping("/dmsws/cerericont/getListOperatorTipCredite")
+    public TipOrdonatorList getListOperatorTipCredite() {
+        return serviceCereri.getListOperatorTipCredite(anonymousToken);
+    }
+
+    @GetMapping("/dmsws/cerericont/getListDenumireCif")
+    public InstiutiiList getListDenumireCif() {
+        return serviceCereri.getListDenumireCif(anonymousToken);
+    }
+
+   @GetMapping("/dmsws/cerericont/getListJudete")
     public JudetList getListJudete() {
         return serviceCereri.getListJudete(anonymousToken);
     }
 
-
-
+    @GetMapping("/dmsws/cerericont/getListLocalitate/{idLocalitate}")
+    public LocalitateList getListLocalitate(@PathVariable String idLocalitate) {
+        return serviceCereri.getListLocalitate(anonymousToken, idLocalitate);
+    }
 
 
 

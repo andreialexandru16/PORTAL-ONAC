@@ -1,36 +1,33 @@
 package ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.server.ServerErrorException;
-import org.springframework.web.server.ServerWebInputException;
 import ro.bithat.dms.microservices.dmsws.DmswsRestService;
 import ro.bithat.dms.microservices.dmsws.file.BaseModel;
-import ro.bithat.dms.microservices.dmsws.file.DmswsFileService;
-import ro.bithat.dms.microservices.dmsws.flow.DmswsFlowService;
-import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.CreateTipDocFileResponse;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.JudetList;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.PersoanaFizicaJuridica;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.PersoanaFizicaJuridicaResponse;
-import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.Psiholog;
-import ro.bithat.dms.security.SecurityUtils;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Optional;
+import ro.bithat.dms.microservices.dmsws.metadata.LovList;
+import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.*;
 
 @Service
 public class CereriContService extends DmswsRestService{
 
 
-	public JudetList getListJudete(@PathVariable String token) {
-		return get(JudetList.class, checkBaseModel(), getDmswsUrl()+"/cererionac/{token}/getListJudete",
+	public TipOrdonatorList getListOperatorTipCredite(@PathVariable String token) {
+		return get(TipOrdonatorList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getListOperatorTipCredite",
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
+	}
+	public InstiutiiList getListDenumireCif(@PathVariable String token) {
+		return get(InstiutiiList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getListDenumireCif",
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
+	}
+	public JudetList getListJudete(@PathVariable String token) {
+		return get(JudetList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getListJudete",
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
+	}
+	public LocalitateList getListLocalitate(@PathVariable String token, @PathVariable String idJudet) {
+		return get(LocalitateList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getListLocalitate/{idJudet}",
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token, idJudet);
 	}
 
 
