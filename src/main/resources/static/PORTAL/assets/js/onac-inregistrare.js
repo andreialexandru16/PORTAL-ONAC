@@ -30,32 +30,77 @@ function isNumberKey(evt){
     return true;
 }
 
-// POPULARE LISTE VALORI PERS FIZICA
-
 $.ajax({
-    url: "/dmsws/nomenclator/countries",
+    url: "/dmsws/cerericont/getListJudete",
     success: function (result) {
-        var countries = result.taraList;
-        for (var i = 0; i < countries.length; i++) {
-            $('#country').append(getOptionListItemHtml(countries[i].id, countries[i].denumire));
-
-            if(countries[i].cod == 'RO') {
-                $('#country').val(countries[i].id).trigger("chosen:updated");
-                fetchRegions(countries[i].id);
-            }
+        var judetList = result.judetList;
+        for (var i = 0; i < judetList.length; i++) {
+            $('#id_judet').append(getOptionListItemHtml(judetList[i].id, judetList[i].denumire));
 
         }
-
-        // $('#country').val(1).trigger("chosen:updated");
-        // fetchRegions(1);
-        // fetchCities(1);
+        $('#id_judet').val(0).trigger("chosen:updated");
 
     },
     error: function (err) {
         console.log(err);
     }
 });
+$.ajax({
+    url: "/dmsws/cerericont/getListDenumireCif",
+    success: function (result) {
+        var institutieList = result.institutieList;
+        for (var i = 0; i < institutieList.length; i++) {
+            $('#id_institutie_solicitanta').append(getOptionListItemHtml(institutieList[i].id, institutieList[i].denumire));
 
+        }
+        $('#id_institutie_solicitanta').val(0).trigger("chosen:updated");
+
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
+$.ajax({
+    url: "/dmsws/cerericont/getListOperatorTipCredite",
+    success: function (result) {
+        var tipOrdonatorList = result.tipOrdonatorList;
+        for (var i = 0; i < tipOrdonatorList.length; i++) {
+            $('#id_tip_ordonator_credite').append(getOptionListItemHtml(tipOrdonatorList[i].id, tipOrdonatorList[i].denumire));
+
+        }
+        $('#id_tip_ordonator_credite').val(0).trigger("chosen:updated");
+
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
+$('#id_judet').on('change', function (e) {
+    fetchLocalitati($(this).val());
+});
+var fetchLocalitati = (localitateId) => {
+    $.ajax({
+        url: "/dmsws/cerericont/getListLocalitate/" + localitateId,
+        beforeSend: function () { $('#id_localitate').empty(); },
+        success: function (result) {
+            localitatiList = result.localitateList;
+            console.log('localitatiList')
+            console.log(localitatiList)
+            for (var i = 0; i < localitatiList.length; i++) {
+                $('#id_localitate').append(getOptionListItemHtml(localitatiList[i].id, localitatiList[i].denumire));
+            }
+
+            $('#id_localitate').val(0).trigger("chosen:updated");
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+};
+
+
+
+// AM:De scos dupa finalizare pagina
 var fetchRegions = (countryId) => {
     $.ajax({
         url: "/dmsws/nomenclator/country/" + countryId + "/regions",
@@ -179,28 +224,6 @@ var fetchChecker = (countryId) => {
 
 //POPULARE LISTE DE VALORI PERS JURIDICA
 
-$.ajax({
-    url: "/dmsws/nomenclator/countries",
-    success: function (result) {
-
-        var countries = result.taraList;
-        for (var i = 0; i < countries.length; i++) {
-            $('#country-pfa').append(getOptionListItemHtml(countries[i].id, countries[i].denumire));
-
-            if(countries[i].cod == 'RO') {
-                $('#country-pfa').val(countries[i].id).trigger("chosen:updated");
-                fetchRegionsPfa(countries[i].id);
-            }
-        }
-
-
-        // fetchRegionsPfa(1);
-        // fetchCitiesPfa(1);
-    },
-    error: function (err) {
-        console.log(err);
-    }
-});
 
 var fetchRegionsPfa = (countryId) => {
     $.ajax({
@@ -260,25 +283,7 @@ var fetchCheckerPfa = (countryId) => {
     });
 };
 
-//POPULARE LISTA DE VALORI INSTITUT PUBLIC
 
-$.ajax({
-    url: "/dmsws/nomenclator/countries",
-    success: function (result) {
-        var countries = result.taraList;
-        for (var i = 0; i < countries.length; i++) {
-            $('#country-pfa1').append(getOptionListItemHtml(countries[i].id, countries[i].denumire));
-        }
-
-        $('#country-pfa1').val(1).trigger("chosen:updated");
-
-        fetchRegionsPfa1(1);
-        // fetchCitiesPfa1(1);
-    },
-    error: function (err) {
-        console.log(err);
-    }
-});
 
 var fetchRegionsPfa1 = (countryId) => {
     $.ajax({
@@ -340,23 +345,6 @@ var fetchCheckerPfa1 = (countryId) => {
 
 //POPULARE LISTA DE VALORI SUBORDONATE
 
-$.ajax({
-    url: "/dmsws/nomenclator/countries",
-    success: function (result) {
-        var countries = result.taraList;
-        for (var i = 0; i < countries.length; i++) {
-            $('#country-pfa2').append(getOptionListItemHtml(countries[i].id, countries[i].denumire));
-        }
-
-        $('#country-pfa2').val(1).trigger("chosen:updated");
-
-        fetchRegionsPfa2(1);
-        fetchCitiesPfa2(1);
-    },
-    error: function (err) {
-        console.log(err);
-    }
-});
 
 var fetchRegionsPfa2 = (countryId) => {
     $.ajax({
@@ -396,6 +384,8 @@ $('#country-pfa2').on('change', function (e) {
     fetchRegionsPfa2($(this).val());
     fetchCitiesPfa2($(this).val());
 });
+
+
 
 $('#tos-pfa2').on('change', function (e) {
     fetchCheckerPfa2(1);

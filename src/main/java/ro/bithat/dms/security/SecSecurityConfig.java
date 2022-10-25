@@ -108,6 +108,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/PORTAL/**").permitAll()
 //                .antMatchers("/frontend/ps4/PORTAL/bithat-inregistrare.html").permitAll()
                 .antMatchers("/dmsws/nomenclator/**").permitAll()
+                .antMatchers("/dmsws/cerericont/**").permitAll()
                 .antMatchers("/dmsws/utilizator/addPf").permitAll()
                 .antMatchers("/dmsws/utilizator/addPj").permitAll()
                 .antMatchers("/dmsws/anre/processExcel").permitAll()
