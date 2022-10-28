@@ -594,7 +594,7 @@ $( '#register_pfa' )
 
 //inregistrare persoana fizica
 $( '#register_ac' ).submit( function( e ) {
-
+debugger
     $("#register").prop('disabled','disabled');
     var response ="true";
     try{
@@ -622,8 +622,14 @@ $( '#register_ac' ).submit( function( e ) {
             }
         });
         /* Check for TOS */
-        if ($("#tos:checked").length == 0) {
+        if ($("#tos1:checked").length == 0) {
             errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați termenii și condițiile.</li>";
+        }
+        if ($("#tos2:checked").length == 0) {
+            errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați Politica de confidentialitate si de prelucrare a datelor cu caracter personal(GDPR).</li>";
+        }
+        if ($("#tos3:checked").length == 0) {
+            errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați Politica de utilizare cookie-uri.</li>";
         }
         /* Passwords */
         if ($("#pwd1").val() !== $("#pwd2").val()) {
@@ -631,26 +637,26 @@ $( '#register_ac' ).submit( function( e ) {
         }
 
         /* Passwords */
-        if (CheckPassword($("#pwd1").val())==false ){
-            errorString += "<li class='text-danger'>Parola trebuie să conțină: cel puțin 8 caractere; cel puțin un caracter numeric; cel puțin o literă mare; cel puțin o literă mică; cel puțin un caracter special (=, ^, !, @, #, $, &, *)</li>";
-        }
+        // if (CheckPassword($("#pwd1").val())==false ){
+        //     errorString += "<li class='text-danger'>Parola trebuie să conțină: cel puțin 8 caractere; cel puțin un caracter numeric; cel puțin o literă mare; cel puțin o literă mică; cel puțin un caracter special (=, ^, !, @, #, $, &, *)</li>";
+        // }
         // if (checkCaptcha()==false){
         //     errorString += "<li class='text-danger'>Va rugam sa completati captcha.</li>";
         // }
 
-   if (isNaN($("#cnp").val())){
-   	errorString += "<li class='text-danger'>CNP nu este fromat din cifre.</li>";
-   }
+   // if (isNaN($("#cnp").val())){
+   // 	errorString += "<li class='text-danger'>CNP nu este fromat din cifre.</li>";
+   // }
 
         /* Cnp */
-        if (validateCnp($("#cnp").val()) == false) {
-            errorString += "<li class='text-danger'>CNP-ul este invalid.</li>";
-        }
+        // if (validateCnp($("#cnp").val()) == false) {
+        //     errorString += "<li class='text-danger'>CNP-ul este invalid.</li>";
+        // }
 
         /* Email */
-        if (validateEmail($("#email").val()) == false) {
-            errorString += "<li class='text-danger'>Adresa de email este invalidă.</li>";
-        }
+        // if (validateEmail($("#email").val()) == false) {
+        //     errorString += "<li class='text-danger'>Adresa de email este invalidă.</li>";
+        // }
 
 
 
@@ -700,7 +706,7 @@ $( '#register_ac' ).submit( function( e ) {
 
 
             $.ajax( {
-                url: '/dmsws/utilizator/addPf',
+                url: '/dmsws/cerericont/addAc',
                 type: 'POST',
                 data: formData,
                 processData: false,
@@ -712,7 +718,7 @@ $( '#register_ac' ).submit( function( e ) {
                     swal.close();
                     Swal.fire({
                         icon: 'success',
-                        html: "Solicitarea dumneavoastră a fost transmisă! Un link de confirmare a adresei de email v-a fost transmis. Vă rugăm să confirmați contul de email pentru a trimite spre aprobare solicitarea dumneavoastră. Vă mulțumim!",
+                        html: "Solicitarea dumneavoastră a fost transmisă!Vă mulțumim!",
                         focusConfirm: false,
                         confirmButtonText: 'Ok'
                 });
@@ -982,7 +988,7 @@ $( '#register_subordonate' )
 $( document ).ready(function() {
 
 
-    Util.validationFunctions("#register");
+   // Util.validationFunctions("#register");
 //afisare captcha - cu cheie preluata din application.properites: google.recaptcha.secretkey
     $UTIL.loadCaptchaKey().then(function (data) {
         if(data!=null && data!=''){

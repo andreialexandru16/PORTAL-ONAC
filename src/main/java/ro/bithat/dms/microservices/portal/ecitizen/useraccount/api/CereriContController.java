@@ -1,15 +1,36 @@
 package ro.bithat.dms.microservices.portal.ecitizen.useraccount.api;
 
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ServerWebInputException;
 import ro.bithat.dms.microservices.dmsws.file.BaseModel;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
+import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.AddUtilizatorSecurityService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.CereriContService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsNomenclatorService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.*;
+import ro.bithat.dms.security.SecurityUtils;
+import ro.bithat.dms.service.URLUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 @RestController
 public class CereriContController {
@@ -19,6 +40,12 @@ public class CereriContController {
 
     @Autowired
     private CereriContService serviceCereri;
+
+    @Autowired
+    private URLUtil urlUtil;
+
+    @Autowired
+    private AddUtilizatorSecurityService checkerService;
 
 
     public static final String ERROR_TEXT = "Error Status Code ";
@@ -45,6 +72,200 @@ public class CereriContController {
     }
 
 
+    private boolean validateCode(String code) {
+        boolean result = checkerService.checkCode(code);
+        if (result == false) {
+            throw new IllegalAccessError();
+        }
+        return result;
+    }
+    public static class FileUploadParamRequest {
+        final Map<String, String> paramMap = new HashMap<>();
+        final List<UploadFileDescription> uploadedFiles = new ArrayList<>();
+
+
+        public void putParam(String name, String value) {
+            paramMap.put(name, value);
+        }
+        public void addUploadedFile(UploadFileDescription file) {
+            uploadedFiles.add(file);
+        }
+
+        public Map<String, String> getParamMap() {
+            return paramMap;
+        }
+
+        public List<UploadFileDescription> getUploadedFiles() {
+            return uploadedFiles;
+        }
+    }
+    public static class UploadFileDescription {
+        final String fileName;
+
+        final byte[] fileData;
+
+        public UploadFileDescription(String fileName, byte[] fileData) {
+            this.fileName = fileName;
+            this.fileData = fileData;
+        }
+
+        public String getFileName() {
+            return fileName;
+        }
+
+        public byte[] getFileData() {
+            return fileData;
+        }
+    }
+    private FileUploadParamRequest getRequestForm(HttpServletRequest httpServletRequest) {
+        boolean isMultipart = ServletFileUpload.isMultipartContent(httpServletRequest);
+
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setRepository(
+                new File(System.getProperty("java.io.tmpdir")));
+        factory.setSizeThreshold(
+                DiskFileItemFactory.DEFAULT_SIZE_THRESHOLD);
+        factory.setFileCleaningTracker(null);
+
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        FileUploadParamRequest requestForm = new FileUploadParamRequest();
+
+        if(isMultipart) {
+            try {
+                List items = upload.parseRequest(httpServletRequest);
+                Iterator iter = items.iterator();
+                while (iter.hasNext()) {
+                    FileItem item = (FileItem) iter.next();
+
+                    if (!item.isFormField()) {
+                        InputStream uploadedStream = item.getInputStream();
+                        requestForm.addUploadedFile(new CereriContController.UploadFileDescription(item.getName(), IOUtils.toByteArray(uploadedStream)));
+                    } else  {
+                        ((DiskFileItem) item).setDefaultCharset("UTF-8");
+                        requestForm.putParam(item.getFieldName(), item.getString());
+                    }
+                }
+            } catch (FileUploadException e) {
+                e.printStackTrace();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return requestForm;
+    }
+    public Optional<String> getExtensionByStringHandling(String filename) {
+        return Optional.ofNullable(filename)
+                .filter(f -> f.contains("."))
+                .map(f -> f.substring(filename.lastIndexOf(".") + 1));
+    }
+
+    PersoanaFizicaJuridica getPersoanaFizicaFields(FileUploadParamRequest formRequest) {
+        PersoanaFizicaJuridica persoanaFizicaJuridica = new PersoanaFizicaJuridica();
+        persoanaFizicaJuridica.setCnp(formRequest.getParamMap().get("cnp"));
+        persoanaFizicaJuridica.setNume(formRequest.getParamMap().get("nume"));
+        persoanaFizicaJuridica.setPrenume(formRequest.getParamMap().get("prenume"));
+        if(formRequest.getParamMap().get("tip-act-pf")!=null) {
+            persoanaFizicaJuridica.setIdTipAct(new Integer(formRequest.getParamMap().get("tip-act-pf")));
+        }
+        persoanaFizicaJuridica.setSerieAct(formRequest.getParamMap().get("serie"));
+        persoanaFizicaJuridica.setNrAct(formRequest.getParamMap().get("numar"));
+        if(formRequest.getParamMap().get("country")!=null) {
+            persoanaFizicaJuridica.setIdTara(new Integer(formRequest.getParamMap().get("country")));
+        }
+        try {
+            persoanaFizicaJuridica.setIdJudet(new Integer(formRequest.getParamMap().get("region")));
+        } catch (Throwable e) {
+            persoanaFizicaJuridica.setIdJudet(1);
+        }
+        try {
+            persoanaFizicaJuridica.setIdLocalitate(new Integer(formRequest.getParamMap().get("city")));
+        } catch (Throwable e) {
+            persoanaFizicaJuridica.setIdLocalitate(1);
+        }
+        persoanaFizicaJuridica.setStrada(formRequest.getParamMap().get("street"));
+        persoanaFizicaJuridica.setNrStrada(formRequest.getParamMap().get("nr_street"));
+        persoanaFizicaJuridica.setBloc(formRequest.getParamMap().get("bloc"));
+        persoanaFizicaJuridica.setScara(formRequest.getParamMap().get("scara"));
+        persoanaFizicaJuridica.setEtaj(formRequest.getParamMap().get("etaj"));
+        persoanaFizicaJuridica.setApartament(formRequest.getParamMap().get("apartament"));
+
+        String prefixTel = formRequest.getParamMap().get("prefixtel");
+        if (prefixTel == null || prefixTel.trim().isEmpty() || prefixTel.trim().toLowerCase().equals("null")){
+            prefixTel = "";
+        }
+
+        persoanaFizicaJuridica.setTelefon(prefixTel+formRequest.getParamMap().get("tel"));
+        persoanaFizicaJuridica.setEmail(formRequest.getParamMap().get("email"));
+        persoanaFizicaJuridica.setParola(formRequest.getParamMap().get("pwd1"));
+        persoanaFizicaJuridica.setEstePersoanaFizica("1");
+        persoanaFizicaJuridica.setTipFormaOrganizare(1);
+
+        return persoanaFizicaJuridica;
+    }
+
+    //vaadin use apache commons-fileuploads and has no support for spring servlet  MultipartFile
+    @PostMapping(value = "/dmsws/cerericont/addAc", consumes = "multipart/form-data", produces = "text/html")
+    public ResponseEntity<String> addPersoanaFizica(HttpServletRequest httpServletRequest) {
+        try {
+            FileUploadParamRequest requestForm = getRequestForm(httpServletRequest);
+            try{
+                validateCode(requestForm.getParamMap().get("checker"));
+            }catch (IllegalAccessError e) {
+
+            }
+            PersoanaFizicaJuridica persoanaFizicaJuridica = getPersoanaFizicaFields(requestForm);
+
+//            if(requestForm.uploadedFiles.size() == 1 && requestForm.getUploadedFiles().get(0).getFileData().length!=0) {
+//               UploadFileDescription ciFile = requestForm.getUploadedFiles().get(0);
+//                Optional<String> extension = getExtensionByStringHandling(ciFile.getFileName());
+//                boolean allowedExtension = false;
+//                if (extension.isPresent() && !extension.get().isEmpty()){
+//                    allowedExtension = Arrays.stream(ALLOWED_EXTENSIONS).anyMatch(extension.get()::equals);
+//
+//                    if (!allowedExtension)
+//                        throw new IllegalArgumentException("Extensia ." + extension.get() + " nu este permisa.");
+//                }
+//
+//                byte[] requestFormPdf = Base64.getDecoder().decode(requestForm.paramMap.get("request_form_pdf"));
+//                String url="";
+//                try{
+//                    url= urlUtil.getPath(httpServletRequest);
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//                serviceCereri.addPersoanaFizicaJuridica(SecurityUtils.getToken(), persoanaFizicaJuridica,
+//                        ciFile.getFileName(), ciFile.getFileData(),
+//                        null, null,
+//                        null, null, requestFormPdf, url);
+//            }
+//            else{
+//
+//            }
+        } catch (IllegalAccessError e) {
+            return ResponseEntity.badRequest().body("Cerere esuata. Repetati operatia!");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (HttpClientErrorException.BadRequest e) {
+            try {
+                JSONParser parser = new JSONParser();
+                JSONObject json = (JSONObject) parser.parse(e.getResponseBodyAsString());
+                String msg = json.getAsString("info");
+                return ResponseEntity.badRequest().body(msg);
+            } catch (Exception e2){
+                return ResponseEntity.badRequest().body("Exista deja un utilizator inregistrat cu aceasta informatie!");
+            }
+        } catch (HttpClientErrorException.NotAcceptable e) {
+            return ResponseEntity.badRequest().body("Parola nu este destul de complexă.");
+        } catch (ServerWebInputException e) {
+            return ResponseEntity.badRequest().body("Eroare server DMSWS. Repetati operatia!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Eroare server DMSWS. Repetati operatia!");
+        }
+
+        return ResponseEntity.ok("OK");
+    }
+
 
 
 
@@ -57,13 +278,7 @@ public class CereriContController {
 ////    	return checkerService.getCode(request+"");
 ////    }
 ////
-////    private boolean validateCode(String code) {
-////    	boolean result = checkerService.checkCode(code);
-////    	if (result == false) {
-////    		throw new IllegalAccessError();
-////    	}
-////    	return result;
-////    }
+
 //
 ////    //vaadin use apache commons-fileuploads and has no support for spring servlet  MultipartFile
 ////    @PostMapping(value = "/dmsws/utilizator/addPf", consumes = "multipart/form-data", produces = "text/html")
