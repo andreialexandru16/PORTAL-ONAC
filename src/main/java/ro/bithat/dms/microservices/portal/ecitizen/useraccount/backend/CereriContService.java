@@ -54,18 +54,17 @@ public class CereriContService extends DmswsRestService{
 			logger.info("canceled {}", utilizatorAcOe.getEmail_rp());
 			throw new ServerWebInputException("Incarcati mandat!");
 		}
-		PersoanaFizicaJuridicaResponse result = post(utilizatorAcOe, PersoanaFizicaJuridicaResponse.class, checkBaseModelWithExtendedInfo(), getDmswsUrl()+"/utilizator/{token}/addUtilizatorAcOe", token);
+		UtilizatorAcOeResponse result = post(utilizatorAcOe, UtilizatorAcOeResponse.class, checkBaseModelWithExtendedInfo(), getDmswsUrl()+"/utilizator/{token}/addUtilizatorAcOe", token);
 		Integer idFisierDummy = result.getIdFisier();
-		Integer idUtilizator = result.getIdUtilizator();
 		try {
-			fileService.uploadToReplaceExistingFile2(SecurityUtils.getToken(), new Long(idFisierDummy), new Long(idUtilizator), "cont.pdf", pdfData);
+			fileService.uploadToReplaceExistingFile2(SecurityUtils.getToken(), new Long(idFisierDummy), null, "cont.pdf", pdfData);
 		} catch (ServerErrorException | IOException e) {
 			logger.error(e.getMessage(), e);
 			throw new ServerWebInputException(e.getMessage());
 		}
-		if (biFilename != null && !biFilename.isEmpty()) {
-			CreateTipDocFileResponse biResp = fileService.uploadFisierTipDocId(SecurityUtils.getToken(), result.getIdDocumentCI(), new Long(result.getIdUtilizator()),
-					biFilename, biFilename, biFileData, Optional.empty());
+		if (mdFilename != null && !mdFilename.isEmpty()) {
+			CreateTipDocFileResponse biResp = fileService.uploadFisierTipDocId(SecurityUtils.getToken(), result.getIdMandat(), null,
+					mdFilename, mdFilename, mdFileData, Optional.empty());
 			fileService.attachFile(SecurityUtils.getToken(), new Integer(biResp.getFileId()), idFisierDummy);
 		}
 
