@@ -160,48 +160,63 @@ public class CereriContController {
                 .map(f -> f.substring(filename.lastIndexOf(".") + 1));
     }
 
-    PersoanaFizicaJuridica getPersoanaFizicaFields(FileUploadParamRequest formRequest) {
-        PersoanaFizicaJuridica persoanaFizicaJuridica = new PersoanaFizicaJuridica();
-        persoanaFizicaJuridica.setCnp(formRequest.getParamMap().get("cnp"));
-        persoanaFizicaJuridica.setNume(formRequest.getParamMap().get("nume"));
-        persoanaFizicaJuridica.setPrenume(formRequest.getParamMap().get("prenume"));
-        if(formRequest.getParamMap().get("tip-act-pf")!=null) {
-            persoanaFizicaJuridica.setIdTipAct(new Integer(formRequest.getParamMap().get("tip-act-pf")));
+    UtilizatorAcOe getUtilizatorAcOe(FileUploadParamRequest formRequest) {
+        UtilizatorAcOe utilizatorAcOe = new UtilizatorAcOe();
+        if(formRequest.getParamMap().get("id_tip_utilizator")!=null) {
+            utilizatorAcOe.setId_tip_utilizator(new Integer(formRequest.getParamMap().get("id_tip_utilizator")));
+        }else{
+            utilizatorAcOe.setId_tip_utilizator(null);
         }
-        persoanaFizicaJuridica.setSerieAct(formRequest.getParamMap().get("serie"));
-        persoanaFizicaJuridica.setNrAct(formRequest.getParamMap().get("numar"));
-        if(formRequest.getParamMap().get("country")!=null) {
-            persoanaFizicaJuridica.setIdTara(new Integer(formRequest.getParamMap().get("country")));
+        if(formRequest.getParamMap().get("id_institutie_solicitanta")!=null) {
+            utilizatorAcOe.setId_institutie_solicitanta(new Integer(formRequest.getParamMap().get("id_institutie_solicitanta")));
+        }else{
+            utilizatorAcOe.setId_institutie_solicitanta(null);
         }
-        try {
-            persoanaFizicaJuridica.setIdJudet(new Integer(formRequest.getParamMap().get("region")));
-        } catch (Throwable e) {
-            persoanaFizicaJuridica.setIdJudet(1);
+        if(formRequest.getParamMap().get("id_tip_ordonator_credite")!=null) {
+            utilizatorAcOe.setId_tip_ordonator_credite(new Integer(formRequest.getParamMap().get("id_tip_ordonator_credite")));
+        }else{
+            utilizatorAcOe.setId_tip_ordonator_credite(null);
         }
-        try {
-            persoanaFizicaJuridica.setIdLocalitate(new Integer(formRequest.getParamMap().get("city")));
-        } catch (Throwable e) {
-            persoanaFizicaJuridica.setIdLocalitate(1);
+        utilizatorAcOe.setWebsite(formRequest.getParamMap().get("website"));
+        utilizatorAcOe.setTl_sediu(formRequest.getParamMap().get("tl_sediu"));
+        utilizatorAcOe.setFax(formRequest.getParamMap().get("fax"));
+        utilizatorAcOe.setNume_rp(formRequest.getParamMap().get("nume_rp"));
+        utilizatorAcOe.setPrenume_rp(formRequest.getParamMap().get("prenume_rp"));
+        utilizatorAcOe.setFunctie_rp(formRequest.getParamMap().get("functie_rp"));
+        utilizatorAcOe.setEmail_rp(formRequest.getParamMap().get("email_rp"));
+        utilizatorAcOe.setNume_c1(formRequest.getParamMap().get("nume_c1"));
+        utilizatorAcOe.setPrenume_c1(formRequest.getParamMap().get("prenume_c1"));
+        utilizatorAcOe.setEmail_c1(formRequest.getParamMap().get("email_c1"));
+        utilizatorAcOe.setTelefon_c1(formRequest.getParamMap().get("telefon_c1"));
+        utilizatorAcOe.setNume_c2(formRequest.getParamMap().get("nume_c2"));
+        utilizatorAcOe.setPrenume_c2(formRequest.getParamMap().get("prenume_c2"));
+        utilizatorAcOe.setEmail_c2(formRequest.getParamMap().get("email_c2"));
+        utilizatorAcOe.setTelefon_c2(formRequest.getParamMap().get("telefon_c2"));
+        if(formRequest.getParamMap().get("id_judet")!=null) {
+            utilizatorAcOe.setId_judet(new Integer(formRequest.getParamMap().get("id_judet")));
+        }else{
+            utilizatorAcOe.setId_judet(null);
         }
-        persoanaFizicaJuridica.setStrada(formRequest.getParamMap().get("street"));
-        persoanaFizicaJuridica.setNrStrada(formRequest.getParamMap().get("nr_street"));
-        persoanaFizicaJuridica.setBloc(formRequest.getParamMap().get("bloc"));
-        persoanaFizicaJuridica.setScara(formRequest.getParamMap().get("scara"));
-        persoanaFizicaJuridica.setEtaj(formRequest.getParamMap().get("etaj"));
-        persoanaFizicaJuridica.setApartament(formRequest.getParamMap().get("apartament"));
+        if(formRequest.getParamMap().get("id_localitate")!=null) {
+            utilizatorAcOe.setId_localitate(new Integer(formRequest.getParamMap().get("id_localitate")));
+        }else{
+            utilizatorAcOe.setId_localitate(null);
+        }
+        utilizatorAcOe.setStrada(formRequest.getParamMap().get("strada"));
+        utilizatorAcOe.setNr_strada(formRequest.getParamMap().get("nr_strada"));
+        utilizatorAcOe.setBloc(formRequest.getParamMap().get("bloc"));
+        utilizatorAcOe.setScara(formRequest.getParamMap().get("scara"));
+        utilizatorAcOe.setApartament(formRequest.getParamMap().get("apartament"));
+        utilizatorAcOe.setEtaj(formRequest.getParamMap().get("etaj"));
+        utilizatorAcOe.setCod(formRequest.getParamMap().get("cod"));
+        utilizatorAcOe.setParola(formRequest.getParamMap().get("pwd1"));
 
-        String prefixTel = formRequest.getParamMap().get("prefixtel");
-        if (prefixTel == null || prefixTel.trim().isEmpty() || prefixTel.trim().toLowerCase().equals("null")){
-            prefixTel = "";
-        }
 
-        persoanaFizicaJuridica.setTelefon(prefixTel+formRequest.getParamMap().get("tel"));
-        persoanaFizicaJuridica.setEmail(formRequest.getParamMap().get("email"));
-        persoanaFizicaJuridica.setParola(formRequest.getParamMap().get("pwd1"));
-        persoanaFizicaJuridica.setEstePersoanaFizica("1");
-        persoanaFizicaJuridica.setTipFormaOrganizare(1);
 
-        return persoanaFizicaJuridica;
+
+
+
+        return utilizatorAcOe;
     }
 
     //vaadin use apache commons-fileuploads and has no support for spring servlet  MultipartFile
@@ -214,34 +229,31 @@ public class CereriContController {
             }catch (IllegalAccessError e) {
 
             }
-            PersoanaFizicaJuridica persoanaFizicaJuridica = getPersoanaFizicaFields(requestForm);
+            UtilizatorAcOe utilizatorAcOe = getUtilizatorAcOe(requestForm);
 
-//            if(requestForm.uploadedFiles.size() == 1 && requestForm.getUploadedFiles().get(0).getFileData().length!=0) {
-//               UploadFileDescription ciFile = requestForm.getUploadedFiles().get(0);
-//                Optional<String> extension = getExtensionByStringHandling(ciFile.getFileName());
-//                boolean allowedExtension = false;
-//                if (extension.isPresent() && !extension.get().isEmpty()){
-//                    allowedExtension = Arrays.stream(ALLOWED_EXTENSIONS).anyMatch(extension.get()::equals);
-//
-//                    if (!allowedExtension)
-//                        throw new IllegalArgumentException("Extensia ." + extension.get() + " nu este permisa.");
-//                }
-//
-//                byte[] requestFormPdf = Base64.getDecoder().decode(requestForm.paramMap.get("request_form_pdf"));
-//                String url="";
-//                try{
-//                    url= urlUtil.getPath(httpServletRequest);
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//                serviceCereri.addPersoanaFizicaJuridica(SecurityUtils.getToken(), persoanaFizicaJuridica,
-//                        ciFile.getFileName(), ciFile.getFileData(),
-//                        null, null,
-//                        null, null, requestFormPdf, url);
-//            }
-//            else{
-//
-//            }
+            if(requestForm.uploadedFiles.size() == 1 && requestForm.getUploadedFiles().get(0).getFileData().length!=0) {
+               UploadFileDescription mandatFile = requestForm.getUploadedFiles().get(0);
+                Optional<String> extension = getExtensionByStringHandling(mandatFile.getFileName());
+                boolean allowedExtension = false;
+                if (extension.isPresent() && !extension.get().isEmpty()){
+                    allowedExtension = Arrays.stream(ALLOWED_EXTENSIONS).anyMatch(extension.get()::equals);
+
+                    if (!allowedExtension)
+                        throw new IllegalArgumentException("Extensia ." + extension.get() + " nu este permisa.");
+                }
+
+                byte[] requestFormPdf = Base64.getDecoder().decode(requestForm.paramMap.get("request_form_pdf"));
+                String url="";
+                try{
+                    url= urlUtil.getPath(httpServletRequest);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                serviceCereri.addUtilizatorAcOe(SecurityUtils.getToken(), utilizatorAcOe, mandatFile.getFileName(), mandatFile.getFileData(), requestFormPdf, url);
+            }
+            else{
+                throw new ServerWebInputException("Incarcati mandat!");
+            }
         } catch (IllegalAccessError e) {
             return ResponseEntity.badRequest().body("Cerere esuata. Repetati operatia!");
         } catch (IllegalArgumentException e) {

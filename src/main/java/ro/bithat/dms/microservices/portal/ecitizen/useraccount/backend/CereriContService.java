@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ServerErrorException;
 import org.springframework.web.server.ServerWebInputException;
 import ro.bithat.dms.microservices.dmsws.DmswsRestService;
+import ro.bithat.dms.microservices.dmsws.colaboration.Utilizator;
 import ro.bithat.dms.microservices.dmsws.file.BaseModel;
 import ro.bithat.dms.microservices.dmsws.file.DmswsFileService;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
@@ -46,18 +47,14 @@ public class CereriContService extends DmswsRestService{
 	}
 
 
-	public void addPersoanaFizicaJuridica(String token,PersoanaFizicaJuridica persoanaFizicaJuridica,
-										  String biFilename, byte[] biFileData, String cuiFilename, byte[] cuiFileData,String imputernicireFilename, byte[] imputernicireFileData, byte[] pdfData, String urlPath) throws ServerWebInputException {
-		logger.info("adding user {}", persoanaFizicaJuridica.getEmail());
-		/*if ("1".equals(persoanaFizicaJuridica.getEstePersoanaFizica()) && biFilename == null){
-			logger.info("canceled {}", persoanaFizicaJuridica.getEmail());
-			throw new ServerWebInputException("Incarcati copie act identitate");
-		}*/
-		if ("0".equals(persoanaFizicaJuridica.getEstePersoanaFizica()) && cuiFilename == null){
-			logger.info("canceled {}", persoanaFizicaJuridica.getEmail());
-			throw new ServerWebInputException("Incarcati copie CUI societate");
+	public void addUtilizatorAcOe(String token,UtilizatorAcOe utilizatorAcOe,
+										  String mdFilename, byte[] mdFileData, byte[] pdfData, String urlPath) throws ServerWebInputException {
+		logger.info("adding user {}", utilizatorAcOe.getEmail_rp());
+		if ( mdFilename == null){
+			logger.info("canceled {}", utilizatorAcOe.getEmail_rp());
+			throw new ServerWebInputException("Incarcati mandat!");
 		}
-		PersoanaFizicaJuridicaResponse result = post(persoanaFizicaJuridica, PersoanaFizicaJuridicaResponse.class, checkBaseModelWithExtendedInfo(), getDmswsUrl()+"/utilizator/{token}/addPersoanaFizicaJuridica", token);
+		PersoanaFizicaJuridicaResponse result = post(utilizatorAcOe, PersoanaFizicaJuridicaResponse.class, checkBaseModelWithExtendedInfo(), getDmswsUrl()+"/utilizator/{token}/addUtilizatorAcOe", token);
 		Integer idFisierDummy = result.getIdFisier();
 		Integer idUtilizator = result.getIdUtilizator();
 		try {
@@ -71,19 +68,8 @@ public class CereriContService extends DmswsRestService{
 					biFilename, biFilename, biFileData, Optional.empty());
 			fileService.attachFile(SecurityUtils.getToken(), new Integer(biResp.getFileId()), idFisierDummy);
 		}
-		if (cuiFilename != null && !cuiFilename.isEmpty()) {
-			CreateTipDocFileResponse cuiResp = fileService.uploadFisierTipDocId(SecurityUtils.getToken(), result.getIdDocumentCUI(), new Long(result.getIdUtilizator()),
-					cuiFilename, cuiFilename, cuiFileData,Optional.empty());
-			fileService.attachFile(SecurityUtils.getToken(), new Integer(cuiResp.getFileId()), idFisierDummy);
-		}
-		if (imputernicireFilename != null && !imputernicireFilename.isEmpty()) {
-			CreateTipDocFileResponse imputernicireResp = fileService.uploadFisierTipDocId(SecurityUtils.getToken(), result.getIdDocumentImputernicire(), new Long(result.getIdUtilizator()),
-					imputernicireFilename, imputernicireFilename, imputernicireFileData, Optional.empty());
-			fileService.attachFile(SecurityUtils.getToken(), new Integer(imputernicireResp.getFileId()), idFisierDummy);
-		}
 
-
-		logger.info("user added with succes", persoanaFizicaJuridica.getEmail());
+		logger.info("user added with succes", utilizatorAcOe.getEmail_rp());
 	}
 
 
