@@ -21,10 +21,7 @@ import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.AddUtiliz
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.CereriContService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsNomenclatorService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.*;
-import ro.bithat.dms.microservices.portal.ecitizen.website.models.Actionari;
-import ro.bithat.dms.microservices.portal.ecitizen.website.models.ActionariList;
-import ro.bithat.dms.microservices.portal.ecitizen.website.models.RelatiiTert;
-import ro.bithat.dms.microservices.portal.ecitizen.website.models.RelatiiTertList;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.*;
 import ro.bithat.dms.security.SecurityUtils;
 import ro.bithat.dms.service.URLUtil;
 
@@ -316,5 +313,9 @@ public class CereriContController {
         return serviceCereri.updateInfoRelatie(SecurityUtils.getToken(), relatie);
 
     }
+    @PostMapping("/dmsws/cerericont/trimSolicitare/")
+    public BaseModel trimSolicitare(  @RequestBody RelatiiTert relatiiTert) {
+            return serviceCereri.trimSolicitare(SecurityUtils.getToken(), relatiiTert);
 
+    }
 }

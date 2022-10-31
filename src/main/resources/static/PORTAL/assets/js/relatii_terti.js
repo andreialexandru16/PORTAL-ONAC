@@ -71,13 +71,13 @@ var PageManager = {
 
        // //$UTIL.log(PAGE_NAME, PROC_NAME, 'Exit', 0);
     },
-    adaugaContact: function(){
+    trimiteSolicitarea: function(){
         var that=this;
-        var PROC_NAME = "PageManager.adaugaContact";
+        var PROC_NAME = "PageManager.trimiteSolicitarea";
 
-        var jReq= PageManager.getInfoRandNou();
+        var jReq= PageManager.getInfoTrimSol();
 
-        var url = "/dmsws/anre/adauga_persoana_contact/";
+        var url = "/dmsws/cerericont/trimSolicitare/";
         if(jReq!=null && typeof jReq!='undefined'){
             $.ajax({
                 url: url,
@@ -89,14 +89,7 @@ var PageManager = {
                     if (data.result == 'OK') {
                         $.fancybox.close();
 
-
-                        Swal.fire({
-                            icon: "info",
-                            html: "A fost adaugata persoana de contact.",
-                            focusConfirm: false,
-                            confirmButtonText: "Ok"
-                        });
-                        PageManager.afiseazaInregistrari();
+                        window.location.href='/PORTAL/bithat-inregistrare.html';
 
                     } else   if (data.result == 'ERR') {
                         Swal.fire({
@@ -323,49 +316,15 @@ var PageManager = {
         window.location.reload();
         },
 
-    getInfoRandNou: function(){
-        var that=this;
-        var PROC_NAME = "PageManager.getInfoRandNou";
+    getInfoTrimSol: function(){
 
-        var numeStr= $("#add_nume").val();
-        var descriere= $("#add_descriere").val();
-        var email= $("#add_email").val();
-        var telefon= $("#add_telefon").val();
-        var fax= $("#add_fax").val();
-        var functie= $("#add_functie").val();
+        var idCerere=PageManager.idCerere;
 
-        var departament= $("#add_departament").val();
-        var reprezentant= $("#add_reprezentant").prop('checked');
-        var imputernicit= $("#add_imputernicit").prop('checked');
-
-
-        if(reprezentant!=null && typeof reprezentant!='undefined' && reprezentant==true){
-            reprezentant=1;
-        }else{
-            reprezentant=0;
-        }
-
-        if(imputernicit!=null && typeof imputernicit!='undefined' && imputernicit==true){
-            imputernicit=1;
-        }else{
-            imputernicit=0;
-        }
-
-        var emailValid= validateEmail(email);
-         if( numeStr!=null && numeStr!='' && emailValid ){
             var objRand= {
-                nume: numeStr,
-                descriere: descriere,
-                email: email,
-                telefon:telefon,
-                fax:fax,
-                functie:functie,
-                departament:departament,
-                reprezentant:reprezentant,
-                imputernicit:imputernicit
+                id_cerere:idCerere
             };
             return JSON.stringify(objRand);
-        }
+
         //$UTIL.log(PAGE_NAME, PROC_NAME, 'Exit', 0);
     },
 

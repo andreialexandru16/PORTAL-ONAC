@@ -19,10 +19,7 @@ import ro.bithat.dms.microservices.dmsws.file.DmswsFileService;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.CreateTipDocFileResponse;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.*;
-import ro.bithat.dms.microservices.portal.ecitizen.website.models.Actionari;
-import ro.bithat.dms.microservices.portal.ecitizen.website.models.ActionariList;
-import ro.bithat.dms.microservices.portal.ecitizen.website.models.RelatiiTert;
-import ro.bithat.dms.microservices.portal.ecitizen.website.models.RelatiiTertList;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.*;
 import ro.bithat.dms.security.SecurityUtils;
 
 import java.io.IOException;
@@ -121,6 +118,16 @@ public class CereriContService extends DmswsRestService{
 
 
 		return post(relatiiTert, MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON,
+				BaseModel.class, checkBaseModel(),
+				url, token);
+	}
+
+	public BaseModel trimSolicitare(String token, RelatiiTert relatiiTert) {
+
+		String url =  getDmswsUrl()+"/cerericont/{token}/trimSolicitare/";
+
+
+		return post(relatiiTert,   MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON,
 				BaseModel.class, checkBaseModel(),
 				url, token);
 	}
