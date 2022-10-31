@@ -6,6 +6,16 @@ public class RelatiiTert {
     int id_tip_relatie;
     String denumire_institutie;
     String tip_relatie;
+    int id_cerere;
+
+
+    public int getId_cerere() {
+        return id_cerere;
+    }
+
+    public void setId_cerere(int id_cerere) {
+        this.id_cerere = id_cerere;
+    }
 
     public int getId() {
         return id;

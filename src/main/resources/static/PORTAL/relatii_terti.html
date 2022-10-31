@@ -113,7 +113,7 @@
 
 
                         <!-- begin Table -->
-                        <div   class="table_inbox table_inregistrari_actionari">
+                        <div   class="table_inbox table_inregistrari_relatii_tert">
                             <!--date dinamice -> tmpl_inregistrari_list-->
 
                         </div>
@@ -216,61 +216,30 @@
   </form>
 
       <!-- begin Popup - Adauga rand nou -->
-      <div class="modal_expertiza" style="display: none;" id="adauga_rand_nou_actionar">
+      <div class="modal_expertiza" style="display: none;" id="adauga_rand_nou_relatie">
 
           <form id="form_adauga_actionar" autocomplete="off">
               <!-- begin Popup - content -->
               <div class="box_rand_nou">
-
-                  <!-- begin Nume -->
-                  <div class="flex_width50">
-                      <p>Actionar<span style="color:red">*</span></p>
-                      <input id="add_actionar" class="" type="text" autocomplete="off">
-                  </div>
-                  <!-- end Nume -->
-                  <!-- begin Descriere -->
-                  <div class="flex_width50">
-                      <p>Capital de stat/public</p>
-                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_tip_capital">
-                          <!--  date dinamice - aduse din tmpl_departament-->
-
-                      </select>
-                  </div>
-                  <!-- end Descriere -->
-
-                  <!-- begin Email -->
-                  <div class="flex_width33">
-                      <p>Procente</p>
-                      <input id="add_procente" class="" type="text" data-val="true">
-                  </div>
-                  <!-- end Email -->
-
-                  <!-- begin actiuni -->
-                  <div class="flex_width33">
-                      <p>Nr.actiuni</p>
-                      <input id="add_nr_actiuni" class="" type="tel" value="">
-                  </div>
-                  <!-- end actiuni -->
-                  <!-- begin Valoare -->
-                  <div class="flex_width33">
-                      <p>Valoare</p>
-                      <input id="add_valoare" class="" type="text" value="">
-                  </div>
-                  <!-- end Valoare -->
-                  <!-- begin Functie -->
                   <div class="flex_full_width">
-                      <p>Moneda</p>
-                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_moneda">
+                      <p>Denumire autoritate<span style="color:red">*</span></p>
+                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_den_autoritate">
                           <!--  date dinamice - aduse din tmpl_departament-->
 
                       </select>
                   </div>
-                  <!-- end Functie -->
 
+                  <div class="flex_full_width">
+                      <p>Tip relatie<span style="color:red">*</span></p>
+                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_tip_relatie">
+                          <!--  date dinamice - aduse din tmpl_departament-->
+
+                      </select>
+                  </div>
               </div>
               <!-- end Popup - content -->
 
-              <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaActionar()" id="btn_adauga_actionar" type="submit">Adauga</button>
+              <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaRelatie()" id="btn_adauga_actionar" type="submit">Adauga</button>
 
           </form>
 
@@ -760,98 +729,8 @@
           </div>
           <!-- end Popup - Adauga rand nou -->
 
-
-
-
-          <!-- begin Popup - Adauga rand nou -->
-          <div class="modal_aut_gosp_apelor" style="display: none;" id="adauga_rand_nou_aut_gosp_apelor">
-              <form id="form_editeaza_aut_gosp_apelor" autocomplete="off">
-
-              <div class="box_rand_nou">
-                  <div class="flex_full_width">
-                      <p>Emitent autorizatie</p>
-                      <input id="aga_emitent" class="" type="text" value="">
-                  </div>
-
-                  <div class="flex_width50">
-                      <p>Numar de inregistrare solicitare</p>
-                      <input id="aga_nr_inreg_emitent" class="" type="text" value="">
-                  </div>
-
-                  <div class="flex_width50" style="flex-basis: 66.66%;">
-                      <p>Data inregistrare solicitare</p>
-                      <input id="aga_data_inreg_emitent" type="text" class="datepicker" value="">
-                  </div>
-
-                  <div class="flex_width33"  style="flex-basis: 100%;">
-                      <p>Sau</p>
-                  </div>
-
-                  <div class="flex_width33">
-                      <p>Numar autorizatie</p>
-                      <input id="aga_numar" class="min130" type="text" value="">
-                  </div>
-
-                  <div class="flex_width33">
-                      <p>Data emiterii autorizatie</p>
-                      <input id="aga_data_emiterii" type="text" class="datepicker" value="">
-                  </div>
-
-
-                  <div class="flex_width33">
-                      <p>Data expirarii autorizatie</p>
-                      <input id="aga_data_expirarii" type="text" class="datepicker" value="">
-                  </div>
-
-                  <div  class="flex_width33">
-                      <p>Judet</p>
-                      <select id="aga_select_judet" class="custom_chosen">
-                          <!--  date dinamice - aduse din tmpl_judet-->
-
-                      </select>
-                  </div>
-
-                  <div  class="flex_width33">
-                      <p>Localitate principala</p>
-                      <select id="aga_select_localitate_principala" class="custom_chosen">
-                          <!--  date dinamice - aduse din tmpl_localitate-->
-
-                      </select>
-                  </div>
-
-                  <div  class="flex_width33">
-                      <p>Localitate apartinatoare</p>
-                      <select id="aga_select_localitate_apartinatoare" class="custom_chosen">
-                          <!--  date dinamice - aduse din tmpl_localitate-->
-
-                      </select>
-                  </div>
-
-                  <div class="flex_full_width">
-                      <p>Adresa</p>
-                      <textarea id="aga_adresa" class="min130"></textarea>
-                  </div>
-
-                  <div class="flex_full_width">
-                      <p>Obiectul autorizatiei</p>
-                      <input id="aga_obiectul_autorizatiei" class="min130" type="text" value="">
-                  </div>
-              </div>
-
-              <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaAutGospApelor()">Salveaza</button>
-
-              </form>
-
-          </div>
-          <!-- end Popup - Adauga rand nou -->
-
-
-
-  <!-- Templates Mustache-->
-
-
       <!-- Template Mustache - Lista ACTIONARI (tabel)-->
-      <script id="tmpl_actionari_list" type="x-tmpl-mustache">
+      <script id="tmpl_relatii_tert_list" type="x-tmpl-mustache">
 <div class="table_scroll">
        <table class="dataTable_nosearch2 display"  style="width: 100%">
 
@@ -864,23 +743,23 @@
                     </tr>
                 </thead>
                 <tbody>
-  {{#data}}
+                 {{#data}}
                     <tr>
-                        <td class="sorting_1">{{actionar}}</td>
-                        <td>{{tip_capital}}</td>
+                        <td class="sorting_1">{{denumire_institutie}}</td>
+                        <td>{{tip_relatie}}</td>
                            <td>
-                      <a href="#" onclick="PageManager.stergeActionar({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
+                      <a href="#" onclick="PageManager.stergeRelatie({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
                         <a  data-fancybox data-src="#editeaza_rand_nou_actionar"  href="#" onclick="PageManager.getActionarInfo({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-edit tooltip_chat"><span class="tooltiptext">Editeaza</span></i></a>
                             </td>
 
                     </tr>
 
-    {{/data}}
+                {{/data}}
    </tbody>
 
     </table>
     </div>
-      <button class="btn btn_green float_right mt30" data-fancybox data-src="#adauga_rand_nou_actionar" onClick="PageManager.prepareOpenRandNou()" class="btn btn_green mt20 float_right">+ adauga rand nou</button>
+      <button class="btn btn_green float_right mt30" data-fancybox data-src="#adauga_rand_nou_relatie" onClick="PageManager.prepareOpenRandNou()" class="btn btn_green mt20 float_right">+ adauga rand nou</button>
 
 </script>
 
@@ -899,8 +778,8 @@
 </script>
 
           <!-- Template Mustache - Lista capital (select)-->
-          <script id="tmpl_tip_capital" type="x-tmpl-mustache">
-            <option selected value="">Cauta Capital de stat/public </option>
+          <script id="tmpl_tip_relatie" type="x-tmpl-mustache">
+            <option selected value="">Cauta tip relatie</option>
 
         {{#data}}
         <option value="{{id}}">{{valoare}}</option>
@@ -909,8 +788,8 @@
 </script>
 
 
-          <script id="tmpl_moneda_actionar" type="x-tmpl-mustache">
-            <option selected value="">Cauta moneda </option>
+          <script id="tmpl_denumire_autoritate" type="x-tmpl-mustache">
+            <option selected value="">Cauta institutie </option>
 
     {{#data}}
         <option value="{{id}}">{{valoare}}</option>

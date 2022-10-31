@@ -11,14 +11,47 @@ var PAGE_NAME = "relatii_terti.js";
 
 var PageManager = {
     idCerere:null,
-
+    idForUpt:null,
+    idForUptAC:null,
+    idForUptSD:null,
+    myDrop:null,
+    wsUrl: null,
+    wsToken: null,
+    templates: {},
+    listaInregistrari: {},
+    listaInregistrariSucursala: {},
+    listaInregistrariAutMediu: {},
+    listaInregistrariAutGospApelor: {},
+    listaActionari: {},
+    listaRelatiiTert: {},
+    listaSedii: {},
+    infoTert: null,
+    listaCautare:{},
+    nrPagina: 0,
+    nrMaxPages: 4,
+    numPerPage: 10,
+    COD_LOV_DEPARTAMENT: "LOV_DEPARTAMENTE_CONTACTE",
+    COD_LOV_TIP_CAPITAL_A: "LOV_TIP_CAPITAL_A",
+    COD_LOV_TIP_RELATIE: "LOV_TIP_RELATIE",
+    COD_LOV_MONEDA_A: "LOV_MONEDE_A",
+    COD_LOV_INSTITUTIE_PORTAL: "LOV_INSTITUTIE_PORTAL",
+    COD_LOV_JUDET: "LOV_JUDET",
+    COD_LOV_STAREA_FIRMEI: "LOV_STARE_FIRMA",
+    COD_LOV_COD_CAEN: "LOV_COD_CAEN",
+    COD_LOV_LOCALITATE: "LOV_LOCALITATE",
+    COD_LOV_SIRUTA: "LOV_SIRUTA",
+    COD_LOV_LOCALITATE_APARTINATOARE: "LOV_LOCALITATE_APARTINATOARE",
+    COD_LOV_DOMENIU: "LOV_TBX_DOMENIU",
      init: function () {
         var PROC_NAME = "PageManager.init";
         debugger
        // //$UTIL.log(PAGE_NAME, PROC_NAME, 'Enter', 0);
         //-------------- se apeleaza obligatoriu la initializarea paginii---------------------
-        this.mandatoryFunctions();
-         PageManager.afiseazaInregistrariTertRelatii();
+         var idCerere=""
+         idCerere=new URL(location.href).searchParams.get('idCerere');
+        PageManager.idCerere=idCerere;
+         this.mandatoryFunctions();
+         PageManager.afiseazaInregistrariTertRelatii(idCerere);
 
 
 
@@ -81,25 +114,22 @@ var PageManager = {
         //$UTIL.log(PAGE_NAME, PROC_NAME, 'Exit', 0);
     },
 
-    adaugaActionar: function(){
+    adaugaRelatie: function(){
+        debugger
         var that=this;
-        var PROC_NAME = "PageManager.adaugaActionar";
+        var PROC_NAME = "PageManager.adaugaRelatie";
 
-        var req = PageManager.getInfoActionarNou();
+        var req = PageManager.getInfoRelatie();
         var jReq = JSON.stringify(req);
 
 
         var ok = true;
-        // if (typeof req.nr_actiuni === 'undefined' || req.nr_actiuni === null || req.nr_actiuni.trim() === '') {
-        //     that.animateElementErr("#add_nr_actiuni");
-        //     ok = false;
-        // }
-        // if (typeof req.valoare === 'undefined' || req.valoare === null || req.valoare.trim() === '') {
-        //     that.animateElementErr("#add_valoare");
-        //     ok = false;
-        // }
-        if (typeof req.actionar === 'undefined' || req.actionar === null || req.actionar.trim() === '') {
-            that.animateElementErr("#add_actionar");
+        if (typeof req.id_denumire_institutie === 'undefined' || req.id_denumire_institutie === null || req.id_denumire_institutie.trim() === '') {
+            that.animateElementErr("#container_select_den_autoritate");
+            ok = false;
+        }
+        if (typeof req.id_tip_relatie === 'undefined' || req.id_tip_relatie === null || req.id_tip_relatie.trim() === '') {
+            that.animateElementErr("#container_select_tip_relatie");
             ok = false;
         }
 
@@ -116,7 +146,7 @@ var PageManager = {
             return;
         }
 
-        var url = "/dmsws/anre/adaugaActionar/";
+        var url = "/dmsws/cerericont/adaugaRelatie/";
        if(jReq!=null && typeof jReq!='undefined'){
             $.ajax({
                 url: url,
@@ -131,11 +161,11 @@ var PageManager = {
 
                         Swal.fire({
                             icon: "info",
-                            html: "A fost adaugat actionarul.",
+                            html: "A fost adaugata relatia.",
                             focusConfirm: false,
                             confirmButtonText: "Ok"
                         });
-                        PageManager.afiseazaInregistrariTertRelatii();
+                        PageManager.afiseazaInregistrariTertRelatii(PageManager.idCerere);
 
                     } else   if (data.result == 'ERR') {
                         Swal.fire({
@@ -199,13 +229,14 @@ var PageManager = {
 
         //$UTIL.log(PAGE_NAME, PROC_NAME, 'Exit', 0);
     },
-    stergeActionar: function(id){
+    stergeRelatie: function(id){
+        debugger
         var that=this;
-        var PROC_NAME = "PageManager.stergeActionar";
+        var PROC_NAME = "PageManager.stergeRelatie";
 
 
 
-        var url = "/dmsws/anre/stergeActionar/"+id;
+        var url = "/dmsws/cerericont/stergeRelatie/"+id;
 
         $.ajax({
             url: url,
@@ -219,11 +250,11 @@ var PageManager = {
 
                     Swal.fire({
                         icon: "info",
-                        html: "Actionarul a fost sters cu succes.",
+                        html: "Relatia a fost stearsa cu succes.",
                         focusConfirm: false,
                         confirmButtonText: "Ok"
                     });
-                    PageManager.afiseazaInregistrariTertRelatii();
+                    PageManager.afiseazaInregistrariTertRelatii(PageManager.idCerere);
 
 
                 } else   if (data.result == 'ERR') {
@@ -338,24 +369,16 @@ var PageManager = {
     },
 
 
-    getInfoActionarNou: function(){
+    getInfoRelatie: function(){
         var that=this;
-        var PROC_NAME = "PageManager.getInfoActionarNou";
+        var PROC_NAME = "PageManager.getInfoRelatie";
 
-        var add_actionar= $("#add_actionar").val();
-        var add_tip_Capital= $("#container_select_tip_capital").val();
-        var add_procente= $("#add_procente").val();
-        var add_nr_actiuni= $("#add_nr_actiuni").val();
-        var add_valoare= $("#add_valoare").val();
-        var add_moneda= $("#container_select_moneda").val();
-
+        var id_denumire_institutie= $("#container_select_den_autoritate").val();
+        var id_tip_relatie= $("#container_select_tip_relatie").val();
             var objRand= {
-                actionar: add_actionar,
-                id_tip_capital: add_tip_Capital,
-                procente: add_procente,
-                nr_actiuni:add_nr_actiuni,
-                valoare:add_valoare,
-                id_moneda:add_moneda
+                id_denumire_institutie: id_denumire_institutie,
+                id_tip_relatie: id_tip_relatie,
+                id_cerere:PageManager.idCerere
             };
             return objRand;
         //$UTIL.log(PAGE_NAME, PROC_NAME, 'Exit', 0);
@@ -393,7 +416,7 @@ var PageManager = {
         var that=this;
         var PROC_NAME = "PageManager.prepareOpenRandNou";
 
-        var urlMonAc="/dmsws/lov/values_by_code/"+ PageManager.COD_LOV_MONEDA_A;
+        var urlMonAc="/dmsws/lov/values_by_code/"+ PageManager.COD_LOV_INSTITUTIE_PORTAL;
         $.ajax({
             url: urlMonAc,
             success: function (data) {
@@ -402,12 +425,12 @@ var PageManager = {
                     if (data.lov != null && data.lov.length != 0) {
 
                         //apelam render template pentru a popula tabelul cu rezultatele obtinute
-                        that.renderTemplate('tmpl_moneda_actionar', {data: data.lov}).then(function (html) {
+                        that.renderTemplate('tmpl_denumire_autoritate', {data: data.lov}).then(function (html) {
 
-                            var tblHolder = $('#container_select_moneda');
+                            var tblHolder = $('#container_select_den_autoritate');
                             tblHolder.html(html);
 
-                            $("#container_select_moneda").trigger("chosen:updated");
+                            $("#container_select_den_autoritate").trigger("chosen:updated");
 
                         }, function () {
                             that.alert('Unable to render template', 'ERROR');
@@ -419,16 +442,7 @@ var PageManager = {
             }
         });
 
-
-
-
-
-
-
-
-
-
-        var urlAc= "/dmsws/lov/values_by_code/"+ PageManager.COD_LOV_TIP_CAPITAL_A;
+        var urlAc= "/dmsws/lov/values_by_code/"+ PageManager.COD_LOV_TIP_RELATIE;
         $.ajax({
             url: urlAc,
             success: function (data) {
@@ -437,12 +451,12 @@ var PageManager = {
                     if (data.lov != null && data.lov.length != 0) {
 
                         //apelam render template pentru a popula tabelul cu rezultatele obtinute
-                        that.renderTemplate('tmpl_tip_capital', {data: data.lov}).then(function (html) {
+                        that.renderTemplate('tmpl_tip_relatie', {data: data.lov}).then(function (html) {
 
-                            var tblHolder = $('#container_select_tip_capital');
+                            var tblHolder = $('#container_select_tip_relatie');
                             tblHolder.html(html);
 
-                            $("#container_select_tip_capital").trigger("chosen:updated");
+                            $("#container_select_tip_relatie").trigger("chosen:updated");
 
                         }, function () {
                             that.alert('Unable to render template', 'ERROR');
@@ -454,38 +468,6 @@ var PageManager = {
             }
         });
 
-
-
-
-
-
-
-        var url = "/dmsws/lov/values_by_code/"+ PageManager.COD_LOV_DEPARTAMENT;
-        $.ajax({
-            url: url,
-            success: function (data) {
-                if (data.result == 'OK') {
-
-                    if (data.lov != null && data.lov.length != 0) {
-
-                        //apelam render template pentru a popula tabelul cu rezultatele obtinute
-                        that.renderTemplate('tmpl_departament', {data: data.lov}).then(function (html) {
-                            var tblHolder = $('#container_select_departament');
-                             tblHolder.html(html);
-
-                            $("#container_select_departament").trigger("chosen:updated");
-
-                        }, function () {
-                            that.alert('Unable to render template', 'ERROR');
-                        });
-
-
-                    }
-                }
-            }
-        });
-
-       //$UTIL.log(PAGE_NAME, PROC_NAME, 'Exit', 0);
     },
 
 
@@ -1177,13 +1159,13 @@ var PageManager = {
         //$UTIL.log(PAGE_NAME, PROC_NAME, 'Exit', 0);
     },
 
-    getListaRelatii: function (jReq) {
-
+    getListaRelatii: function (idCerere) {
+        debugger
         var that = this;
         var PROC_NAME = "PageManager.getListaRelatii";
         //$UTIL.log(PAGE_NAME, PROC_NAME, 'Enter', 0);
 
-        var url ="/dmsws/anre/getListaRelatii";
+        var url ="/dmsws/cerericont/getListaRelatii/" + idCerere;
 
         console.log("Ajax Call Start:" + url);
 
@@ -1192,7 +1174,7 @@ var PageManager = {
 
             success: function (data) {
                 if (data.result == 'OK') {
-                    that.listaActionari = data.actionariList;
+                    that.listaRelatiiTert = data.relatiiTertList;
 
 
                     /* if(data.persoaneContactList==null||data.persoaneContactList.length==0  ){
@@ -1205,9 +1187,9 @@ var PageManager = {
                      }
                      else{*/
                     //apelam render template pentru a popula tabelul cu rezultatele obtinute
-                    that.renderTemplate('tmpl_actionari_list', {data: data.actionariList}).then(function (html) {
+                    that.renderTemplate('tmpl_relatii_tert_list', {data: data.relatiiTertList}).then(function (html) {
 
-                        var tblHolder = $('.table_inregistrari_actionari');
+                        var tblHolder = $('.table_inregistrari_relatii_tert');
                         tblHolder.html('');
                         tblHolder.html(html);
 
@@ -1678,7 +1660,7 @@ var PageManager = {
                             focusConfirm: false,
                             confirmButtonText: "Ok"
                         });
-                        PageManager.afiseazaInregistrariTertRelatii();
+                        PageManager.afiseazaInregistrariTertRelatii(PageManager.idCerere);
 
                     } else   if (data.result == 'ERR') {
                         Swal.fire({
@@ -1743,6 +1725,7 @@ var PageManager = {
         }
     },
     mandatoryFunctions: function () {
+        debugger
         var PROC_NAME = "PageManager.mandatoryFunctions";
         //.log(PAGE_NAME, PROC_NAME, 'Enter', 0);
         //-------------- preluam WS_URL si WS_TOKEN din documentaPortal-util.js ---------------------
@@ -1754,8 +1737,11 @@ var PageManager = {
 
         //$UTIL.log(PAGE_NAME, PROC_NAME, 'Exit', 0);
     },
-    compileAllTemplates: function () {
-        this.templates['tmpl_actionari_list'] = $('#tmpl_actionari_list').html();
+    compileAllTemplates: function () {       
+        debugger
+        this.templates['tmpl_relatii_tert_list'] = $('#tmpl_relatii_tert_list').html();
+        this.templates['tmpl_tip_relatie'] = $('#tmpl_tip_relatie').html();
+        this.templates['tmpl_denumire_autoritate'] = $('#tmpl_denumire_autoritate').html();
 
 
         // parseaza toate template-urile
@@ -2970,12 +2956,12 @@ var PageManager = {
 
         //$UTIL.log(PAGE_NAME, PROC_NAME, 'Exit', 0);
     },
-    afiseazaInregistrariTertRelatii: function () {
+    afiseazaInregistrariTertRelatii: function (etapaidCerere) {
         var PROC_NAME = "PageManager.afiseazaInregistrariTertRelatii";
 
 
         //apelam reconstructie paginare & afisare rezultate
-        PageManager.getListaRelatii();
+        PageManager.getListaRelatii(etapaidCerere);
 
         //$UTIL.log(PAGE_NAME, PROC_NAME, 'Exit', 0);
     },
