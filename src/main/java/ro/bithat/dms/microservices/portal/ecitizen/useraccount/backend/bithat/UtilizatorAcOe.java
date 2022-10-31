@@ -38,7 +38,34 @@ public class UtilizatorAcOe extends  BaseModel{
     private String etaj;
     private String cod;
     private String parola;
+    private String tos_pers_jur;
     private Integer id_unitate;
+    private String utilizator_ac_oe;
+    private String error;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getUtilizator_ac_oe() {
+        return utilizator_ac_oe;
+    }
+
+    public void setUtilizator_ac_oe(String utilizator_ac_oe) {
+        this.utilizator_ac_oe = utilizator_ac_oe;
+    }
+
+    public String getTos_pers_jur() {
+        return tos_pers_jur;
+    }
+
+    public void setTos_pers_jur(String tos_pers_jur) {
+        this.tos_pers_jur = tos_pers_jur;
+    }
 
     public Integer getId_unitate() {
         return id_unitate;

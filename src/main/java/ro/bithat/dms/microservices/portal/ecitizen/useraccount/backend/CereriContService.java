@@ -1,8 +1,11 @@
 package ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend;
 
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -29,6 +32,11 @@ public class CereriContService extends DmswsRestService{
 	@Autowired
 	private DmswsFileService fileService;
 
+	@Value("${dmsws.anonymous.userid}")
+	private Long idUtilizatorAnonimus;
+
+
+
 	public TipOrdonatorList getListOperatorTipCredite(@PathVariable String token) {
 		return get(TipOrdonatorList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getListOperatorTipCredite",
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
@@ -54,16 +62,17 @@ public class CereriContService extends DmswsRestService{
 			logger.info("canceled {}", utilizatorAcOe.getEmail_rp());
 			throw new ServerWebInputException("Incarcati mandat!");
 		}
-		UtilizatorAcOeResponse result = post(utilizatorAcOe, UtilizatorAcOeResponse.class, checkBaseModelWithExtendedInfo(), getDmswsUrl()+"/utilizator/{token}/addUtilizatorAcOe", token);
+
+		UtilizatorAcOeResponse result = post(utilizatorAcOe, UtilizatorAcOeResponse.class, checkBaseModelWithExtendedInfo(), getDmswsUrl()+"/cerericont/{token}/addUtilizatorAcOe", token);
 		Integer idFisierDummy = result.getIdFisier();
 		try {
-			fileService.uploadToReplaceExistingFile2(SecurityUtils.getToken(), new Long(idFisierDummy), null, "cont.pdf", pdfData);
+			fileService.uploadToReplaceExistingFile2(SecurityUtils.getToken(), new Long(idFisierDummy), idUtilizatorAnonimus, "cont.pdf", pdfData);
 		} catch (ServerErrorException | IOException e) {
 			logger.error(e.getMessage(), e);
 			throw new ServerWebInputException(e.getMessage());
 		}
 		if (mdFilename != null && !mdFilename.isEmpty()) {
-			CreateTipDocFileResponse biResp = fileService.uploadFisierTipDocId(SecurityUtils.getToken(), result.getIdMandat(), null,
+			CreateTipDocFileResponse biResp = fileService.uploadFisierTipDocId(SecurityUtils.getToken(), result.getIdMandat(), idUtilizatorAnonimus,
 					mdFilename, mdFilename, mdFileData, Optional.empty());
 			fileService.attachFile(SecurityUtils.getToken(), new Integer(biResp.getFileId()), idFisierDummy);
 		}

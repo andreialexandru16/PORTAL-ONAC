@@ -160,7 +160,7 @@ public class CereriContController {
                 .map(f -> f.substring(filename.lastIndexOf(".") + 1));
     }
 
-    UtilizatorAcOe getUtilizatorAcOe(FileUploadParamRequest formRequest) {
+    UtilizatorAcOe getUtilizatorAc(FileUploadParamRequest formRequest) {
         UtilizatorAcOe utilizatorAcOe = new UtilizatorAcOe();
         if(formRequest.getParamMap().get("id_tip_utilizator")!=null) {
             utilizatorAcOe.setId_tip_utilizator(new Integer(formRequest.getParamMap().get("id_tip_utilizator")));
@@ -210,6 +210,8 @@ public class CereriContController {
         utilizatorAcOe.setEtaj(formRequest.getParamMap().get("etaj"));
         utilizatorAcOe.setCod(formRequest.getParamMap().get("cod"));
         utilizatorAcOe.setParola(formRequest.getParamMap().get("pwd1"));
+        utilizatorAcOe.setTos_pers_jur(formRequest.getParamMap().get("id_entitate_pers_jur"));
+        utilizatorAcOe.setUtilizator_ac_oe("AC");
 
 
 
@@ -229,7 +231,7 @@ public class CereriContController {
             }catch (IllegalAccessError e) {
 
             }
-            UtilizatorAcOe utilizatorAcOe = getUtilizatorAcOe(requestForm);
+            UtilizatorAcOe utilizatorAcOe = getUtilizatorAc(requestForm);
 
             if(requestForm.uploadedFiles.size() == 1 && requestForm.getUploadedFiles().get(0).getFileData().length!=0) {
                UploadFileDescription mandatFile = requestForm.getUploadedFiles().get(0);
