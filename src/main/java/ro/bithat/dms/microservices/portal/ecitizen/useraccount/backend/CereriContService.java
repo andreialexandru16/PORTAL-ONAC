@@ -19,6 +19,9 @@ import ro.bithat.dms.microservices.dmsws.file.DmswsFileService;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.CreateTipDocFileResponse;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.*;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.ActionariList;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.RelatiiTert;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.RelatiiTertList;
 import ro.bithat.dms.security.SecurityUtils;
 
 import java.io.IOException;
@@ -80,6 +83,12 @@ public class CereriContService extends DmswsRestService{
 
 		logger.info("user added with succes", utilizatorAcOe.getEmail_rp());
 		return idCerere;
+	}
+	public RelatiiTertList getListaRelatii(String token) {
+		String url =  getDmswsUrl()+"/cerericont/{token}/getListaRelatii";
+
+		return get(RelatiiTertList.class, checkBaseModel(),url,
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
 	}
 
 

@@ -716,7 +716,7 @@ $( '#register_ac' ).submit( function( e ) {
                 },
                 success: function (resultData) {
                     swal.close();
-                     window.location.href = '/PORTAL/autentificare.html?idCerere=' + resultData;
+                     window.location.href = '/PORTAL/relatii_terti.html?idCerere=' + resultData;
 
 
                 },

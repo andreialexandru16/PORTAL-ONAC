@@ -1,0 +1,1101 @@
+<!doctype html>
+<html class="no-js" lang=""> 
+
+<head>
+  <meta charset="utf-8">
+  <title>ANRE</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/favicon.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"> 
+  <link href="assets/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="assets/css/font-awesome-all.min.css" rel="stylesheet">
+
+  <!-- CSS -->
+  <!-- CSS - jQuery -->
+  <link rel="stylesheet" href="assets/css/jquery-ui.css">
+  <!-- CSS - DataTable -->
+  <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+  <!-- CSS Semantic - dropdown -->
+  <link rel="stylesheet" href="assets/css/dropdown.min.css">
+  <link rel="stylesheet" href="assets/css/transition.min.css">
+  <!-- CSS - Fancybox -->
+  <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
+  <!-- CSS - Yearpicker -->
+  <link rel="stylesheet" href="assets/css/yearpicker.css">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="assets/css/chosen.v2.css">
+
+  <!-- Custom -->
+  <link rel="stylesheet" href="assets/css/main_anre.css">
+
+  <style>
+      .chosen-container-single .chosen-single div b{
+          background: none;
+      }
+      .file_name_textarea {
+          resize: none;
+          width: 300px !important;
+          height: 50px;
+          display: block;
+      }
+
+      .file_name_buttons {
+          width:300px !important;
+          display: block;
+      }
+
+      .file_name_textarea_holder {
+          width:300px !important;
+          display: block;
+      }
+
+      .high-swal {
+          z-index: 9999999999;
+      }
+
+
+      @media screen and (max-width: 767px) {
+          .box_rand_nou > div {
+              flex-basis: 50%;
+          }
+          .tabs .ui-tabs-tab a {white-space: break-spaces;}
+          select.custom_chosen {
+              width: 100%;
+              border: 1px solid #c5c5c5;
+              padding: 8px;
+          }
+      }
+
+
+  </style>
+
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- begin Container -->
+  <div class="container">
+
+    <!-- begin Inbox -->
+    <div class="services_list_container my-account-data">
+
+      <!-- begin Title -->
+      <div class="services_header"><div class="service_title"><h2>Entitati in subordonare/coordonare sau sub autoritate</h2></div></div>
+      <!-- end Title -->
+
+      <div class="service_body">
+          <div class="if_tbl">
+              <div class="if_cell image"><img src="assets/images/contacte.png"></div>
+              <div class="if_cell content">
+                  <!-- begin Tabs -->
+                  <div class="tabs">
+
+                    <!-- begin Tabs - menu -->
+                    <ul>
+                        <li><a href="#tabs-3">Relatii entitati</a></li>
+
+                    </ul>
+                    <!-- end Tabs - menu -->
+
+
+
+                    <!-- begin Tabs 3 -->
+                    <div id="tabs-3">
+
+
+                        <!-- begin Table -->
+                        <div   class="table_inbox table_inregistrari_actionari">
+                            <!--date dinamice -> tmpl_inregistrari_list-->
+
+                        </div>
+
+
+                    </div>
+                    <!-- end Tabs 3 -->
+
+                  </div>
+                  <!-- end Tabs -->
+              </div>
+          </div>
+      </div>
+
+    </div>
+    <!-- end Inbox --> 
+
+  </div>
+  <!-- end Container -->
+
+  <!-- begin Popup - Adauga rand nou --> 
+  <div class="modal_expertiza" style="display: none;" id="adauga_rand_nou">
+
+  <form id="form_adauga" autocomplete="off">
+      <!-- begin Popup - content -->
+      <div class="box_rand_nou">
+
+          <!-- begin Nume -->
+          <div class="flex_width50">
+              <p>Nume<span style="color:red">*</span></p>
+              <input id="add_nume" class="" type="text" autocomplete="off" required>
+          </div>
+          <!-- end Nume -->
+          <!-- begin Descriere -->
+          <div class="flex_width50">
+              <p>Descriere</p>
+              <input id="add_descriere" class="" type="text" value="">
+          </div>
+          <!-- end Descriere -->
+
+          <!-- begin Email -->
+          <div class="flex_width33">
+              <p>Email</p>
+              <input id="add_email" class="" type="email" data-val="true">
+          </div>
+          <!-- end Email -->
+
+          <!-- begin Telefon -->
+          <div class="flex_width33">
+              <p>Telefon</p>
+              <input id="add_telefon" class="" type="tel" value="">
+          </div>
+          <!-- end Telefon -->
+          <!-- begin Fax -->
+          <div class="flex_width33">
+              <p>Fax</p>
+              <input id="add_fax" class="" type="text" value="">
+          </div>
+          <!-- end Fax -->
+          <!-- begin Functie -->
+          <div class="flex_width50">
+              <p>Functie</p>
+              <input id="add_functie" class="" type="text" value="">
+          </div>
+          <!-- end Functie -->
+
+          <!-- begin Departament legatura -->
+          <div class="flex_width50">
+              <p>Departament legatura</p>
+              <input id="add_departament" class="" type="text" value="">
+          </div>
+          <!-- end Departament legatura -->
+
+          <!-- begin Reprez. legal -->
+          <div  class="flex_width50">
+              <p>Reprezentant</p>
+              <label class="checkbox notxt">
+                  <input id="add_reprezentant" name="" value="" type="checkbox">
+                  <div class="icn_checkbox"></div>
+              </label>
+          </div>
+          <!-- end Reprez. legal -->
+
+          <!-- begin Imputernicit -->
+          <div  class="flex_width50">
+              <p>Imputernicit</p>
+              <label class="checkbox notxt">
+                  <input id="add_imputernicit" name="" value="" type="checkbox">
+                  <div class="icn_checkbox"></div>
+              </label>
+          </div>
+          <!-- end Imputernicit -->
+
+
+      </div>
+      <!-- end Popup - content -->
+
+      <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaContact()" id="btn_adauga" type="submit">Adauga</button>
+
+  </form>
+
+      <!-- begin Popup - Adauga rand nou -->
+      <div class="modal_expertiza" style="display: none;" id="adauga_rand_nou_actionar">
+
+          <form id="form_adauga_actionar" autocomplete="off">
+              <!-- begin Popup - content -->
+              <div class="box_rand_nou">
+
+                  <!-- begin Nume -->
+                  <div class="flex_width50">
+                      <p>Actionar<span style="color:red">*</span></p>
+                      <input id="add_actionar" class="" type="text" autocomplete="off">
+                  </div>
+                  <!-- end Nume -->
+                  <!-- begin Descriere -->
+                  <div class="flex_width50">
+                      <p>Capital de stat/public</p>
+                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_tip_capital">
+                          <!--  date dinamice - aduse din tmpl_departament-->
+
+                      </select>
+                  </div>
+                  <!-- end Descriere -->
+
+                  <!-- begin Email -->
+                  <div class="flex_width33">
+                      <p>Procente</p>
+                      <input id="add_procente" class="" type="text" data-val="true">
+                  </div>
+                  <!-- end Email -->
+
+                  <!-- begin actiuni -->
+                  <div class="flex_width33">
+                      <p>Nr.actiuni</p>
+                      <input id="add_nr_actiuni" class="" type="tel" value="">
+                  </div>
+                  <!-- end actiuni -->
+                  <!-- begin Valoare -->
+                  <div class="flex_width33">
+                      <p>Valoare</p>
+                      <input id="add_valoare" class="" type="text" value="">
+                  </div>
+                  <!-- end Valoare -->
+                  <!-- begin Functie -->
+                  <div class="flex_full_width">
+                      <p>Moneda</p>
+                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_moneda">
+                          <!--  date dinamice - aduse din tmpl_departament-->
+
+                      </select>
+                  </div>
+                  <!-- end Functie -->
+
+              </div>
+              <!-- end Popup - content -->
+
+              <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaActionar()" id="btn_adauga_actionar" type="submit">Adauga</button>
+
+          </form>
+
+     <!-- begin Popup - Adauga rand nou -->
+      <div class="modal_expertiza" style="display: none;" id="editeaza_rand_nou_actionar">
+
+          <form id="form_editeaza_actionar" autocomplete="off">
+              <!-- begin Popup - content -->
+              <div class="box_rand_nou">
+
+                  <!-- begin Nume -->
+                  <div class="flex_width50">
+                      <p>Actionar<span style="color:red">*</span></p>
+                      <input id="editeaza_actionar" class="" type="text" autocomplete="off">
+                  </div>
+                  <!-- end Nume -->
+                  <!-- begin Descriere -->
+                  <div class="flex_width50">
+                      <p>Capital de stat/public</p>
+                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_editeaza_tip_capital">
+                          <!--  date dinamice - aduse din tmpl_departament-->
+
+                      </select>
+                  </div>
+                  <!-- end Descriere -->
+
+                  <!-- begin Email -->
+                  <div class="flex_width33">
+                      <p>Procente</p>
+                      <input id="editeaza_procente" class="" type="text" data-val="true">
+                  </div>
+                  <!-- end Email -->
+
+                  <!-- begin Telefon -->
+                  <div class="flex_width33">
+                      <p>Nr.actiuni<span style="color:red">*</span></p>
+                      <input id="editeaza_nr_actiuni" class="" type="tel" value="">
+                  </div>
+                  <!-- end Telefon -->
+                  <!-- begin Fax -->
+                  <div class="flex_width33">
+                      <p>Valoare<span style="color:red">*</span></p>
+                      <input id="editeaza_valoare" class="" type="text" value="">
+                  </div>
+                  <!-- end Fax -->
+                  <div class="flex_full_width">
+                      <p>Moneda</p>
+                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_editeaza_moneda">
+                          <!--  date dinamice - aduse din tmpl_departament-->
+
+                      </select>
+                  </div>
+
+              </div>
+              <!-- end Popup - content -->
+
+              <button class="btn btn_green mt20 float_right" onclick="PageManager.editeazaActionar()" id="btn_editeaza_actionar">Salveaza Modificarile</button>
+
+          </form>
+
+      <div class="modal_editeaza_rand_nou_sediu" style="display: none; height:700px;" id="editeaza_rand_nou_sediu">
+
+          <form id="form_editeaza_sediu" autocomplete="off">
+              <!-- begin Popup - content -->
+              <div class="box_rand_nou">
+
+                  <div class="flex_width33" style="flex-basis: 100%;">
+                      <div style="height:1px; position:relative; left:-1000px;"><input type="text"/></div>
+
+                      <p>Cod Caen</p>
+                      <select id="sed_select_cod_caen" multiple="multiple" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_cod_caen-->
+
+                      </select>
+                  </div>
+
+                  <div class="flex_width33" class="flex_width100" >
+                      <p>Nume sediu</p>
+                      <input id="sed_nume" class="min130" type="text" value="" >
+                  </div>
+
+                  <div class="flex_width33" >
+                      <p>Nr. registru comertului</p>
+                      <input id="sed_nr_reg_com" class="min130" type="text" value="">
+                  </div>
+
+                  <div class="flex_width33" >
+                      <p>EUID</p>
+                      <input id="sed_euid" class="min130" type="text" value="">
+                  </div>
+
+                  <div class="flex_width50" >
+                      <p>Adresa sediu</p>
+                      <input id="sed_adresa" class="min130" type="text" value="">
+                  </div>
+
+                  <div class="flex_width50" >
+                      <p>Cod postal</p>
+                      <input id="sed_cod_postal" class="min130" type="text" value="">
+                  </div>
+
+                  <div  class="flex_width33">
+                      <p>Judet</p>
+                      <select id="sed_select_judet" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_judet-->
+                      </select>
+                  </div>
+
+                  <div  class="flex_width33">
+                      <p>Localitate mica</p>
+                      <select id="sed_select_localitate_mica" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_localitate-->
+                      </select>
+                  </div>
+
+                  <div  class="flex_width33">
+                      <p>Localitate mare</p>
+                      <select id="sed_select_localitate_mare" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_localitate-->
+                      </select>
+                  </div>
+
+
+              </div>
+              <!-- end Popup - content -->
+
+              <button class="btn btn_green mt20 float_right" onclick="PageManager.editeazaSediu()" id="btn_editeaza_sediu">Salveaza Modificarile</button>
+
+          </form>
+      </div>
+
+
+          <!-- begin Popup - Editeaza-->
+  <div class="modal_expertiza" style="display: none;" id="editeaza_rand_nou">
+
+  <form id="form_editeaza" autocomplete="off">
+      <!-- begin Popup - content -->
+      <div class="box_rand_nou">
+
+          <!-- begin Nume -->
+          <div class="flex_width50">
+              <p>Nume<span style="color:red">*</span></p>
+              <input id="editeaza_nume" class="" type="text" autocomplete="off" required>
+          </div>
+          <!-- end Nume -->
+          <!-- begin Descriere -->
+          <div class="flex_width50">
+              <p>Descriere</p>
+              <input id="editeaza_descriere" class="" type="text" value="">
+          </div>
+          <!-- end Descriere -->
+
+          <!-- begin Email -->
+          <div class="flex_width33">
+              <p>Email</p>
+              <input id="editeaza_email" class="" type="email" data-val="true">
+          </div>
+          <!-- end Email -->
+
+          <!-- begin Telefon -->
+          <div class="flex_width33">
+              <p>Telefon</p>
+              <input id="editeaza_telefon" class="" type="tel" value="">
+          </div>
+          <!-- end Telefon -->
+          <!-- begin Fax -->
+          <div class="flex_width33">
+              <p>Fax</p>
+              <input id="editeaza_fax" class="" type="text" value="">
+          </div>
+          <!-- end Fax -->
+          <!-- begin Functie -->
+          <div class="flex_width50">
+              <p>Functie</p>
+              <input id="editeaza_functie" class="" type="text" value="">
+          </div>
+          <!-- end Functie -->
+
+          <!-- begin Departament legatura -->
+          <div class="flex_width50">
+              <p>Departament legatura</p>
+              <input id="editeaza_departament" class="" type="text" value="">
+          </div>
+          <!-- end Departament legatura -->
+
+          <!-- begin Reprez. legal -->
+          <div class="flex_width50">
+              <p>Reprezentant</p>
+              <label class="checkbox notxt">
+                  <input id="editeaza_reprezentant" name="" value="" type="checkbox">
+                  <div class="icn_checkbox"></div>
+              </label>
+          </div>
+          <!-- end Reprez. legal -->
+
+          <!-- begin Imputernicit -->
+          <div class="flex_width50">
+              <p>Imputernicit</p>
+              <label class="checkbox notxt">
+                  <input id="editeaza_imputernicit" name="" value="" type="checkbox">
+                  <div class="icn_checkbox"></div>
+              </label>
+          </div>
+          <!-- end Imputernicit -->
+
+
+      </div>
+      <!-- end Popup - content -->
+
+      <button class="btn btn_green mt20 float_right" onclick="PageManager.editeazaContact()" id="btn_editeaza">Salveaza Modificarile</button>
+
+  </form>
+
+
+
+  </div>
+  <!-- end Popup - Adauga rand nou -->
+  <!-- begin Popup - Adauga rand nou -->
+  <div class="modal_conducere" style="display: none;" id="adauga_rand_nou_conducere">
+
+      <!-- begin Popup - content -->
+      <div class="box_rand_nou">
+
+          <!-- begin Nume -->
+          <div class="flex_width33">
+              <p>Nume</p>
+              <input id="conducere_nume" class="" type="text" value="">
+          </div>
+          <!-- end Nume -->
+          <!-- begin Nume -->
+          <div class="flex_width33">
+              <p>Prenume</p>
+              <input id="conducere_prenume" class="" type="text" value="">
+          </div>
+          <!-- end Nume -->
+
+          <!-- begin Functie -->
+          <div class="flex_width33">
+              <p>Functie</p>
+              <input id="conducere_functie" type="text" value="">    </div>
+          <!-- end Functie -->
+
+
+
+          <!-- begin Reprez. legal -->
+          <div class="flex_width33">
+              <p>Reprez. legal</p>
+              <label class="checkbox notxt">
+                  <input id="conducere_reprez_legal" name="" value="" type="checkbox">
+                  <div class="icn_checkbox"></div>
+              </label>
+          </div>
+          <!-- end Reprez. legal -->
+
+          <!-- begin Manager -->
+          <div class="flex_width33">
+              <p>Manager</p>
+              <label class="checkbox notxt">
+                  <input id="conducere_manager" name="" value="" type="checkbox">
+                  <div class="icn_checkbox"></div>
+              </label>
+          </div>
+          <!-- end Manager -->
+
+          <!-- begin Resp. tehnic -->
+          <div class="flex_width33">
+              <p>Resp. tehnic</p>
+              <label class="checkbox notxt">
+                  <input id="conducere_resp_tehnic" name="" value="" type="checkbox">
+                  <div class="icn_checkbox"></div>
+              </label>
+          </div>
+          <!-- end Resp. tehnic -->
+
+          <!-- begin An absolvire -->
+          <div class="flex_width33">
+              <p>An absolvire</p>
+              <input id="conducere_an_absolvire" type="text" class="yearpicker" value="">
+          </div>
+          <!-- end An absolvire -->
+
+          <!-- begin Termen expirare mandat -->
+          <div class="flex_width33">
+              <p>Termen exp. mandat</p>
+              <input id="conducere_termen_expirare_mandat" type="text" class="datepicker" value="">
+          </div>
+          <!-- end Termen expirare mandat -->
+
+          <!-- begin Vechime -->
+          <div class="flex_width33">
+              <p>Vechime</p>
+              <input id="conducere_vechime" type="text" value="">
+          </div>
+          <!-- end Vechime -->
+          <!-- begin Nr. adresa CV -->
+          <div class="flex_width50">
+              <p>Nr. adresa CV</p>
+              <input id="conducere_nr_adresa_cv" type="text" value="">
+          </div>
+          <!-- end Nr. adresa CV -->
+
+          <!-- begin Data adresa CV -->
+          <div class="flex_width50">
+              <p>Data adresa CV</p>
+              <input id="conducere_data_adresa_cv" type="text" class="datepicker">
+          </div>
+          <!-- end Data adresa CV -->
+
+          <!-- begin Studii -->
+          <div class="flex_full_width">
+              <p>Studii</p>
+              <textarea id="conducere_studii" class=""></textarea>
+          </div>
+          <!-- end Studii -->
+
+      </div>
+      <!-- end Popup - content -->
+
+      <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaConducere()">Salveaza modificarile</button>
+
+  </div>
+  <!-- end Popup - Adauga rand nou -->
+
+          <!-- begin Popup - Adauga rand nou -->
+          <div class="modal_sucursala" style="display: none; height:500px;" id="adauga_rand_nou_sucursala">
+
+              <!-- begin Popup - content -->
+              <div class="box_rand_nou">
+
+                  <!-- begin Nume -->
+                  <div class="flex_width50">
+                      <p>Nume</p>
+                      <input id="sucursala_nume" class="min130" type="text" value="">
+                  </div>
+                  <!-- end Nume -->
+
+                  <!-- begin Localitate -->
+                  <div class="flex_width50">
+                      <p>Localitate</p>
+                      <select id="select_localitate" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_localitate-->
+
+                      </select>
+                  </div>
+                  <!-- end Localitate -->
+
+                  <!-- begin Adresa -->
+                  <div class="flex_width50">
+                      <p>Adresa</p>
+                      <input id="sucursala_adresa" type="text" value="">    </div>
+                  <!-- end Adresa -->
+
+                  <!-- begin Adresa corespondenta -->
+                  <div class="flex_width50">
+                      <p>Adresa corespondenta</p>
+                      <input id="sucursala_adresa_corespondenta" type="text" value="">    </div>
+                  <!-- end Adresa corespondenta -->
+
+
+                  <!-- begin Localitate -->
+                  <div class="flex_width50 flex_width100" >
+                      <p>Localitate</p>
+                      <select id="select_domeniu" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_localitate-->
+
+                      </select>
+                  </div>
+                  <!-- end Localitate -->
+
+              </div>
+              <!-- end Popup - content -->
+
+              <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaSucursala()">Adauga</button>
+
+          </div>
+          <!-- end Popup - Adauga rand nou -->
+
+
+
+
+          <!-- begin Popup - Adauga rand nou -->
+          <div class="modal_aut_mediu" style="display: none;" id="adauga_rand_nou_aut_mediu">
+              <form id="form_editeaza_aut_mediu" autocomplete="off">
+
+              <div class="box_rand_nou">
+
+                  <div class="flex_full_width" style="flex-basis: 100%;">
+                      <p>Emitent autorizatie</p>
+                      <input id="am_aut_emitent" class="" type="text" value="">
+                  </div>
+
+                  <div class="flex_width50">
+                      <p>Numar de inregistrare solicitare</p>
+                      <input id="am_nr_inreg_emitent" class="" type="text" value="">
+                  </div>
+
+                  <div class="flex_width50" style="flex-basis: 66.66%;">
+                      <p>Data inregistrare solicitare</p>
+                      <input id="am_data_inreg_emitent" type="text" class="datepicker" value="">
+                  </div>
+
+                  <div class="flex_width33"  style="flex-basis: 100%;">
+                      <p>Sau</p>
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Numar autorizatie</p>
+                      <input id="am_aut_numar" class="min130" type="text" value="">
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Data emiterii autorizatie</p>
+                      <input id="am_aut_data_emiterii" type="text" class="datepicker" value="">
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Data expirarii autorizatie</p>
+                      <input id="am_aut_data_expirarii" type="text" class="datepicker" value="">
+                  </div>
+
+                  <div  class="flex_width33">
+                      <p>Judet</p>
+                      <select id="am_select_judet" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_judet-->
+
+                      </select>
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Localitate principala</p>
+                      <select id="am_select_localitate_principala" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_localitate-->
+
+                      </select>
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Localitate apartinatoare</p>
+                      <select id="am_select_localitate_apartinatoare" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_localitate-->
+
+                      </select>
+                  </div>
+
+                  <div class="flex_width66"  style="flex-basis: 66.6%;">
+                      <p>Adresa obiectiv</p>
+                      <textarea id="am_adresa" class="min130"></textarea>
+                  </div>
+
+                  <div class="flex_width33"  style="flex-basis: 33.4%;">
+                      <p>Denumire obiectiv</p>
+                      <input id="am_denumire" class="min130" type="text" value="">
+                  </div>
+
+                  <div class="flex_width33"  style="flex-basis: 100%;">
+                      <p>Decizie viza anuala</p>
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Emitent decizie</p>
+                      <input id="am_dec_emitent" class="min130" type="text" value="">
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Numar decizie</p>
+                      <input id="am_dec_numar" class="min130" type="text" value="">
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Data emiterii decizie</p>
+                      <input id="am_dec_data_emiterii" type="text" class="datepicker" value="">
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Data expirarii decizie</p>
+                      <input id="am_dec_data_expirarii" type="text" class="datepicker" value="">
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Perioada de valabilitate decizie</p>
+                      <input id="am_perioada_de_valabilitate" class="min130" type="text" value="">
+                  </div>
+              </div>
+
+              <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaAutMediu()">Salveaza</button>
+          </form>
+          </div>
+          <!-- end Popup - Adauga rand nou -->
+
+
+
+
+          <!-- begin Popup - Adauga rand nou -->
+          <div class="modal_aut_gosp_apelor" style="display: none;" id="adauga_rand_nou_aut_gosp_apelor">
+              <form id="form_editeaza_aut_gosp_apelor" autocomplete="off">
+
+              <div class="box_rand_nou">
+                  <div class="flex_full_width">
+                      <p>Emitent autorizatie</p>
+                      <input id="aga_emitent" class="" type="text" value="">
+                  </div>
+
+                  <div class="flex_width50">
+                      <p>Numar de inregistrare solicitare</p>
+                      <input id="aga_nr_inreg_emitent" class="" type="text" value="">
+                  </div>
+
+                  <div class="flex_width50" style="flex-basis: 66.66%;">
+                      <p>Data inregistrare solicitare</p>
+                      <input id="aga_data_inreg_emitent" type="text" class="datepicker" value="">
+                  </div>
+
+                  <div class="flex_width33"  style="flex-basis: 100%;">
+                      <p>Sau</p>
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Numar autorizatie</p>
+                      <input id="aga_numar" class="min130" type="text" value="">
+                  </div>
+
+                  <div class="flex_width33">
+                      <p>Data emiterii autorizatie</p>
+                      <input id="aga_data_emiterii" type="text" class="datepicker" value="">
+                  </div>
+
+
+                  <div class="flex_width33">
+                      <p>Data expirarii autorizatie</p>
+                      <input id="aga_data_expirarii" type="text" class="datepicker" value="">
+                  </div>
+
+                  <div  class="flex_width33">
+                      <p>Judet</p>
+                      <select id="aga_select_judet" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_judet-->
+
+                      </select>
+                  </div>
+
+                  <div  class="flex_width33">
+                      <p>Localitate principala</p>
+                      <select id="aga_select_localitate_principala" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_localitate-->
+
+                      </select>
+                  </div>
+
+                  <div  class="flex_width33">
+                      <p>Localitate apartinatoare</p>
+                      <select id="aga_select_localitate_apartinatoare" class="custom_chosen">
+                          <!--  date dinamice - aduse din tmpl_localitate-->
+
+                      </select>
+                  </div>
+
+                  <div class="flex_full_width">
+                      <p>Adresa</p>
+                      <textarea id="aga_adresa" class="min130"></textarea>
+                  </div>
+
+                  <div class="flex_full_width">
+                      <p>Obiectul autorizatiei</p>
+                      <input id="aga_obiectul_autorizatiei" class="min130" type="text" value="">
+                  </div>
+              </div>
+
+              <button class="btn btn_green mt20 float_right" onclick="PageManager.adaugaAutGospApelor()">Salveaza</button>
+
+              </form>
+
+          </div>
+          <!-- end Popup - Adauga rand nou -->
+
+
+
+  <!-- Templates Mustache-->
+
+
+      <!-- Template Mustache - Lista ACTIONARI (tabel)-->
+      <script id="tmpl_actionari_list" type="x-tmpl-mustache">
+<div class="table_scroll">
+       <table class="dataTable_nosearch2 display"  style="width: 100%">
+
+  <thead>
+                    <tr role="row">
+                       <th class="sorting sorting_asc" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Nume: activate to sort column descending" style="width: 30%;">Denumire autoritate</th>
+                       <th class="sorting_disabled sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 10%;">Tip</th>
+                       <th class="sorting_disabled sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 10%;"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+  {{#data}}
+                    <tr>
+                        <td class="sorting_1">{{actionar}}</td>
+                        <td>{{tip_capital}}</td>
+                           <td>
+                      <a href="#" onclick="PageManager.stergeActionar({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
+                        <a  data-fancybox data-src="#editeaza_rand_nou_actionar"  href="#" onclick="PageManager.getActionarInfo({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-edit tooltip_chat"><span class="tooltiptext">Editeaza</span></i></a>
+                            </td>
+
+                    </tr>
+
+    {{/data}}
+   </tbody>
+
+    </table>
+    </div>
+      <button class="btn btn_green float_right mt30" data-fancybox data-src="#adauga_rand_nou_actionar" onClick="PageManager.prepareOpenRandNou()" class="btn btn_green mt20 float_right">+ adauga rand nou</button>
+
+</script>
+
+
+
+          <!-- Template Mustache - Lista departament (select)-->
+  <script id="tmpl_departament" type="x-tmpl-mustache">
+            <option selected value="">Cauta departament </option>
+
+    {{#data}}
+
+            <option value="{{valoare}}">{{valoare}}</option>
+
+    {{/data}}
+
+</script>
+
+          <!-- Template Mustache - Lista capital (select)-->
+          <script id="tmpl_tip_capital" type="x-tmpl-mustache">
+            <option selected value="">Cauta Capital de stat/public </option>
+
+        {{#data}}
+        <option value="{{id}}">{{valoare}}</option>
+        {{/data}}
+
+</script>
+
+
+          <script id="tmpl_moneda_actionar" type="x-tmpl-mustache">
+            <option selected value="">Cauta moneda </option>
+
+    {{#data}}
+        <option value="{{id}}">{{valoare}}</option>
+    {{/data}}
+
+</script>
+
+
+  <!-- Template Mustache - Lista judet (select)-->
+  <script id="tmpl_judet" type="x-tmpl-mustache">
+            <option selected value="">Cauta judet </option>
+
+    {{#data}}
+
+            <option value="{{id}}">{{valoare}}</option>
+
+    {{/data}}
+
+</script>
+
+  <!-- Template Mustache - Starea firmei -->
+  <script id="tmpl_starea_firmei" type="x-tmpl-mustache">
+            <option selected value="">Cauta stare firma </option>
+
+    {{#data}}
+
+            <option value="{{id}}">{{valoare}}</option>
+
+    {{/data}}
+
+</script>
+
+  <!-- Template Mustache - Lista judet (select)-->
+<script id="tmpl_cod_caen" type="x-tmpl-mustache">
+
+    {{#data}}
+
+            <option value="{{id}}">{{valoare}}</option>
+
+    {{/data}}
+
+</script>
+
+          <!-- Template Mustache - Lista localitate (select)-->
+          <script id="tmpl_localitate" type="x-tmpl-mustache">
+            <option selected value="">Cauta localitate </option>
+
+    {{#data}}
+
+            <option value="{{id}}">{{valoare}}</option>
+
+    {{/data}}
+
+</script>
+
+<!-- Template Mustache - Lista domeniu (select)-->
+<script id="tmpl_domeniu" type="x-tmpl-mustache">
+  <option selected value="">Cauta domeniu </option>
+
+    {{#data}}
+
+            <option value="{{id}}">{{valoare}}</option>
+
+    {{/data}}
+
+</script>
+
+  <!-- SweetAlert -->
+  <script src="assets/js/sweetalert2.min.js"></script>
+  <!-- script modernizr -->
+  <script src="assets/js/vendor/modernizr-3.8.0.min.js"></script>
+  <!-- script jQuery -->
+  <script src="assets/js/jquery-3.5.1.min.js"></script>
+  <!-- script jQuery -->
+  <script src="assets/js/jquery-ui.js"></script>
+  <!-- script jQuery Semantic - dropdown -->
+  <script src="assets/js/dropdown.min.js"></script>
+  <script src="assets/js/transition.min.js"></script>
+  <!-- script Sort Table -->
+  <script type="text/javascript" src="assets/js/sort-table.js"></script>
+  <!-- script DataTable -->
+  <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script> 
+  <!-- script Fancybox -->
+  <script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
+  <!-- script Yearpicker -->
+  <script src="assets/js/yearpicker.js"></script>
+  <!-- custom js -->
+  <script src="assets/js/main_portal.js"></script>
+  <!-- script Mustache -->
+  <script src="assets/js/mustache.js"></script>
+  <script src="assets/js/chosen.jquery.min.v2.js"></script>
+  <script src="assets/js/weblib.js"></script>
+
+  <script src="assets/js/relatii_terti.js"></script>
+  <script src="../website/assets/js/documentaPortal-util.js"></script>
+  <script src="assets/js/leave_page.js"></script>
+
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+  <script>jQuery(document).ready(function ($) {
+      /* Date Picker */
+      $(".datepicker").datepicker({
+          monthNames: ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'],
+          dayNamesMin: ['Du', 'Lu', 'Ma', 'Mi', 'Jo', 'Vi', 'Sa'],
+          beforeShow: function (input, inst) {
+              var calendar = inst.dpDiv;
+              setTimeout(function() {
+                  calendar.position({
+                      my: 'right top',
+                      at: 'right bottom',
+                      collision: 'none',
+                      of: input
+                  });
+              }, 1);
+          }
+      });
+
+
+      $("#select_judet").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#select_starea_firmei").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#select_localitate").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#select_domeniu").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#am_select_judet").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#am_select_localitate_principala").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#am_select_localitate_apartinatoare").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+
+
+      $("#aga_select_judet").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#aga_select_localitate_principala").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#aga_select_localitate_apartinatoare").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+
+
+      $("#sed_select_judet").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#sed_select_localitate_mare").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#sed_select_localitate_mica").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#sed_select_cod_caen").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+      $("#select_cod_caen").chosen({
+          inherit_select_classes:true,
+          no_results_text: "Nu a fost găsit : "
+      });
+
+  });</script>
+
+
+</body>
+
+</html>

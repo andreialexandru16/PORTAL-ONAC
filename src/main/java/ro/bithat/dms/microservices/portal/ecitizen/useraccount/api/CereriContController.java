@@ -19,10 +19,13 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ServerWebInputException;
 import ro.bithat.dms.microservices.dmsws.file.BaseModel;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
+import ro.bithat.dms.microservices.portal.ecitizen.raportare.models.TertList;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.AddUtilizatorSecurityService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.CereriContService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsNomenclatorService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.*;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.ActionariList;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.RelatiiTertList;
 import ro.bithat.dms.security.SecurityUtils;
 import ro.bithat.dms.service.URLUtil;
 
@@ -281,7 +284,11 @@ public class CereriContController {
         return ResponseEntity.ok(String.valueOf(idCerere));
     }
 
+    @GetMapping("/dmsws/cerericont/getListaRelatii")
+    public RelatiiTertList getListaRelatii() {
 
+            return serviceCereri.getListaActionari(SecurityUtils.getToken());
+    }
 
 
 
