@@ -55,7 +55,7 @@ public class CereriContService extends DmswsRestService{
 	}
 
 
-	public void addUtilizatorAcOe(String token,UtilizatorAcOe utilizatorAcOe,
+	public Integer addUtilizatorAcOe(String token,UtilizatorAcOe utilizatorAcOe,
 										  String mdFilename, byte[] mdFileData, byte[] pdfData, String urlPath) throws ServerWebInputException {
 		logger.info("adding user {}", utilizatorAcOe.getEmail_rp());
 		if ( mdFilename == null){
@@ -65,6 +65,7 @@ public class CereriContService extends DmswsRestService{
 
 		UtilizatorAcOeResponse result = post(utilizatorAcOe, UtilizatorAcOeResponse.class, checkBaseModelWithExtendedInfo(), getDmswsUrl()+"/cerericont/{token}/addUtilizatorAcOe", token);
 		Integer idFisierDummy = result.getIdFisier();
+		Integer idCerere =  result.getIdCerere();
 		try {
 			fileService.uploadToReplaceExistingFile2(SecurityUtils.getToken(), new Long(idFisierDummy), idUtilizatorAnonimus, "cont.pdf", pdfData);
 		} catch (ServerErrorException | IOException e) {
@@ -78,6 +79,7 @@ public class CereriContService extends DmswsRestService{
 		}
 
 		logger.info("user added with succes", utilizatorAcOe.getEmail_rp());
+		return idCerere;
 	}
 
 

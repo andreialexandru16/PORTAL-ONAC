@@ -594,7 +594,7 @@ $( '#register_pfa' )
 
 //inregistrare persoana fizica
 $( '#register_ac' ).submit( function( e ) {
-debugger
+    debugger
     $("#register").prop('disabled','disabled');
     var response ="true";
     try{
@@ -604,6 +604,7 @@ debugger
 
     }
     if(response == "FALSE") {
+        debugger
         e.preventDefault();
         //reCaptcha not verified
         Swal.fire({
@@ -614,6 +615,7 @@ debugger
         });
         $("#register").removeAttr('disabled');
     }else{
+        debugger
         let errorString = "<ul class='text-left'>";
         /* Check for required fields */
         $(this).find(".required").each(function () {
@@ -672,9 +674,7 @@ debugger
             $("#register").removeAttr('disabled');
 
         } else {
-
-
-
+            debugger
             var HTML_Width = $("#register_ac").width();
             var HTML_Height = $("#register_ac").height();
             var top_left_margin = 15;
@@ -716,12 +716,9 @@ debugger
                 },
                 success: function (resultData) {
                     swal.close();
-                    Swal.fire({
-                        icon: 'success',
-                        html: "Solicitarea dumneavoastră a fost transmisă!Vă mulțumim!",
-                        focusConfirm: false,
-                        confirmButtonText: 'Ok'
-                });
+                     window.location.href = '/PORTAL/autentificare.html?idCerere=' + resultData;
+
+
                 },
                 error: function(err) {
 //    		    TODO: treat html tag for client side servers with err.responseJSON.status and err.responseJSON.message

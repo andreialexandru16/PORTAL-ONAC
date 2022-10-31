@@ -15,6 +15,15 @@ public class UtilizatorAcOeResponse extends BaseModel {
     private Integer idMandat;
     private Integer id;
     private Integer idUtilizator;
+    private Integer idCerere;
+
+    public Integer getIdCerere() {
+        return idCerere;
+    }
+
+    public void setIdCerere(Integer idCerere) {
+        this.idCerere = idCerere;
+    }
 
     public Integer getIdFisier() {
         return idFisier;
