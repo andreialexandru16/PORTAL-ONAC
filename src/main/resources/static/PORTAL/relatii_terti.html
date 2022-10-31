@@ -244,59 +244,29 @@
           </form>
 
      <!-- begin Popup - Adauga rand nou -->
-      <div class="modal_expertiza" style="display: none;" id="editeaza_rand_nou_actionar">
+      <div class="modal_expertiza" style="display: none;" id="editeaza_rand_nou_relatie">
 
           <form id="form_editeaza_actionar" autocomplete="off">
               <!-- begin Popup - content -->
               <div class="box_rand_nou">
-
-                  <!-- begin Nume -->
-                  <div class="flex_width50">
-                      <p>Actionar<span style="color:red">*</span></p>
-                      <input id="editeaza_actionar" class="" type="text" autocomplete="off">
-                  </div>
-                  <!-- end Nume -->
-                  <!-- begin Descriere -->
-                  <div class="flex_width50">
-                      <p>Capital de stat/public</p>
-                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_editeaza_tip_capital">
-                          <!--  date dinamice - aduse din tmpl_departament-->
-
-                      </select>
-                  </div>
-                  <!-- end Descriere -->
-
-                  <!-- begin Email -->
-                  <div class="flex_width33">
-                      <p>Procente</p>
-                      <input id="editeaza_procente" class="" type="text" data-val="true">
-                  </div>
-                  <!-- end Email -->
-
-                  <!-- begin Telefon -->
-                  <div class="flex_width33">
-                      <p>Nr.actiuni<span style="color:red">*</span></p>
-                      <input id="editeaza_nr_actiuni" class="" type="tel" value="">
-                  </div>
-                  <!-- end Telefon -->
-                  <!-- begin Fax -->
-                  <div class="flex_width33">
-                      <p>Valoare<span style="color:red">*</span></p>
-                      <input id="editeaza_valoare" class="" type="text" value="">
-                  </div>
-                  <!-- end Fax -->
                   <div class="flex_full_width">
-                      <p>Moneda</p>
-                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_editeaza_moneda">
+                      <p>Denumire autoritate<span style="color:red">*</span></p>
+                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_den_autoritate_edit">
                           <!--  date dinamice - aduse din tmpl_departament-->
 
                       </select>
                   </div>
 
-              </div>
-              <!-- end Popup - content -->
+                  <div class="flex_full_width">
+                      <p>Tip relatie<span style="color:red">*</span></p>
+                      <select class="ui fluid dropdown dropdown_inbox" id="container_select_tip_relatie_edit">
+                          <!--  date dinamice - aduse din tmpl_departament-->
 
-              <button class="btn btn_green mt20 float_right" onclick="PageManager.editeazaActionar()" id="btn_editeaza_actionar">Salveaza Modificarile</button>
+                      </select>
+                  </div>
+              </div>
+
+              <button class="btn btn_green mt20 float_right" onclick="PageManager.editeazaRelatie()" id="btn_editeaza_actionar">Salveaza Modificarile</button>
 
           </form>
 
@@ -749,7 +719,7 @@
                         <td>{{tip_relatie}}</td>
                            <td>
                       <a href="#" onclick="PageManager.stergeRelatie({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-trash tooltip_chat"><span class="tooltiptext">Sterge</span></i></a>
-                        <a  data-fancybox data-src="#editeaza_rand_nou_actionar"  href="#" onclick="PageManager.getActionarInfo({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-edit tooltip_chat"><span class="tooltiptext">Editeaza</span></i></a>
+                        <a  data-fancybox data-src="#editeaza_rand_nou_relatie"  href="#" onclick="PageManager.getRelatieInfo({{id}})" class="btn_blue" style="margin:2px"><i class="fas fa-edit tooltip_chat"><span class="tooltiptext">Editeaza</span></i></a>
                             </td>
 
                     </tr>

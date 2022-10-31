@@ -109,5 +109,20 @@ public class CereriContService extends DmswsRestService{
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token, id);
 	}
 
+	public RelatiiTertList getRelatieInfo(String token, String idRelatie) {
+		String url =  getDmswsUrl()+"/cerericont/{token}/getRelatieInfo/{idRelatie}";
+
+		return get(RelatiiTertList.class, checkBaseModel(),url,
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token, idRelatie);
+	}
+	public BaseModel updateInfoRelatie(String token, RelatiiTert relatiiTert) {
+
+		String url =  getDmswsUrl()+"/cerericont/{token}/updateInfoRelatie";
+
+
+		return post(relatiiTert, MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON,
+				BaseModel.class, checkBaseModel(),
+				url, token);
+	}
 
 }

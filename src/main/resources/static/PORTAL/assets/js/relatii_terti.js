@@ -11,6 +11,7 @@ var PAGE_NAME = "relatii_terti.js";
 
 var PageManager = {
     idCerere:null,
+    idRow:null,
     idForUpt:null,
     idForUptAC:null,
     idForUptSD:null,
@@ -1308,35 +1309,25 @@ var PageManager = {
         });
         //$UTIL.log(PAGE_NAME, PROC_NAME, 'Exit', 0);
     },
-     getActionarInfo: function (id) {
-
-
+     getRelatieInfo: function (id) {
         var that = this;
-        var PROC_NAME = "PageManager.getContactInfo";
+        var PROC_NAME = "PageManager.getRelatieInfo";
         //$UTIL.log(PAGE_NAME, PROC_NAME, 'Enter', 0);
         PageManager.idForUptAC=id;
-        var url ="/dmsws/anre/getActionarById/"+id;
+        var url ="/dmsws/cerericont/getRelatieInfo/"+id;
 
         console.log("Ajax Call Start:" + url);
 
+        PageManager.idRow=id;
         $.ajax({
             url: url,
 
             success: function (data) {
                 if (data.result == 'OK') {
-                    that.listaActionari = data.actionariList;
+                    that.listaRelatiiTert = data.relatiiTertList;
 
-
-                    $("#editeaza_actionar").val(that.listaActionari[0].actionar);
-                    $("#editeaza_procente").val(that.listaActionari[0].procente);
-                    $("#editeaza_nr_actiuni").val(that.listaActionari[0].nr_actiuni);
-                    $("#editeaza_valoare").val(that.listaActionari[0].valoare);
-
-                    // $("#editeaza_moneda").val(that.listaActionari[0].moneda);
-                    // $("#editeaza_tip_Capital").val(that.listaActionari[0].tip_capital);
-
-                    var id_moneda=that.listaActionari[0].id_moneda;
-                    var urlMonAc="/dmsws/lov/values_by_code/"+ PageManager.COD_LOV_MONEDA_A;
+                    var idInstitutie=that.listaRelatiiTert[0].id_denumire_institutie;
+                    var urlMonAc="/dmsws/lov/values_by_code/"+ PageManager.COD_LOV_INSTITUTIE_PORTAL;
                     $.ajax({
                         url: urlMonAc,
                         success: function (data) {
@@ -1345,14 +1336,14 @@ var PageManager = {
                                 if (data.lov != null && data.lov.length != 0) {
 
                                     //apelam render template pentru a popula tabelul cu rezultatele obtinute
-                                    that.renderTemplate('tmpl_moneda_actionar', {data: data.lov}).then(function (html) {
+                                    that.renderTemplate('tmpl_denumire_autoritate', {data: data.lov}).then(function (html) {
 
-                                        var tblHolder = $('#container_select_editeaza_moneda');
+                                        var tblHolder = $('#container_select_den_autoritate_edit');
                                         tblHolder.html(html);
-                                    if(id_moneda!=null && id_moneda!=undefined && id_moneda!="") {
-                                        $("#container_select_editeaza_moneda").val(id_moneda).trigger("chosen:updated");
+                                    if(idInstitutie!=null && idInstitutie!=undefined && idInstitutie!="") {
+                                        $("#container_select_den_autoritate_edit").val(idInstitutie).trigger("chosen:updated");
                                     }else{
-                                        $("#container_select_editeaza_moneda").trigger("chosen:updated");
+                                        $("#container_select_den_autoritate_edit").trigger("chosen:updated");
 
                                     }
                                     }, function () {
@@ -1364,8 +1355,8 @@ var PageManager = {
                             }
                         }
                     });
-                    var id_tip_capital=that.listaActionari[0].id_tip_capital;
-                    var urlAc= "/dmsws/lov/values_by_code/"+ PageManager.COD_LOV_TIP_CAPITAL_A;
+                    var idTipRelatie=that.listaRelatiiTert[0].id_tip_relatie;
+                    var urlAc= "/dmsws/lov/values_by_code/"+ PageManager.COD_LOV_TIP_RELATIE;
                     $.ajax({
                         url: urlAc,
                         success: function (data) {
@@ -1374,14 +1365,14 @@ var PageManager = {
                                 if (data.lov != null && data.lov.length != 0) {
 
                                     //apelam render template pentru a popula tabelul cu rezultatele obtinute
-                                    that.renderTemplate('tmpl_tip_capital', {data: data.lov}).then(function (html) {
+                                    that.renderTemplate('tmpl_tip_relatie', {data: data.lov}).then(function (html) {
 
-                                        var tblHolder = $('#container_select_editeaza_tip_capital');
+                                        var tblHolder = $('#container_select_tip_relatie_edit');
                                         tblHolder.html(html);
-                                        if(id_tip_capital!=null && id_tip_capital!="" && id_tip_capital!=undefined) {
-                                            $("#container_select_editeaza_tip_capital").val(id_tip_capital).trigger("chosen:updated");
+                                        if(idTipRelatie!=null && idTipRelatie!="" && idTipRelatie!=undefined) {
+                                            $("#container_select_tip_relatie_edit").val(idTipRelatie).trigger("chosen:updated");
                                         }else{
-                                            $("#container_select_editeaza_tip_capital").trigger("chosen:updated");
+                                            $("#container_select_tip_relatie_edit").trigger("chosen:updated");
 
                                         }
                                     }, function () {
@@ -1509,30 +1500,18 @@ var PageManager = {
 
 
     },
-    salveazaModificarileActionarPrepare: function(){
+    salveazaModificarileRelatie: function(){
         var that = this;
-        var PROC_NAME = "PageManager.salveazaModificarileActionarPrepare";
+        var PROC_NAME = "PageManager.salveazaModificarileRelatie";
 
-
-        var editeaza_actionar=$("#editeaza_actionar").val();
-        var editeaza_tip_Capital=$("#container_select_editeaza_tip_capital").val();
-        var editeaza_procente=$("#editeaza_procente").val();
-        var editeaza_nr_actiuni=$("#editeaza_nr_actiuni").val();
-        var editeaza_valoare=$("#editeaza_valoare").val();
-        var editeaza_moneda=$("#container_select_editeaza_moneda").val();
-
-
-
-        var obj = {
-            id:PageManager.idForUptAC,
-            actionar: editeaza_actionar,
-            id_tip_capital: editeaza_tip_Capital,
-            procente: editeaza_procente,
-            nr_actiuni:editeaza_nr_actiuni,
-            valoare:editeaza_valoare,
-            id_moneda:editeaza_moneda
+        var id_denumire_institutie= $("#container_select_den_autoritate_edit").val();
+        var id_tip_relatie= $("#container_select_tip_relatie_edit").val();
+        var objRand= {
+            id_denumire_institutie: id_denumire_institutie,
+            id_tip_relatie: id_tip_relatie,
+            id_row:PageManager.idRow
         };
-        return obj;
+        return objRand;
 
 
 
@@ -1609,24 +1588,21 @@ var PageManager = {
     },
 
 
-    editeazaActionar: function(){
+    editeazaRelatie: function(){
+        debugger
         var that=this;
-        var PROC_NAME = "PageManager.editeazaActionar";
+        var PROC_NAME = "PageManager.editeazaRelatie";
 
-        var req = PageManager.salveazaModificarileActionarPrepare();
+        var req = PageManager.salveazaModificarileRelatie();
         var jReq = JSON.stringify(req);
 
         var ok = true;
-        if (typeof req.nr_actiuni === 'undefined' || req.nr_actiuni === null || req.nr_actiuni.trim() === '') {
-            that.animateElementErr("#editeaza_actiuni");
+        if (typeof req.id_denumire_institutie === 'undefined' || req.id_denumire_institutie === null || req.id_denumire_institutie.trim() === '') {
+            that.animateElementErr("#container_select_den_autoritate");
             ok = false;
         }
-        if (typeof req.valoare === 'undefined' || req.valoare === null || req.valoare.trim() === '') {
-            that.animateElementErr("#editeaza_valoare");
-            ok = false;
-        }
-        if (typeof req.actionar === 'undefined' || req.actionar === null || req.actionar.trim() === '') {
-            that.animateElementErr("#editeaza_actionar");
+        if (typeof req.id_tip_relatie === 'undefined' || req.id_tip_relatie === null || req.id_tip_relatie.trim() === '') {
+            that.animateElementErr("#container_select_tip_relatie");
             ok = false;
         }
 
@@ -1643,7 +1619,7 @@ var PageManager = {
             return;
         }
 
-        var url = "/dmsws/anre/updateInfoActionar";
+        var url = "/dmsws/cerericont/updateInfoRelatie";
         if(jReq!=null && typeof jReq!='undefined'){
             $.ajax({
                 url: url,
@@ -1660,6 +1636,7 @@ var PageManager = {
                             focusConfirm: false,
                             confirmButtonText: "Ok"
                         });
+                        PageManager.idRow=null;
                         PageManager.afiseazaInregistrariTertRelatii(PageManager.idCerere);
 
                     } else   if (data.result == 'ERR') {

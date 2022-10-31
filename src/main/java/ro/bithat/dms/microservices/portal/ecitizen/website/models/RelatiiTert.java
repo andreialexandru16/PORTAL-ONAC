@@ -7,7 +7,15 @@ public class RelatiiTert {
     String denumire_institutie;
     String tip_relatie;
     int id_cerere;
+    int id_row;
 
+    public int getId_row() {
+        return id_row;
+    }
+
+    public void setId_row(int id_row) {
+        this.id_row = id_row;
+    }
 
     public int getId_cerere() {
         return id_cerere;

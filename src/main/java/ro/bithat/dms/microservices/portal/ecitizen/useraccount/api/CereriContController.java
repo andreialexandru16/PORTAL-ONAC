@@ -304,7 +304,17 @@ public class CereriContController {
 
 
     }
+    @GetMapping("/dmsws/cerericont/getRelatieInfo/{idRelatie}")
+    public RelatiiTertList getRelatieInfo(@PathVariable String idRelatie) {
+
+        return serviceCereri.getRelatieInfo(SecurityUtils.getToken(),idRelatie);
+    }
+    @PostMapping("/dmsws/cerericont/updateInfoRelatie")
+    public BaseModel updateInfoRelatie(  @RequestBody RelatiiTert relatie) {
 
 
+        return serviceCereri.updateInfoRelatie(SecurityUtils.getToken(), relatie);
+
+    }
 
 }
