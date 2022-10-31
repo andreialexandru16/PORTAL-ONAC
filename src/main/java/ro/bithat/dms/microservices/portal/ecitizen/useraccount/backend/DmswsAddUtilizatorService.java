@@ -44,6 +44,8 @@ public class DmswsAddUtilizatorService extends DmswsRestService{
 	@Value("${portal.url}")
 	private String portalUrl;
 
+
+
 	public void addPersoanaFizicaJuridica(String token,PersoanaFizicaJuridica persoanaFizicaJuridica,
 										   String biFilename, byte[] biFileData, String cuiFilename, byte[] cuiFileData,String imputernicireFilename, byte[] imputernicireFileData, byte[] pdfData, String urlPath) throws ServerWebInputException {
 		logger.info("adding user {}", persoanaFizicaJuridica.getEmail());

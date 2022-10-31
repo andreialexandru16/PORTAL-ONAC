@@ -63,7 +63,7 @@
         <div class="tab-content">
             <div id="persoana-fizica" class="tab-pane fade in active show">
                 <!-- Registration Form -->
-                <form id="register_ac" action="/dmsws/cererionac/addPf" method="post" enctype="multipart/form-data">
+                <form id="register_ac" action="/dmsws/cerericont/addAc" method="post" enctype="multipart/form-data">
 
                     <div class="section_separator"><br><a class="section-separator">Informatii generale</a><br></div>
 
@@ -75,6 +75,14 @@
                             <select name="id_tip_utilizator" id="id_tip_utilizator" class="form-control chosen-select required">
                                 <option value="1">Utilizator principal</option>
                                 <option value="0">Utilizator secundar</option>
+                            </select>
+                        </div>
+                        <!-- Tip Utilizator -->
+                        <div class="col-lg-2 md-margin sm-margin">
+                            <label for="id_entitate_pers_jur">Entitate cu personalitate juridica</label>
+                            <select name="id_entitate_pers_jur" id="id_entitate_pers_jur" class="form-control chosen-select required">
+                                <option value="1">Da</option>
+                                <option value="0">Nu</option>
                             </select>
                         </div>
                         <!-- Denumire/Cif -->
@@ -205,13 +213,13 @@
                         </div>
                         <!-- Street -->
                         <div class="col-md-8 col-lg-4 md-margin sm-margin">
-                            <label for="street">Strada <span class="text-danger">*</span></label>
-                            <input type="text" name="street" id="street" class="form-control required" placeholder=""/>
+                            <label for="strada">Strada <span class="text-danger">*</span></label>
+                            <input type="text" name="strada" id="strada" class="form-control required" placeholder=""/>
                         </div>
                         <!-- Street Number -->
                         <div class="col-md-2 col-lg-1 md-margin sm-margin">
-                            <label for="nr_street">Nr <span class="text-danger">*</span></label>
-                            <input type="text" name="nr_street" id="nr_street" class="form-control required"
+                            <label for="nr_strada">Nr <span class="text-danger">*</span></label>
+                            <input type="text" name="nr_strada" id="nr_strada" class="form-control required"
                                    placeholder=""/>
                         </div>
                         <!-- Bloc -->
@@ -261,6 +269,7 @@
                             <input type="password" name="pwd2" id="pwd2" class="form-control required"
                                    placeholder=""/>
                         </div>
+
                     </div>
                     <div class="form-group row">
                         <!-- Password -->
@@ -285,7 +294,7 @@
                             <a class="link_gdpr" href="https://www.anre.ro/ro/gdpr" target="_blank">Download model sablon</a>
                         </div>
                     </div>
-                    <!-- TOS -->
+
                     <div class="custom-control custom-checkbox form-group">
                         <input type="checkbox" class="custom-control-input" id="tos1">
                         <label class="custom-control-label" for="tos1">Am citit si sunt de acord cu Termenii si Conditiile<span
@@ -319,7 +328,7 @@
                     <!-- Submit -->
                     <div class="form-group">
                         <button id="register" class="btn btn_green min_width250"
-                                type="submit">Înregistrare</button>
+                                type="submit">Pasul urmator</button>
                     </div>
                 </form>
             </div>
@@ -414,7 +423,7 @@
                     <div class="form-group row">
                         <!-- Telefon -->
                         <div class="col-md-6 sm-margin">
-                            <label for="tel">Telefon <span class="text-danger">*</span></label>
+                            <label for="tel-pfa">Telefon <span class="text-danger">*</span></label>
                             <input type="text" name="tel-pfa" id="tel-pfa" class="form-control required"
                                    placeholder=""/>
                         </div>
