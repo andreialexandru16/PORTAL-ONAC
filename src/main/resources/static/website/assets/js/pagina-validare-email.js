@@ -11,7 +11,7 @@ var PageManager = {
     numPerPage: 5,
     idRegistru: 5,
     init: function () {
-
+debugger
         var PROC_NAME = "PageManager.init";
         $UTIL.log(PAGE_NAME, PROC_NAME, 'Enter', 0);
         //-------------- se apeleaza obligatoriu la initializarea paginii---------------------
@@ -22,7 +22,7 @@ var PageManager = {
 
     },
     mandatoryFunctions: function () {
-
+debugger
         var PROC_NAME = "PageManager.mandatoryFunctions";
         $UTIL.log(PAGE_NAME, PROC_NAME, 'Enter', 0);
         //-------------- preluam WS_URL si WS_TOKEN din documentaPortal-util.js ---------------------
@@ -50,7 +50,7 @@ var PageManager = {
 
 
         this.ajaxAction({
-            url: '/dmsws/portalflow/checkFileOnFlow?&idFisier='+etidFisier,
+            url: '/dmsws/cerericont/checkFileOnFlow?&idFisier='+etidFisier,
             headers: $UTIL.mergeObjects($UTIL.corsHeaders, {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ var PageManager = {
                 if (json.extendedInfo2 === '1') {
                     Swal.fire({
                         icon: "error",
-                        html: "Contul a fost deja trimis spre aprobare.",
+                        html: "Contul a fost deja verificat iar cererea a fost trimisa catre operator.",
                         focusConfirm: false,
                         confirmButtonText: "Ok",
                           onClose: () =>{
@@ -74,7 +74,7 @@ var PageManager = {
                 else {
 
                     this.ajaxAction({
-                        url: "/dmsws/portalflow/sendFluxRequestByIdFisier/"+etidFisier,
+                        url: "/dmsws/cerericont/validareEmail/"+etidFisier,
                         method: 'POST',
                         headers: $UTIL.mergeObjects($UTIL.corsHeaders, {
                             'Accept': 'application/json',

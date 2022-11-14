@@ -16,6 +16,15 @@ public class UtilizatorAcOeResponse extends BaseModel {
     private Integer id;
     private Integer idUtilizator;
     private Integer idCerere;
+    private String emailInstitutie;
+
+    public String getEmailInstitutie() {
+        return emailInstitutie;
+    }
+
+    public void setEmailInstitutie(String emailInstitutie) {
+        this.emailInstitutie = emailInstitutie;
+    }
 
     public Integer getIdCerere() {
         return idCerere;

@@ -89,7 +89,7 @@ var PageManager = {
                     if (data.result == 'OK') {
                         $.fancybox.close();
 
-                        window.location.href='/PORTAL/bithat-inregistrare.html';
+                        window.location.href='/PORTAL/onac-inregistrare.html';
 
                     } else   if (data.result == 'ERR') {
                         Swal.fire({
