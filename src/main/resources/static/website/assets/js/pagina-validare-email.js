@@ -11,7 +11,7 @@ var PageManager = {
     numPerPage: 5,
     idRegistru: 5,
     init: function () {
-
+debugger
         var PROC_NAME = "PageManager.init";
         $UTIL.log(PAGE_NAME, PROC_NAME, 'Enter', 0);
         //-------------- se apeleaza obligatoriu la initializarea paginii---------------------
@@ -22,7 +22,7 @@ var PageManager = {
 
     },
     mandatoryFunctions: function () {
-
+debugger
         var PROC_NAME = "PageManager.mandatoryFunctions";
         $UTIL.log(PAGE_NAME, PROC_NAME, 'Enter', 0);
         //-------------- preluam WS_URL si WS_TOKEN din documentaPortal-util.js ---------------------
