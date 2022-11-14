@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ServerWebInputException;
 import ro.bithat.dms.microservices.dmsws.file.BaseModel;
+import ro.bithat.dms.microservices.dmsws.flow.StandardResponse;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
 import ro.bithat.dms.microservices.portal.ecitizen.raportare.models.TertList;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.AddUtilizatorSecurityService;
@@ -49,6 +50,17 @@ public class CereriContController {
 
     public static final String ERROR_TEXT = "Error Status Code ";
     public static final String[] ALLOWED_EXTENSIONS = {"docx","doc","pdf","jpg","jpeg","png","svg","tif","tiff",".gif"};
+
+
+    @PostMapping(value = "/dmsws/cerericont/validareEmail/{idFisier}", produces = {"application/json"})
+    public StandardResponse validareEmail(@PathVariable Long idFisier) {
+        return serviceCereri.validareEmail(SecurityUtils.getToken(), idFisier);
+    }
+
+    @GetMapping(value = "/dmsws/cerericont/checkFileOnFlow", produces = {"application/json"})
+    public BaseModel checkFileOnFlow(@RequestParam String idFisier) {
+        return serviceCereri.checkFileOnFlow(SecurityUtils.getToken(), idFisier);
+    }
 
     @GetMapping("/dmsws/cerericont/getListOperatorTipCredite")
     public TipOrdonatorList getListOperatorTipCredite() {

@@ -16,6 +16,7 @@ import ro.bithat.dms.microservices.dmsws.DmswsRestService;
 import ro.bithat.dms.microservices.dmsws.colaboration.Utilizator;
 import ro.bithat.dms.microservices.dmsws.file.BaseModel;
 import ro.bithat.dms.microservices.dmsws.file.DmswsFileService;
+import ro.bithat.dms.microservices.dmsws.flow.StandardResponse;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.CreateTipDocFileResponse;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.*;
@@ -36,7 +37,25 @@ public class CereriContService extends DmswsRestService{
 	@Value("${dmsws.anonymous.userid}")
 	private Long idUtilizatorAnonimus;
 
+	@Autowired
+	private EmailHelperService emailService;
 
+	@Value("${portal.url}")
+	private String portalUrl;
+
+
+
+	public StandardResponse validareEmail(String token, Long idFisier) {
+		return post(null, MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, StandardResponse.class, checkStandardResponse(),
+				getDmswsUrl() + "/cerericont/{token}/validareEmail/{idFisier}", token, idFisier);
+	}
+
+
+	public BaseModel checkFileOnFlow(String token, String idFisier) {
+		String url=getDmswsUrl()+"/cerericont/{token}/checkFileOnFlow?&idFisier="+idFisier;
+		return get(BaseModel.class, checkBaseModel(),url ,
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
+	}
 
 	public TipOrdonatorList getListOperatorTipCredite(@PathVariable String token) {
 		return get(TipOrdonatorList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getListOperatorTipCredite",
@@ -67,6 +86,7 @@ public class CereriContService extends DmswsRestService{
 		UtilizatorAcOeResponse result = post(utilizatorAcOe, UtilizatorAcOeResponse.class, checkBaseModelWithExtendedInfo(), getDmswsUrl()+"/cerericont/{token}/addUtilizatorAcOe", token);
 		Integer idFisierDummy = result.getIdFisier();
 		Integer idCerere =  result.getIdCerere();
+		String emailInstitutie = result.getEmailInstitutie();
 		try {
 			fileService.uploadToReplaceExistingFile2(SecurityUtils.getToken(), new Long(idFisierDummy), idUtilizatorAnonimus, "cont.pdf", pdfData);
 		} catch (ServerErrorException | IOException e) {
@@ -78,6 +98,14 @@ public class CereriContService extends DmswsRestService{
 					mdFilename, mdFilename, mdFileData, Optional.empty());
 			fileService.attachFile(SecurityUtils.getToken(), new Integer(biResp.getFileId()), idFisierDummy);
 		}
+		HashMap<String,String> replaceMap = new HashMap<>();
+		replaceMap.put("{PORTAL_URL}",portalUrl);
+		replaceMap.put("{ID_FISIER_CONT}",idFisierDummy.toString());
+
+		emailService.sendEmailFromTemplateReplaceAll2(replaceMap
+				, emailInstitutie,	"Confirmare email!",
+				"static/website/confirmare-email.html"
+		);
 
 		logger.info("user added with succes", utilizatorAcOe.getEmail_rp());
 		return idCerere;
