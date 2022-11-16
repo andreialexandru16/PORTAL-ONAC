@@ -902,6 +902,7 @@ $( '#register_oe' ).submit( function( e ) {
                 },
                 success: function (resultData) {
                     swal.close();
+                    window.location.reload();
                 },
                 error: function(err) {
 //    		    TODO: treat html tag for client side servers with err.responseJSON.status and err.responseJSON.message
