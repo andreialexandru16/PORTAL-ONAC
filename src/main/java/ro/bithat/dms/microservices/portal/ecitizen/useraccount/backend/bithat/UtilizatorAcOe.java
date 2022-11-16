@@ -42,6 +42,43 @@ public class UtilizatorAcOe extends  BaseModel{
     private Integer id_unitate;
     private String utilizator_ac_oe;
     private String error;
+    private String cod_cui;
+    private String nume_tert_master;
+    private String nr_inmatriculare_tert_master;
+    private String email_tert_master;
+
+
+    public String getCod_cui() {
+        return cod_cui;
+    }
+
+    public void setCod_cui(String cod_cui) {
+        this.cod_cui = cod_cui;
+    }
+
+    public String getNume_tert_master() {
+        return nume_tert_master;
+    }
+
+    public void setNume_tert_master(String nume_tert_master) {
+        this.nume_tert_master = nume_tert_master;
+    }
+
+    public String getNr_inmatriculare_tert_master() {
+        return nr_inmatriculare_tert_master;
+    }
+
+    public void setNr_inmatriculare_tert_master(String nr_inmatriculare_tert_master) {
+        this.nr_inmatriculare_tert_master = nr_inmatriculare_tert_master;
+    }
+
+    public String getEmail_tert_master() {
+        return email_tert_master;
+    }
+
+    public void setEmail_tert_master(String email_tert_master) {
+        this.email_tert_master = email_tert_master;
+    }
 
     public String getError() {
         return error;

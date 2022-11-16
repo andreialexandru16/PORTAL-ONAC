@@ -236,10 +236,115 @@ public class CereriContController {
 
         return utilizatorAcOe;
     }
+    UtilizatorAcOe getUtilizatorOe(FileUploadParamRequest formRequest) {
+        UtilizatorAcOe utilizatorAcOe = new UtilizatorAcOe();
+
+        utilizatorAcOe.setCod_cui(formRequest.getParamMap().get("cui"));
+        utilizatorAcOe.setNume_tert_master(formRequest.getParamMap().get("nume_tert_master"));
+        utilizatorAcOe.setNr_inmatriculare_tert_master(formRequest.getParamMap().get("nr_inmatriculare_tert_master"));
+        utilizatorAcOe.setTl_sediu(formRequest.getParamMap().get("telefon_tert_master"));
+        utilizatorAcOe.setEmail_tert_master(formRequest.getParamMap().get("email_tert_master"));
+        utilizatorAcOe.setNume_rp(formRequest.getParamMap().get("nume_rp_oe"));
+        utilizatorAcOe.setPrenume_rp(formRequest.getParamMap().get("prenume_rp_oe"));
+        utilizatorAcOe.setFunctie_rp(formRequest.getParamMap().get("functie_rp_oe"));
+        utilizatorAcOe.setEmail_rp(formRequest.getParamMap().get("email_rp_oe"));
+        utilizatorAcOe.setNume_c1(formRequest.getParamMap().get("nume_c1_oe"));
+        utilizatorAcOe.setPrenume_c1(formRequest.getParamMap().get("prenume_c1_oe"));
+        utilizatorAcOe.setEmail_c1(formRequest.getParamMap().get("email_c1_oe"));
+        utilizatorAcOe.setTelefon_c1(formRequest.getParamMap().get("telefon_c1_oe"));
+        utilizatorAcOe.setNume_c2(formRequest.getParamMap().get("nume_c2_oe"));
+        utilizatorAcOe.setPrenume_c2(formRequest.getParamMap().get("prenume_c2_oe"));
+        utilizatorAcOe.setEmail_c2(formRequest.getParamMap().get("email_c2_oe"));
+        utilizatorAcOe.setTelefon_c2(formRequest.getParamMap().get("telefon_c2_oe"));
+        if(formRequest.getParamMap().get("id_judet_oe")!=null) {
+            utilizatorAcOe.setId_judet(new Integer(formRequest.getParamMap().get("id_judet_oe")));
+        }else{
+            utilizatorAcOe.setId_judet(null);
+        }
+
+        if(formRequest.getParamMap().get("id_localitate_oe")!=null) {
+            utilizatorAcOe.setId_localitate(new Integer(formRequest.getParamMap().get("id_localitate_oe")));
+        }else{
+            utilizatorAcOe.setId_localitate(null);
+        }
+        utilizatorAcOe.setStrada(formRequest.getParamMap().get("strada_oe"));
+        utilizatorAcOe.setNr_strada(formRequest.getParamMap().get("nr_strada_oe"));
+        utilizatorAcOe.setBloc(formRequest.getParamMap().get("bloc_oe"));
+        utilizatorAcOe.setScara(formRequest.getParamMap().get("scara_oe"));
+        utilizatorAcOe.setApartament(formRequest.getParamMap().get("apartament_oe"));
+        utilizatorAcOe.setEtaj(formRequest.getParamMap().get("etaj_oe"));
+        utilizatorAcOe.setCod(formRequest.getParamMap().get("cod_oe"));
+        utilizatorAcOe.setParola(formRequest.getParamMap().get("pwd1_oe"));
+        utilizatorAcOe.setUtilizator_ac_oe("OE");
+
+
+        return utilizatorAcOe;
+    }
+
+    //vaadin use apache commons-fileuploads and has no support for spring servlet  MultipartFile
+    @PostMapping(value = "/dmsws/cerericont/addOe", consumes = "multipart/form-data", produces = "text/html")
+    public ResponseEntity<String> addOperatorEconomic(HttpServletRequest httpServletRequest) {
+        Integer idCerere=null;
+        try {
+            FileUploadParamRequest requestForm = getRequestForm(httpServletRequest);
+            try{
+                validateCode(requestForm.getParamMap().get("checker"));
+            }catch (IllegalAccessError e) {
+
+            }
+            UtilizatorAcOe utilizatorAcOe = getUtilizatorOe(requestForm);
+
+//            if(requestForm.uploadedFiles.size() == 1 && requestForm.getUploadedFiles().get(0).getFileData().length!=0) {
+//                UploadFileDescription mandatFile = requestForm.getUploadedFiles().get(0);
+//                Optional<String> extension = getExtensionByStringHandling(mandatFile.getFileName());
+//                boolean allowedExtension = false;
+//                if (extension.isPresent() && !extension.get().isEmpty()){
+//                    allowedExtension = Arrays.stream(ALLOWED_EXTENSIONS).anyMatch(extension.get()::equals);
+//
+//                    if (!allowedExtension)
+//                        throw new IllegalArgumentException("Extensia ." + extension.get() + " nu este permisa.");
+//                }
+//
+//                byte[] requestFormPdf = Base64.getDecoder().decode(requestForm.paramMap.get("request_form_pdf"));
+//                String url="";
+//                try{
+//                    url= urlUtil.getPath(httpServletRequest);
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//                idCerere = serviceCereri.addUtilizatorAcOe(SecurityUtils.getToken(), utilizatorAcOe, mandatFile.getFileName(), mandatFile.getFileData(), requestFormPdf, url);
+//            }
+//            else{
+//                throw new ServerWebInputException("Incarcati mandat!");
+//            }
+        } catch (IllegalAccessError e) {
+            return ResponseEntity.badRequest().body("Cerere esuata. Repetati operatia!");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (HttpClientErrorException.BadRequest e) {
+            try {
+                JSONParser parser = new JSONParser();
+                JSONObject json = (JSONObject) parser.parse(e.getResponseBodyAsString());
+                String msg = json.getAsString("info");
+                return ResponseEntity.badRequest().body(msg);
+            } catch (Exception e2){
+                return ResponseEntity.badRequest().body("Exista deja un utilizator inregistrat cu aceasta informatie!");
+            }
+        } catch (HttpClientErrorException.NotAcceptable e) {
+            return ResponseEntity.badRequest().body("Parola nu este destul de complexă.");
+        } catch (ServerWebInputException e) {
+            return ResponseEntity.badRequest().body("Eroare server DMSWS. Repetati operatia!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Eroare server DMSWS. Repetati operatia!");
+        }
+
+        return ResponseEntity.ok(String.valueOf(idCerere));
+    }
+
 
     //vaadin use apache commons-fileuploads and has no support for spring servlet  MultipartFile
     @PostMapping(value = "/dmsws/cerericont/addAc", consumes = "multipart/form-data", produces = "text/html")
-    public ResponseEntity<String> addPersoanaFizica(HttpServletRequest httpServletRequest) {
+    public ResponseEntity<String> addAutoritateContractanta(HttpServletRequest httpServletRequest) {
         Integer idCerere=null;
         try {
             FileUploadParamRequest requestForm = getRequestForm(httpServletRequest);
