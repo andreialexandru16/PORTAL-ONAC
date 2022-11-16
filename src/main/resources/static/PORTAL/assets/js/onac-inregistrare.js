@@ -36,9 +36,11 @@ $.ajax({
         var judetList = result.judetList;
         for (var i = 0; i < judetList.length; i++) {
             $('#id_judet').append(getOptionListItemHtml(judetList[i].id, judetList[i].denumire));
+            $('#id_judet_oe').append(getOptionListItemHtml(judetList[i].id, judetList[i].denumire));
 
         }
         $('#id_judet').val(0).trigger("chosen:updated");
+        $('#id_judet_oe').val(0).trigger("chosen:updated");
 
     },
     error: function (err) {
@@ -78,6 +80,9 @@ $.ajax({
 $('#id_judet').on('change', function (e) {
     fetchLocalitati($(this).val());
 });
+$('#id_judet_oe').on('change', function (e) {
+    fetchLocalitatiOE($(this).val());
+});
 var fetchLocalitati = (localitateId) => {
     $.ajax({
         url: "/dmsws/cerericont/getListLocalitate/" + localitateId,
@@ -91,6 +96,25 @@ var fetchLocalitati = (localitateId) => {
             }
 
             $('#id_localitate').val(0).trigger("chosen:updated");
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+};
+var fetchLocalitatiOE = (localitateId) => {
+    $.ajax({
+        url: "/dmsws/cerericont/getListLocalitate/" + localitateId,
+        beforeSend: function () { $('#id_localitate_oe').empty(); },
+        success: function (result) {
+            localitatiList = result.localitateList;
+            console.log('localitatiList')
+            console.log(localitatiList)
+            for (var i = 0; i < localitatiList.length; i++) {
+                $('#id_localitate_oe').append(getOptionListItemHtml(localitatiList[i].id, localitatiList[i].denumire));
+            }
+
+            $('#id_localitate_oe').val(0).trigger("chosen:updated");
         },
         error: function (err) {
             console.log(err);
