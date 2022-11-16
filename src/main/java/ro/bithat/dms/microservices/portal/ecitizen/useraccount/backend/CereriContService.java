@@ -65,6 +65,11 @@ public class CereriContService extends DmswsRestService{
 		return get(InstiutiiList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getListDenumireCif",
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
 	}
+	public UtilizatorDocument getDownloadSablon(@PathVariable String token) {
+		return get(UtilizatorDocument.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getDownloadSablon",
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
+	}
+
 	public JudetList getListJudete(@PathVariable String token) {
 		return get(JudetList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getListJudete",
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);

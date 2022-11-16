@@ -36,9 +36,11 @@ $.ajax({
         var judetList = result.judetList;
         for (var i = 0; i < judetList.length; i++) {
             $('#id_judet').append(getOptionListItemHtml(judetList[i].id, judetList[i].denumire));
+            $('#id_judet_oe').append(getOptionListItemHtml(judetList[i].id, judetList[i].denumire));
 
         }
         $('#id_judet').val(0).trigger("chosen:updated");
+        $('#id_judet_oe').val(0).trigger("chosen:updated");
 
     },
     error: function (err) {
@@ -78,6 +80,9 @@ $.ajax({
 $('#id_judet').on('change', function (e) {
     fetchLocalitati($(this).val());
 });
+$('#id_judet_oe').on('change', function (e) {
+    fetchLocalitatiOE($(this).val());
+});
 var fetchLocalitati = (localitateId) => {
     $.ajax({
         url: "/dmsws/cerericont/getListLocalitate/" + localitateId,
@@ -91,6 +96,25 @@ var fetchLocalitati = (localitateId) => {
             }
 
             $('#id_localitate').val(0).trigger("chosen:updated");
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+};
+var fetchLocalitatiOE = (localitateId) => {
+    $.ajax({
+        url: "/dmsws/cerericont/getListLocalitate/" + localitateId,
+        beforeSend: function () { $('#id_localitate_oe').empty(); },
+        success: function (result) {
+            localitatiList = result.localitateList;
+            console.log('localitatiList')
+            console.log(localitatiList)
+            for (var i = 0; i < localitatiList.length; i++) {
+                $('#id_localitate_oe').append(getOptionListItemHtml(localitatiList[i].id, localitatiList[i].denumire));
+            }
+
+            $('#id_localitate_oe').val(0).trigger("chosen:updated");
         },
         error: function (err) {
             console.log(err);
@@ -145,6 +169,20 @@ var resizeContainer = () => {
 
     $('#resize_iframe', window.parent.document).trigger('click');
 
+};
+var downloadMandat = () => {
+debugger
+    $.ajax({
+        url: "/dmsws/cerericont/getDownloadSablon",
+        success: function (data) {
+            if(data.result == "OK"){
+                window.open(data.downloadLink,'_blank')
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
 };
 $('#country').on('change', function (e) {
     fetchRegions($(this).val());
@@ -592,7 +630,7 @@ $( '#register_pfa' )
         e.preventDefault();
     } );
 
-//inregistrare persoana fizica
+//inregistrare autoritate contractanta
 $( '#register_ac' ).submit( function( e ) {
     debugger
     $("#register").prop('disabled','disabled');
@@ -719,6 +757,152 @@ $( '#register_ac' ).submit( function( e ) {
                      window.location.href = '/PORTAL/relatii_terti.html?idCerere=' + resultData;
 
 
+                },
+                error: function(err) {
+//    		    TODO: treat html tag for client side servers with err.responseJSON.status and err.responseJSON.message
+                    swal.close();
+                    Swal.fire({
+                        icon: 'error',
+                        html: "<p class='text-danger'><strong>" + err.responseText +"</strong></p>",
+                        focusConfirm: false,
+                        confirmButtonText: 'Ok',
+                    });
+                    $("#register").removeAttr('disabled');
+
+                } } );
+
+        });
+
+        }
+    }
+    e.preventDefault();
+} );
+
+//inregistrare operatori economici
+$( '#register_oe' ).submit( function( e ) {
+    debugger
+    $("#register2").prop('disabled','disabled');
+    var response ="true";
+    try{
+
+        response = grecaptcha.getResponse(0);
+    }catch (err){
+
+    }
+    if(response == "FALSE") {
+        debugger
+        e.preventDefault();
+        //reCaptcha not verified
+        Swal.fire({
+            icon: 'error',
+            html: "Captcha gresit!",
+            focusConfirm: false,
+            confirmButtonText: 'Ok',
+        });
+        $("#register2").removeAttr('disabled');
+    }else{
+        debugger
+        let errorString = "<ul class='text-left'>";
+        /* Check for required fields */
+        $(this).find(".required").each(function () {
+            if ($(this).val() === "") {
+                errorString += "<li class='text-danger'>Câmpul: <strong>" + $(this).parent().find("label").text() + "</strong> este obligatoriu.</li>";
+            }
+        });
+        /* Check for TOS */
+        if ($("#tos1_oe:checked").length == 0) {
+            errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați termenii și condițiile.</li>";
+        }
+        if ($("#tos2_oe:checked").length == 0) {
+            errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați Politica de confidentialitate si de prelucrare a datelor cu caracter personal(GDPR).</li>";
+        }
+        if ($("#tos3_oe:checked").length == 0) {
+            errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați Politica de utilizare cookie-uri.</li>";
+        }
+        /* Passwords */
+        if ($("#pwd1_oe").val() !== $("#pwd2_oe").val()) {
+            errorString += "<li class='text-danger'>Parolele nu se potrivesc.</li>";
+        }
+
+        /* Passwords */
+        // if (CheckPassword($("#pwd1").val())==false ){
+        //     errorString += "<li class='text-danger'>Parola trebuie să conțină: cel puțin 8 caractere; cel puțin un caracter numeric; cel puțin o literă mare; cel puțin o literă mică; cel puțin un caracter special (=, ^, !, @, #, $, &, *)</li>";
+        // }
+        // if (checkCaptcha()==false){
+        //     errorString += "<li class='text-danger'>Va rugam sa completati captcha.</li>";
+        // }
+
+   // if (isNaN($("#cnp").val())){
+   // 	errorString += "<li class='text-danger'>CNP nu este fromat din cifre.</li>";
+   // }
+
+        /* Cnp */
+        // if (validateCnp($("#cnp").val()) == false) {
+        //     errorString += "<li class='text-danger'>CNP-ul este invalid.</li>";
+        // }
+
+        /* Email */
+        // if (validateEmail($("#email").val()) == false) {
+        //     errorString += "<li class='text-danger'>Adresa de email este invalidă.</li>";
+        // }
+
+
+
+        errorString += "</ul>";
+        if (errorString !== "<ul class='text-left'></ul>") {
+
+            Swal.fire({
+                icon: 'error',
+                html: errorString,
+                focusConfirm: false,
+                confirmButtonText: 'Ok',
+            });
+            $("#register2").removeAttr('disabled');
+
+        } else {
+            debugger
+            var HTML_Width = $("#register_oe").width();
+            var HTML_Height = $("#register_oe").height();
+            var top_left_margin = 15;
+            var PDF_Width = HTML_Width+(top_left_margin*2);
+            var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+            var canvas_image_width = HTML_Width;
+            var canvas_image_height = HTML_Height;
+
+            var totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
+
+            $(window).scrollTop(0);
+            $("#register_oe").css("background","white");
+
+            domtoimage.toJpeg(document.querySelector("#register_oe"), { quality: 0.95 })
+                .then(function (dataUrl) {
+                    var formData = new FormData( document.querySelector("#register_oe"));
+
+                    var imgData=dataUrl;
+            var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
+            pdf.addImage(imgData, 'JPEG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
+
+            for (var i = 1; i <= totalPDFPages; i++) {
+                pdf.addPage(PDF_Width, PDF_Height);
+                pdf.addImage(imgData, 'JPEG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+            }
+            formData.append("request_form_pdf", btoa(pdf.output())); ///pdf.output());
+
+
+
+
+            $.ajax( {
+                url: '/dmsws/cerericont/addOe',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    $UTIL.waitForLoading();
+                },
+                success: function (resultData) {
+                    swal.close();
+                    window.location.reload();
                 },
                 error: function(err) {
 //    		    TODO: treat html tag for client side servers with err.responseJSON.status and err.responseJSON.message
