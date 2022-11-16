@@ -294,29 +294,29 @@ public class CereriContController {
             }
             UtilizatorAcOe utilizatorAcOe = getUtilizatorOe(requestForm);
 
-//            if(requestForm.uploadedFiles.size() == 1 && requestForm.getUploadedFiles().get(0).getFileData().length!=0) {
-//                UploadFileDescription mandatFile = requestForm.getUploadedFiles().get(0);
-//                Optional<String> extension = getExtensionByStringHandling(mandatFile.getFileName());
-//                boolean allowedExtension = false;
-//                if (extension.isPresent() && !extension.get().isEmpty()){
-//                    allowedExtension = Arrays.stream(ALLOWED_EXTENSIONS).anyMatch(extension.get()::equals);
-//
-//                    if (!allowedExtension)
-//                        throw new IllegalArgumentException("Extensia ." + extension.get() + " nu este permisa.");
-//                }
-//
-//                byte[] requestFormPdf = Base64.getDecoder().decode(requestForm.paramMap.get("request_form_pdf"));
-//                String url="";
-//                try{
-//                    url= urlUtil.getPath(httpServletRequest);
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//                idCerere = serviceCereri.addUtilizatorAcOe(SecurityUtils.getToken(), utilizatorAcOe, mandatFile.getFileName(), mandatFile.getFileData(), requestFormPdf, url);
-//            }
-//            else{
-//                throw new ServerWebInputException("Incarcati mandat!");
-//            }
+            if(requestForm.uploadedFiles.size() == 1 && requestForm.getUploadedFiles().get(0).getFileData().length!=0) {
+                UploadFileDescription mandatFile = requestForm.getUploadedFiles().get(0);
+                Optional<String> extension = getExtensionByStringHandling(mandatFile.getFileName());
+                boolean allowedExtension = false;
+                if (extension.isPresent() && !extension.get().isEmpty()){
+                    allowedExtension = Arrays.stream(ALLOWED_EXTENSIONS).anyMatch(extension.get()::equals);
+
+                    if (!allowedExtension)
+                        throw new IllegalArgumentException("Extensia ." + extension.get() + " nu este permisa.");
+                }
+
+                byte[] requestFormPdf = Base64.getDecoder().decode(requestForm.paramMap.get("request_form_pdf"));
+                String url="";
+                try{
+                    url= urlUtil.getPath(httpServletRequest);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                idCerere = serviceCereri.addUtilizatorAcOe(SecurityUtils.getToken(), utilizatorAcOe, mandatFile.getFileName(), mandatFile.getFileData(), requestFormPdf, url);
+            }
+            else{
+                throw new ServerWebInputException("Incarcati mandat!");
+            }
         } catch (IllegalAccessError e) {
             return ResponseEntity.badRequest().body("Cerere esuata. Repetati operatia!");
         } catch (IllegalArgumentException e) {
