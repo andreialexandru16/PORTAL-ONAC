@@ -146,6 +146,20 @@ var resizeContainer = () => {
     $('#resize_iframe', window.parent.document).trigger('click');
 
 };
+var downloadMandat = () => {
+debugger
+    $.ajax({
+        url: "/dmsws/cerericont/getDownloadSablon",
+        success: function (data) {
+            if(data.result == "OK"){
+                window.open(data.downloadLink,'_blank')
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+};
 $('#country').on('change', function (e) {
     fetchRegions($(this).val());
     // fetchCities($(this).val());

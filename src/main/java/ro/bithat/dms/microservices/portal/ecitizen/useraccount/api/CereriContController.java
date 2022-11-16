@@ -72,6 +72,11 @@ public class CereriContController {
         return serviceCereri.getListDenumireCif(anonymousToken);
     }
 
+    @GetMapping("/dmsws/cerericont/getDownloadSablon")
+    public UtilizatorDocument getDownloadSablon() {
+        return serviceCereri.getDownloadSablon(anonymousToken);
+    }
+
    @GetMapping("/dmsws/cerericont/getListJudete")
     public JudetList getListJudete() {
         return serviceCereri.getListJudete(anonymousToken);
