@@ -584,7 +584,6 @@ $( '#register_ct' ).submit( function( e ) {
             $(window).scrollTop(0);
             $("#register_ct").css("background","white");
             var formData = new FormData( document.querySelector("#register_ct"));
-
                     $.ajax( {
                         url: '/dmsws/cerericont/addCt',
                         type: 'POST',
@@ -593,6 +592,7 @@ $( '#register_ct' ).submit( function( e ) {
                         contentType: false,
                         beforeSend: function() {
                             $UTIL.waitForLoading();
+
                         },
                         success: function (resultData) {
                             swal.close();
@@ -608,7 +608,7 @@ $( '#register_ct' ).submit( function( e ) {
                                 focusConfirm: false,
                                 confirmButtonText: 'Ok',
                             });
-                            $("#register").removeAttr('disabled');
+                            $("#btn_add_contact").removeAttr('disabled');
 
                         } } );
     e.preventDefault();
