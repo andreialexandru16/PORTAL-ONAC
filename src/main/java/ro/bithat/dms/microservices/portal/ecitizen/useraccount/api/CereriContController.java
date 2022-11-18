@@ -236,6 +236,7 @@ public class CereriContController {
 
         return utilizatorAcOe;
     }
+
     UtilizatorAcOe getUtilizatorOe(FileUploadParamRequest formRequest) {
         UtilizatorAcOe utilizatorAcOe = new UtilizatorAcOe();
 
@@ -277,6 +278,10 @@ public class CereriContController {
         utilizatorAcOe.setParola(formRequest.getParamMap().get("pwd1_oe"));
         utilizatorAcOe.setUtilizator_ac_oe("OE");
 
+        utilizatorAcOe.setNume(formRequest.getParamMap().get("nume_c"));
+        utilizatorAcOe.setPrenume(formRequest.getParamMap().get("prenume_c"));
+        utilizatorAcOe.setEmail(formRequest.getParamMap().get("email_c"));
+        utilizatorAcOe.setTelefon(formRequest.getParamMap().get("telefon_c"));
 
         return utilizatorAcOe;
     }
@@ -401,6 +406,57 @@ public class CereriContController {
 
         return ResponseEntity.ok(String.valueOf(idCerere));
     }
+
+    //vaadin use apache commons-fileuploads and has no support for spring servlet  MultipartFile
+    @PostMapping(value = "/dmsws/cerericont/addCt", consumes = "multipart/form-data", produces = "text/html")
+    public ResponseEntity<String> addContact(HttpServletRequest httpServletRequest) {
+        try {
+            FileUploadParamRequest requestForm = getRequestForm(httpServletRequest);
+            UtilizatorAcOe utilizatorContact = getUtilizatorOe(requestForm);
+            if(requestForm.uploadedFiles.size() == 1 && requestForm.getUploadedFiles().get(0).getFileData().length!=0) {
+                UploadFileDescription mandatFile = requestForm.getUploadedFiles().get(0);
+                Optional<String> extension = getExtensionByStringHandling(mandatFile.getFileName());
+                boolean allowedExtension = false;
+                if (extension.isPresent() && !extension.get().isEmpty()){
+                    allowedExtension = Arrays.stream(ALLOWED_EXTENSIONS).anyMatch(extension.get()::equals);
+
+                    if (!allowedExtension)
+                        throw new IllegalArgumentException("Extensia ." + extension.get() + " nu este permisa.");
+                }
+
+                serviceCereri.addContact(SecurityUtils.getToken(), utilizatorContact, mandatFile.getFileName(), mandatFile.getFileData());
+            }
+            else{
+                throw new ServerWebInputException("Incarcati mandat!");
+            }
+        } catch (IllegalAccessError e) {
+            return ResponseEntity.badRequest().body("Cerere esuata. Repetati operatia!");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (HttpClientErrorException.BadRequest e) {
+            try {
+                JSONParser parser = new JSONParser();
+                JSONObject json = (JSONObject) parser.parse(e.getResponseBodyAsString());
+                String msg = json.getAsString("info");
+                return ResponseEntity.badRequest().body(msg);
+            } catch (Exception e2){
+                return ResponseEntity.badRequest().body("Exista deja un utilizator inregistrat cu aceasta informatie!");
+            }
+        } catch (HttpClientErrorException.NotAcceptable e) {
+            return ResponseEntity.badRequest().body("Parola nu este destul de complexă.");
+        } catch (ServerWebInputException e) {
+            return ResponseEntity.badRequest().body("Eroare server DMSWS. Repetati operatia!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Eroare server DMSWS. Repetati operatia!");
+        }
+
+        return ResponseEntity.ok("OK");
+    }
+
+
+
+
+
 
     @GetMapping("/dmsws/cerericont/getListaRelatii/{idCerere}")
     public RelatiiTertList getListaRelatii(@PathVariable String idCerere) {

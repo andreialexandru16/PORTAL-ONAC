@@ -79,6 +79,31 @@ public class CereriContService extends DmswsRestService{
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token, idJudet);
 	}
 
+	public void addContact(String token,UtilizatorAcOe utilizatorContact,
+									 String mdFilename, byte[] mdFileData) throws ServerWebInputException {
+		logger.info("adding user {}", utilizatorContact.getEmail());
+		if ( mdFilename == null){
+			logger.info("canceled {}", utilizatorContact.getEmail());
+			throw new ServerWebInputException("Incarcati mandat!");
+		}
+
+		UtilizatorAcOeResponse result = post(utilizatorContact, UtilizatorAcOeResponse.class, checkBaseModelWithExtendedInfo(), getDmswsUrl()+"/cerericont/{token}/addUtilizatorCt", token);
+
+		if (mdFilename != null && !mdFilename.isEmpty()) {
+			CreateTipDocFileResponse biResp = fileService.uploadFisierTipDocId(SecurityUtils.getToken(), result.getIdMandat(), idUtilizatorAnonimus,
+					mdFilename, mdFilename, mdFileData, Optional.empty());
+		}
+		HashMap<String,String> replaceMap = new HashMap<>();
+		replaceMap.put("{PORTAL_URL}",portalUrl);
+
+		emailService.sendEmailFromTemplateReplaceAll2(replaceMap
+				, utilizatorContact.getEmail(),	"Confirmare email!",
+				"static/website/creare-cont-utilizator-contact.html"
+		);
+
+		logger.info("contact added with succes", utilizatorContact.getEmail());
+	}
+
 
 	public Integer addUtilizatorAcOe(String token,UtilizatorAcOe utilizatorAcOe,
 										  String mdFilename, byte[] mdFileData, byte[] pdfData, String urlPath) throws ServerWebInputException {
