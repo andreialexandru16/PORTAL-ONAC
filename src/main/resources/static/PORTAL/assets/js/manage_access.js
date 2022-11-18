@@ -560,5 +560,22 @@ var FileManager = {
 
 
 $(document).ready(function () {
+    /* Upload Files */
+    $(document).find(".file-control").each(function () {
+        let currentFile = $(this);
+        let uploadText = $(this).attr("upload-text");
+        currentFile.after("<div class='cbnp_upload_file form-control'><span>" + uploadText + "</span><i class='fas fa-upload'></i></div>");
+    });
+    $(document).on("click", ".cbnp_upload_file", function () {
+        $(this).prev().trigger("click");
+    });
+    $(document).on("change", ".file-control", function () {
+        let fileName = $(this).val().split("\\");
+        let uploadFileName = fileName[fileName.length - 1];
+        if ( uploadFileName.length > 20 ) {
+            uploadFileName = uploadFileName.substr(0, 20) + "...";
+        }
+        $(this).next().find("span").text(uploadFileName);
+    });
     FileManager.init();
 });

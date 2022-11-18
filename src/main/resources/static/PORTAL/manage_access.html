@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Manage Access</title>
+    <title>Persoane contact</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -46,7 +46,7 @@
         <div class="services_list_container my-account-data">
 
             <!-- begin Title -->
-            <div class="services_header"><div class="service_title"><h2> Management acces</h2></div></div>
+            <div class="services_header"><div class="service_title"><h2> Persoane contact</h2></div></div>
             <!-- end Title -->
 
             <div class="service_body">
@@ -90,7 +90,7 @@
                                         <div class="title_table">
                                             <!--<span class="editable_text" contenteditable="true">Management acces</span>-->
                                             <a class="btn_arrow_left float_left mt30" style="color:#fff;" onclick="FileManager.goBack()">Inapoi</a>
-                                            <a style="color:#fff;" class="btn btn_green float_right mt30" data-fancybox data-src="#modal1">Adauga subcont</a>
+                                            <a style="color:#fff;" class="btn btn_green float_right mt30" data-fancybox data-src="#modal1">Adauga persoana de contact</a>
 
                                         </div>
                                         <!-- end Title -->
@@ -119,16 +119,44 @@
     <form method="post" action="#" id="add_ticket_form">
         <!-- begin Task -->
         <div class="modal_one">
-            <div class="box_input">
-                <label class="label">Username</label>
-                <input id="username" type="text" name="">
+            <div class="width50">
+            <div class="box_input mb20">
+                <label for="nume_c">Nume</label>
+                <input type="text" name="nume_c" id="nume_c" class="form-control" placeholder=""/>
+            </div>
+            </div>
+            <div class="width50">
+            <div class="box_input mb20">
+                <label for="prenume_c">Prenume</label>
+                <input type="text" name="prenume_c" id="prenume_c" class="form-control" placeholder=""/>
+            </div>
+            </div>
+            <div class="width50">
+            <div class="box_input mb20">
+                <label for="email_c">Email</label>
+                <input type="text" name="email_c" id="email_c" class="form-control" placeholder=""/>
+            </div>
+            </div>
+            <div class="width50">
+            <div class="box_input mb20">
+                <label for="telefon_c">Telefon</label>
+                <input type="text" name="telefon_c" id="telefon_c" class="form-control" placeholder=""/>
+            </div>
+            </div>
+            <div class="box_input" >
+                    <label for="contact_file">Incarca mandat<span class="text-danger">*</span></label>
+
+                <input type="file" accept=".gif,.jpg,.jpeg,.png,.doc,.docx,.pdf,.tiff,.svg,.tif"
+                           name="contact_file" id="contact_file" class="form-control file-control required"
+                           upload-text="Incarca documentul" method="post" enctype="multipart/form-data"/>
+
             </div>
         </div>
         <!-- end Task -->
 
         <!-- begin Submit -->
         <div class="modal_one">
-            <button style="float: right;color:#fff;" type="button" class="btn btn_green float_right" id="btn_add_ticket" onclick="FileManager.prepareToAddSubcont()">Asociaza subcont</button>
+            <button style="float: right;color:#fff;" type="button" class="btn btn_green float_right" id="btn_add_ticket" onclick="FileManager.prepareToAddSubcont()">Adauga</button>
         </div>
         <!-- end Submit -->
 
