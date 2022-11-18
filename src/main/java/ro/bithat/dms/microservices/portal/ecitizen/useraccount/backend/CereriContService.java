@@ -79,7 +79,7 @@ public class CereriContService extends DmswsRestService{
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token, idJudet);
 	}
 
-	public void addContact(String token,UtilizatorContact utilizatorContact,
+	public void addContact(String token,UtilizatorAcOe utilizatorContact,
 									 String mdFilename, byte[] mdFileData) throws ServerWebInputException {
 		logger.info("adding user {}", utilizatorContact.getEmail());
 		if ( mdFilename == null){
@@ -87,7 +87,7 @@ public class CereriContService extends DmswsRestService{
 			throw new ServerWebInputException("Incarcati mandat!");
 		}
 
-		UtilizatorContactResponse result = post(utilizatorContact, UtilizatorContactResponse.class, checkBaseModelWithExtendedInfo(), getDmswsUrl()+"/cerericont/{token}/addUtilizatorCt", token);
+		UtilizatorAcOeResponse result = post(utilizatorContact, UtilizatorAcOeResponse.class, checkBaseModelWithExtendedInfo(), getDmswsUrl()+"/cerericont/{token}/addUtilizatorCt", token);
 
 		if (mdFilename != null && !mdFilename.isEmpty()) {
 			CreateTipDocFileResponse biResp = fileService.uploadFisierTipDocId(SecurityUtils.getToken(), result.getIdMandat(), idUtilizatorAnonimus,

@@ -47,6 +47,42 @@ public class UtilizatorAcOe extends  BaseModel{
     private String nr_inmatriculare_tert_master;
     private String email_tert_master;
 
+    private String nume;
+    private String prenume;
+    private String email;
+    private String telefon;
+
+    public String getNume() {
+        return nume;
+    }
+
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+
+    public String getPrenume() {
+        return prenume;
+    }
+
+    public void setPrenume(String prenume) {
+        this.prenume = prenume;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
 
     public String getCod_cui() {
         return cod_cui;

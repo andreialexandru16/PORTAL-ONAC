@@ -236,15 +236,7 @@ public class CereriContController {
 
         return utilizatorAcOe;
     }
-    UtilizatorContact getUtilizatorContact(FileUploadParamRequest formRequest) {
-        UtilizatorContact utilizatorContact = new UtilizatorContact();
-        utilizatorContact.setNume(formRequest.getParamMap().get("nume_c"));
-        utilizatorContact.setPrenume(formRequest.getParamMap().get("prenume_c"));
-        utilizatorContact.setEmail(formRequest.getParamMap().get("email_c"));
-        utilizatorContact.setTelefon(formRequest.getParamMap().get("telefon_c"));
 
-        return utilizatorContact;
-    }
     UtilizatorAcOe getUtilizatorOe(FileUploadParamRequest formRequest) {
         UtilizatorAcOe utilizatorAcOe = new UtilizatorAcOe();
 
@@ -286,6 +278,10 @@ public class CereriContController {
         utilizatorAcOe.setParola(formRequest.getParamMap().get("pwd1_oe"));
         utilizatorAcOe.setUtilizator_ac_oe("OE");
 
+        utilizatorAcOe.setNume(formRequest.getParamMap().get("nume_c"));
+        utilizatorAcOe.setPrenume(formRequest.getParamMap().get("prenume_c"));
+        utilizatorAcOe.setEmail(formRequest.getParamMap().get("email_c"));
+        utilizatorAcOe.setTelefon(formRequest.getParamMap().get("telefon_c"));
 
         return utilizatorAcOe;
     }
@@ -416,7 +412,7 @@ public class CereriContController {
     public ResponseEntity<String> addContact(HttpServletRequest httpServletRequest) {
         try {
             FileUploadParamRequest requestForm = getRequestForm(httpServletRequest);
-            UtilizatorContact utilizatorContact = getUtilizatorContact(requestForm);
+            UtilizatorAcOe utilizatorContact = getUtilizatorOe(requestForm);
             if(requestForm.uploadedFiles.size() == 1 && requestForm.getUploadedFiles().get(0).getFileData().length!=0) {
                 UploadFileDescription mandatFile = requestForm.getUploadedFiles().get(0);
                 Optional<String> extension = getExtensionByStringHandling(mandatFile.getFileName());
