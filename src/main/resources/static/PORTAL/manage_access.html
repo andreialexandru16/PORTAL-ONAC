@@ -116,9 +116,10 @@
 
 <!-- begin Popup - Adauga ticket -->
 <div class="modal_subcont" style="display: none;" id="modal1">
-    <form method="post" action="#" id="add_ticket_form">
+    <form id="register_ct" action="/dmsws/cerericont/addCt" method="post" enctype="multipart/form-data">
         <!-- begin Task -->
         <div class="modal_one">
+            <div class="form-group row">
             <div class="width50">
             <div class="box_input mb20">
                 <label for="nume_c">Nume</label>
@@ -151,12 +152,13 @@
                            upload-text="Incarca documentul" method="post" enctype="multipart/form-data"/>
 
             </div>
+            </div>
         </div>
         <!-- end Task -->
 
         <!-- begin Submit -->
-        <div class="modal_one">
-            <button style="float: right;color:#fff;" type="button" class="btn btn_green float_right" id="btn_add_ticket" onclick="FileManager.prepareToAddSubcont()">Adauga</button>
+        <div class="form-group">
+            <button style="float: right;color:#fff;" type="submit" class="btn btn_green float_right" id="btn_add_contact" >Adauga</button>
         </div>
         <!-- end Submit -->
 
@@ -252,6 +254,7 @@
 <script src="assets/js/util.js"></script>
 <script src="assets/js/manage_access.js"></script>
 <script src="assets/js/leave_page.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
 
 <!-- script Fancybox -->
 <script type="text/javascript"

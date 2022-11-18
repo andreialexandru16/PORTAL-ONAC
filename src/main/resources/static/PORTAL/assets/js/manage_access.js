@@ -20,6 +20,7 @@ var FileManager = {
         );
     },
 
+
     getWsAndUserInfo: function(){
         var that = this;
         var defer = $.Deferred();
@@ -83,6 +84,9 @@ var FileManager = {
 
         return defer.promise();
     },
+
+
+
 
 
 
@@ -558,6 +562,58 @@ var FileManager = {
     }
 };
 
+$( '#register_ct' ).submit( function( e ) {
+    debugger
+    $("#btn_add_contact").prop('disabled','disabled');
+    var nume_c = $("#nume_c").val();
+    var prenume_c = $("#prenume_c").val();
+    var email_c = $("#email_c").val();
+    var telefon_c = $("#telefon_c").val();
+    var contact_file = $("#contact_file").val();
+
+            var HTML_Width = $("#register_ct").width();
+            var HTML_Height = $("#register_ct").height();
+            var top_left_margin = 15;
+            var PDF_Width = HTML_Width+(top_left_margin*2);
+            var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+            var canvas_image_width = HTML_Width;
+            var canvas_image_height = HTML_Height;
+
+            var totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
+
+            $(window).scrollTop(0);
+            $("#register_ct").css("background","white");
+            var formData = new FormData( document.querySelector("#register_ct"));
+
+                    $.ajax( {
+                        url: '/dmsws/cerericont/addCt',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function() {
+                            $UTIL.waitForLoading();
+                        },
+                        success: function (resultData) {
+                            swal.close();
+                            window.location.reload();
+
+                        },
+                        error: function(err) {
+//    		    TODO: treat html tag for client side servers with err.responseJSON.status and err.responseJSON.message
+                            swal.close();
+                            Swal.fire({
+                                icon: 'error',
+                                html: "<p class='text-danger'><strong>" + err.responseText +"</strong></p>",
+                                focusConfirm: false,
+                                confirmButtonText: 'Ok',
+                            });
+                            $("#register").removeAttr('disabled');
+
+                        } } );
+    e.preventDefault();
+
+} );
 
 $(document).ready(function () {
     /* Upload Files */
