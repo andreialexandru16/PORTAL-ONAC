@@ -33,6 +33,15 @@ public class Utilizator extends BaseModel{
     private Integer  nrCrt;
     private String roluri;
     private Integer  idSubcont;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Integer getIdSubcont() {
         return idSubcont;

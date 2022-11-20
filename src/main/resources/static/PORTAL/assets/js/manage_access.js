@@ -50,20 +50,21 @@ var FileManager = {
      Function to read basic project data from ws.
      */
     loadSubconturiData: function () {
+        debugger
         var that = this;
 
         var defer = $.Deferred();
         $.ajax({
-          url: '/dmsws/users/getSubconturi',
+          url: '/dmsws/cerericont/getSubconturi',
             success: function (data) {
                 if (data.result == 'OK') {
 
                     that.renderSubconturiData(data);
-                    FileManager.loadListaLov('#id_rol', '#container_select_id_rol', 'LOV_GRUP_PORTAL');
+                  //  FileManager.loadListaLov('#id_rol', '#container_select_id_rol', 'LOV_GRUP_PORTAL');
                     //functii reload liste lov
                     //timp reload after typing, id select, id container, cod lov
 
-                    FileManager.reloadListaLovAfterStopTyping(2000,'#id_rol', '#container_select_id_rol', 'LOV_GRUP_PORTAL');
+                   // FileManager.reloadListaLovAfterStopTyping(2000,'#id_rol', '#container_select_id_rol', 'LOV_GRUP_PORTAL');
                     defer.resolve();
                 }
                 else {
@@ -360,10 +361,10 @@ var FileManager = {
     goBack: function () {
        window.history.back();
     },
-    deleteSubcont: function (id,username) {
+    inactivareCont: function (id,username) {
         Swal.fire({
                 position: 'top',
-                html:"Sunteti pe cale sa eliminati subcontul: "+username+". Sunteti sigur ca doriti sa il eliminati?",
+                html:"Sunteti pe cale sa inactivati contul: "+username+". Sunteti sigur ca doriti sa il inactivati?",
                 onOpen: function() {
                 },
 
@@ -377,26 +378,38 @@ var FileManager = {
                 return new Promise(function(resolve, reject) {
 
                     $.ajax({
-                        url: "/dmsws/users/deleteSubcont/"+id,
+                        url: "/dmsws/cerericont/inactivareCont/"+id,
                         type: 'POST',
                         contentType: 'application/json',
                         accept:'application/json',
                         success: function (data) {
 
                             if(data.result=='OK'){
+                                if(data.extendedInfo3 == -1){
+                                    $.fancybox.close();
+                                    Swal.fire({
+                                            position: 'top',
+                                            icon: "info",
+                                            html: "Utilizatorul este deja inactivat.",
+                                            focusConfirm: false,
+                                            confirmButtonText: "Ok",
+                                            onClose: () => {
+                                            window.location.reload();
+                                }
 
-                                $.fancybox.close();
-                                Swal.fire({
-                                        position: 'top',
-                                        icon: "info",
-                                        html: "Subcontul a fost eliminat cu succes.",
-                                        focusConfirm: false,
-                                        confirmButtonText: "Ok",
-                                        onClose: () => {
-                                        window.location.reload();
-                            }
+                                });
+                                }else{  $.fancybox.close();
+                                    Swal.fire({
+                                            position: 'top',
+                                            icon: "info",
+                                            html: "Utilizatorul a fost inactivat cu succes.",
+                                            focusConfirm: false,
+                                            confirmButtonText: "Ok",
+                                            onClose: () => {
+                                            window.location.reload();
+                                }
 
-                            });
+                                });}
 
 
                             }
@@ -408,7 +421,7 @@ var FileManager = {
                             Swal.fire({
                                 position: 'top',
                                 icon: "error",
-                                html: "Eroare server. Subcontul nu a putut fi eliminat.",
+                                html: "Eroare server. Utilizatorul nu a putut fi inactivat.",
                                 focusConfirm: false,
                                 confirmButtonText: "Ok"
 
