@@ -51,6 +51,13 @@ public class CereriContService extends DmswsRestService{
 				getDmswsUrl()+"/cerericont/{token}/inactivareCont/{id}/",token,id);
 
 	}
+	public Utilizator activareCont(String token, String id) {
+		return post(null,
+				Utilizator.class,
+				checkBaseModelWithExtendedInfo(),
+				getDmswsUrl()+"/cerericont/{token}/activareCont/{id}/",token,id);
+
+	}
 
 	public StandardResponse validareEmail(String token, Long idFisier) {
 		return post(null, MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, StandardResponse.class, checkStandardResponse(),

@@ -59,6 +59,12 @@ public class CereriContController {
         return u;
     }
 
+    @PostMapping(value = "/dmsws/cerericont/activareCont/{id}", produces = {"application/json"})
+    public Utilizator activareCont(@PathVariable String id) {
+        Utilizator u =  serviceCereri.activareCont(SecurityUtils.getToken(),id);
+        return u;
+    }
+
     @GetMapping("/dmsws/cerericont/getSubconturi")
     public UtilizatorList getSubconturi() {
         return serviceCereri.getSubconturi(SecurityUtils.getToken());

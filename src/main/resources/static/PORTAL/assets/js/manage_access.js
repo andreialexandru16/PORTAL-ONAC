@@ -437,6 +437,82 @@ var FileManager = {
 
 
     },
+    activareCont: function (id,username) {
+        Swal.fire({
+                position: 'top',
+                html:"Sunteti pe cale sa activati contul: "+username+". Sunteti sigur ca doriti sa il activati?",
+                onOpen: function() {
+                },
+
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Da',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                return new Promise(function(resolve, reject) {
+
+                    $.ajax({
+                        url: "/dmsws/cerericont/activareCont/"+id,
+                        type: 'POST',
+                        contentType: 'application/json',
+                        accept:'application/json',
+                        success: function (data) {
+
+                            if(data.result=='OK'){
+                                if(data.extendedInfo3 == -1){
+                                    $.fancybox.close();
+                                    Swal.fire({
+                                            position: 'top',
+                                            icon: "info",
+                                            html: "Utilizatorul este deja activat.",
+                                            focusConfirm: false,
+                                            confirmButtonText: "Ok",
+                                            onClose: () => {
+                                            window.location.reload();
+                                }
+
+                                });
+                                }else{  $.fancybox.close();
+                                    Swal.fire({
+                                            position: 'top',
+                                            icon: "info",
+                                            html: "Utilizatorul a fost activat cu succes.",
+                                            focusConfirm: false,
+                                            confirmButtonText: "Ok",
+                                            onClose: () => {
+                                            window.location.reload();
+                                }
+
+                                });}
+
+
+                            }
+
+                        },
+                        error: function (err) {
+
+                            $.fancybox.close();
+                            Swal.fire({
+                                position: 'top',
+                                icon: "error",
+                                html: "Eroare server. Utilizatorul nu a putut fi activat.",
+                                focusConfirm: false,
+                                confirmButtonText: "Ok"
+
+                            });
+                        }
+                    });
+
+                });
+    },
+        allowOutsideClick: () => !Swal.isLoading()
+    });
+
+
+
+    },
     loadListaLov:function(select_id, container_id,lov_code){
         var that=this;
         $.ajax({
