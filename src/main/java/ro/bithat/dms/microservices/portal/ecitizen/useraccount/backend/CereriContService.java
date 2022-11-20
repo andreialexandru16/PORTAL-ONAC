@@ -19,6 +19,7 @@ import ro.bithat.dms.microservices.dmsws.file.DmswsFileService;
 import ro.bithat.dms.microservices.dmsws.flow.StandardResponse;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.CreateTipDocFileResponse;
+import ro.bithat.dms.microservices.portal.ecitizen.project.backend.bithat.UtilizatorList;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.*;
 import ro.bithat.dms.microservices.portal.ecitizen.website.models.*;
 import ro.bithat.dms.security.SecurityUtils;
@@ -43,7 +44,20 @@ public class CereriContService extends DmswsRestService{
 	@Value("${portal.url}")
 	private String portalUrl;
 
+	public Utilizator inactivareCont(String token, String id) {
+		return post(null,
+				Utilizator.class,
+				checkBaseModelWithExtendedInfo(),
+				getDmswsUrl()+"/cerericont/{token}/inactivareCont/{id}/",token,id);
 
+	}
+	public Utilizator activareCont(String token, String id) {
+		return post(null,
+				Utilizator.class,
+				checkBaseModelWithExtendedInfo(),
+				getDmswsUrl()+"/cerericont/{token}/activareCont/{id}/",token,id);
+
+	}
 
 	public StandardResponse validareEmail(String token, Long idFisier) {
 		return post(null, MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, StandardResponse.class, checkStandardResponse(),
@@ -67,6 +81,11 @@ public class CereriContService extends DmswsRestService{
 	}
 	public UtilizatorDocument getDownloadSablon(@PathVariable String token) {
 		return get(UtilizatorDocument.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getDownloadSablon",
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
+	}
+
+	public UtilizatorList getSubconturi(String token) {
+		return get(UtilizatorList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getSubconturi",
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
 	}
 

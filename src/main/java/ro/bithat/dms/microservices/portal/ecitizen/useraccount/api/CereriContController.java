@@ -14,9 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ServerWebInputException;
+import ro.bithat.dms.microservices.dmsws.colaboration.Utilizator;
 import ro.bithat.dms.microservices.dmsws.file.BaseModel;
 import ro.bithat.dms.microservices.dmsws.flow.StandardResponse;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
+import ro.bithat.dms.microservices.portal.ecitizen.project.backend.bithat.UtilizatorList;
 import ro.bithat.dms.microservices.portal.ecitizen.raportare.models.TertList;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.AddUtilizatorSecurityService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.CereriContService;
@@ -51,6 +53,22 @@ public class CereriContController {
     public static final String ERROR_TEXT = "Error Status Code ";
     public static final String[] ALLOWED_EXTENSIONS = {"docx","doc","pdf","jpg","jpeg","png","svg","tif","tiff",".gif"};
 
+    @PostMapping(value = "/dmsws/cerericont/inactivareCont/{id}", produces = {"application/json"})
+    public Utilizator inactivareCont(@PathVariable String id) {
+        Utilizator u =  serviceCereri.inactivareCont(SecurityUtils.getToken(),id);
+        return u;
+    }
+
+    @PostMapping(value = "/dmsws/cerericont/activareCont/{id}", produces = {"application/json"})
+    public Utilizator activareCont(@PathVariable String id) {
+        Utilizator u =  serviceCereri.activareCont(SecurityUtils.getToken(),id);
+        return u;
+    }
+
+    @GetMapping("/dmsws/cerericont/getSubconturi")
+    public UtilizatorList getSubconturi() {
+        return serviceCereri.getSubconturi(SecurityUtils.getToken());
+    }
 
     @PostMapping(value = "/dmsws/cerericont/validareEmail/{idFisier}", produces = {"application/json"})
     public StandardResponse validareEmail(@PathVariable Long idFisier) {
