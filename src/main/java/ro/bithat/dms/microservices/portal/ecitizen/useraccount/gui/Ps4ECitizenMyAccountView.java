@@ -42,28 +42,22 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
     private ClickNotifierAnchor anchorDocumentsBtn = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorEditBtn = new ClickNotifierAnchor();
     private ClickNotifierAnchor schimbaParolaBtn = new ClickNotifierAnchor();
-    private ClickNotifierAnchor anchorButtonAllControl = new ClickNotifierAnchor();
-    private ClickNotifierAnchor anchorButtonAllPetitii = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllRequests = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllDocuments = new ClickNotifierAnchor();
-    private ClickNotifierAnchor anchorButtonAllPayments = new ClickNotifierAnchor();
     private ClickNotifierAnchor studiiPage = new ClickNotifierAnchor();
     private ClickNotifierAnchor contactePage = new ClickNotifierAnchor();
 
 
     private ClickNotifierAnchor anchorAllMessages = new ClickNotifierAnchor();
 
-    private Div myControlContainer = new Div();
 
-    private Div myPetitiiContainer = new Div();
 
     private Div myRequestsContainer = new Div();
 
     private Div myDocumentsContainer = new Div();
 
-    private Div myPaymentsContainer = new Div();
 
-    private Div myAccountDetailsContainerSidebar = new Div(myPetitiiContainer, myControlContainer, myRequestsContainer, myDocumentsContainer, myPaymentsContainer);
+    private Div myAccountDetailsContainerSidebar = new Div( myRequestsContainer, myDocumentsContainer);
 
     private ColaborationMessagesTableComponent colaborationMessagesTableComponent = new ColaborationMessagesTableComponent(this);
 
@@ -105,81 +99,8 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         }
     }
 
-    public void setControlRequests(List<CorespondentaControl> myControl) {
-        Div myControlHeader = new Div();
-        Div myControlHeaderImage = new Div();
-        Div myControlHeaderTitle = new Div();
-        Div myControlHeaderNo = new Div();
-       /*HEADER*/
-        myControlHeader.addClassName("header");
-        myControlHeaderImage.addClassName("image");
-        myControlHeaderTitle.addClassName("title");
-        myControlHeaderNo.addClassName("no");
-        HtmlContainer iconHeaderImage = new HtmlContainer("i");
-        iconHeaderImage.addClassNames("far", "fa-file-alt");
 
-        myControlHeaderImage.add(iconHeaderImage);
-        myControlHeaderTitle.add(new Text("ps4.ecetatean.breadcrumb.myaccount.mycontrol.page.title"));
-        myControlHeaderNo.add(new Text(String.valueOf(myControl.size())));
 
-        myControlHeader.add(myControlHeaderImage, myControlHeaderTitle, myControlHeaderNo);
-
-        UnorderedList ulMyControlWidgetElements = new UnorderedList();
-        ulMyControlWidgetElements.addClassName("widget_elements");
-        for (CorespondentaControl control : myControl) {
-            ListItem liMyControl = createListItemForControl(control);
-            ulMyControlWidgetElements.add(liMyControl);
-        }
-
-        Div allMyControlButton = new Div();
-
-        allMyControlButton.addClassName("all_elements");
-        anchorButtonAllControl.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.mycontrols.button.all"));
-        anchorButtonAllControl.setHref("javascript:void(0);");
-        anchorButtonAllControl.addClassNames("btn", "btn_green", "min_width250", "btn-common");
-        /*HtmlContainer iconElementButtonGoToAllControl = new HtmlContainer("i");
-        iconElementButtonGoToAllControl.addClassNames("fas","fa-arrow-alt-circle-right");
-        anchorButtonAllControl.add(iconElementButtonGoToAllControl);*/
-        myControlContainer.add(myControlHeader, ulMyControlWidgetElements, anchorButtonAllControl);
-    }
-
-    public void setPetitiiRequests(List<CorespondentaPetitii> myPetitii) {
-        Div myPetitiiHeader = new Div();
-        Div myPetitiiHeaderImage = new Div();
-        Div myPetitiiHeaderTitle = new Div();
-        Div myPetitiiHeaderNo = new Div();
-       /*HEADER*/
-        myPetitiiHeader.addClassName("header");
-        myPetitiiHeaderImage.addClassName("image");
-        myPetitiiHeaderTitle.addClassName("title");
-        myPetitiiHeaderNo.addClassName("no");
-        HtmlContainer iconHeaderImage = new HtmlContainer("i");
-        iconHeaderImage.addClassNames("far", "fa-file-alt");
-
-        myPetitiiHeaderImage.add(iconHeaderImage);
-        myPetitiiHeaderTitle.add(new Text("ps4.ecetatean.breadcrumb.myaccount.mypetitii.page.title"));
-        myPetitiiHeaderNo.add(new Text(String.valueOf(myPetitii.size())));
-
-        myPetitiiHeader.add(myPetitiiHeaderImage, myPetitiiHeaderTitle, myPetitiiHeaderNo);
-
-        UnorderedList ulMyPetitiiWidgetElements = new UnorderedList();
-        ulMyPetitiiWidgetElements.addClassName("widget_elements");
-        for (CorespondentaPetitii petitii : myPetitii) {
-            ListItem liMyPetitii = createListItemForPetitii(petitii);
-            ulMyPetitiiWidgetElements.add(liMyPetitii);
-        }
-
-        Div allMyPetitiiButton = new Div();
-
-        allMyPetitiiButton.addClassName("all_elements");
-        anchorButtonAllPetitii.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.mypetitiis.button.all"));
-        anchorButtonAllPetitii.setHref("javascript:void(0);");
-        anchorButtonAllPetitii.addClassNames("btn", "btn_green", "min_width250", "btn-common");
-        /*HtmlContainer iconElementButtonGoToAllPetitii = new HtmlContainer("i");
-        iconElementButtonGoToAllPetitii.addClassNames("fas","fa-arrow-alt-circle-right");
-        anchorButtonAllPetitii.add(iconElementButtonGoToAllPetitii);*/
-        myPetitiiContainer.add(myPetitiiHeader, ulMyPetitiiWidgetElements, anchorButtonAllPetitii);
-    }
 
     public void setMyRequestsTable(List<PortalFile> myRequests) {
 
@@ -257,53 +178,10 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         anchorButtonAllDocuments.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.mydocuments.button.all"));
         anchorButtonAllDocuments.setHref("javascript:void(0);");
         anchorButtonAllDocuments.addClassNames("btn", "btn_green", "min_width", "btn-common");
-        /*HtmlContainer iconElementButtonGoToAllDocuments = new HtmlContainer("i");
-        iconElementButtonGoToAllDocuments.addClassNames("fas","fa-arrow-alt-circle-right");
-        anchorButtonAllDocuments.add(iconElementButtonGoToAllDocuments);*/
         myDocumentsContainer.add(myDocumentsHeader, ulMyDocumentsWidgetElements, anchorButtonAllDocuments);
 
     }
 
-    public void setMyPaymentsTable(List<PlataResponse> myPayments) {
-        Div myPaymentsHeader = new Div();
-        Div myPaymentsHeaderImage = new Div();
-        Div myPaymentsHeaderTitle = new Div();
-        Div myPaymentsHeaderNo = new Div();
-       /*HEADER*/
-        myPaymentsHeader.addClassName("header");
-        myPaymentsHeaderImage.addClassName("image");
-        myPaymentsHeaderTitle.addClassName("title");
-        myPaymentsHeaderNo.addClassName("no");
-        HtmlContainer iconHeaderImage = new HtmlContainer("i");
-        iconHeaderImage.addClassNames("far", "fa-file-alt");
-
-        myPaymentsHeaderImage.add(iconHeaderImage);
-        myPaymentsHeaderTitle.add((new Text("ps4.ecetatean.breadcrumb.myaccount.mypayments.page.title")));
-        myPaymentsHeaderNo.add(new Text(String.valueOf(myPayments.size())));
-
-        myPaymentsHeader.add(myPaymentsHeaderImage, myPaymentsHeaderTitle, myPaymentsHeaderNo);
-        /*DOCUMENTS*/
-        UnorderedList ulMyPaymentsWidgetElements = new UnorderedList();
-        ulMyPaymentsWidgetElements.addClassName("widget_elements");
-        for (PlataResponse payment : myPayments) {
-            ListItem liMyPayments = createListItemForPayments(payment);
-            ulMyPaymentsWidgetElements.add(liMyPayments);
-        }
-
-        /*BUTTON ALL DOCUMENTS*/
-
-        Div allMyPaymentsButton = new Div();
-
-        allMyPaymentsButton.addClassName("all_elements");
-        anchorButtonAllPayments.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.mypayments.button.all"));
-        anchorButtonAllPayments.setHref("javascript:void(0);");
-        anchorButtonAllPayments.addClassNames("btn", "btn_green", "min_width250", "btn-common");
-        /*HtmlContainer iconElementButtonGoToAllPayments = new HtmlContainer("i");
-        iconElementButtonGoToAllPayments.addClassNames("fas","fa-arrow-alt-circle-right");
-        anchorButtonAllPayments.add(iconElementButtonGoToAllPayments);*/
-        myPaymentsContainer.add(myPaymentsHeader, ulMyPaymentsWidgetElements, anchorButtonAllPayments);
-
-    }
 
     public void i18nInboxContainer() {
         inboxComponent.i18nInboxContainer();
@@ -523,68 +401,9 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
     }
 
 
-    private ListItem createListItemForControl(CorespondentaControl cc) {
-        ListItem liMyRequests = new ListItem();
-            /*ELEMENT CONTENT*/
-        Div divElementContent = new Div();
-        divElementContent.addClassName("element_content");
-        HtmlContainer iconElementContent = new HtmlContainer("i");
-        iconElementContent.addClassNames("fas", "fa-file-alt");
-        Strong strongElementContent = new Strong();
-
-        if (cc.getCorespondentaLinieControlList() != null) {
-            for (CorespondentaLinieControl cl : cc.getCorespondentaLinieControlList()) {
-                ClickNotifierAnchor anchorRequestPreviewFile = new ClickNotifierAnchor();
-                anchorRequestPreviewFile.setHref(
-                        StreamResourceUtil.getStreamResource(cl.getDocument(), cl.getDownloadLink()));
-                anchorRequestPreviewFile.setTarget("_blank");
-                anchorRequestPreviewFile.setText(cl.getDocument());
-                anchorRequestPreviewFile.getStyle().set("margin-right", "10px");
-
-                strongElementContent.add(anchorRequestPreviewFile);
-            }
-        }
-
-        divElementContent.add(iconElementContent, strongElementContent);
-            /*ELEMENT BUTTONS*/
-        Div divElementButtons = new Div();
-        divElementButtons.addClassName("element_buttons");
-
-        liMyRequests.add(divElementContent, divElementButtons);
-        return liMyRequests;
-    }
 
 
-    private ListItem createListItemForPetitii(CorespondentaPetitii cc) {
-        ListItem liMyRequests = new ListItem();
-            /*ELEMENT CONTENT*/
-        Div divElementContent = new Div();
-        divElementContent.addClassName("element_content");
-        HtmlContainer iconElementContent = new HtmlContainer("i");
-        iconElementContent.addClassNames("fas", "fa-file-alt");
-        Strong strongElementContent = new Strong();
 
-        if (cc.getCorespondentaLiniePetitiiList() != null) {
-            for (CorespondentaLiniePetitii cl : cc.getCorespondentaLiniePetitiiList()) {
-                ClickNotifierAnchor anchorRequestPreviewFile = new ClickNotifierAnchor();
-                anchorRequestPreviewFile.setHref(
-                        StreamResourceUtil.getStreamResource(cl.getDocument(), cl.getDownloadLink()));
-                anchorRequestPreviewFile.setTarget("_blank");
-                anchorRequestPreviewFile.setText(cl.getDocument());
-                anchorRequestPreviewFile.getStyle().set("margin-right", "10px");
-
-                strongElementContent.add(anchorRequestPreviewFile);
-            }
-        }
-
-        divElementContent.add(iconElementContent, strongElementContent);
-            /*ELEMENT BUTTONS*/
-        Div divElementButtons = new Div();
-        divElementButtons.addClassName("element_buttons");
-
-        liMyRequests.add(divElementContent, divElementButtons);
-        return liMyRequests;
-    }
 
 
     private ListItem createListItemForDocuments(PortalFile file) {
@@ -626,30 +445,6 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         return liMyDocuments;
     }
 
-    private ListItem createListItemForPayments(PlataResponse payment) {
-        ListItem liMyPayments = new ListItem();
-            /*ELEMENT CONTENT*/
-        Div divElementContent = new Div();
-        divElementContent.addClassName("element_content");
-        HtmlContainer iconElementContent = new HtmlContainer("i");
-        iconElementContent.addClassNames("fas", "fa-file-invoice-dollar");
-        Strong strongElementContent = new Strong();
-        strongElementContent.setText(payment.getNumeFisier() + " (" + payment.getData_plata_str() + ")");
-        divElementContent.add(iconElementContent, strongElementContent);
-            /*ELEMENT BUTTONS*/
-        Div divElementButtons = new Div();
-        divElementButtons.addClassName("element_buttons");
-
-
-        Strong labelPaymentValue = new Strong(payment.getSuma().toString() + " ");
-
-        HtmlContainer iconElementButtonPreview = new HtmlContainer("i");
-        iconElementButtonPreview.addClassNames("fas", "fa-coins");
-        divElementButtons.add(iconElementButtonPreview, labelPaymentValue);
-
-        liMyPayments.add(divElementContent, divElementButtons);
-        return liMyPayments;
-    }
 
     private void setStylesForMyAccountDetailsContainerProfile() {
         myAccountDetailsContainerProfile.addClassNames("col-md-12", "col-xl-8", "profile");
@@ -681,11 +476,9 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         myAccountDetailsContainerSidebar.addClassNames("cold-md-12", "col-xl-4", "sidebar");
 
 
-        myControlContainer.addClassNames("sidebar_widget", "my_control");
-        myPetitiiContainer.addClassNames("sidebar_widget", "my_petitii");
+//        myPetitiiContainer.addClassNames("sidebar_widget", "my_petitii");
         myRequestsContainer.addClassNames("sidebar_widget", "my_requests");
         myDocumentsContainer.addClassNames("sidebar_widget", "my_documents");
-        myPaymentsContainer.addClassNames("sidebar_widget", "my_documents");
 
     }
 
@@ -715,8 +508,6 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
     }
 
     public void hideNonstandardButtons(){
-        myControlContainer.setVisible(false);
-        myPetitiiContainer.setVisible(false);
         studiiPage.setVisible(false);
         contactePage.setVisible(false);
     }

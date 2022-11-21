@@ -77,16 +77,13 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
     public void prepareModel(String state) {
         getView().setFormDetails(myAccountService.getPersoanaFizicaJuridica(SecurityUtils.getToken(),SecurityUtils.getUserId().intValue()));
         if(showNonStandardButtons!=null && showNonStandardButtons.equals("true")) {
-            getView().setPetitiiRequests(myPetitiiService.getCorespondentaPetitiiTrimise(SecurityUtils.getToken(), SecurityUtils.getContCurentPortalE().getUserCurent().getId(), noDocumentsShown).getCorespondentaPetitiiList());
 
-            getView().setControlRequests(myControlService.getCorespondentaControlTrimise(SecurityUtils.getToken(), SecurityUtils.getContCurentPortalE().getUserCurent().getId(), noDocumentsShown).getCorespondentaControlList());
         }else{
             getView().hideNonstandardButtons();
         }
 
         getView().setMyRequestsTable(myRequestsService.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
         getView().setMyDocumentsTable(myDocumentsService.getLimitedDocumentsByUser(String.valueOf(noDocumentsShown)));
-        getView().setMyPaymentsTable(dmswsBankingService.getPaymentsListLimitedByUser(String.valueOf(noPaymentsShown)));
         getView().setInboxTable(inboxService.getSysEmailsByUser(SecurityUtils.getToken(),noEmailsShown.toString(),null));
         getView().setColaborationMessagesTable(colaborationService.getLastColaborationMessagesByUser());
 
