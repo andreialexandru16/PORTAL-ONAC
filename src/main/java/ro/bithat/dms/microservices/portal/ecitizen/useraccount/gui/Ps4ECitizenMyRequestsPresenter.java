@@ -10,6 +10,7 @@ import ro.bithat.dms.microservices.dmsws.file.PortalFile;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.Document;
 import ro.bithat.dms.microservices.portal.ecitizen.home.gui.Ps4ECitizenHomeRoute;
 import ro.bithat.dms.microservices.portal.ecitizen.onlineservices.gui.Ps4ECitizenOnlineServicesRoute;
+import ro.bithat.dms.microservices.portal.ecitizen.useraccount.api.CereriContController;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsMyRequestsService;
 import ro.bithat.dms.passiveview.ClickEventPresenterMethod;
 import ro.bithat.dms.passiveview.QueryParameterUtil;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
 public class Ps4ECitizenMyRequestsPresenter extends PrepareModelFlowPresenter<Ps4ECitizenMyRequestsView> {
 
     @Autowired
-    private DmswsMyRequestsService myRequestsService;
+    private CereriContController myRequestsService;
     @Value("${wordpress.url}")
     private String wordpressUrl;
 
@@ -67,7 +68,6 @@ public class Ps4ECitizenMyRequestsPresenter extends PrepareModelFlowPresenter<Ps
                 ||f.getNume().toLowerCase().contains(finalSearchText.trim())
                 ||f.getTrimisLa().contains(finalSearchText.trim())
                 ||(f.getDenumireWorkflowStatus()==null?"":f.getDenumireWorkflowStatus().toLowerCase()).contains(finalSearchText.trim())
-                ||f.getValoarePlatita().toString().contains(finalSearchText.trim())
         ).collect(Collectors.toList()));
     }
 

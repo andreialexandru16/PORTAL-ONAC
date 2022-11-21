@@ -55,6 +55,10 @@ public class CereriContController {
     public static final String[] ALLOWED_EXTENSIONS = {"docx","doc","pdf","jpg","jpeg","png","svg","tif","tiff",".gif"};
 
 
+    public List<PortalFile> getFilesOnWorkflowByUser(){
+        return serviceCereri.getFilesOnWorkflowByUser(SecurityUtils.getToken()).getPortalFileList();
+    }
+
     public List<PortalFile> getLimitedFilesOnWorkflowByUser(String nrRows){
         return serviceCereri.getLimitedFilesOnWorkflowByUser(SecurityUtils.getToken(),nrRows).getPortalFileList();
     }

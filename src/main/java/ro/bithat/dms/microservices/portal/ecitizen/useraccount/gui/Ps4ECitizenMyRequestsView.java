@@ -24,16 +24,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Ps4ECitizenMyRequestsView extends ContentContainerView<Ps4ECitizenMyRequestsPresenter> {
     private SearchContainer searchFormContainer = new SearchContainer(this);
 
-    private Div filterContainer = new Div(searchFormContainer);
 
     private TableContainerDiv serviceDocumentsTable =
             new TableContainerDiv(
-
                     "myaccount.my.requests.view.service.index.label",
-                    "myaccount.my.requests.view.service.registrationnumber.label",
-                    "myaccount.my.requests.view.service.registrationdate.label",
-                    "myaccount.my.requests.view.service.classname.label",
-                    "myaccount.my.requests.view.service.doctypename.label",
                     "myaccount.my.requests.view.service.documentname.label",
                     "myaccount.my.requests.view.service.datastart.label",
                     "myaccount.my.requests.view.service.documentstatus.label"
@@ -54,7 +48,6 @@ public class Ps4ECitizenMyRequestsView extends ContentContainerView<Ps4ECitizenM
             serviceDocumentsTable.addHeader( "myaccount.my.requests.view.service.paymentvalue.label");
         }
         //13.07.2021 - NG - ANRE - adaugare camp de cautare
-        addComponentAsFirst(filterContainer);
         setContentPageTile(I18NProviderStatic.getTranslation("ps4.ecetatean.breadcrumb.myaccount.myrequests.page.title"));
         setServicesListHeaderIcon("/icons/document.png");
         formContainer.addClassNames("my_documents", "table_scroll");
@@ -84,6 +77,7 @@ public class Ps4ECitizenMyRequestsView extends ContentContainerView<Ps4ECitizenM
     public SearchContainer getSearchFormContainer() {
         return searchFormContainer;
     }
+
     public void setMyRequestsTable(List<PortalFile> myDocuments) {
         serviceDocumentsTable.clearContent();
         AtomicInteger index = new AtomicInteger(1);
@@ -127,8 +121,8 @@ public class Ps4ECitizenMyRequestsView extends ContentContainerView<Ps4ECitizenM
                 constructIcon("fas", "fa-info-circle") : constructIcon();
         ClickNotifierAnchor documentLink=new ClickNotifierAnchor();
         ClickNotifierAnchor mobDocumentLink=new ClickNotifierAnchor();
-        documentLink.setText(document.getNumeBaza());
-        mobDocumentLink.setText(document.getNumeBaza());
+        documentLink.setText(document.getNume());
+        mobDocumentLink.setText(document.getNume());
         Div documentDetail=new Div(iconDocument,documentLink);
         Div mobDocumentDetail=new Div(mobIconDocument,mobDocumentLink);
 
@@ -209,23 +203,15 @@ public class Ps4ECitizenMyRequestsView extends ContentContainerView<Ps4ECitizenM
         Div paymentValueDetail=new Div(iconPaymentValue,paymentValueSpan);
         Div mobPaymentValueDetail=new Div(iconPaymentValue,mobPaymentValueSpan);
         int rowIndex = index.getAndIncrement();
+
         if(getPresenter().getShowPaymentCol()!=null && getPresenter().getShowPaymentCol().equals("true") ){
             serviceDocumentsTable.addRow(new Label( rowIndex + ""),
-                    new Label(document.getNrInreg()),
-                    registrationDateDetail,
-                    categoryDetail,
-                    docTypeDetail,
                     documentDetail,
                     sendAtDetail,
-                    workflowStatusDetail,
-                    paymentValueDetail
+                    workflowStatusDetail
             );
         }else{
             serviceDocumentsTable.addRow(new Label( rowIndex + ""),
-                    new Label(document.getNrInreg()),
-                    registrationDateDetail,
-                    categoryDetail,
-                    docTypeDetail,
                     documentDetail,
                     sendAtDetail,
                     workflowStatusDetail
@@ -236,17 +222,10 @@ public class Ps4ECitizenMyRequestsView extends ContentContainerView<Ps4ECitizenM
 
         Map<String, Component> mobileRowMap = new LinkedHashMap<>();
         mobileRowMap.put("myaccount.my.requests.view.service.index.label", new Label(rowIndex + ""));
-        mobileRowMap.put("myaccount.my.requests.view.service.registrationnumber.label", new Label(document.getNrInreg()));
-        mobileRowMap.put("myaccount.my.requests.view.service.registrationdate.label", mobRegistrationDateDetail);
-        mobileRowMap.put("myaccount.my.requests.view.service.classname.label", mobCategoryDetail);
-        mobileRowMap.put("myaccount.my.requests.view.service.doctypename.label", mobDocTypeDetail);
         mobileRowMap.put("myaccount.my.requests.view.service.documentname.label", mobDocumentDetail);
         mobileRowMap.put("myaccount.my.requests.view.service.datastart.label", monSendAtDetail);
         mobileRowMap.put("myaccount.my.requests.view.service.documentstatus.label", mobWorkflowStatusDetail);
-        if(getPresenter().getShowPaymentCol()!=null && getPresenter().getShowPaymentCol().equals("true") ){
-            mobileRowMap.put("myaccount.my.requests.view.service.paymentvalue.label", mobPaymentValueDetail);
 
-        }
         mobServiceDocumentsTable.addRow(mobileRowMap);
 
     }

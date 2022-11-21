@@ -140,6 +140,7 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         /*HtmlContainer iconElementButtonGoToAllRequests = new HtmlContainer("i");
         iconElementButtonGoToAllRequests.addClassNames("fas","fa-arrow-alt-circle-right");
         anchorButtonAllRequests.add(iconElementButtonGoToAllRequests);*/
+
         myRequestsContainer.add(myRequestsHeader, ulMyRequestsWidgetElements, anchorButtonAllRequests);
 
     }
