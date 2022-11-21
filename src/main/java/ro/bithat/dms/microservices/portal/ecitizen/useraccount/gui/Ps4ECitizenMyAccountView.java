@@ -270,13 +270,13 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
 
         editProfileBtn.add(anchorEditBtn);
 
-        anchorDocumentsBtn.setHref("javascript:void(0);");
-        anchorDocumentsBtn.addClassNames("btn", "btn_cogs", "btn_green");
-        anchorDocumentsBtn.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.documents.button"));
-        HtmlContainer iconArrowNextDoc = new HtmlContainer("i");
-        iconArrowNextDoc.addClassNames("fas", "fa-file");
-        anchorDocumentsBtn.add(iconArrowNextDoc);
-        editProfileBtn.add(anchorDocumentsBtn);
+//        anchorDocumentsBtn.setHref("javascript:void(0);");
+//        anchorDocumentsBtn.addClassNames("btn", "btn_cogs", "btn_green");
+//        anchorDocumentsBtn.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.documents.button"));
+//        HtmlContainer iconArrowNextDoc = new HtmlContainer("i");
+//        iconArrowNextDoc.addClassNames("fas", "fa-file");
+//        anchorDocumentsBtn.add(iconArrowNextDoc);
+//        editProfileBtn.add(anchorDocumentsBtn);
         accountDataContentProfileContent.add(profileFieldWelcome, profileFieldDate, profileFieldName, profileFieldEmail, profileFieldPhone, editProfileBtn);
 
         //BTN STUDII
@@ -291,12 +291,12 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
 
 
         //BTN CONTACTE
-        contactePage.setHref("javascript:void(0);");
-        contactePage.addClassNames("btn", "btn_cogs", "btn_green");
-        contactePage.add(new Text("ps4.ecetatean.breadcrumb.myaccount.detail.table.contactePage"));
-        HtmlContainer iconArrowNextContacte = new HtmlContainer("i");
-        iconArrowNextContacte.addClassNames("fas", "fa-cogs");
-        contactePage.add(iconArrowNextContacte);
+//        contactePage.setHref("javascript:void(0);");
+//        contactePage.addClassNames("btn", "btn_cogs", "btn_green");
+//        contactePage.add(new Text("ps4.ecetatean.breadcrumb.myaccount.detail.table.contactePage"));
+//        HtmlContainer iconArrowNextContacte = new HtmlContainer("i");
+//        iconArrowNextContacte.addClassNames("fas", "fa-cogs");
+//        contactePage.add(iconArrowNextContacte);
 
 
         //END BTN CONTACTE
@@ -353,7 +353,7 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         HtmlContainer iconElementContent = new HtmlContainer("i");
         iconElementContent.addClassNames("fas", "fa-file-alt");
         Strong strongElementContent = new Strong();
-        strongElementContent.setText(file.getClasaDocument() + " " + file.getDenumireDocument() + " (" + file.getTrimisLa() + ")"
+        strongElementContent.setText(file.getDenumireDocument() + " " + file.getNume() + " (" + file.getTrimisLa() + ")"
                 + " - " + file.getDenumireWorkflowStatus());
 
         divElementContent.add(iconElementContent, strongElementContent);
@@ -474,8 +474,6 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
 
     private void setStylesForMyAccountDetailsContainerSidebar() {
         myAccountDetailsContainerSidebar.addClassNames("cold-md-12", "col-xl-4", "sidebar");
-
-
 //        myPetitiiContainer.addClassNames("sidebar_widget", "my_petitii");
         myRequestsContainer.addClassNames("sidebar_widget", "my_requests");
         myDocumentsContainer.addClassNames("sidebar_widget", "my_documents");

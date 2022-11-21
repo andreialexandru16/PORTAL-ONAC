@@ -16,6 +16,7 @@ import ro.bithat.dms.microservices.dmsws.DmswsRestService;
 import ro.bithat.dms.microservices.dmsws.colaboration.Utilizator;
 import ro.bithat.dms.microservices.dmsws.file.BaseModel;
 import ro.bithat.dms.microservices.dmsws.file.DmswsFileService;
+import ro.bithat.dms.microservices.dmsws.file.MultiFilterPortalFileList;
 import ro.bithat.dms.microservices.dmsws.flow.StandardResponse;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.CreateTipDocFileResponse;
@@ -43,6 +44,14 @@ public class CereriContService extends DmswsRestService{
 
 	@Value("${portal.url}")
 	private String portalUrl;
+
+
+	public MultiFilterPortalFileList getLimitedFilesOnWorkflowByUser(String token, String nrRows) {
+		return get(MultiFilterPortalFileList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getWorkflowsByUser?nrRows="+nrRows,
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
+	}
+
+
 
 	public Utilizator inactivareCont(String token, String id) {
 		return post(null,

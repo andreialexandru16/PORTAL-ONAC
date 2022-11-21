@@ -18,6 +18,7 @@ import ro.bithat.dms.microservices.portal.ecitizen.documenttype.backend.DmswsCon
 import ro.bithat.dms.microservices.portal.ecitizen.documenttype.backend.DmswsPetitiiService;
 import ro.bithat.dms.microservices.portal.ecitizen.documenttype.gui.Ps4ECorespondentaControlRoute;
 import ro.bithat.dms.microservices.portal.ecitizen.documenttype.gui.Ps4ECorespondentaPetitiiRoute;
+import ro.bithat.dms.microservices.portal.ecitizen.useraccount.api.CereriContController;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.*;
 import ro.bithat.dms.passiveview.ClickEventPresenterMethod;
 import ro.bithat.dms.passiveview.VaadinClientUrlUtil;
@@ -39,8 +40,10 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
     @Autowired
     private DmswsMyDocumentsService myDocumentsService;
 
+
+
     @Autowired
-    private DmswsMyRequestsService myRequestsService;
+    private CereriContController myRequestsService;
 
     @Autowired
     private DmswsControlService myControlService;
