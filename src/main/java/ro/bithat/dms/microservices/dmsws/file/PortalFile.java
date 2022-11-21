@@ -60,6 +60,87 @@ public class PortalFile extends BaseModel{
     private String emitent;
     private String email;
     private Integer allowComments;
+    private String persoanaReprezentantLegal;
+    private String persoanaReprezentantLegalEmail;
+    private String persoanaReprezentantLegalFunctie;
+    private String persoanaContact1;
+    private String persoanaContact1Email;
+    private String persoanaContact1Telefon;
+    private String persoanaContact2;
+    private String persoanaContact2Email;
+    private String persoanaContact2Telefon;
+
+    public String getPersoanaReprezentantLegal() {
+        return persoanaReprezentantLegal;
+    }
+
+    public void setPersoanaReprezentantLegal(String persoanaReprezentantLegal) {
+        this.persoanaReprezentantLegal = persoanaReprezentantLegal;
+    }
+
+    public String getPersoanaReprezentantLegalEmail() {
+        return persoanaReprezentantLegalEmail;
+    }
+
+    public void setPersoanaReprezentantLegalEmail(String persoanaReprezentantLegalEmail) {
+        this.persoanaReprezentantLegalEmail = persoanaReprezentantLegalEmail;
+    }
+
+    public String getPersoanaReprezentantLegalFunctie() {
+        return persoanaReprezentantLegalFunctie;
+    }
+
+    public void setPersoanaReprezentantLegalFunctie(String persoanaReprezentantLegalFunctie) {
+        this.persoanaReprezentantLegalFunctie = persoanaReprezentantLegalFunctie;
+    }
+
+    public String getPersoanaContact1() {
+        return persoanaContact1;
+    }
+
+    public void setPersoanaContact1(String persoanaContact1) {
+        this.persoanaContact1 = persoanaContact1;
+    }
+
+    public String getPersoanaContact1Email() {
+        return persoanaContact1Email;
+    }
+
+    public void setPersoanaContact1Email(String persoanaContact1Email) {
+        this.persoanaContact1Email = persoanaContact1Email;
+    }
+
+    public String getPersoanaContact1Telefon() {
+        return persoanaContact1Telefon;
+    }
+
+    public void setPersoanaContact1Telefon(String persoanaContact1Telefon) {
+        this.persoanaContact1Telefon = persoanaContact1Telefon;
+    }
+
+    public String getPersoanaContact2() {
+        return persoanaContact2;
+    }
+
+    public void setPersoanaContact2(String persoanaContact2) {
+        this.persoanaContact2 = persoanaContact2;
+    }
+
+    public String getPersoanaContact2Email() {
+        return persoanaContact2Email;
+    }
+
+    public void setPersoanaContact2Email(String persoanaContact2Email) {
+        this.persoanaContact2Email = persoanaContact2Email;
+    }
+
+    public String getPersoanaContact2Telefon() {
+        return persoanaContact2Telefon;
+    }
+
+    public void setPersoanaContact2Telefon(String persoanaContact2Telefon) {
+        this.persoanaContact2Telefon = persoanaContact2Telefon;
+    }
 
     public Integer getAllowComments() {
         return allowComments;
