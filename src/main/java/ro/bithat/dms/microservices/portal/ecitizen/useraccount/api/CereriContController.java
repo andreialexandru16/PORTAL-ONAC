@@ -16,6 +16,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ServerWebInputException;
 import ro.bithat.dms.microservices.dmsws.colaboration.Utilizator;
 import ro.bithat.dms.microservices.dmsws.file.BaseModel;
+import ro.bithat.dms.microservices.dmsws.file.PortalFile;
 import ro.bithat.dms.microservices.dmsws.flow.StandardResponse;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
 import ro.bithat.dms.microservices.portal.ecitizen.project.backend.bithat.UtilizatorList;
@@ -52,6 +53,16 @@ public class CereriContController {
 
     public static final String ERROR_TEXT = "Error Status Code ";
     public static final String[] ALLOWED_EXTENSIONS = {"docx","doc","pdf","jpg","jpeg","png","svg","tif","tiff",".gif"};
+
+
+    public List<PortalFile> getFilesOnWorkflowByUser(){
+        return serviceCereri.getFilesOnWorkflowByUser(SecurityUtils.getToken()).getPortalFileList();
+    }
+
+    public List<PortalFile> getLimitedFilesOnWorkflowByUser(String nrRows){
+        return serviceCereri.getLimitedFilesOnWorkflowByUser(SecurityUtils.getToken(),nrRows).getPortalFileList();
+    }
+
 
     @PostMapping(value = "/dmsws/cerericont/inactivareCont/{id}", produces = {"application/json"})
     public Utilizator inactivareCont(@PathVariable String id) {

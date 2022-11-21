@@ -18,6 +18,7 @@ import ro.bithat.dms.microservices.portal.ecitizen.documenttype.backend.DmswsCon
 import ro.bithat.dms.microservices.portal.ecitizen.documenttype.backend.DmswsPetitiiService;
 import ro.bithat.dms.microservices.portal.ecitizen.documenttype.gui.Ps4ECorespondentaControlRoute;
 import ro.bithat.dms.microservices.portal.ecitizen.documenttype.gui.Ps4ECorespondentaPetitiiRoute;
+import ro.bithat.dms.microservices.portal.ecitizen.useraccount.api.CereriContController;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.*;
 import ro.bithat.dms.passiveview.ClickEventPresenterMethod;
 import ro.bithat.dms.passiveview.VaadinClientUrlUtil;
@@ -39,8 +40,10 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
     @Autowired
     private DmswsMyDocumentsService myDocumentsService;
 
+
+
     @Autowired
-    private DmswsMyRequestsService myRequestsService;
+    private CereriContController myRequestsService;
 
     @Autowired
     private DmswsControlService myControlService;
@@ -77,16 +80,13 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
     public void prepareModel(String state) {
         getView().setFormDetails(myAccountService.getPersoanaFizicaJuridica(SecurityUtils.getToken(),SecurityUtils.getUserId().intValue()));
         if(showNonStandardButtons!=null && showNonStandardButtons.equals("true")) {
-            getView().setPetitiiRequests(myPetitiiService.getCorespondentaPetitiiTrimise(SecurityUtils.getToken(), SecurityUtils.getContCurentPortalE().getUserCurent().getId(), noDocumentsShown).getCorespondentaPetitiiList());
 
-            getView().setControlRequests(myControlService.getCorespondentaControlTrimise(SecurityUtils.getToken(), SecurityUtils.getContCurentPortalE().getUserCurent().getId(), noDocumentsShown).getCorespondentaControlList());
         }else{
             getView().hideNonstandardButtons();
         }
 
         getView().setMyRequestsTable(myRequestsService.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
         getView().setMyDocumentsTable(myDocumentsService.getLimitedDocumentsByUser(String.valueOf(noDocumentsShown)));
-        getView().setMyPaymentsTable(dmswsBankingService.getPaymentsListLimitedByUser(String.valueOf(noPaymentsShown)));
         getView().setInboxTable(inboxService.getSysEmailsByUser(SecurityUtils.getToken(),noEmailsShown.toString(),null));
         getView().setColaborationMessagesTable(colaborationService.getLastColaborationMessagesByUser());
 
