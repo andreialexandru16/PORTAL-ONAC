@@ -62,7 +62,11 @@ public abstract class DocumentTypePresenter<V extends ContentContainerView> exte
         fileId = QueryParameterUtil.getQueryParameter("request", Integer.class);
         docRaspunsId = QueryParameterUtil.getQueryParameter("docRaspunsId", Integer.class);
         if(documentId.isPresent()) {
-            document = ps4Service.getDocumentByIdAndClasa(documentType,documentId.get());
+            try{
+                document = ps4Service.getDocumentByIdAndClasa(documentType,documentId.get());
+            }catch(Exception e){
+
+            }
         }
         if(fileId.isPresent()) {
             try {

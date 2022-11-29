@@ -89,7 +89,7 @@ public class Ps4ECitizenServicePreviewRequestPresenter extends DocumentTypePrese
 
         AttributeLinkList all = getPs4Service().getMetadataByDocumentId(getDocumentId().get());
         getView().buildDmsSmartForm(all, "");
-        getView().setServiceNameAndRegisterPreviousStep(getDocument().get().getDenumire(), "");
+        getView().setServiceNameAndRegisterPreviousStep("", "");
 
         UI.getCurrent().getPage().executeJavaScript("resetChanges();");
 
