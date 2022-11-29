@@ -36,11 +36,11 @@ public class Ps4ECitizenServicePreviewRequestRoute extends DocumentTypeRoute {
         //daca nu se gaseste clasa in lista => reciteste lista tipuri/clase documente si reincearca
 
         SecurityUtils.forceGetAllDocumentTypes(SecurityUtils.getToken());
-        documentClass = getPs4Service().getDocumentTypeById(paramDocumentType.get());
+        documentClass = getPs4Service().getClasaDocumentAndDocumentListById(paramDocumentType.get());
 
         if (documentClass.isPresent()) {
             if (paramDocumentId.isPresent()) {
-                Optional<Document> document = getPs4Service().getDocumentByIdAndClasa(paramDocumentType.get(), paramDocumentId.get());
+                Optional<Document> document = documentClass.get().getDocumentList().stream().filter(e -> e.getId().equals(paramDocumentId.get())).findFirst();
                 if (document.isPresent()) {
                     addContentContainer(servicePreviewRequestView);
                     return true;
