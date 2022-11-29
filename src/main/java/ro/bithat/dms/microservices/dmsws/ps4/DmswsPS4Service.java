@@ -64,6 +64,10 @@ public class DmswsPS4Service extends DmswsRestService{
 		return get(TipDocument.class, checkBaseModel(), getDmswsUrl()+"/document/{token}/getClasaDocumentById/{documentId}",
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, SecurityUtils.getToken(), documentId);
 	}
+	public TipDocument getClasaDocumentAndDocumentListById(Integer documentId) {
+		return get(TipDocument.class, checkBaseModel(), getDmswsUrl()+"/document/{token}/getClasaDocumentAndDocumentListById/{documentId}",
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, SecurityUtils.getToken(), documentId);
+	}
 	//@Cacheable(value = "dmswsPS4Service_tipDocumentList", key = "1")
 	public Document getDocumentById(Integer documentId) {
 		return get(Document.class, checkBaseModel(), getDmswsUrl()+"/document/{token}/getDocumentById/{documentId}",

@@ -72,6 +72,10 @@ public class PS4Service {
         //return Optional.ofNullable(service.getDocumentById(documentId));
         return  getDocuments(tipDocument).stream().filter(document -> document.getId().equals(documentId)).findAny();
     }
+    public Optional<TipDocument> getClasaDocumentAndDocumentListById(Integer tipDocument) {
+        //return Optional.ofNullable(service.getDocumentById(documentId));
+        return  Optional.ofNullable(service.getClasaDocumentAndDocumentListById(tipDocument));
+    }
     public Optional<Document> getDocumentById(Integer documentId) {
         return Optional.ofNullable(service.getDocumentById(documentId));
     }

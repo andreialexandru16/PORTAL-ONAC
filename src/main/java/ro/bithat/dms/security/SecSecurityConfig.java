@@ -91,6 +91,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/administrare-calendar").permitAll()
                 .antMatchers("/administrare-rezervari").permitAll()
                 .antMatchers("/clase-doc**").permitAll()
+                .antMatchers("/previzualizare-formular**").permitAll()
 
 
 
