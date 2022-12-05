@@ -66,6 +66,10 @@ public class DmswsFileService extends DmswsRestService{
 	@Value("${dmsws.url}")
 	private String url;
 
+	private String getToken() {
+		return SecurityUtils.getToken();
+	}
+
 	public RestTemplate getRestTemplate(){
 	    SSLContext sslContext;
 		try {
@@ -204,7 +208,33 @@ public class DmswsFileService extends DmswsRestService{
 	public byte[] getFileBinary(String token, String fileDownloadLink) throws IOException  {
 		return copyURLToByteArray(fileDownloadLink, 10000, 10000); 
 	}
-	
+
+	public byte[] downloadFileById(Integer fileId)  throws Exception{
+		logger.info(url + "/file_store/" + getToken() + "/downloadFileById/" + fileId);
+		if(fileId==null){
+			throw new Exception("file id required");
+		}
+		RestTemplate restTemplate = getRestTemplate();
+
+		restTemplate.getMessageConverters().add(
+				new ByteArrayHttpMessageConverter());
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
+//	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_PDF));
+//
+		HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+		ResponseEntity<byte[]> response = restTemplate.exchange(
+				url + "/file_store/" + getToken() + "/downloadFileById/" + fileId,
+				HttpMethod.GET, entity, byte[].class);
+
+		if (response.getStatusCode() == HttpStatus.OK) {
+			return response.getBody();
+		}
+		return null;
+	}
+
 	static byte[] copyURLToByteArray(final String urlStr,
 	        final int connectionTimeout, final int readTimeout) 
 	                throws IOException {
