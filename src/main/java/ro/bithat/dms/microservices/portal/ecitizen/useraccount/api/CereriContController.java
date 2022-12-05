@@ -63,6 +63,10 @@ public class CereriContController {
         return serviceCereri.getLimitedFilesOnWorkflowByUser(SecurityUtils.getToken(),nrRows).getPortalFileList();
     }
 
+    public List<PortalFile> getLimitedInvoicesByUser(String nrRows){
+        return serviceCereri.getLimitedInvoicesByUser(SecurityUtils.getToken(),nrRows).getPortalFileList();
+    }
+
 
     @PostMapping(value = "/dmsws/cerericont/inactivareCont/{id}", produces = {"application/json"})
     public Utilizator inactivareCont(@PathVariable String id) {

@@ -43,6 +43,7 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
     private ClickNotifierAnchor anchorEditBtn = new ClickNotifierAnchor();
     private ClickNotifierAnchor schimbaParolaBtn = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllRequests = new ClickNotifierAnchor();
+    private ClickNotifierAnchor anchorButtonAllInvoices = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllDocuments = new ClickNotifierAnchor();
     private ClickNotifierAnchor studiiPage = new ClickNotifierAnchor();
     private ClickNotifierAnchor contactePage = new ClickNotifierAnchor();
@@ -56,8 +57,10 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
 
     private Div myDocumentsContainer = new Div();
 
+    private Div myInvoicesContainer = new Div();
 
-    private Div myAccountDetailsContainerSidebar = new Div( myRequestsContainer, myDocumentsContainer);
+
+    private Div myAccountDetailsContainerSidebar = new Div( myRequestsContainer,myInvoicesContainer, myDocumentsContainer);
 
     private ColaborationMessagesTableComponent colaborationMessagesTableComponent = new ColaborationMessagesTableComponent(this);
 
@@ -100,6 +103,50 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
     }
 
 
+
+
+    public void setMyInvoicesContainer(List<PortalFile> myRequests) {
+
+        Div myInvoicesHeader = new Div();
+        Div myInvoicesHeaderImage = new Div();
+        Div myInvoicesHeaderTitle = new Div();
+        Div myInvoicesHeaderNo = new Div();
+       /*HEADER*/
+        myInvoicesHeader.addClassName("header");
+        myInvoicesHeaderImage.addClassName("image");
+        myInvoicesHeaderTitle.addClassName("title");
+        myInvoicesHeaderNo.addClassName("no");
+        HtmlContainer iconHeaderImage = new HtmlContainer("i");
+        iconHeaderImage.addClassNames("far", "fa-file-alt");
+
+        myInvoicesHeaderImage.add(iconHeaderImage);
+        myInvoicesHeaderTitle.add(new Text("ps4.ecetatean.breadcrumb.myaccount.myrequests.page.title"));
+        myInvoicesHeaderNo.add(new Text(String.valueOf(myRequests.size())));
+
+        myInvoicesHeader.add(myInvoicesHeaderImage, myInvoicesHeaderTitle, myInvoicesHeaderNo);
+        /*REQUESTS*/
+        UnorderedList ulMyRequestsWidgetElements = new UnorderedList();
+        ulMyRequestsWidgetElements.addClassName("widget_elements");
+        for (PortalFile request : myRequests) {
+            ListItem liMyRequests = createListItemForInvoices(request);
+            ulMyRequestsWidgetElements.add(liMyRequests);
+        }
+
+        /*BUTTON ALL REQUESTS*/
+
+        Div allMyInvoicesButton = new Div();
+
+        allMyInvoicesButton.addClassName("all_elements");
+        anchorButtonAllInvoices.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.myrequests.button.all"));
+        anchorButtonAllInvoices.setHref("javascript:void(0);");
+        anchorButtonAllInvoices.addClassNames("btn", "btn_green", "min_width250", "btn-common");
+        /*HtmlContainer iconElementButtonGoToAllRequests = new HtmlContainer("i");
+        iconElementButtonGoToAllRequests.addClassNames("fas","fa-arrow-alt-circle-right");
+        anchorButtonAllInvoices.add(iconElementButtonGoToAllRequests);*/
+
+        myInvoicesContainer.add(myInvoicesHeader, ulMyRequestsWidgetElements, anchorButtonAllInvoices);
+
+    }
 
 
     public void setMyRequestsTable(List<PortalFile> myRequests) {
@@ -346,6 +393,63 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
     }
 
 
+    private ListItem createListItemForInvoices(PortalFile file) {
+        ListItem liMyRequests = new ListItem();
+            /*ELEMENT CONTENT*/
+        Div divElementContent = new Div();
+        divElementContent.addClassName("element_content");
+        HtmlContainer iconElementContent = new HtmlContainer("i");
+        iconElementContent.addClassNames("fas", "fa-file-alt");
+        Strong strongElementContent = new Strong();
+        strongElementContent.setText(file.getDenumireDocument() + " " + file.getNume() + " (" + file.getTrimisLa() + ")"
+                + " - " + file.getDenumireWorkflowStatus());
+
+        divElementContent.add(iconElementContent, strongElementContent);
+            /*ELEMENT BUTTONS*/
+        Div divElementButtons = new Div();
+        divElementButtons.addClassName("element_buttons");
+
+        if (Optional.ofNullable(file.getDownloadLink()).isPresent() &&
+                !file.getDownloadLink().isEmpty()) {
+            ClickNotifierAnchor anchorRequestPreviewFile = new ClickNotifierAnchor();
+            anchorRequestPreviewFile.setHref(
+                    StreamResourceUtil.getStreamResource(file.getNume(), file.getDownloadLink()));
+            anchorRequestPreviewFile.setTarget("_blank");
+            HtmlContainer iconElementButtonPreview = new HtmlContainer("i");
+            iconElementButtonPreview.addClassNames("fas", "fa-file-pdf");
+            anchorRequestPreviewFile.add(iconElementButtonPreview);
+            divElementButtons.add(anchorRequestPreviewFile);
+        }
+
+
+        ClickNotifierAnchor anchorRequestGoToFile = new ClickNotifierAnchor();
+        //TODO redirect to page: solicitare-noua-revizie-finala
+        //anchorRequestPreviewFile.setHref();
+        HtmlContainer iconElementButtonGoTo = new HtmlContainer("i");
+        iconElementButtonGoTo.addClassNames("fas", "fa-eye");
+        anchorRequestGoToFile.add(iconElementButtonGoTo);
+        anchorRequestGoToFile.getElement().getStyle().set("cursor", "pointer");
+        if (Optional.ofNullable(file.getIdDocument()).isPresent()
+                && Optional.ofNullable(file.getIdClasaDocument()).isPresent()
+                && Optional.ofNullable(file.getId()).isPresent()) {
+            Map<String, Object> filterPageParameters = new HashMap<>();
+            filterPageParameters.put("tipDocument", file.getIdClasaDocument());
+            filterPageParameters.put("document", file.getIdDocument());
+            filterPageParameters.put("request", file.getId());
+
+            anchorRequestGoToFile.getStyle().set("cursor", "pointer");
+            anchorRequestGoToFile.addClickListener(e
+                    -> VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceRequestReviewRoute.class)));
+        }
+
+        divElementButtons.add(anchorRequestGoToFile);
+
+        liMyRequests.add(divElementContent, divElementButtons);
+        return liMyRequests;
+    }
+
+
+
     private ListItem createListItemForRequests(PortalFile file) {
         ListItem liMyRequests = new ListItem();
             /*ELEMENT CONTENT*/
@@ -477,6 +581,7 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         myAccountDetailsContainerSidebar.addClassNames("cold-md-12", "col-xl-4", "sidebar");
 //        myPetitiiContainer.addClassNames("sidebar_widget", "my_petitii");
         myRequestsContainer.addClassNames("sidebar_widget", "my_requests");
+        myInvoicesContainer.addClassNames("sidebar_widget", "my_requests");
         myDocumentsContainer.addClassNames("sidebar_widget", "my_documents");
 
     }
