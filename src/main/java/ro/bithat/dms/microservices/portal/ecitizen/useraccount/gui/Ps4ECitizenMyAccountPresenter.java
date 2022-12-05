@@ -86,7 +86,7 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
         }
 
         getView().setMyRequestsTable(myRequestsService.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
-        getView().setMyInvoicesContainer(myRequestsService.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
+        getView().setMyInvoicesContainer(myRequestsService.getLimitedInvoicesByUser(String.valueOf(noRequestsShown)));
         getView().setMyDocumentsTable(myDocumentsService.getLimitedDocumentsByUser(String.valueOf(noDocumentsShown)));
         getView().setInboxTable(inboxService.getSysEmailsByUser(SecurityUtils.getToken(),noEmailsShown.toString(),null));
         getView().setColaborationMessagesTable(colaborationService.getLastColaborationMessagesByUser());
