@@ -72,6 +72,42 @@ public class PortalFile extends BaseModel{
     private String numarFactura;
     private String dataFactura;
     private String serieFactura;
+    private String valoareFactura;
+    private String monedaFactura;
+    private String acFactura;
+    private String furnizorFactura;
+
+    public String getAcFactura() {
+        return acFactura;
+    }
+
+    public void setAcFactura(String acFactura) {
+        this.acFactura = acFactura;
+    }
+
+    public String getFurnizorFactura() {
+        return furnizorFactura;
+    }
+
+    public void setFurnizorFactura(String furnizorFactura) {
+        this.furnizorFactura = furnizorFactura;
+    }
+
+    public String getMonedaFactura() {
+        return monedaFactura;
+    }
+
+    public void setMonedaFactura(String monedaFactura) {
+        this.monedaFactura = monedaFactura;
+    }
+
+    public String getValoareFactura() {
+        return valoareFactura;
+    }
+
+    public void setValoareFactura(String valoareFactura) {
+        this.valoareFactura = valoareFactura;
+    }
 
     public String getNumarFactura() {
         return numarFactura;
