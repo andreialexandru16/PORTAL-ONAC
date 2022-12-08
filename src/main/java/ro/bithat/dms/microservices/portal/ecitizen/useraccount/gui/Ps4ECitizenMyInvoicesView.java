@@ -46,10 +46,10 @@ public class Ps4ECitizenMyInvoicesView extends ContentContainerView<Ps4ECitizenM
     @Override
     public void beforeBinding() {
         if(getPresenter().getShowPaymentCol()!=null && getPresenter().getShowPaymentCol().equals("true") ){
-            serviceDocumentsTable.addHeader( "myaccount.my.requests.view.service.paymentvalue.label");
+            serviceDocumentsTable.addHeader( "ps4.ecetatean.breadcrumb.myaccount.myinvoices.page.title");
         }
         //13.07.2021 - NG - ANRE - adaugare camp de cautare
-        setContentPageTile(I18NProviderStatic.getTranslation("ps4.ecetatean.breadcrumb.myaccount.myrequests.page.title"));
+        setContentPageTile(I18NProviderStatic.getTranslation("ps4.ecetatean.breadcrumb.myaccount.myinvoices.page.title"));
         setServicesListHeaderIcon("/icons/document.png");
         formContainer.addClassNames("my_documents", "table_scroll");
 
