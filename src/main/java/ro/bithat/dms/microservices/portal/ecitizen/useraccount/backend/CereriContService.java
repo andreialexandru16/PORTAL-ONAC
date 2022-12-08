@@ -50,6 +50,10 @@ public class CereriContService extends DmswsRestService{
 		return get(MultiFilterPortalFileList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getWorkflowsByUser",
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
 	}
+	public MultiFilterPortalFileList getInvoicesByUser(String token) {
+		return get(MultiFilterPortalFileList.class, checkBaseModel(), getDmswsUrl()+"/cerericont/{token}/getInvoicesByUser",
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
+	}
 
 
 	public MultiFilterPortalFileList getLimitedFilesOnWorkflowByUser(String token, String nrRows) {

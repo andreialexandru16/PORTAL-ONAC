@@ -58,6 +58,9 @@ public class CereriContController {
     public List<PortalFile> getFilesOnWorkflowByUser(){
         return serviceCereri.getFilesOnWorkflowByUser(SecurityUtils.getToken()).getPortalFileList();
     }
+    public List<PortalFile> getInvoicesByUser(){
+        return serviceCereri.getInvoicesByUser(SecurityUtils.getToken()).getPortalFileList();
+    }
 
     public List<PortalFile> getLimitedFilesOnWorkflowByUser(String nrRows){
         return serviceCereri.getLimitedFilesOnWorkflowByUser(SecurityUtils.getToken(),nrRows).getPortalFileList();
