@@ -120,7 +120,7 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         iconHeaderImage.addClassNames("far", "fa-file-alt");
 
         myInvoicesHeaderImage.add(iconHeaderImage);
-        myInvoicesHeaderTitle.add(new Text("ps4.ecetatean.breadcrumb.myaccount.myrequests.page.title"));
+        myInvoicesHeaderTitle.add(new Text("ps4.ecetatean.breadcrumb.myaccount.myinvoices.page.title"));
         myInvoicesHeaderNo.add(new Text(String.valueOf(myRequests.size())));
 
         myInvoicesHeader.add(myInvoicesHeaderImage, myInvoicesHeaderTitle, myInvoicesHeaderNo);
@@ -137,7 +137,7 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         Div allMyInvoicesButton = new Div();
 
         allMyInvoicesButton.addClassName("all_elements");
-        anchorButtonAllInvoices.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.myrequests.button.all"));
+        anchorButtonAllInvoices.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.myinvoices.button.all"));
         anchorButtonAllInvoices.setHref("javascript:void(0);");
         anchorButtonAllInvoices.addClassNames("btn", "btn_green", "min_width250", "btn-common");
         /*HtmlContainer iconElementButtonGoToAllRequests = new HtmlContainer("i");
@@ -401,8 +401,8 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         HtmlContainer iconElementContent = new HtmlContainer("i");
         iconElementContent.addClassNames("fas", "fa-file-alt");
         Strong strongElementContent = new Strong();
-        strongElementContent.setText(file.getDenumireDocument() + " " + file.getNume() + " (" + file.getTrimisLa() + ")"
-                + " - " + file.getDenumireWorkflowStatus());
+        strongElementContent.setText("Factura " + " " + file.getNumarFactura() + " (" + file.getDataFactura() + ")"
+                + " - " + file.getSerieFactura());
 
         divElementContent.add(iconElementContent, strongElementContent);
             /*ELEMENT BUTTONS*/
@@ -422,27 +422,27 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         }
 
 
-        ClickNotifierAnchor anchorRequestGoToFile = new ClickNotifierAnchor();
+//        ClickNotifierAnchor anchorRequestGoToFile = new ClickNotifierAnchor();
         //TODO redirect to page: solicitare-noua-revizie-finala
         //anchorRequestPreviewFile.setHref();
-        HtmlContainer iconElementButtonGoTo = new HtmlContainer("i");
-        iconElementButtonGoTo.addClassNames("fas", "fa-eye");
-        anchorRequestGoToFile.add(iconElementButtonGoTo);
-        anchorRequestGoToFile.getElement().getStyle().set("cursor", "pointer");
-        if (Optional.ofNullable(file.getIdDocument()).isPresent()
-                && Optional.ofNullable(file.getIdClasaDocument()).isPresent()
-                && Optional.ofNullable(file.getId()).isPresent()) {
-            Map<String, Object> filterPageParameters = new HashMap<>();
-            filterPageParameters.put("tipDocument", file.getIdClasaDocument());
-            filterPageParameters.put("document", file.getIdDocument());
-            filterPageParameters.put("request", file.getId());
+//        HtmlContainer iconElementButtonGoTo = new HtmlContainer("i");
+//        iconElementButtonGoTo.addClassNames("fas", "fa-eye");
+//        anchorRequestGoToFile.add(iconElementButtonGoTo);
+//        anchorRequestGoToFile.getElement().getStyle().set("cursor", "pointer");
+//        if (Optional.ofNullable(file.getIdDocument()).isPresent()
+//                && Optional.ofNullable(file.getIdClasaDocument()).isPresent()
+//                && Optional.ofNullable(file.getId()).isPresent()) {
+//            Map<String, Object> filterPageParameters = new HashMap<>();
+//            filterPageParameters.put("tipDocument", file.getIdClasaDocument());
+//            filterPageParameters.put("document", file.getIdDocument());
+//            filterPageParameters.put("request", file.getId());
+//
+//            anchorRequestGoToFile.getStyle().set("cursor", "pointer");
+//            anchorRequestGoToFile.addClickListener(e
+//                    -> VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceRequestReviewRoute.class)));
+//        }
 
-            anchorRequestGoToFile.getStyle().set("cursor", "pointer");
-            anchorRequestGoToFile.addClickListener(e
-                    -> VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceRequestReviewRoute.class)));
-        }
-
-        divElementButtons.add(anchorRequestGoToFile);
+//        divElementButtons.add(anchorRequestGoToFile);
 
         liMyRequests.add(divElementContent, divElementButtons);
         return liMyRequests;

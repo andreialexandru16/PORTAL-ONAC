@@ -69,6 +69,33 @@ public class PortalFile extends BaseModel{
     private String persoanaContact2;
     private String persoanaContact2Email;
     private String persoanaContact2Telefon;
+    private String numarFactura;
+    private String dataFactura;
+    private String serieFactura;
+
+    public String getNumarFactura() {
+        return numarFactura;
+    }
+
+    public void setNumarFactura(String numarFactura) {
+        this.numarFactura = numarFactura;
+    }
+
+    public String getDataFactura() {
+        return dataFactura;
+    }
+
+    public void setDataFactura(String dataFactura) {
+        this.dataFactura = dataFactura;
+    }
+
+    public String getSerieFactura() {
+        return serieFactura;
+    }
+
+    public void setSerieFactura(String serieFactura) {
+        this.serieFactura = serieFactura;
+    }
 
     public String getPersoanaReprezentantLegal() {
         return persoanaReprezentantLegal;
