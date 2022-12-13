@@ -223,8 +223,9 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler(logoutSuccessHandler());
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
-        http.sessionManagement()
-                .maximumSessions(1).and().invalidSessionUrl("/expired");
+        //CA - DESCHIDERE PAGINA PUBLICA FARA AUTENTIFICARE
+//        http.sessionManagement()
+//                .maximumSessions(1).and().invalidSessionUrl("/expired");
 
     }
 
