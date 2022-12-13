@@ -189,7 +189,13 @@ public class Ps4ECitizenServiceNewRequestView extends ContentContainerView<Ps4EC
         getLogger().info("printSmartFormPdf command sending to client");
         sendToPrintTimeMillis = System.currentTimeMillis();
         if(getPresenter().getFileId().isPresent() || getPresenter().getRequestFileid().isPresent()){
-            RunJasperByTipDocAndSaveResp runJasperByTipDocAndSaveResp = getPresenter().getIdFisierJasper();
+
+            RunJasperByTipDocAndSaveResp runJasperByTipDocAndSaveResp = new RunJasperByTipDocAndSaveResp();
+            try{
+                runJasperByTipDocAndSaveResp = getPresenter().getIdFisierJasper();
+            }catch (Exception e){
+                //ignore
+            }
             if (runJasperByTipDocAndSaveResp.getStatus()!=null && runJasperByTipDocAndSaveResp.getStatus().equals("OK")) {
                 UI.getCurrent().getPage().executeJs("  $UTIL.downloadFileByVaadin($0,$1)", runJasperByTipDocAndSaveResp.getFileName(),
                         runJasperByTipDocAndSaveResp.getDownloadLink());
