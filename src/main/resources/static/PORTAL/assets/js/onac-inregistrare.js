@@ -1,4 +1,7 @@
-
+var seenPass1=0;
+var seenPass1Oe=0;
+var seenPass2=0;
+var seenPass2Oe=0;
 
 var getOptionListItemHtml = (id, city) => {
     return '<option value="' + id + '">' + city + '</option>';
@@ -22,6 +25,46 @@ function CheckPassword(inputtxt)
         return false;
     }
 };
+
+function seePassword(id){
+  debugger
+    if(id == "pwd1"){
+      if(seenPass1 == 0 || seenPass1 == "0" ){
+          $('#pwd1').attr('type', 'text');
+          seenPass1 = 1;
+      }else if(seenPass1 == 1 || seenPass1 == "1"){
+          $('#pwd1').attr('type', 'password');
+          seenPass1 = 0;
+      }
+    }else if(id == "pwd2"){
+        if(seenPass2 == 0 || seenPass2 == "0" ){
+            $('#pwd2').attr('type', 'text');
+            seenPass2 = 1;
+        }else if(seenPass2 == 1 || seenPass2 == "1"){
+            $('#pwd2').attr('type', 'password');
+            seenPass2 = 0;
+        }
+    }else if(id == "pwd1_oe"){
+        if(seenPass1Oe == 0 || seenPass1Oe == "0" ){
+            $('#pwd1_oe').attr('type', 'text');
+            seenPass1Oe = 1;
+        }else if(seenPass1Oe == 1 || seenPass1Oe == "1"){
+            $('#pwd1_oe').attr('type', 'password');
+            seenPass1Oe = 0;
+        }
+    }else if(id == "pwd2_oe"){
+        if(seenPass2Oe == 0 || seenPass2Oe == "0" ){
+            $('#pwd2_oe').attr('type', 'text');
+            seenPass2Oe = 1;
+        }else if(seenPass2Oe == 1 || seenPass2Oe == "1"){
+            $('#pwd2_oe').attr('type', 'password');
+            seenPass2Oe = 0;
+        }
+    }
+
+}
+
+
 
 function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
@@ -1179,6 +1222,8 @@ $( document ).ready(function() {
         }
 
     });
+
+
 
 
 
