@@ -1223,7 +1223,11 @@ $( document ).ready(function() {
 
     });
 
-
+    $(document).on("change", ".file-control", function () {
+        let fileName = $(this).val().split("\\");
+        let uploadFileName = fileName[fileName.length - 1];
+        $(this).next().find("span").text(uploadFileName);
+    });
 
 
 
