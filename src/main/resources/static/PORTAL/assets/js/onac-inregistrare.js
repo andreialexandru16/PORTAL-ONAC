@@ -994,145 +994,307 @@ $( '#register_ac' ).submit( function( e ) {
 //inregistrare operatori economici
 $( '#register_oe' ).submit( function( e ) {
     debugger
-    $("#register2").prop('disabled','disabled');
-    var response ="true";
-    try{
+    var nume_c2_oe = $("#nume_c2_oe").val();
+    var prenume_c2_oe = $("#prenume_c2_oe").val();
+    var email_c2_oe = $("#email_c2_oe").val();
+    var telefon_c2_oe = $("#telefon_c2_oe").val();
+    if(nume_c2_oe!=null && nume_c2_oe!="" && nume_c2_oe!=undefined && nume_c2_oe!="null" &&
+        prenume_c2_oe!=null && prenume_c2_oe!="" && prenume_c2_oe!=undefined && prenume_c2_oe!="null" &&
+        email_c2_oe!=null && email_c2_oe!="" && email_c2_oe!=undefined && email_c2_oe!="null" &&
+        telefon_c2_oe!=null && telefon_c2_oe!="" && telefon_c2_oe!=undefined && telefon_c2_oe!="null") {
+        $("#register2").prop('disabled', 'disabled');
+        var response = "true";
+        try {
 
-        response = grecaptcha.getResponse(0);
-    }catch (err){
+            response = grecaptcha.getResponse(0);
+        } catch (err) {
 
-    }
-    if(response == "FALSE") {
-        debugger
-        e.preventDefault();
-        //reCaptcha not verified
-        Swal.fire({
-            icon: 'error',
-            html: "Captcha gresit!",
-            focusConfirm: false,
-            confirmButtonText: 'Ok',
-        });
-        $("#register2").removeAttr('disabled');
-    }else{
-        debugger
-        let errorString = "<ul class='text-left'>";
-        /* Check for required fields */
-        $(this).find(".required").each(function () {
-            if ($(this).val() === "" || $(this).val() === "null" || $(this).val() === null) {
-                errorString += "<li class='text-danger'>Câmpul: <strong>" + $(this).parent().find("label").text() + "</strong> este obligatoriu.</li>";
-            }
-        });
-        /* Check for TOS */
-        if ($("#tos1_oe:checked").length == 0) {
-            errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați termenii și condițiile.</li>";
         }
-        if ($("#tos2_oe:checked").length == 0) {
-            errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați Politica de confidentialitate si de prelucrare a datelor cu caracter personal(GDPR).</li>";
-        }
-        if ($("#tos3_oe:checked").length == 0) {
-            errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați Politica de utilizare cookie-uri.</li>";
-        }
-        /* Passwords */
-        if ($("#pwd1_oe").val() !== $("#pwd2_oe").val()) {
-            errorString += "<li class='text-danger'>Parolele nu se potrivesc.</li>";
-        }
-
-        /* Passwords */
-        // if (CheckPassword($("#pwd1").val())==false ){
-        //     errorString += "<li class='text-danger'>Parola trebuie să conțină: cel puțin 8 caractere; cel puțin un caracter numeric; cel puțin o literă mare; cel puțin o literă mică; cel puțin un caracter special (=, ^, !, @, #, $, &, *)</li>";
-        // }
-        // if (checkCaptcha()==false){
-        //     errorString += "<li class='text-danger'>Va rugam sa completati captcha.</li>";
-        // }
-
-   // if (isNaN($("#cnp").val())){
-   // 	errorString += "<li class='text-danger'>CNP nu este fromat din cifre.</li>";
-   // }
-
-        /* Cnp */
-        // if (validateCnp($("#cnp").val()) == false) {
-        //     errorString += "<li class='text-danger'>CNP-ul este invalid.</li>";
-        // }
-
-        /* Email */
-        // if (validateEmail($("#email").val()) == false) {
-        //     errorString += "<li class='text-danger'>Adresa de email este invalidă.</li>";
-        // }
-
-
-
-        errorString += "</ul>";
-        if (errorString !== "<ul class='text-left'></ul>") {
-
+        if (response == "FALSE") {
+            debugger
+            e.preventDefault();
+            //reCaptcha not verified
             Swal.fire({
                 icon: 'error',
-                html: errorString,
+                html: "Captcha gresit!",
                 focusConfirm: false,
                 confirmButtonText: 'Ok',
             });
             $("#register2").removeAttr('disabled');
-
         } else {
             debugger
-            var HTML_Width = $("#register_oe").width();
-            var HTML_Height = $("#register_oe").height();
-            var top_left_margin = 15;
-            var PDF_Width = HTML_Width+(top_left_margin*2);
-            var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
-            var canvas_image_width = HTML_Width;
-            var canvas_image_height = HTML_Height;
-
-            var totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
-
-            $(window).scrollTop(0);
-            $("#register_oe").css("background","white");
-
-            domtoimage.toJpeg(document.querySelector("#register_oe"), { quality: 0.95 })
-                .then(function (dataUrl) {
-                    var formData = new FormData( document.querySelector("#register_oe"));
-
-                    var imgData=dataUrl;
-            var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
-            pdf.addImage(imgData, 'JPEG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
-
-            for (var i = 1; i <= totalPDFPages; i++) {
-                pdf.addPage(PDF_Width, PDF_Height);
-                pdf.addImage(imgData, 'JPEG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+            let errorString = "<ul class='text-left'>";
+            /* Check for required fields */
+            $(this).find(".required").each(function () {
+                if ($(this).val() === "" || $(this).val() === "null" || $(this).val() === null) {
+                    errorString += "<li class='text-danger'>Câmpul: <strong>" + $(this).parent().find("label").text() + "</strong> este obligatoriu.</li>";
+                }
+            });
+            /* Check for TOS */
+            if ($("#tos1_oe:checked").length == 0) {
+                errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați termenii și condițiile.</li>";
             }
-            formData.append("request_form_pdf", btoa(pdf.output())); ///pdf.output());
+            if ($("#tos2_oe:checked").length == 0) {
+                errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați Politica de confidentialitate si de prelucrare a datelor cu caracter personal(GDPR).</li>";
+            }
+            if ($("#tos3_oe:checked").length == 0) {
+                errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați Politica de utilizare cookie-uri.</li>";
+            }
+            /* Passwords */
+            if ($("#pwd1_oe").val() !== $("#pwd2_oe").val()) {
+                errorString += "<li class='text-danger'>Parolele nu se potrivesc.</li>";
+            }
+
+            /* Passwords */
+            // if (CheckPassword($("#pwd1").val())==false ){
+            //     errorString += "<li class='text-danger'>Parola trebuie să conțină: cel puțin 8 caractere; cel puțin un caracter numeric; cel puțin o literă mare; cel puțin o literă mică; cel puțin un caracter special (=, ^, !, @, #, $, &, *)</li>";
+            // }
+            // if (checkCaptcha()==false){
+            //     errorString += "<li class='text-danger'>Va rugam sa completati captcha.</li>";
+            // }
+
+            // if (isNaN($("#cnp").val())){
+            // 	errorString += "<li class='text-danger'>CNP nu este fromat din cifre.</li>";
+            // }
+
+            /* Cnp */
+            // if (validateCnp($("#cnp").val()) == false) {
+            //     errorString += "<li class='text-danger'>CNP-ul este invalid.</li>";
+            // }
+
+            /* Email */
+            // if (validateEmail($("#email").val()) == false) {
+            //     errorString += "<li class='text-danger'>Adresa de email este invalidă.</li>";
+            // }
 
 
+            errorString += "</ul>";
+            if (errorString !== "<ul class='text-left'></ul>") {
+
+                Swal.fire({
+                    icon: 'error',
+                    html: errorString,
+                    focusConfirm: false,
+                    confirmButtonText: 'Ok',
+                });
+                $("#register2").removeAttr('disabled');
+
+            } else {
+                debugger
+                var HTML_Width = $("#register_oe").width();
+                var HTML_Height = $("#register_oe").height();
+                var top_left_margin = 15;
+                var PDF_Width = HTML_Width + (top_left_margin * 2);
+                var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+                var canvas_image_width = HTML_Width;
+                var canvas_image_height = HTML_Height;
+
+                var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+                $(window).scrollTop(0);
+                $("#register_oe").css("background", "white");
+
+                domtoimage.toJpeg(document.querySelector("#register_oe"), {quality: 0.95})
+                    .then(function (dataUrl) {
+                        var formData = new FormData(document.querySelector("#register_oe"));
+
+                        var imgData = dataUrl;
+                        var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+                        pdf.addImage(imgData, 'JPEG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+
+                        for (var i = 1; i <= totalPDFPages; i++) {
+                            pdf.addPage(PDF_Width, PDF_Height);
+                            pdf.addImage(imgData, 'JPEG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
+                        }
+                        formData.append("request_form_pdf", btoa(pdf.output())); ///pdf.output());
 
 
-            $.ajax( {
-                url: '/dmsws/cerericont/addOe',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                beforeSend: function() {
-                    $UTIL.waitForLoading();
-                },
-                success: function (resultData) {
-                    swal.close();
-                    window.location.reload();
-                },
-                error: function(err) {
+                        $.ajax({
+                            url: '/dmsws/cerericont/addOe',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            beforeSend: function () {
+                                $UTIL.waitForLoading();
+                            },
+                            success: function (resultData) {
+                                swal.close();
+                                window.location.reload();
+                            },
+                            error: function (err) {
 //    		    TODO: treat html tag for client side servers with err.responseJSON.status and err.responseJSON.message
-                    swal.close();
+                                swal.close();
+                                Swal.fire({
+                                    icon: 'error',
+                                    html: "<p class='text-danger'><strong>" + err.responseText + "</strong></p>",
+                                    focusConfirm: false,
+                                    confirmButtonText: 'Ok',
+                                });
+                                $("#register").removeAttr('disabled');
+
+                            }
+                        });
+
+                    });
+
+            }
+        }
+    }else {
+        Swal.fire({
+            title: 'Confirmati ca in relatia cu ONAC desemnati o singura personae de contact?',
+            showCancelButton: true,
+            confirmButtonText: 'Ok',
+            cancelButtonText: 'Anuleaza'
+        }).then((result) => {
+            if (result.value == true)
+        {
+            $("#register2").prop('disabled', 'disabled');
+            var response = "true";
+            try {
+
+                response = grecaptcha.getResponse(0);
+            } catch (err) {
+
+            }
+            if (response == "FALSE") {
+                debugger
+                e.preventDefault();
+                //reCaptcha not verified
+                Swal.fire({
+                    icon: 'error',
+                    html: "Captcha gresit!",
+                    focusConfirm: false,
+                    confirmButtonText: 'Ok',
+                });
+                $("#register2").removeAttr('disabled');
+            } else {
+                debugger
+                $("#nume_c2_oe").val($("#nume_c1_oe").val());
+                $("#prenume_c2_oe").val($("#prenume_c1_oe").val());
+                $("#email_c2_oe").val($("#email_c1_oe").val());
+                $("#telefon_c2_oe").val($("#telefon_c1_oe").val());
+                let errorString = "<ul class='text-left'>";
+                /* Check for required fields */
+                $(this).find(".required").each(function () {
+                    if ($(this).val() === "" || $(this).val() === "null" || $(this).val() === null) {
+                        errorString += "<li class='text-danger'>Câmpul: <strong>" + $(this).parent().find("label").text() + "</strong> este obligatoriu.</li>";
+                    }
+                });
+                /* Check for TOS */
+                if ($("#tos1_oe:checked").length == 0) {
+                    errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați termenii și condițiile.</li>";
+                }
+                if ($("#tos2_oe:checked").length == 0) {
+                    errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați Politica de confidentialitate si de prelucrare a datelor cu caracter personal(GDPR).</li>";
+                }
+                if ($("#tos3_oe:checked").length == 0) {
+                    errorString += "<li class='text-danger'>Vă rugăm să citiți și să bifați Politica de utilizare cookie-uri.</li>";
+                }
+                /* Passwords */
+                if ($("#pwd1_oe").val() !== $("#pwd2_oe").val()) {
+                    errorString += "<li class='text-danger'>Parolele nu se potrivesc.</li>";
+                }
+
+                /* Passwords */
+                // if (CheckPassword($("#pwd1").val())==false ){
+                //     errorString += "<li class='text-danger'>Parola trebuie să conțină: cel puțin 8 caractere; cel puțin un caracter numeric; cel puțin o literă mare; cel puțin o literă mică; cel puțin un caracter special (=, ^, !, @, #, $, &, *)</li>";
+                // }
+                // if (checkCaptcha()==false){
+                //     errorString += "<li class='text-danger'>Va rugam sa completati captcha.</li>";
+                // }
+
+                // if (isNaN($("#cnp").val())){
+                // 	errorString += "<li class='text-danger'>CNP nu este fromat din cifre.</li>";
+                // }
+
+                /* Cnp */
+                // if (validateCnp($("#cnp").val()) == false) {
+                //     errorString += "<li class='text-danger'>CNP-ul este invalid.</li>";
+                // }
+
+                /* Email */
+                // if (validateEmail($("#email").val()) == false) {
+                //     errorString += "<li class='text-danger'>Adresa de email este invalidă.</li>";
+                // }
+
+
+                errorString += "</ul>";
+                if (errorString !== "<ul class='text-left'></ul>") {
+
                     Swal.fire({
                         icon: 'error',
-                        html: "<p class='text-danger'><strong>" + err.responseText +"</strong></p>",
+                        html: errorString,
                         focusConfirm: false,
                         confirmButtonText: 'Ok',
                     });
-                    $("#register").removeAttr('disabled');
+                    $("#register2").removeAttr('disabled');
 
-                } } );
+                } else {
+                    debugger
+                    var HTML_Width = $("#register_oe").width();
+                    var HTML_Height = $("#register_oe").height();
+                    var top_left_margin = 15;
+                    var PDF_Width = HTML_Width + (top_left_margin * 2);
+                    var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+                    var canvas_image_width = HTML_Width;
+                    var canvas_image_height = HTML_Height;
 
-        });
+                    var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
 
+                    $(window).scrollTop(0);
+                    $("#register_oe").css("background", "white");
+
+                    domtoimage.toJpeg(document.querySelector("#register_oe"), {quality: 0.95})
+                        .then(function (dataUrl) {
+                            var formData = new FormData(document.querySelector("#register_oe"));
+
+                            var imgData = dataUrl;
+                            var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+                            pdf.addImage(imgData, 'JPEG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+
+                            for (var i = 1; i <= totalPDFPages; i++) {
+                                pdf.addPage(PDF_Width, PDF_Height);
+                                pdf.addImage(imgData, 'JPEG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
+                            }
+                            formData.append("request_form_pdf", btoa(pdf.output())); ///pdf.output());
+
+
+                            $.ajax({
+                                url: '/dmsws/cerericont/addOe',
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                beforeSend: function () {
+                                    $UTIL.waitForLoading();
+                                },
+                                success: function (resultData) {
+                                    swal.close();
+                                    window.location.reload();
+                                },
+                                error: function (err) {
+//    		    TODO: treat html tag for client side servers with err.responseJSON.status and err.responseJSON.message
+                                    swal.close();
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "<p class='text-danger'><strong>" + err.responseText + "</strong></p>",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                    $("#register").removeAttr('disabled');
+
+                                }
+                            });
+
+                        });
+
+                }
+            }
+        }else if (result.dismiss == "cancel") {
+            return;
         }
+    })
     }
     e.preventDefault();
 } );
