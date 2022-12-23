@@ -700,7 +700,7 @@ $( '#register_ac' ).submit( function( e ) {
         let errorString = "<ul class='text-left'>";
         /* Check for required fields */
         $(this).find(".required").each(function () {
-            if ($(this).val() === "") {
+            if ($(this).val() === "" || $(this).val() === "null" || $(this).val() === null) {
                 errorString += "<li class='text-danger'>Câmpul: <strong>" + $(this).parent().find("label").text() + "</strong> este obligatoriu.</li>";
             }
         });
