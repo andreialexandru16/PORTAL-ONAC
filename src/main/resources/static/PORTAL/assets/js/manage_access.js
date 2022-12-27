@@ -474,6 +474,19 @@ var FileManager = {
                                 }
 
                                 });
+                                }if(data.extendedInfo3 == -2){
+                                    $.fancybox.close();
+                                    Swal.fire({
+                                            position: 'top',
+                                            icon: "info",
+                                            html: "Nu se poate activa utilizatorul.Numarul de utilizatori activi asociati pentru acest cont ar depasii limita legala!",
+                                            focusConfirm: false,
+                                            confirmButtonText: "Ok",
+                                            onClose: () => {
+                                            window.location.reload();
+                                }
+
+                                })
                                 }else{  $.fancybox.close();
                                     Swal.fire({
                                             position: 'top',
@@ -489,6 +502,7 @@ var FileManager = {
 
 
                             }
+
 
                         },
                         error: function (err) {
@@ -697,7 +711,7 @@ $( '#register_ct' ).submit( function( e ) {
                             }else if(resultData == "NRER"){
                                 Swal.fire({
                                     icon: 'error',
-                                    html: "Persoana de contact nu a fost adaugata.Numar maxim de utilizatori activi asociati a fost depasit!",
+                                    html: "Persoana de contact nu a fost adaugata.Numarul maxim de utilizatori activi asociati a fost depasit!",
                                     focusConfirm: false,
                                     confirmButtonText: 'Ok'
                                 }).then(function(result) {
