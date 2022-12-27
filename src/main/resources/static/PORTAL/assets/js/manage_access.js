@@ -684,23 +684,26 @@ $( '#register_ct' ).submit( function( e ) {
 
                         },
                         success: function (resultData) {
-                            swal.close();
+                            $.fancybox.close();
                             if(resultData == "OK"){
                                 Swal.fire({
-                                    icon: 'error',
-                                    html: "",
+                                    icon: 'info',
+                                    html: "Utilizator adaugat cu succes!",
                                     focusConfirm: false,
-                                    confirmButtonText: 'Ok',
+                                    confirmButtonText: 'Ok'
+                                }).then(function(result) {
+                                    window.location.reload();
                                 });
                             }else if(resultData == "NRER"){
                                 Swal.fire({
                                     icon: 'error',
                                     html: "Persoana de contact nu a fost adaugata.Numar maxim de utilizatori activi asociati a fost depasit!",
                                     focusConfirm: false,
-                                    confirmButtonText: 'Ok',
+                                    confirmButtonText: 'Ok'
+                                }).then(function(result) {
+                                    window.location.reload();
                                 });
                             }
-                            $("#btn_add_contact").removeAttr('disabled');
                             e.preventDefault();
 
                         },
