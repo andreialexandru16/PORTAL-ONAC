@@ -16,7 +16,17 @@ public class UtilizatorAcOeResponse extends BaseModel {
     private Integer id;
     private Integer idUtilizator;
     private Integer idCerere;
+    private Integer verificatNrConturi;
     private String emailInstitutie;
+
+
+    public Integer getVerificatNrConturi() {
+        return verificatNrConturi;
+    }
+
+    public void setVerificatNrConturi(Integer verificatNrConturi) {
+        this.verificatNrConturi = verificatNrConturi;
+    }
 
     public String getEmailInstitutie() {
         return emailInstitutie;

@@ -353,7 +353,7 @@ var FileManager = {
     renderSubconturiData: function (subcontData) {
         var that = this;
 
-        var html = Util.renderTemplateNonAsync(that, "tmpl_subconturi", subcontData);
+        var html = $UTIL.renderTemplateNonAsync(that, "tmpl_subconturi", subcontData);
         $("#cl_tickets").html(html);
 
 
@@ -685,7 +685,23 @@ $( '#register_ct' ).submit( function( e ) {
                         },
                         success: function (resultData) {
                             swal.close();
-                            window.location.reload();
+                            if(resultData == "OK"){
+                                Swal.fire({
+                                    icon: 'error',
+                                    html: "",
+                                    focusConfirm: false,
+                                    confirmButtonText: 'Ok',
+                                });
+                            }else if(resultData == "NRER"){
+                                Swal.fire({
+                                    icon: 'error',
+                                    html: "Persoana de contact nu a fost adaugata.Numar maxim de utilizatori activi asociati a fost depasit!",
+                                    focusConfirm: false,
+                                    confirmButtonText: 'Ok',
+                                });
+                            }
+                            $("#btn_add_contact").removeAttr('disabled');
+                            e.preventDefault();
 
                         },
                         error: function(err) {
