@@ -446,6 +446,7 @@ public class CereriContController {
     //vaadin use apache commons-fileuploads and has no support for spring servlet  MultipartFile
     @PostMapping(value = "/dmsws/cerericont/addCt", consumes = "multipart/form-data", produces = "text/html")
     public ResponseEntity<String> addContact(HttpServletRequest httpServletRequest) {
+        Integer raspuns=null;
         try {
             FileUploadParamRequest requestForm = getRequestForm(httpServletRequest);
             UtilizatorAcOe utilizatorContact = getUtilizatorOe(requestForm);
@@ -460,7 +461,7 @@ public class CereriContController {
                         throw new IllegalArgumentException("Extensia ." + extension.get() + " nu este permisa.");
                 }
 
-                serviceCereri.addContact(SecurityUtils.getToken(), utilizatorContact, mandatFile.getFileName(), mandatFile.getFileData());
+              raspuns =  serviceCereri.addContact(SecurityUtils.getToken(), utilizatorContact, mandatFile.getFileName(), mandatFile.getFileData());
             }
             else{
                 throw new ServerWebInputException("Incarcati mandat!");
@@ -486,7 +487,11 @@ public class CereriContController {
             return ResponseEntity.badRequest().body("Eroare server DMSWS. Repetati operatia!");
         }
 
-        return ResponseEntity.ok("OK");
+        if(raspuns == -1){
+            return ResponseEntity.ok("NRER");
+        }else{
+            return ResponseEntity.ok("OK");
+        }
     }
 
 

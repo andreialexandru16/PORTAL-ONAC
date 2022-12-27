@@ -227,6 +227,12 @@ debugger
         }
     });
 };
+
+var goTo = (pageGoTo) => {
+debugger
+    console.log("go to" + pageGoTo);
+    window.open(pageGoTo, "_blank");
+};
 $('#country').on('change', function (e) {
     fetchRegions($(this).val());
     // fetchCities($(this).val());
