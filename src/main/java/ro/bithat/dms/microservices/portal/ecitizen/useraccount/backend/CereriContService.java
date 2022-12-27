@@ -135,7 +135,7 @@ public class CereriContService extends DmswsRestService{
 		returnResult = result.getVerificatNrConturi();
 
 		if (mdFilename != null && !mdFilename.isEmpty() && returnResult == 0) {
-			CreateTipDocFileResponse biResp = fileService.uploadFisierTipDocId(SecurityUtils.getToken(), result.getIdMandat(), idUtilizatorAnonimus,
+			CreateTipDocFileResponse biResp = fileService.uploadFisierTipDocId(SecurityUtils.getToken(), result.getIdMandat(), Long.parseLong(String.valueOf(result.getIdUtilizator())),
 					mdFilename, mdFilename, mdFileData, Optional.empty());
 		}
 		if(returnResult == 0) {
