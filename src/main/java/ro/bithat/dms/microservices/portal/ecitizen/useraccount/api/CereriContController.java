@@ -219,11 +219,11 @@ public class CereriContController {
         }else{
             utilizatorAcOe.setId_tip_utilizator(null);
         }
-        if(formRequest.getParamMap().get("id_institutie_solicitanta")!=null) {
-            utilizatorAcOe.setId_institutie_solicitanta(new Integer(formRequest.getParamMap().get("id_institutie_solicitanta")));
-        }else{
-            utilizatorAcOe.setId_institutie_solicitanta(null);
-        }
+        utilizatorAcOe.setCod_cui(formRequest.getParamMap().get("cui_ac"));
+        utilizatorAcOe.setNume_tert_master(formRequest.getParamMap().get("nume_tert_master_ac"));
+        utilizatorAcOe.setNr_inmatriculare_tert_master(formRequest.getParamMap().get("nr_inmatriculare_tert_master_ac"));
+        utilizatorAcOe.setEmail_tert_master(formRequest.getParamMap().get("email_tert_master_ac"));
+
         if(formRequest.getParamMap().get("id_tip_ordonator_credite")!=null) {
             utilizatorAcOe.setId_tip_ordonator_credite(new Integer(formRequest.getParamMap().get("id_tip_ordonator_credite")));
         }else{
