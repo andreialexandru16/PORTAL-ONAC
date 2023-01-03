@@ -90,21 +90,22 @@ $.ajax({
         console.log(err);
     }
 });
-$.ajax({
-    url: "/dmsws/cerericont/getListDenumireCif",
-    success: function (result) {
-        var institutieList = result.institutieList;
-        for (var i = 0; i < institutieList.length; i++) {
-            $('#id_institutie_solicitanta').append(getOptionListItemHtml(institutieList[i].id, institutieList[i].denumire));
-
-        }
-        $('#id_institutie_solicitanta').val(0).trigger("chosen:updated");
-
-    },
-    error: function (err) {
-        console.log(err);
-    }
-});
+//cerinta onac de modificat functionalitate AC sa fie ca la OE 03.01.2023
+// $.ajax({
+//     url: "/dmsws/cerericont/getListDenumireCif",
+//     success: function (result) {
+//         var institutieList = result.institutieList;
+//         for (var i = 0; i < institutieList.length; i++) {
+//             $('#id_institutie_solicitanta').append(getOptionListItemHtml(institutieList[i].id, institutieList[i].denumire));
+//
+//         }
+//         $('#id_institutie_solicitanta').val(0).trigger("chosen:updated");
+//
+//     },
+//     error: function (err) {
+//         console.log(err);
+//     }
+// });
 $.ajax({
     url: "/dmsws/cerericont/getListOperatorTipCredite",
     success: function (result) {

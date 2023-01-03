@@ -92,12 +92,33 @@
                                 <option value="0">Nu</option>
                             </select>
                         </div>
-                        <!-- Denumire/Cif -->
-                        <div class="col-lg-2 md-margin sm-margin">
-                            <label for="id_institutie_solicitanta">Denumire/Cif<span class="text-danger">*</span></label>
-                            <select name="id_institutie_solicitanta" id="id_institutie_solicitanta" class="form-control chosen-select required">
 
-                            </select>
+                        <!--cerinta onac de modificat functionalitate AC sa fie ca la OE 03.01.2023-->
+                        <!--&lt;!&ndash; Denumire/Cif &ndash;&gt;-->
+                        <!--<div class="col-lg-2 md-margin sm-margin">-->
+                            <!--<label for="id_institutie_solicitanta">Denumire/Cif<span class="text-danger">*</span></label>-->
+                            <!--<select name="id_institutie_solicitanta" id="id_institutie_solicitanta" class="form-control chosen-select required">-->
+
+                            <!--</select>-->
+                        <!--</div>-->
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="cui_ac">Cod Unic de Inregistrare (Unique number)/CIF<span class="text-danger">*</span></label>
+                            <input type="text" name="cui" id="cui_ac" class="form-control required"
+                                   placeholder="fara prefixul 'RO'. ex: 5731826" onkeypress="return isNumberKey(event)"/>
+                        </div>
+                        <div class="col-lg-3 md-margin sm-margin">
+                            <label for="nr_inmatriculare_tert_master_ac">Nr. Inmatriculare<span class="text-danger">*</span></label>
+                            <input type="text" name="nr_inmatriculare_tert_master" id="nr_inmatriculare_tert_master_ac" class="form-control required"
+                                   placeholder="ex: J10/10000/2020 "/>
+                        </div>
+
+
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-6 md-margin sm-margin">
+                            <label for="nume_tert_master_ac">Denumire firma (Company name)<span class="text-danger">*</span></label>
+                            <input type="text" name="nume_tert_master" id="nume_tert_master_ac" class="form-control required"
+                                   placeholder="ex: SC Exemplu SRL"/>
                         </div>
                         <div class="col-lg-4 md-margin sm-margin">
                             <label for="id_tip_ordonator_credite">Tip ordonator de credite,conform Lg.500/2002 si Lg.273/2006<span class="text-danger">*</span></label>
@@ -105,7 +126,6 @@
 
                             </select>
                         </div>
-
                     </div>
                     <div class="form-group row">
                         <!-- Website -->
@@ -115,13 +135,18 @@
                         </div>
                         <!-- Telefon sediu -->
                         <div class="col-md-3 col-lg-2">
-                            <label for="tl_sediu">Telefon sediu<span class="text-danger">*</span></label>
+                            <label for="tl_sediu">Telefon<span class="text-danger">*</span></label>
                             <input type="text" name="tl_sediu" id="tl_sediu" class="form-control required" placeholder=""/>
                         </div>
                         <!-- FAX -->
                         <div class="col-md-3 col-lg-2">
                             <label for="fax">Fax</label>
                             <input type="text" name="fax" id="fax" class="form-control " placeholder=""/>
+                        </div>
+                        <div class="col-md-3 col-lg-2">
+                        <label for="email_tert_master_ac">Email <span class="text-danger">*</span></label>
+                        <input type="email" name="email_tert_master" id="email_tert_master_ac" class="form-control required"
+                               placeholder=""/>
                         </div>
                     </div>
 
