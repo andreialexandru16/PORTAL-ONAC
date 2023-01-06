@@ -2736,6 +2736,26 @@ public class ComplexAttributeLinkComponent extends AttributeLinkGenericComponent
                     TextField attrTextAdaugat = new TextField();
                     mapComponentaAtribut.put(attrTextAdaugat, at);
                     attrTextAdaugat.getElement().setAttribute("td-class", "text-border");
+                    if (at.getValoareImplicita() != null && !at.getValoareImplicita().isEmpty()) {
+                        if (at.getValoareImplicita().contains("^")) {
+                            String val = at.getValoareImplicita();
+                            for (AttributeLink a : attributeList) {
+                                if (at.getValoareImplicita() != null && at.getValoareImplicita().contains("^" + a.getName())) {
+                                    val = val.replaceAll("\\^" + a.getName(), a.getValueForLov().get(0).getId());
+                                }
+                            }
+
+                            String valoare = dmswsPS4Service.getSqlResult(val).getInfo();
+                            if (valoare != null && !valoare.isEmpty()) {
+                                at.setValue(valoare);
+                                attrTextAdaugat.setValue(valoare);
+                            }
+
+                        } else {
+                            attrTextAdaugat.setValue(at.getValoareImplicita());
+
+                        }
+                    }
                     setWidthAttr(attrTextAdaugat, at);
                     if (at.getValue() != null) {
                         attrTextAdaugat.setValue(at.getValue());
