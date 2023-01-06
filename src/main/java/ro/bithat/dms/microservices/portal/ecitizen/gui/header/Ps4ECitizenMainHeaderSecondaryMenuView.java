@@ -95,7 +95,7 @@ public class Ps4ECitizenMainHeaderSecondaryMenuView extends DivFlowViewBuilder<P
 
         add(secondaryTopMenu);
         if(!SecurityUtils.getUsername().equalsIgnoreCase("nouser")) {
-            authenticationNavItemLinkLabel.setText("Buna, " + SecurityUtils.getFirstName());
+            authenticationNavItemLinkLabel.setText("Buna, " + SecurityUtils.getLastName());
 
         }
         authenticationNavItemLink.addClickListener(e -> {

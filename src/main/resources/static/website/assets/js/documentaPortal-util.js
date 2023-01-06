@@ -1067,6 +1067,18 @@ this.waitForLoading=function(){
 
 
     };
+    this.renderTemplateNonAsync = function (manager, templateName, data) {
+        var that = this;
+        var str = null;
+
+        try {
+            str = Mustache.render(manager.templates[templateName], data);
+        } catch (e) {
+            that.alert(e,"ERROR");
+        }
+
+        return str;
+    };
 
     this.checkTokenAndExtend = function() {
 
@@ -1120,6 +1132,7 @@ this.waitForLoading=function(){
 
 
     }
+
     this.getMenuRights = function(){
         var that = this;
         var defer = $.Deferred();

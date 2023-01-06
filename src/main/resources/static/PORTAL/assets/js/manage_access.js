@@ -353,7 +353,7 @@ var FileManager = {
     renderSubconturiData: function (subcontData) {
         var that = this;
 
-        var html = Util.renderTemplateNonAsync(that, "tmpl_subconturi", subcontData);
+        var html = $UTIL.renderTemplateNonAsync(that, "tmpl_subconturi", subcontData);
         $("#cl_tickets").html(html);
 
 
@@ -474,6 +474,19 @@ var FileManager = {
                                 }
 
                                 });
+                                }if(data.extendedInfo3 == -2){
+                                    $.fancybox.close();
+                                    Swal.fire({
+                                            position: 'top',
+                                            icon: "info",
+                                            html: "Nu se poate activa utilizatorul.Numarul de utilizatori activi asociati pentru acest cont ar depasii limita legala!",
+                                            focusConfirm: false,
+                                            confirmButtonText: "Ok",
+                                            onClose: () => {
+                                            window.location.reload();
+                                }
+
+                                })
                                 }else{  $.fancybox.close();
                                     Swal.fire({
                                             position: 'top',
@@ -489,6 +502,7 @@ var FileManager = {
 
 
                             }
+
 
                         },
                         error: function (err) {
@@ -684,8 +698,27 @@ $( '#register_ct' ).submit( function( e ) {
 
                         },
                         success: function (resultData) {
-                            swal.close();
-                            window.location.reload();
+                            $.fancybox.close();
+                            if(resultData == "OK"){
+                                Swal.fire({
+                                    icon: 'info',
+                                    html: "Utilizator adaugat cu succes!",
+                                    focusConfirm: false,
+                                    confirmButtonText: 'Ok'
+                                }).then(function(result) {
+                                    window.location.reload();
+                                });
+                            }else if(resultData == "NRER"){
+                                Swal.fire({
+                                    icon: 'error',
+                                    html: "Persoana de contact nu a fost adaugata.Numarul maxim de utilizatori activi asociati a fost depasit!",
+                                    focusConfirm: false,
+                                    confirmButtonText: 'Ok'
+                                }).then(function(result) {
+                                    window.location.reload();
+                                });
+                            }
+                            e.preventDefault();
 
                         },
                         error: function(err) {
