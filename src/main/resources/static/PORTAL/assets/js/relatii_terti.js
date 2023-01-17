@@ -150,16 +150,17 @@ var PageManager = {
                 data:jReq,
                 success: function (data) {
                     if (data.result == 'OK') {
-                        $.fancybox.close();
+                      window.location.reload();
 
-
-                        Swal.fire({
-                            icon: "info",
-                            html: "A fost adaugata relatia.",
-                            focusConfirm: false,
-                            confirmButtonText: "Ok"
-                        });
-                        PageManager.afiseazaInregistrariTertRelatii(PageManager.idCerere);
+                      //AM:S-a comentat posibilitatea de afisare fara reload la pagina momentan
+                        //
+                        // Swal.fire({
+                        //     icon: "info",
+                        //     html: "A fost adaugata relatia.",
+                        //     focusConfirm: false,
+                        //     confirmButtonText: "Ok"
+                        // });
+                        // PageManager.afiseazaInregistrariTertRelatii(PageManager.idCerere);
 
                     } else   if (data.result == 'ERR') {
                         Swal.fire({
