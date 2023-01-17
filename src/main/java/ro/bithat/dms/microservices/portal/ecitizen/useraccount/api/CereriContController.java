@@ -489,6 +489,8 @@ public class CereriContController {
 
         if(raspuns == -1){
             return ResponseEntity.ok("NRER");
+        }else if(raspuns == -3){
+            return ResponseEntity.ok("EMEXT");
         }else{
             return ResponseEntity.ok("OK");
         }

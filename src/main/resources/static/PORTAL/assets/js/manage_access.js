@@ -717,6 +717,15 @@ $( '#register_ct' ).submit( function( e ) {
                                 }).then(function(result) {
                                     window.location.reload();
                                 });
+                            }else if(resultData == "EMEXT"){
+                                Swal.fire({
+                                    icon: 'error',
+                                    html: "Persoana de contact nu a fost adaugata.E-mailul este deja inregistrat in sistem!",
+                                    focusConfirm: false,
+                                    confirmButtonText: 'Ok'
+                                }).then(function(result) {
+                                    window.location.reload();
+                                });
                             }
                             e.preventDefault();
 
