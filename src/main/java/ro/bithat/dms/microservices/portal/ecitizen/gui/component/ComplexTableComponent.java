@@ -23,7 +23,7 @@ public class ComplexTableComponent extends Div implements HasValue<AbstractField
     private Map<String,HtmlContainer> tableHeadersMap= new LinkedHashMap<>();
     private Map<String,HtmlContainer> tableFootersMap= new LinkedHashMap<>();
     private Map<String,HtmlContainer> tableFootersMapIds= new HashMap<>();
-
+    private List<Component> componentList = new ArrayList<>();
     private HtmlContainer tableTopButtons = new HtmlContainer("tr");
 
     private HtmlContainer tableContainerBody = new HtmlContainer("tbody");
@@ -160,7 +160,7 @@ public class ComplexTableComponent extends Div implements HasValue<AbstractField
             columnDetail.addClassName(columnClassName.get());
         }
         columnDetail.add(column);
-
+        componentList.add(column);
         row.add(columnDetail);
     }
 
@@ -216,5 +216,13 @@ public class ComplexTableComponent extends Div implements HasValue<AbstractField
 
     public void clearContainerBody() {
         this.tableContainerBody.removeAll();
+    }
+
+    public List<Component> getComponentList() {
+        return componentList;
+    }
+
+    public void setComponentList(List<Component> componentList) {
+        this.componentList = componentList;
     }
 }
