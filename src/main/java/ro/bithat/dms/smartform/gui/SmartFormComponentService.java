@@ -34,6 +34,7 @@ import ro.bithat.dms.microservices.dmsws.metadata.AttributeLinkList;
 import ro.bithat.dms.microservices.dmsws.metadata.Lov;
 import ro.bithat.dms.microservices.dmsws.metadata.LovList;
 import ro.bithat.dms.microservices.dmsws.ps4.PS4Service;
+import ro.bithat.dms.microservices.portal.ecitizen.gui.component.ComplexTableComponent;
 import ro.bithat.dms.service.SpelParserUtil;
 import ro.bithat.dms.smartform.backend.AttributeLinkDataType;
 import ro.bithat.dms.smartform.gui.attribute.ComplexAttributeLinkComponent;
@@ -80,7 +81,7 @@ public class SmartFormComponentService {
     private final Map<String, Map<Long, List<Lov>>> lovAttributeLinkMap = new HashMap<>();
 
     //lista cu toate atributele complexe
-    private  final Map<String, Map<Long, List<RowAttrComplexList>>> attributeLinkMapComplex = new HashMap<>();
+    private final Map<String, Map<Long, List<RowAttrComplexList>>> attributeLinkMapComplex = new HashMap<>();
 
     private Map<String, Map<Long, Label>> formLabels = new HashMap<>();
 
@@ -90,9 +91,11 @@ public class SmartFormComponentService {
 
     private final List<String> toRemoveMandatory = new ArrayList<>();
 
-    public  final Map<String, Map<String, BeanValidationBinder<AttributeBinderBean>>> attributeBinderMap = new HashMap<>();
+    public final Map<String, Map<String, BeanValidationBinder<AttributeBinderBean>>> attributeBinderMap = new HashMap<>();
 
-    public ComplexAttributeLinkComponent complexAttributeLinkComponent=new ComplexAttributeLinkComponent();
+    private HashMap<Component, Component> replacedComponents = new HashMap<>();
+
+    public ComplexAttributeLinkComponent complexAttributeLinkComponent = new ComplexAttributeLinkComponent();
     @Autowired
     private ConversionService conversionService;
 
@@ -139,7 +142,7 @@ public class SmartFormComponentService {
                 bindingBuilder = bindingBuilder.withValidator(new SpELAttributeBeanPropertyValidator(attributeBinderBean.getAttributeLink().getValidator(), ""));
             } else if (attributeBinderBean.getAttributeLink().getMandatory()) {
 
-                if( attributeBinderBean.getAttributeLink().getValue()!=null && attributeBinderBean.getAttributeLink().getValue().equals(" ") ){
+                if (attributeBinderBean.getAttributeLink().getValue() != null && attributeBinderBean.getAttributeLink().getValue().equals(" ")) {
                     attributeBinderBean.getAttributeLink().setValue("");
                 }
 
@@ -150,7 +153,8 @@ public class SmartFormComponentService {
         attributeBinder.setBean(attributeBinderBean);
         attributeBinderMap.get(smartFormId).put(attributeBinderBean.getAttributeLink().getAttributeId().toString(), attributeBinder);
     }
-    public <T> void bindWithRow(String smartFormId, AttributeBinderBean<T> attributeBinderBean, HasValue attributeField,Integer rowIndex,Validator... validators) {
+
+    public <T> void bindWithRow(String smartFormId, AttributeBinderBean<T> attributeBinderBean, HasValue attributeField, Integer rowIndex, Validator... validators) {
         BeanValidationBinder attributeBinder = getAttributeBinder(attributeBinderBean);
         Binder.BindingBuilder<AttributeBinderBean<T>, T> bindingBuilder = attributeBinder.forField(attributeField);
         if (!attributeBinderBean.getAttributeLink().getHidden()) {
@@ -161,7 +165,7 @@ public class SmartFormComponentService {
                 bindingBuilder = bindingBuilder.withValidator(new SpELAttributeBeanPropertyValidator(attributeBinderBean.getAttributeLink().getValidator(), ""));
             } else if (attributeBinderBean.getAttributeLink().getMandatory()) {
 
-                if( attributeBinderBean.getAttributeLink().getValue()!=null && attributeBinderBean.getAttributeLink().getValue().equals(" ") ){
+                if (attributeBinderBean.getAttributeLink().getValue() != null && attributeBinderBean.getAttributeLink().getValue().equals(" ")) {
                     attributeBinderBean.getAttributeLink().setValue("");
                 }
 
@@ -170,8 +174,9 @@ public class SmartFormComponentService {
         }
         bindingBuilder.bind(AttributeBinderBean::getValue, AttributeBinderBean::setValue);
         attributeBinder.setBean(attributeBinderBean);
-        attributeBinderMap.get(smartFormId).put(attributeBinderBean.getAttributeLink().getAttributeId()+"_"+rowIndex, attributeBinder);
+        attributeBinderMap.get(smartFormId).put(attributeBinderBean.getAttributeLink().getAttributeId() + "_" + rowIndex, attributeBinder);
     }
+
     public <T> void unbind(String smartFormId, AttributeBinderBean<T> attributeBinderBean, HasValue attributeField, Validator... validators) {
 
         BeanValidationBinder attributeBinder = getAttributeBinder(attributeBinderBean);
@@ -232,15 +237,15 @@ public class SmartFormComponentService {
                     }
                 }
                 //decomentat pentru a valida inclusiv atributele complexe (ex validare obligativitate completare)
-               // if (idDocSel == null || idDocSel.equals(0)) {
+                // if (idDocSel == null || idDocSel.equals(0)) {
 
                 //Adaugat verificare pentru obligativitate - sa nu fie in lista toRemoveMandatory
-                    if (!binder.isValid() && (codAtribut == null || !toRemoveMandatory.contains(codAtribut))) {
-                        binder.validate();
-                        valid = false;
-                    }
+                if (!binder.isValid() && (codAtribut == null || !toRemoveMandatory.contains(codAtribut))) {
+                    binder.validate();
+                    valid = false;
+                }
 
-               // }
+                // }
 
 
             }
@@ -278,6 +283,7 @@ public class SmartFormComponentService {
 
     public void makeSmartFormPrintable(SmartForm smartForm) {
         Component smartFormComponent = (Component) smartForm;
+        replacedComponents = new HashMap<>();
         componentsFormMap.get(smartFormComponent.getId().get()).
                 keySet().forEach(sfcId -> replaceWithPrintableComponent(smartForm, sfcId, componentsFormMap.get(smartFormComponent.getId().get()).get(sfcId)));
     }
@@ -354,18 +360,95 @@ public class SmartFormComponentService {
                 return;
             }
         }
+//        if (ComplexTableComponent.class.isAssignableFrom(component.getClass())) {
+//            ComplexTableComponent tableComponent = (ComplexTableComponent) component;
+//            mapComponenteRandAtribute.entrySet().stream().forEach(e -> {
+//                e.getValue().entrySet().stream().forEach(compCompl -> appendPrintableComponent(smartForm, Long.valueOf(compCompl.getValue().getAttributeId()), compCompl.getKey()));
+//            });
+//
+//        }
         printableComponents.add(component);
         printableComponentsFormMap.get(smartFormComponent.getId().get()).put(sfcId, printableComponents);
 
     }
 
+    private Component getPrintableComponent(Component component) {
+
+        if (TextField.class.isAssignableFrom(component.getClass())) {
+            TextField textField = (TextField) component;
+            Text input = new Text(textField.getValue());
+//            input.getClassNames().stream().forEach(cn -> input.addClassName(cn));
+//            if(Optional.ofNullable(textField.getWidth()).isPresent() && !textField.getWidth().isEmpty()) {
+//                input.setWidth(textField.getWidth());
+//            }
+            return input;
+        }
+        if (ComboBox.class.isAssignableFrom(component.getClass())) {
+            ComboBox comboBox = (ComboBox) component;
+            if (comboBox.getValue() != null) {
+                if (Lov.class.isAssignableFrom(comboBox.getValue().getClass())) {
+                    Lov lov = (Lov) comboBox.getValue();
+                    Text input = new Text(lov.getValoare());
+                    return input;
+                }
+            }
+        }
+        if (TextArea.class.isAssignableFrom(component.getClass())) {
+            TextArea textArea = (TextArea) component;
+            Text input = new Text(textArea.getValue());
+//            input.getClassNames().stream().forEach(cn -> input.addClassName(cn));
+//            if(Optional.ofNullable(textArea.getWidth()).isPresent() && !textArea.getWidth().isEmpty()) {
+//                input.setWidth(textArea.getWidth());
+//            }
+            return input;
+        }
+        if (DatePicker.class.isAssignableFrom(component.getClass())) {
+            DatePicker datePicker = (DatePicker) component;
+            Text input = new Text((datePicker != null && datePicker.getValue() != null) ? datePicker.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) : "");
+//            input.add(new Text();
+//            input.getClassNames().stream().forEach(cn -> input.addClassName(cn));
+//            if(Optional.ofNullable(datePicker.getWidth()).isPresent() && !datePicker.getWidth().isEmpty()) {
+//                input.setWidth(datePicker.getWidth());
+//            }
+            return input;
+        }
+        if (Checkbox.class.isAssignableFrom(component.getClass())) {
+            Checkbox checkbox = (Checkbox) component;
+            if (checkbox.getValue()) {
+                Text input = new Text("X\t" + checkbox.getLabel());
+                return input;
+            }
+        }
+        return component;
+    }
+
     private void replaceWithPrintableComponent(List<Component> components, List<Component> printableComponents) {
         for (int i = 0; i < components.size(); i++) {
             Component component = components.get(i);
-            if (component.getParent().isPresent()) {
-                HasComponents parent = (HasComponents) component.getParent().get();
-                parent.remove(component);
-                parent.add(printableComponents.get(i));
+            if (component instanceof ComplexTableComponent) {
+                if (component.getParent().isPresent()) {
+                    HasComponents parent = (HasComponents) component.getParent().get();
+                    parent.remove(component);
+                    parent.add(printableComponents.get(i));
+                }
+                for (Map.Entry<Integer, HashMap<Component, AttributeLink>> entry : mapComponenteRandAtribute.entrySet()) {
+                    for (Map.Entry<Component, AttributeLink> componentAttributeLinkEntry : entry.getValue().entrySet()) {
+                        if (componentAttributeLinkEntry.getKey().getParent().isPresent()) {
+                            HasComponents parent = (HasComponents) componentAttributeLinkEntry.getKey().getParent().get();
+                            parent.remove(componentAttributeLinkEntry.getKey());
+                            Component replaceComponent = getPrintableComponent(componentAttributeLinkEntry.getKey());
+                            parent.add(replaceComponent);
+                            replacedComponents.put(replaceComponent, componentAttributeLinkEntry.getKey());
+                        }
+                    }
+                }
+
+            } else {
+                if (component.getParent().isPresent()) {
+                    HasComponents parent = (HasComponents) component.getParent().get();
+                    parent.remove(component);
+                    parent.add(printableComponents.get(i));
+                }
             }
         }
     }
@@ -387,10 +470,31 @@ public class SmartFormComponentService {
     private void replaceWithComponent(List<Component> components, List<Component> printableComponents) {
         for (int i = 0; i < printableComponents.size(); i++) {
             Component printableComponent = printableComponents.get(i);
-            if (printableComponent.getParent().isPresent()) {
-                HasComponents parent = (HasComponents) printableComponent.getParent().get();
-                parent.remove(printableComponent);
-                parent.add(components.get(i));
+            if (printableComponent instanceof ComplexTableComponent) {
+                if (printableComponent.getParent().isPresent()) {
+                    HasComponents parent = (HasComponents) printableComponent.getParent().get();
+                    parent.remove(printableComponent);
+                    parent.add(printableComponents.get(i));
+                }
+                for (Map.Entry<Integer, HashMap<Component, AttributeLink>> entry : mapComponenteRandAtribute.entrySet()) {
+                    for (Map.Entry<Component, AttributeLink> componentAttributeLinkEntry : entry.getValue().entrySet()) {
+
+                        Component removeComponent = replacedComponents.entrySet().stream().filter(e -> e.getValue().equals(componentAttributeLinkEntry.getKey())).findFirst().get().getKey();
+                        if (removeComponent.getParent().isPresent()) {
+                            HasComponents parent = (HasComponents) removeComponent.getParent().get();
+                            parent.remove(removeComponent);
+                            parent.add(componentAttributeLinkEntry.getKey());
+                        }
+
+                    }
+                }
+
+            } else {
+                if (printableComponent.getParent().isPresent()) {
+                    HasComponents parent = (HasComponents) printableComponent.getParent().get();
+                    parent.remove(printableComponent);
+                    parent.add(components.get(i));
+                }
             }
         }
     }
@@ -435,7 +539,7 @@ public class SmartFormComponentService {
         if (attributeComponents == null || attributeComponents.isEmpty()) {
             return null;
         }
-            return ((HolographicComponent)attributeComponents.get(0)).getImage();
+        return ((HolographicComponent) attributeComponents.get(0)).getImage();
     }
 
     public String getValueLov(String smartFormId, DocAttrLink docAttrLink) {
@@ -446,10 +550,10 @@ public class SmartFormComponentService {
             return null;
         }
         Lov lov = new Lov();
-        try{
+        try {
             lov = (Lov) ((ComboBox) attributeComponents.get(0)).getValue();
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return lov.getId() == null ? lov.getValoare() : lov.getId().toString();
@@ -462,26 +566,26 @@ public class SmartFormComponentService {
         if (lovList == null || lovList.isEmpty()) {
             return null;
         }
-        if(attributeComponents.size()>1 && Checkbox.class.isAssignableFrom(attributeComponents.get(0).getClass())){
+        if (attributeComponents.size() > 1 && Checkbox.class.isAssignableFrom(attributeComponents.get(0).getClass())) {
             ArrayList<String> list = new ArrayList<>();
-            for (Component c : attributeComponents){
-                Boolean value = ((Checkbox)c).getValue();
-                if(value){
+            for (Component c : attributeComponents) {
+                Boolean value = ((Checkbox) c).getValue();
+                if (value) {
                     Optional<Lov> lovChecked = lovList.stream()
-                            .filter(bv ->  ((Checkbox) c).getLabel().equalsIgnoreCase(bv.getValoare()))
+                            .filter(bv -> ((Checkbox) c).getLabel().equalsIgnoreCase(bv.getValoare()))
                             .findFirst();
-                    if(lovChecked.isPresent()){
+                    if (lovChecked.isPresent()) {
                         list.add(lovChecked.get().getId());
                     }
                 }
             }
-            if(list.size()>0){
-                return String.join(",",list);
-            }else{
+            if (list.size() > 0) {
+                return String.join(",", list);
+            } else {
                 return null;
             }
         }
-       return null;
+        return null;
     }
 
     public List<RowAttrComplexList> getValueAtrComplex(String smartFormId, DocAttrLink attrComplex) {
@@ -495,6 +599,7 @@ public class SmartFormComponentService {
 
         return listaAtributeAtrComplex;
     }
+
     public List<RowAttrComplexList> getValueAtrComplexFisier(String smartFormId, DocAttrLink attrComplex) {
         //componentsFormMap
         List<RowAttrComplexList> listaAtributeAtrComplex =
@@ -502,36 +607,36 @@ public class SmartFormComponentService {
         if (listaAtributeAtrComplex == null || listaAtributeAtrComplex.isEmpty()) {
             return null;
         }
-        List<RowAttrComplexList> listaAtributeAtrComplexFinal= new ArrayList<>();
-        for(RowAttrComplexList rowAttrComplexList: listaAtributeAtrComplex){
-            List<DocAttrLink> listaAttr= new ArrayList<>();
+        List<RowAttrComplexList> listaAtributeAtrComplexFinal = new ArrayList<>();
+        for (RowAttrComplexList rowAttrComplexList : listaAtributeAtrComplex) {
+            List<DocAttrLink> listaAttr = new ArrayList<>();
 
-            if( mapComponenteRandAtribute.containsKey(rowAttrComplexList.getRowNumber())){
-                for( Component comp: mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).keySet() ){
+            if (mapComponenteRandAtribute.containsKey(rowAttrComplexList.getRowNumber())) {
+                for (Component comp : mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).keySet()) {
 
                     if (TextField.class.isAssignableFrom(comp.getClass())) {
-                        String valC = ((TextField)comp).getValue();
-                        AttributeLink attr=  mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
+                        String valC = ((TextField) comp).getValue();
+                        AttributeLink attr = mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
 
-                        if(valC.contains("(") && valC.endsWith(")")){
-                            String valId=valC.substring(valC.lastIndexOf("(")+1, valC.lastIndexOf(")"));
+                        if (valC.contains("(") && valC.endsWith(")")) {
+                            String valId = valC.substring(valC.lastIndexOf("(") + 1, valC.lastIndexOf(")"));
                             attr.setValue(valId);
 
 
-                        }else{
+                        } else {
 
                             mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp).setValue(valC);
                         }
-                        listaAttr.add( getBean(ConversionService.class).convert(attr, DocAttrLink.class));
+                        listaAttr.add(getBean(ConversionService.class).convert(attr, DocAttrLink.class));
 
-                    }else if (DatePicker.class.isAssignableFrom(comp.getClass())){
-                        AttributeLink attr=  mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
-                        LocalDate valCDate = ((DatePicker)comp).getValue();
+                    } else if (DatePicker.class.isAssignableFrom(comp.getClass())) {
+                        AttributeLink attr = mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
+                        LocalDate valCDate = ((DatePicker) comp).getValue();
 
-                        SimpleDateFormat sdf= new SimpleDateFormat("dd.mm.yyyy");
-                        SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-mm-dd");
-                        String valC= null;
-                        if(valCDate!=null){
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
+                        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-mm-dd");
+                        String valC = null;
+                        if (valCDate != null) {
                             try {
                                 valC = sdf.format(sdf2.parse(valCDate.toString()));
                             } catch (ParseException e) {
@@ -540,65 +645,60 @@ public class SmartFormComponentService {
                         }
 
                         attr.setValue(valC);
-                        listaAttr.add( getBean(ConversionService.class).convert(attr, DocAttrLink.class));
-                    } else if (ComboBox.class.isAssignableFrom(comp.getClass()))
-                    {
-                        AttributeLink attr=  mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
+                        listaAttr.add(getBean(ConversionService.class).convert(attr, DocAttrLink.class));
+                    } else if (ComboBox.class.isAssignableFrom(comp.getClass())) {
+                        AttributeLink attr = mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
                         String valC;
-                        Lov lov = ((Lov) (((ComboBox)comp).getValue()));
-                        if (attr.getSelectionType() == 3){
+                        Lov lov = ((Lov) (((ComboBox) comp).getValue()));
+                        if (attr.getSelectionType() == 3) {
                             valC = (lov != null ? lov.getId() : null);
                         } else {
                             valC = (lov != null ? lov.getValoare() : null);
                         }
                         attr.setValue(valC);
-                        listaAttr.add( getBean(ConversionService.class).convert(attr, DocAttrLink.class));
+                        listaAttr.add(getBean(ConversionService.class).convert(attr, DocAttrLink.class));
 
-                    } else if (MultiselectComboBox.class.isAssignableFrom(comp.getClass()))
-                    {
-                        AttributeLink attr=  mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
+                    } else if (MultiselectComboBox.class.isAssignableFrom(comp.getClass())) {
+                        AttributeLink attr = mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
                         HashSet<Lov> lov = new HashSet<>();
                         try {
                             lov = (HashSet) ((MultiselectComboBox) comp).getValue();
-                        } catch (ClassCastException cce){
+                        } catch (ClassCastException cce) {
                         }
 
                         StringBuilder sb = new StringBuilder();
-                        for (Lov l : lov){
-                            if(l.getId() != null && !l.getId().isEmpty()){
+                        for (Lov l : lov) {
+                            if (l.getId() != null && !l.getId().isEmpty()) {
                                 sb.append(l.getId()).append(",");
                             }
                         }
-                        String valC = sb.toString().isEmpty()?null:sb.deleteCharAt(sb.length()-1).toString();
+                        String valC = sb.toString().isEmpty() ? null : sb.deleteCharAt(sb.length() - 1).toString();
                         attr.setValue(valC);
-                        listaAttr.add( getBean(ConversionService.class).convert(attr, DocAttrLink.class));
+                        listaAttr.add(getBean(ConversionService.class).convert(attr, DocAttrLink.class));
 
-                    } else if (Checkbox.class.isAssignableFrom(comp.getClass())){
-                        AttributeLink attr=  mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
-                        String valC = ((Checkbox)comp).getValue() != null && ((Checkbox)comp).getValue() ? "1" : "0";
+                    } else if (Checkbox.class.isAssignableFrom(comp.getClass())) {
+                        AttributeLink attr = mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
+                        String valC = ((Checkbox) comp).getValue() != null && ((Checkbox) comp).getValue() ? "1" : "0";
                         attr.setValue(valC);
-                        listaAttr.add( getBean(ConversionService.class).convert(attr, DocAttrLink.class));
-                    }
-                    else{
-                        AttributeLink attr=  mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
+                        listaAttr.add(getBean(ConversionService.class).convert(attr, DocAttrLink.class));
+                    } else {
+                        AttributeLink attr = mapComponenteRandAtribute.get(rowAttrComplexList.getRowNumber()).get(comp);
 
-                        listaAttr.add( getBean(ConversionService.class).convert(attr, DocAttrLink.class));
+                        listaAttr.add(getBean(ConversionService.class).convert(attr, DocAttrLink.class));
 
                     }
                 }
-            }else{
+            } else {
                 //logger.info("SAVE ---------- nu a gasit in map componente; Se va salva din lista initiala primia:\t" + rowAttrComplexList.getRowNumber());
-                for( DocAttrLink atr: rowAttrComplexList.getListaAtribute()){
+                for (DocAttrLink atr : rowAttrComplexList.getListaAtribute()) {
                     listaAttr.add(atr);
                 }
             }
 
 
-
             listaAtributeAtrComplexFinal.add(new RowAttrComplexList(rowAttrComplexList.getRowNumber(), listaAttr));
 
         }
-
 
 
         return listaAtributeAtrComplexFinal;
@@ -628,10 +728,10 @@ public class SmartFormComponentService {
             componentsFormMap.get(smartFormId)
                     .get(new Long(attributeLink.getAttributeId()))
                     .stream().forEach(component -> {
-                addSubjectValueComponent(component);
-                //Neata Georgiana # 23.06.2021 # ANRE # adaugare in map smartFormComponentsValues : atributl si valoarea
-                String valoare = null;
-                DocAttrLink docAttrLink = conversionService.convert(attributeLink, DocAttrLink.class);
+                        addSubjectValueComponent(component);
+                        //Neata Georgiana # 23.06.2021 # ANRE # adaugare in map smartFormComponentsValues : atributl si valoarea
+                        String valoare = null;
+                        DocAttrLink docAttrLink = conversionService.convert(attributeLink, DocAttrLink.class);
                         if (attributeLink.getLovId() != null && attributeLink.getLovId() != 0) {
                             valoare = getValue(smartFormId, docAttrLink);
 
@@ -645,7 +745,7 @@ public class SmartFormComponentService {
 
                             valoare = attributeLink.getValue();
                         }
-                smartFormComponentsValues.put(attributeLink, valoare);
+                        smartFormComponentsValues.put(attributeLink, valoare);
                     }
 
 
@@ -770,7 +870,6 @@ public class SmartFormComponentService {
     }
 
 
-
     private boolean hasValueChanged(Component component) {
         return HasValue.class.isAssignableFrom(component.getClass()) && changedComponents.contains(component);
     }
@@ -855,7 +954,7 @@ public class SmartFormComponentService {
             //daca face parte din lov-uri standard dependente , dar totusi nu e nicio valoare setata pentru ele le incarca (incarcare initiala)
             if (smartFormComponents.containsKey(attributeLink) && attributeLink.getValueForLov() == null) {
                 LovList lovList = BeanUtil.getBean(PS4Service.class).getLovListWithDependecies(attributeLink, smartFormComponentsValues, null);
-                if (lovList.getLov() != null ) {
+                if (lovList.getLov() != null) {
                     List<Lov> backendLov = lovList.getLov();
                     lovComboBox.setItems(backendLov);
                     SmartFormSupport.addLovListForAttributeLink(((Component) smartForm).getId().get(), attributeLink, lovList);
@@ -864,36 +963,36 @@ public class SmartFormComponentService {
                 }
             } else if (!smartFormComponents.containsKey(attributeLink)) {
                 LovList lovList = BeanUtil.getBean(PS4Service.class).getLovListWithDependecies(attributeLink, smartFormComponentsValues, null);
-                if (lovList.getLov() != null ) {
+                if (lovList.getLov() != null) {
                     List<Lov> backendLov = lovList.getLov();
                     lovComboBox.setItems(backendLov);
                     SmartFormSupport.addLovListForAttributeLink(((Component) smartForm).getId().get(), attributeLink, lovList);
 
                 }
             } else if (smartFormComponents.containsKey(attributeLink) && attributeLink.getDataType() != null && attributeLink.getDataType().equals("JUDET")) {
-                String COD_TARA = attributeLink.getDataType().replaceAll("JUDET","TARA");
+                String COD_TARA = attributeLink.getDataType().replaceAll("JUDET", "TARA");
                 AttributeLink attributeLinkTara = attributeLink;
-                for (AttributeLink attr : smartFormComponents.keySet()){
-                    if (attr.getDataType() != null && attr.getDataType().equals(COD_TARA)){
+                for (AttributeLink attr : smartFormComponents.keySet()) {
+                    if (attr.getDataType() != null && attr.getDataType().equals(COD_TARA)) {
                         attributeLinkTara = attr;
                         //adaugat break; altfel continua si ajungea sa seteze attributeLinkTara=null; chiar daca il gasea la un moment dat
                         break;
-                    }else{
-                        attributeLinkTara=null;
+                    } else {
+                        attributeLinkTara = null;
                     }
                 }
 
-                if (attributeLinkTara!=null){
+                if (attributeLinkTara != null) {
                     LovList lovList = BeanUtil.getBean(PS4Service.class).getJudeteByIdTara(Integer.valueOf(((ComboBox<Lov>) smartFormComponents.get(attributeLinkTara)).getValue().getId()));
-                    if (lovList.getLov() != null ) {
+                    if (lovList.getLov() != null) {
                         List<Lov> backendLov = lovList.getLov();
                         lovComboBox.setItems(backendLov);
                         SmartFormSupport.addLovListForAttributeLink(((Component) smartForm).getId().get(), attributeLink, lovList);
 
                     }
-                }else{
+                } else {
                     LovList lovList = BeanUtil.getBean(PS4Service.class).getLovList(attributeLink);
-                    if (lovList.getLov() != null ) {
+                    if (lovList.getLov() != null) {
                         List<Lov> backendLov = lovList.getLov();
                         lovComboBox.setItems(backendLov);
                         SmartFormSupport.addLovListForAttributeLink(((Component) smartForm).getId().get(), attributeLink, lovList);
@@ -902,17 +1001,17 @@ public class SmartFormComponentService {
                 }
 
             } else if (smartFormComponents.containsKey(attributeLink) && attributeLink.getDataType() != null && attributeLink.getDataType().equals("LOCALITATE")) {
-                String COD_JUDET = attributeLink.getDataType().replaceAll("LOCALITATE","JUDET");
+                String COD_JUDET = attributeLink.getDataType().replaceAll("LOCALITATE", "JUDET");
                 AttributeLink attributeLinkJudet = attributeLink;
-                for (AttributeLink attr : smartFormComponents.keySet()){
-                    if (attr.getDataType() != null && attr.getDataType().equals(COD_JUDET)){
+                for (AttributeLink attr : smartFormComponents.keySet()) {
+                    if (attr.getDataType() != null && attr.getDataType().equals(COD_JUDET)) {
                         attributeLinkJudet = attr;
                         break;
                     }
                 }
 
                 LovList lovList = BeanUtil.getBean(PS4Service.class).getLocalitatiByJudet(Integer.valueOf(((ComboBox<Lov>) smartFormComponents.get(attributeLinkJudet)).getValue().getId()));
-                if (lovList.getLov() != null ) {
+                if (lovList.getLov() != null) {
                     List<Lov> backendLov = lovList.getLov();
                     lovComboBox.setItems(backendLov);
                     SmartFormSupport.addLovListForAttributeLink(((Component) smartForm).getId().get(), attributeLink, lovList);
@@ -928,7 +1027,7 @@ public class SmartFormComponentService {
     // Neata Georgiana # 23.06.2021 # ANRE # functie care se apeleaza la click pe un lov (aduce lista de valori cu API nou care tine cont de lov uri dependente)
 
 
-    public void addFocusOnComboboxOnComplex(AttributeLink attributeLink, ComboBox<Lov> lovComboBox, Integer nrRow, AttributeLink attrComplex,HashMap<Integer, HashMap<Component, AttributeLink>>  mapComponenteRandAtribute) {
+    public void addFocusOnComboboxOnComplex(AttributeLink attributeLink, ComboBox<Lov> lovComboBox, Integer nrRow, AttributeLink attrComplex, HashMap<Integer, HashMap<Component, AttributeLink>> mapComponenteRandAtribute) {
         if (attributeLink.getLovId() != null && attributeLink.getLovId() != 0 && !smartFormComponents.containsKey(attributeLink)) {
 
             HashMap<Component, AttributeLink> randAttrComplex = mapComponenteRandAtribute.get(nrRow);
@@ -945,7 +1044,7 @@ public class SmartFormComponentService {
                     if (!val.isEmpty()) {
 
                         mapAtr.put(a, val);
-                    }else{
+                    } else {
                         mapAtr.put(a, a.getValue());
                     }
 
@@ -974,7 +1073,7 @@ public class SmartFormComponentService {
 
                         for (Lov lov : lovList.getLov()) {
 
-                            if (lov.getId()!=null && !valuesToRemove.contains(lov.getId())) {
+                            if (lov.getId() != null && !valuesToRemove.contains(lov.getId())) {
                                 listaLovFinal.add(lov);
                             }
                         }
@@ -1000,7 +1099,7 @@ public class SmartFormComponentService {
     /**
      * Creaza un data provider pentru un combobox lov.
      */
-    DataProvider<Lov, String> createLovDataProviderDynamic(AttributeLink attributeLink, ComboBox<Lov> lovComboBox, Integer nrRow, AttributeLink attrComplex,HashMap<Integer, HashMap<Component, AttributeLink>>  mapComponenteRandAtribute) {
+    DataProvider<Lov, String> createLovDataProviderDynamic(AttributeLink attributeLink, ComboBox<Lov> lovComboBox, Integer nrRow, AttributeLink attrComplex, HashMap<Integer, HashMap<Component, AttributeLink>> mapComponenteRandAtribute) {
         return DataProvider.fromFilteringCallbacks(query -> {
             // getFilter returns Optional<String>
             String filter = query.getFilter().orElse(null);
@@ -1053,7 +1152,7 @@ public class SmartFormComponentService {
 
                 if (valuesToRemove.size() != 0) {
                     for (Lov lov : lovList.getLov()) {
-                        if (lov.getId()!=null && !valuesToRemove.contains(lov.getId())) {
+                        if (lov.getId() != null && !valuesToRemove.contains(lov.getId())) {
                             listaLovFinal.add(lov);
                         }
                     }
@@ -1119,7 +1218,7 @@ public class SmartFormComponentService {
 
                 if (valuesToRemove.size() != 0) {
                     for (Lov lov : lovList.getLov()) {
-                        if (lov.getId()!=null && !valuesToRemove.contains(lov.getId())) {
+                        if (lov.getId() != null && !valuesToRemove.contains(lov.getId())) {
                             listaLovFinal.add(lov);
                         }
                     }
@@ -1143,7 +1242,7 @@ public class SmartFormComponentService {
     /**
      * Creaza un data provider pentru un combobox lov.
      */
-    ListDataProvider<Lov> createLovDataProviderList(AttributeLink attributeLink, ComboBox<Lov> lovComboBox, Integer nrRow, AttributeLink attrComplex,HashMap<Integer, HashMap<Component, AttributeLink>>  mapComponenteRandAtribute) {
+    ListDataProvider<Lov> createLovDataProviderList(AttributeLink attributeLink, ComboBox<Lov> lovComboBox, Integer nrRow, AttributeLink attrComplex, HashMap<Integer, HashMap<Component, AttributeLink>> mapComponenteRandAtribute) {
         // lista goala in caz ca nu are ce intoarce
         List<Lov> emptyList = new ArrayList<Lov>();
 
@@ -1163,7 +1262,7 @@ public class SmartFormComponentService {
                     if (!val.isEmpty()) {
 
                         mapAtr.put(a, val);
-                    }else{
+                    } else {
                         mapAtr.put(a, a.getValue());
                     }
 
@@ -1193,7 +1292,7 @@ public class SmartFormComponentService {
 
                     for (Lov lov : lovList.getLov()) {
 
-                        if (lov.getId()!=null && !valuesToRemove.contains(lov.getId())) {
+                        if (lov.getId() != null && !valuesToRemove.contains(lov.getId())) {
                             listaLovFinal.add(lov);
                         }
                     }
@@ -1219,7 +1318,7 @@ public class SmartFormComponentService {
     /**
      * Creaza un data provider pentru un combobox lov.
      */
-    ListDataProvider<Lov> createLovMultiDataProviderList(AttributeLink attributeLink, MultiselectComboBox<Lov> lovComboBox, Integer nrRow, AttributeLink attrComplex,HashMap<Integer, HashMap<Component, AttributeLink>>  mapComponenteRandAtribute) {
+    ListDataProvider<Lov> createLovMultiDataProviderList(AttributeLink attributeLink, MultiselectComboBox<Lov> lovComboBox, Integer nrRow, AttributeLink attrComplex, HashMap<Integer, HashMap<Component, AttributeLink>> mapComponenteRandAtribute) {
         // lista goala in caz ca nu are ce intoarce
         List<Lov> emptyList = new ArrayList<Lov>();
 
@@ -1239,7 +1338,7 @@ public class SmartFormComponentService {
                     if (!val.isEmpty()) {
 
                         mapAtr.put(a, val);
-                    }else{
+                    } else {
                         mapAtr.put(a, a.getValue());
                     }
 
@@ -1269,7 +1368,7 @@ public class SmartFormComponentService {
 
                     for (Lov lov : lovList.getLov()) {
 
-                        if (lov.getId()!=null && !valuesToRemove.contains(lov.getId())) {
+                        if (lov.getId() != null && !valuesToRemove.contains(lov.getId())) {
                             listaLovFinal.add(lov);
                         }
                     }
@@ -1316,7 +1415,7 @@ public class SmartFormComponentService {
 
                     if (valueTf != null) {
                         if (textFieldComponent.getClassNames().contains("thousands")) {
-                            valueTf = valueTf.replace(",","");
+                            valueTf = valueTf.replace(",", "");
                         }
                     }
                     return valueTf;
@@ -1371,9 +1470,9 @@ public class SmartFormComponentService {
         this.smartFormComponentsValues = smartFormComponentsValues;
     }
 
-    public void aplicareFormulaCalculPortal(Integer nrRow, String smartFormId, HashMap<Integer, HashMap<Component, AttributeLink>>  mapComponenteRandAtribute) {
+    public void aplicareFormulaCalculPortal(Integer nrRow, String smartFormId, HashMap<Integer, HashMap<Component, AttributeLink>> mapComponenteRandAtribute) {
         HashMap<Component, AttributeLink> randAttrComplex = mapComponenteRandAtribute.get(nrRow);
-        DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
         if (randAttrComplex != null) {
             Map<String, String> mapAtr = new HashMap<>();
@@ -1414,12 +1513,12 @@ public class SmartFormComponentService {
 
                         }
 
-                    } else      if (a.getFormulaCalculPortal().contains("[MANDATORY]")) {
+                    } else if (a.getFormulaCalculPortal().contains("[MANDATORY]")) {
                         Matcher matches = Pattern.compile("\\((.*?)\\)").matcher(a.getFormulaCalculPortal());
                         while (matches.find()) {
                             String codAtr = matches.group(1);
                             if (mapAtr.get(a.getName()) != null) {
-                                if( a.getDataType().equals("BOOLEAN")){
+                                if (a.getDataType().equals("BOOLEAN")) {
 
                                     if (mapAtr.get(a.getName()).equals("0")) {
                                         todoMandatory.add(codAtr);
@@ -1427,7 +1526,7 @@ public class SmartFormComponentService {
                                         toRemoveMandatory.add(codAtr);
 
                                     }
-                                } else{
+                                } else {
                                     if (!mapAtr.get(a.getName()).equals("0")) {
                                         todoMandatory.add(codAtr);
                                     } else {
@@ -1445,8 +1544,8 @@ public class SmartFormComponentService {
                     else {
                         try {
                             Double formulaCalcul = (Double) SpelParserUtil.parseSpel(mapAtr, a.getFormulaCalculPortal());
-                            String formulaCalculStr= formulaCalcul.toString();
-                            if(a.getPrecision()!=null){
+                            String formulaCalculStr = formulaCalcul.toString();
+                            if (a.getPrecision() != null) {
                                 formulaCalculStr = BigDecimal.valueOf(formulaCalcul)
                                         .setScale(a.getPrecision(), RoundingMode.HALF_UP).toPlainString();
                             }
@@ -1481,7 +1580,7 @@ public class SmartFormComponentService {
                 for (Component c : randAttrComplex.keySet()) {
                     if (
                             todoMandatory.contains(randAttrComplex.get(c).getName()) ||
-                            toRemoveMandatory.contains(randAttrComplex.get(c).getName())
+                                    toRemoveMandatory.contains(randAttrComplex.get(c).getName())
 
                             ) {
 
@@ -1489,31 +1588,31 @@ public class SmartFormComponentService {
                         if (TextField.class.isAssignableFrom(c.getClass())) {
 
                             TextField textF = (TextField) c;
-                            String currentVal= textF.getValue();
+                            String currentVal = textF.getValue();
                             randAttrComplex.get(c).setValue(currentVal);
                             StringAttributeBinderBean binderBean = new StringAttributeBinderBean(smartFormId, (randAttrComplex.get(c)));
 
                             if (todoMandatory.contains(randAttrComplex.get(c).getName())) {
                                 randAttrComplex.get(c).setMandatory(true);
 
-                                try{
+                                try {
                                     SmartFormSupport.bind(smartFormId,
                                             binderBean, textF,
                                             new MandatoryAttributeBeanPropertyValidator(""));
-                                }catch (Exception e){
-                                    logger.trace("BIND FAILED for "+ randAttrComplex.get(c).getName() + " on row "+ nrRow );
+                                } catch (Exception e) {
+                                    logger.trace("BIND FAILED for " + randAttrComplex.get(c).getName() + " on row " + nrRow);
 
                                 }
                                 //la aplicare Binder se repune valoarea pe care o gaseste pe atribut (ID fisier)
                                 //utilizatorul trebuie sa vada si numele => aplicam valoarea care se afla pe textfiled
-                                if(!currentVal.trim().isEmpty()){
-                                    if(randAttrComplex.get(c).getDataType().equals("FISIER")){
-                                        if (currentVal.contains("(") && currentVal.endsWith(")")){
+                                if (!currentVal.trim().isEmpty()) {
+                                    if (randAttrComplex.get(c).getDataType().equals("FISIER")) {
+                                        if (currentVal.contains("(") && currentVal.endsWith(")")) {
                                             textF.setValue(currentVal);
-                                        }else{
+                                        } else {
                                             textF.setValue("");
                                         }
-                                    }else {
+                                    } else {
                                         textF.setValue(currentVal);
                                     }
                                 }
@@ -1521,11 +1620,11 @@ public class SmartFormComponentService {
 
                             } else if (toRemoveMandatory.contains(randAttrComplex.get(c).getName())) {
                                 randAttrComplex.get(c).setMandatory(false);
-                                try{
+                                try {
                                     SmartFormSupport.unbind(smartFormId,
                                             binderBean, textF,
                                             new MandatoryAttributeBeanPropertyValidator(""));
-                                }catch (Exception e){
+                                } catch (Exception e) {
 
                                 }
                                 ((TextField) c).removeClassName("vaadin-invalid-input");
@@ -1533,24 +1632,22 @@ public class SmartFormComponentService {
 
                                 //la aplicare Binder se repune valoarea pe care o gaseste pe atribut (ID fisier)
                                 //utilizatorul trebuie sa vada si numele => aplicam valoarea care se afla pe textfiled
-                                if(!currentVal.trim().isEmpty()){
-                                    if(randAttrComplex.get(c).getDataType().equals("FISIER")){
-                                        if (currentVal.contains("(") && currentVal.endsWith(")")){
+                                if (!currentVal.trim().isEmpty()) {
+                                    if (randAttrComplex.get(c).getDataType().equals("FISIER")) {
+                                        if (currentVal.contains("(") && currentVal.endsWith(")")) {
                                             textF.setValue(currentVal);
-                                        }else{
+                                        } else {
                                             textF.setValue("");
                                         }
-                                    }else {
+                                    } else {
                                         textF.setValue(currentVal);
                                     }
                                 }
                             }
-                        }
-
-                        else if (DatePicker.class.isAssignableFrom(c.getClass())) {
+                        } else if (DatePicker.class.isAssignableFrom(c.getClass())) {
 
                             DatePicker textF = (DatePicker) c;
-                            String currentVal= textF.getValue()!=null ?textF.getValue().format(formatter):null;
+                            String currentVal = textF.getValue() != null ? textF.getValue().format(formatter) : null;
 
                             randAttrComplex.get(c).setValue(currentVal);
                             LocalDateAttributeBinderBean localDateAttributeBinderBean = new LocalDateAttributeBinderBean(smartFormId, (randAttrComplex.get(c)));
@@ -1559,13 +1656,13 @@ public class SmartFormComponentService {
 
                                 randAttrComplex.get(c).setMandatory(true);
 
-                                try{
+                                try {
 
                                     SmartFormSupport.bindWithRow(smartFormId,
-                                            localDateAttributeBinderBean, textF,nrRow,
+                                            localDateAttributeBinderBean, textF, nrRow,
                                             new DateRangeValidator("", LocalDate.MIN, LocalDate.MAX));
-                                }catch (Exception e){
-                                    logger.trace("BIND FAILED for "+ randAttrComplex.get(c).getName() + " on row "+ nrRow );
+                                } catch (Exception e) {
+                                    logger.trace("BIND FAILED for " + randAttrComplex.get(c).getName() + " on row " + nrRow);
 
                                 }
 
@@ -1573,15 +1670,15 @@ public class SmartFormComponentService {
                             } else if (toRemoveMandatory.contains(randAttrComplex.get(c).getName())) {
                                 randAttrComplex.get(c).setMandatory(false);
 
-                                    try{
-                                        SmartFormSupport.unbind(smartFormId,
-                                                localDateAttributeBinderBean, textF,
-                                                new DateRangeValidator("", LocalDate.MIN, LocalDate.MAX));
+                                try {
+                                    SmartFormSupport.unbind(smartFormId,
+                                            localDateAttributeBinderBean, textF,
+                                            new DateRangeValidator("", LocalDate.MIN, LocalDate.MAX));
 
-                                    }catch (Exception e){
+                                } catch (Exception e) {
 
-                                    }
-                                    ((DatePicker) c).removeClassName("vaadin-invalid-input");
+                                }
+                                ((DatePicker) c).removeClassName("vaadin-invalid-input");
                                 ((DatePicker) c).getElement().removeAttribute("invalid");
 
 
@@ -1606,31 +1703,31 @@ public class SmartFormComponentService {
                         if (TextField.class.isAssignableFrom(c.getClass())) {
 
                             TextField textF = (TextField) c;
-                            String currentVal= textF.getValue();
+                            String currentVal = textF.getValue();
                             randAttrComplex.get(c).setValue(currentVal);
                             StringAttributeBinderBean binderBean = new StringAttributeBinderBean(smartFormId, (randAttrComplex.get(c)));
 
                             if (todoMandatory.contains(randAttrComplex.get(c).getName())) {
                                 randAttrComplex.get(c).setMandatory(true);
 
-                                try{
+                                try {
                                     SmartFormSupport.bind(smartFormId,
                                             binderBean, textF,
                                             new MandatoryAttributeBeanPropertyValidator(""));
-                                }catch (Exception e){
-                                    logger.trace("BIND FAILED for "+ randAttrComplex.get(c).getName() + " on row "+ nrRow );
+                                } catch (Exception e) {
+                                    logger.trace("BIND FAILED for " + randAttrComplex.get(c).getName() + " on row " + nrRow);
 
                                 }
                                 //la aplicare Binder se repune valoarea pe care o gaseste pe atribut (ID fisier)
                                 //utilizatorul trebuie sa vada si numele => aplicam valoarea care se afla pe textfiled
-                                if(!currentVal.trim().isEmpty()){
-                                    if(randAttrComplex.get(c).getDataType().equals("FISIER")){
-                                        if (currentVal.contains("(") && currentVal.endsWith(")")){
+                                if (!currentVal.trim().isEmpty()) {
+                                    if (randAttrComplex.get(c).getDataType().equals("FISIER")) {
+                                        if (currentVal.contains("(") && currentVal.endsWith(")")) {
                                             textF.setValue(currentVal);
-                                        }else{
+                                        } else {
                                             textF.setValue("");
                                         }
-                                    }else {
+                                    } else {
                                         textF.setValue(currentVal);
                                     }
                                 }
@@ -1639,11 +1736,11 @@ public class SmartFormComponentService {
                             } else if (toRemoveMandatory.contains(randAttrComplex.get(c).getName())) {
                                 randAttrComplex.get(c).setMandatory(false);
 
-                                try{
+                                try {
                                     SmartFormSupport.unbind(smartFormId,
                                             binderBean, textF,
                                             new MandatoryAttributeBeanPropertyValidator(""));
-                                }catch (Exception e){
+                                } catch (Exception e) {
 
                                 }
                                 ((TextField) c).removeClassName("vaadin-invalid-input");
@@ -1651,23 +1748,22 @@ public class SmartFormComponentService {
 
                                 //la aplicare Binder se repune valoarea pe care o gaseste pe atribut (ID fisier)
                                 //utilizatorul trebuie sa vada si numele => aplicam valoarea care se afla pe textfiled
-                                if(!currentVal.trim().isEmpty()){
-                                    if(randAttrComplex.get(c).getDataType().equals("FISIER")){
-                                        if (currentVal.contains("(") && currentVal.endsWith(")")){
+                                if (!currentVal.trim().isEmpty()) {
+                                    if (randAttrComplex.get(c).getDataType().equals("FISIER")) {
+                                        if (currentVal.contains("(") && currentVal.endsWith(")")) {
                                             textF.setValue(currentVal);
-                                        }else{
+                                        } else {
                                             textF.setValue("");
                                         }
-                                    }else {
+                                    } else {
                                         textF.setValue(currentVal);
                                     }
                                 }
                             }
-                        }
-                        else if (DatePicker.class.isAssignableFrom(c.getClass())) {
+                        } else if (DatePicker.class.isAssignableFrom(c.getClass())) {
 
                             DatePicker textF = (DatePicker) c;
-                            String currentVal= textF.getValue()!=null?textF.getValue().format(formatter):null;
+                            String currentVal = textF.getValue() != null ? textF.getValue().format(formatter) : null;
                             randAttrComplex.get(c).setValue(currentVal);
                             LocalDateAttributeBinderBean localDateAttributeBinderBean = new LocalDateAttributeBinderBean(smartFormId, (randAttrComplex.get(c)));
 
@@ -1675,36 +1771,36 @@ public class SmartFormComponentService {
 
                                 randAttrComplex.get(c).setMandatory(true);
 
-                                try{
+                                try {
                                     SmartFormSupport.bindWithRow(smartFormId,
-                                            localDateAttributeBinderBean, textF,nrRow,
+                                            localDateAttributeBinderBean, textF, nrRow,
                                             new DateRangeValidator("", LocalDate.MIN, LocalDate.MAX));
-                                }catch (Exception e){
+                                } catch (Exception e) {
 
-                                    logger.trace("BIND FAILED for "+ randAttrComplex.get(c).getName() + " on row "+ nrRow );
+                                    logger.trace("BIND FAILED for " + randAttrComplex.get(c).getName() + " on row " + nrRow);
                                 }
                                 //la aplicare Binder se repune valoarea pe care o gaseste pe atribut (ID fisier)
                                 //utilizatorul trebuie sa vada si numele => aplicam valoarea care se afla pe textfiled
-                            if(currentVal!=null &&  !currentVal.trim().isEmpty()){
+                                if (currentVal != null && !currentVal.trim().isEmpty()) {
 
-                                textF.setValue( LocalDate.parse(currentVal, formatter));
+                                    textF.setValue(LocalDate.parse(currentVal, formatter));
 
-                            }
+                                }
 
 
                             } else if (toRemoveMandatory.contains(randAttrComplex.get(c).getName())) {
                                 randAttrComplex.get(c).setMandatory(false);
 
-                                    try{
-                                        SmartFormSupport.unbind(smartFormId,
-                                                localDateAttributeBinderBean, textF,
-                                                new DateRangeValidator("", LocalDate.MIN, LocalDate.MAX));
+                                try {
+                                    SmartFormSupport.unbind(smartFormId,
+                                            localDateAttributeBinderBean, textF,
+                                            new DateRangeValidator("", LocalDate.MIN, LocalDate.MAX));
 
-                                    }catch (Exception e){
+                                } catch (Exception e) {
 
-                                    }
-                                    ((DatePicker) c).removeClassName("vaadin-invalid-input");
-                                    ((DatePicker) c).getElement().removeAttribute("invalid");
+                                }
+                                ((DatePicker) c).removeClassName("vaadin-invalid-input");
+                                ((DatePicker) c).getElement().removeAttribute("invalid");
 
 
                             }
@@ -1720,16 +1816,16 @@ public class SmartFormComponentService {
 
     }
 
-    public void aplicareFormulaCalculColoanaPortal(Integer nrRow, AttributeLink attributeLink,LovList lovList,HashMap<Integer, HashMap<Component, AttributeLink>>  mapComponenteRandAtribute) {
+    public void aplicareFormulaCalculColoanaPortal(Integer nrRow, AttributeLink attributeLink, LovList lovList, HashMap<Integer, HashMap<Component, AttributeLink>> mapComponenteRandAtribute) {
         HashMap<Component, AttributeLink> randParinte = mapComponenteRandAtribute.get(nrRow);
-        String formulaCalculStr=lovList.getLov().get(nrRow-1).getFormulaCalcul();
+        String formulaCalculStr = lovList.getLov().get(nrRow - 1).getFormulaCalcul();
         if (randParinte != null) {
             Map<String, String> mapAtr = new HashMap<>();
             //calcul map atribut->valoare
             for (int i = 1; i <= mapComponenteRandAtribute.size(); i++) {
                 String c = ((TextField) (mapComponenteRandAtribute.get(i).entrySet().stream().filter(componentAttributeLinkEntry -> componentAttributeLinkEntry.getValue().getName().equals(attributeLink.getName())).findFirst().get().getKey())).getValue();
-                if(c.isEmpty()){
-                    c="0";
+                if (c.isEmpty()) {
+                    c = "0";
                 }
 
                 mapAtr.put(String.valueOf(i), c);
@@ -1737,23 +1833,24 @@ public class SmartFormComponentService {
 
             }
             //check daca are formula-> calculeaza
-            if(formulaCalculStr!=null&&!formulaCalculStr.isEmpty()){
+            if (formulaCalculStr != null && !formulaCalculStr.isEmpty()) {
                 DecimalFormat df2 = new DecimalFormat("#.##");
                 Double formulaCalcul = (Double) SpelParserUtil.parseSpel(mapAtr, formulaCalculStr);
 
-                attributeLink.setValue(df2.format(formulaCalcul).replaceAll(",","."));
+                attributeLink.setValue(df2.format(formulaCalcul).replaceAll(",", "."));
                 Component c = randParinte.entrySet().stream().filter(componentAttributeLinkEntry -> componentAttributeLinkEntry.getValue().getName().equals(attributeLink.getName())).findFirst().get().getKey();
                 ((TextField) c).setReadOnly(true);
                 randParinte.put(c, attributeLink);
-                ((TextField) c).setValue(df2.format(formulaCalcul).replaceAll(",","."));
+                ((TextField) c).setValue(df2.format(formulaCalcul).replaceAll(",", "."));
             }
 
             mapComponenteRandAtribute.put(nrRow, randParinte);
 
         }
     }
-    public void addSmartFormComponentsValues(AttributeLink attributeLink,String value){
-        smartFormComponentsValues.put(attributeLink,value);
+
+    public void addSmartFormComponentsValues(AttributeLink attributeLink, String value) {
+        smartFormComponentsValues.put(attributeLink, value);
     }
 
     public Map<String, Map<Long, List<RowAttrComplexList>>> getAttributeLinkMapComplex() {

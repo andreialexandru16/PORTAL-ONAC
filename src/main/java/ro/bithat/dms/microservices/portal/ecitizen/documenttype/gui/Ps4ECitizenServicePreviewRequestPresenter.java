@@ -22,6 +22,7 @@ import ro.bithat.dms.microservices.dmsws.metadata.Lov;
 import ro.bithat.dms.microservices.dmsws.ps4.DmswsPS4Service;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.DocObligatoriuExtra;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.CreateTipDocFileResponse;
+import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.Document;
 import ro.bithat.dms.microservices.portal.ecitizen.gui.component.LoadingSpinner;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsUtilizatorService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.SolicitareService;
@@ -90,7 +91,8 @@ public class Ps4ECitizenServicePreviewRequestPresenter extends DocumentTypePrese
         AttributeLinkList all = getPs4Service().getMetadataByDocumentId(getDocumentId().get());
         getView().buildDmsSmartForm(all, "");
         getView().setServiceNameAndRegisterPreviousStep("", "");
-
+        Document document = dmswsPS4Service.getDocumentById(getDocumentId().get());
+        setDocument(Optional.of(document));
         UI.getCurrent().getPage().executeJavaScript("resetChanges();");
 
     }
