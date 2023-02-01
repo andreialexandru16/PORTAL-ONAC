@@ -1816,6 +1816,338 @@ public class SmartFormComponentService {
 
     }
 
+    public void aplicareFormulaCalculPortalAtribut(String smartFormId, Map<AttributeLink, Component> mapComponenteAtribute) {
+        List<String> todoReadonly = new ArrayList<>();
+        List<String> todoMandatory = new ArrayList<>();
+        List<String> toRemoveReadonly = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        Map<String, String> mapAtr = new HashMap<>();
+        //calcul map atribut->valoare
+        mapComponenteAtribute.keySet().forEach(e ->{
+            Component c = mapComponenteAtribute.get(e);
+            String val = getValue(c, e);
+            if (!val.isEmpty()) {
+
+                mapAtr.put(e.getName(), val);
+            } else {
+                mapAtr.put(e.getName(), "0");
+            }
+        });
+
+        mapComponenteAtribute.keySet().forEach(e -> {
+            if (e.getFormulaCalculPortal() != null && !e.getFormulaCalculPortal().isEmpty()) {
+                if (e.getFormulaCalculPortal().contains("[READONLY]")) {
+                    Matcher matches = Pattern.compile("\\((.*?)\\)").matcher(e.getFormulaCalculPortal());
+                    while (matches.find()) {
+                        String codAtr = matches.group(1);
+                        if (e.getName() != null && !mapAtr.get(e.getName()).equals("0")) {
+                            todoReadonly.add(codAtr);
+
+                        } else {
+                            toRemoveReadonly.add(codAtr);
+
+                        }
+
+                    }
+
+                } else if (e.getFormulaCalculPortal().contains("[MANDATORY]")) {
+                    Matcher matches = Pattern.compile("\\((.*?)\\)").matcher(e.getFormulaCalculPortal());
+                    while (matches.find()) {
+                        String codAtr = matches.group(1);
+                        if (mapAtr.get(e.getName()) != null) {
+                            if (e.getDataType().equals("BOOLEAN")) {
+
+                                if (mapAtr.get(e.getName()).equals("0")) {
+                                    todoMandatory.add(codAtr);
+                                } else {
+                                    toRemoveMandatory.add(codAtr);
+
+                                }
+                            } else {
+                                if (!mapAtr.get(e.getName()).equals("0")) {
+                                    todoMandatory.add(codAtr);
+                                } else {
+                                    toRemoveMandatory.add(codAtr);
+
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+                //altfel se parseaza formula calcul portal in mod obisnuit
+                else {
+                    try {
+                        Double formulaCalcul = (Double) SpelParserUtil.parseSpel(mapAtr, e.getFormulaCalculPortal());
+                        String formulaCalculStr = formulaCalcul.toString();
+                        if (e.getPrecision() != null) {
+                            formulaCalculStr = BigDecimal.valueOf(formulaCalcul)
+                                    .setScale(e.getPrecision(), RoundingMode.HALF_UP).toPlainString();
+                        }
+                        e.setValue(formulaCalculStr);
+                        ((TextField) mapComponenteAtribute.get(e)).setValue(formulaCalculStr);
+
+
+                    } catch (Exception ex) {
+
+                    }
+                }
+
+
+            }
+        });
+
+        //se parcurg listele de todoReadonly , respectiv toRemoveReadonly
+        if (todoReadonly.size() != 0 || toRemoveReadonly.size() != 0) {
+            mapComponenteAtribute.keySet().forEach((e) -> {
+                if (todoReadonly.contains(e.getName())) {
+                    mapComponenteAtribute.get(e).getElement().setAttribute("readonly", "readonly");
+                } else if (toRemoveReadonly.contains(e.getName())) {
+                    mapComponenteAtribute.get(e).getElement().removeAttribute("readonly");
+                }
+            });
+        }
+
+        //se parcurg listele de todoMandatory , respectiv toRemoveMandatory
+        if (todoMandatory.size() != 0 || toRemoveMandatory.size() != 0) {
+            mapComponenteAtribute.keySet().stream().forEach((e) -> {
+                if (
+                        todoMandatory.contains(e.getName()) ||
+                                toRemoveMandatory.contains(e.getName())
+
+                        ) {
+
+
+                    if (TextField.class.isAssignableFrom(mapComponenteAtribute.get(e).getClass())) {
+
+                        TextField textF = (TextField) mapComponenteAtribute.get(e);
+                        String currentVal = textF.getValue();
+                        e.setValue(currentVal);
+                        StringAttributeBinderBean binderBean = new StringAttributeBinderBean(smartFormId, (e));
+
+                        if (todoMandatory.contains(e.getName())) {
+                            e.setMandatory(true);
+
+                            try {
+                                SmartFormSupport.bind(smartFormId,
+                                        binderBean, textF,
+                                        new MandatoryAttributeBeanPropertyValidator(""));
+                            } catch (Exception ex) {
+                                logger.trace("BIND FAILED for " + e.getName());
+
+                            }
+                            //la aplicare Binder se repune valoarea pe care o gaseste pe atribut (ID fisier)
+                            //utilizatorul trebuie sa vada si numele => aplicam valoarea care se afla pe textfiled
+                            if (!currentVal.trim().isEmpty()) {
+                                if (e.getDataType().equals("FISIER")) {
+                                    if (currentVal.contains("(") && currentVal.endsWith(")")) {
+                                        textF.setValue(currentVal);
+                                    } else {
+                                        textF.setValue("");
+                                    }
+                                } else {
+                                    textF.setValue(currentVal);
+                                }
+                            }
+
+
+                        } else if (toRemoveMandatory.contains(e.getName())) {
+                            e.setMandatory(false);
+                            try {
+                                SmartFormSupport.unbind(smartFormId,
+                                        binderBean, textF,
+                                        new MandatoryAttributeBeanPropertyValidator(""));
+                            } catch (Exception ex) {
+
+                            }
+                            ((TextField) mapComponenteAtribute.get(e)).removeClassName("vaadin-invalid-input");
+                            ((TextField) mapComponenteAtribute.get(e)).getElement().removeAttribute("invalid");
+
+                            //la aplicare Binder se repune valoarea pe care o gaseste pe atribut (ID fisier)
+                            //utilizatorul trebuie sa vada si numele => aplicam valoarea care se afla pe textfiled
+                            if (!currentVal.trim().isEmpty()) {
+                                if (e.getDataType().equals("FISIER")) {
+                                    if (currentVal.contains("(") && currentVal.endsWith(")")) {
+                                        textF.setValue(currentVal);
+                                    } else {
+                                        textF.setValue("");
+                                    }
+                                } else {
+                                    textF.setValue(currentVal);
+                                }
+                            }
+                        }
+                    } else if (DatePicker.class.isAssignableFrom(mapComponenteAtribute.get(e).getClass())) {
+
+                        DatePicker textF = (DatePicker) mapComponenteAtribute.get(e);
+                        String currentVal = textF.getValue() != null ? textF.getValue().format(formatter) : null;
+
+                        e.setValue(currentVal);
+                        LocalDateAttributeBinderBean localDateAttributeBinderBean = new LocalDateAttributeBinderBean(smartFormId, (e));
+
+                        if (todoMandatory.contains(e.getName())) {
+
+                            e.setMandatory(true);
+
+                            try {
+
+                                SmartFormSupport.bind(smartFormId,
+                                        localDateAttributeBinderBean, textF,
+                                        new DateRangeValidator("", LocalDate.MIN, LocalDate.MAX));
+                            } catch (Exception ex) {
+                                logger.trace("BIND FAILED for " + e.getName());
+
+                            }
+
+
+                        } else if (toRemoveMandatory.contains(e.getName())) {
+                            e.setMandatory(false);
+
+                            try {
+                                SmartFormSupport.unbind(smartFormId,
+                                        localDateAttributeBinderBean, textF,
+                                        new DateRangeValidator("", LocalDate.MIN, LocalDate.MAX));
+
+                            } catch (Exception ex) {
+
+                            }
+                            ((DatePicker) mapComponenteAtribute.get(e)).removeClassName("vaadin-invalid-input");
+                            ((DatePicker) mapComponenteAtribute.get(e)).getElement().removeAttribute("invalid");
+
+
+                            ((DatePicker) mapComponenteAtribute.get(e)).removeClassName("vaadin-invalid-input");
+
+
+                        }
+                    }
+
+
+                }
+            });
+
+            //reparcurgere lista pentru aplicare modificari
+            mapComponenteAtribute.keySet().forEach(e -> {
+                if (todoMandatory.contains(e.getName()) ||
+                        toRemoveMandatory.contains(e.getName())) {
+
+                    if (TextField.class.isAssignableFrom(mapComponenteAtribute.get(e).getClass())) {
+
+                        TextField textF = (TextField) mapComponenteAtribute.get(e);
+                        String currentVal = textF.getValue();
+                        e.setValue(currentVal);
+                        StringAttributeBinderBean binderBean = new StringAttributeBinderBean(smartFormId, (e));
+
+                        if (todoMandatory.contains(e.getName())) {
+                            e.setMandatory(true);
+
+                            try {
+                                SmartFormSupport.bind(smartFormId,
+                                        binderBean, textF,
+                                        new MandatoryAttributeBeanPropertyValidator(""));
+                            } catch (Exception ex) {
+                                logger.trace("BIND FAILED for " + e.getName());
+
+                            }
+                            //la aplicare Binder se repune valoarea pe care o gaseste pe atribut (ID fisier)
+                            //utilizatorul trebuie sa vada si numele => aplicam valoarea care se afla pe textfiled
+                            if (!currentVal.trim().isEmpty()) {
+                                if (e.getDataType().equals("FISIER")) {
+                                    if (currentVal.contains("(") && currentVal.endsWith(")")) {
+                                        textF.setValue(currentVal);
+                                    } else {
+                                        textF.setValue("");
+                                    }
+                                } else {
+                                    textF.setValue(currentVal);
+                                }
+                            }
+
+
+                        } else if (toRemoveMandatory.contains(e.getName())) {
+                            e.setMandatory(false);
+
+                            try {
+                                SmartFormSupport.unbind(smartFormId,
+                                        binderBean, textF,
+                                        new MandatoryAttributeBeanPropertyValidator(""));
+                            } catch (Exception ex) {
+
+                            }
+                            ((TextField) mapComponenteAtribute.get(e)).removeClassName("vaadin-invalid-input");
+                            ((TextField) mapComponenteAtribute.get(e)).getElement().removeAttribute("invalid");
+
+                            //la aplicare Binder se repune valoarea pe care o gaseste pe atribut (ID fisier)
+                            //utilizatorul trebuie sa vada si numele => aplicam valoarea care se afla pe textfiled
+                            if (!currentVal.trim().isEmpty()) {
+                                if (e.getDataType().equals("FISIER")) {
+                                    if (currentVal.contains("(") && currentVal.endsWith(")")) {
+                                        textF.setValue(currentVal);
+                                    } else {
+                                        textF.setValue("");
+                                    }
+                                } else {
+                                    textF.setValue(currentVal);
+                                }
+                            }
+                        }
+                    } else if (DatePicker.class.isAssignableFrom(mapComponenteAtribute.get(e).getClass())) {
+
+                        DatePicker textF = (DatePicker) mapComponenteAtribute.get(e);
+                        String currentVal = textF.getValue() != null ? textF.getValue().format(formatter) : null;
+                        e.setValue(currentVal);
+                        LocalDateAttributeBinderBean localDateAttributeBinderBean = new LocalDateAttributeBinderBean(smartFormId, (e));
+
+                        if (todoMandatory.contains(e.getName())) {
+
+                            e.setMandatory(true);
+
+                            try {
+                                SmartFormSupport.bind(smartFormId,
+                                        localDateAttributeBinderBean, textF,
+                                        new DateRangeValidator("", LocalDate.MIN, LocalDate.MAX));
+                            } catch (Exception ex) {
+
+                                logger.trace("BIND FAILED for " + e.getName());
+                            }
+                            //la aplicare Binder se repune valoarea pe care o gaseste pe atribut (ID fisier)
+                            //utilizatorul trebuie sa vada si numele => aplicam valoarea care se afla pe textfiled
+                            if (currentVal != null && !currentVal.trim().isEmpty()) {
+
+                                textF.setValue(LocalDate.parse(currentVal, formatter));
+
+                            }
+
+
+                        } else if (toRemoveMandatory.contains(e.getName())) {
+                            e.setMandatory(false);
+
+                            try {
+                                SmartFormSupport.unbind(smartFormId,
+                                        localDateAttributeBinderBean, textF,
+                                        new DateRangeValidator("", LocalDate.MIN, LocalDate.MAX));
+
+                            } catch (Exception ex) {
+
+                            }
+                            ((DatePicker) mapComponenteAtribute.get(e)).removeClassName("vaadin-invalid-input");
+                            ((DatePicker) mapComponenteAtribute.get(e)).getElement().removeAttribute("invalid");
+
+
+                        }
+                    }
+                }
+            });
+
+            //END reparcurgere lsita pentru aplicare modificari
+
+        }
+//            mapComponenteRandAtribute.put(nrRow, randAttrComplex);
+
+
+    }
+
     public void aplicareFormulaCalculColoanaPortal(Integer nrRow, AttributeLink attributeLink, LovList lovList, HashMap<Integer, HashMap<Component, AttributeLink>> mapComponenteRandAtribute) {
         HashMap<Component, AttributeLink> randParinte = mapComponenteRandAtribute.get(nrRow);
         String formulaCalculStr = lovList.getLov().get(nrRow - 1).getFormulaCalcul();

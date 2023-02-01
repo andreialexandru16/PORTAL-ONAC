@@ -16,6 +16,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.textfield.TextFieldVariant;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import javafx.scene.control.CheckBox;
+import kotlin.reflect.jvm.internal.impl.util.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import ro.bithat.dms.boot.BeanUtil;
 import ro.bithat.dms.microservices.dmsws.file.DocAttrLink;
@@ -146,7 +148,13 @@ public class DocumentaSmartForm extends VerticalLayout implements SmartForm {
         if (attributeLink.getRand() != null && attributeLink.getRand() != 0
             //&& attributeLink.getColoana()!=null&& attributeLink.getColoana()!=0
                 ) {
+
             SmartFormSupport.getAttributeLinkService().attributeLinkDataPostProcessor(documentaSmartForm, attributeLink, rowLayout);
+            if(attributeLink.getFormulaCalculPortal()!=null && getComponentMapAttr().get(attributeLink).getClass().isAssignableFrom(Checkbox.class)){
+                ((Checkbox)getComponentMapAttr().get(attributeLink)).addValueChangeListener(e -> {
+                    SmartFormSupport.aplicareFormulaCalculPortalAtribut(smartFormId, componentMapAttr);
+                });
+            }
         }
     }
 

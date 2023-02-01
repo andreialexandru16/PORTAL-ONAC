@@ -230,6 +230,10 @@ public final class SmartFormSupport {
         getSmartFormComponentService().aplicareFormulaCalculPortal(nrRow, smartFormId,mapComponenteRandAtribute);
 
     }
+    public static void aplicareFormulaCalculPortalAtribut( String smartFormId, Map<AttributeLink, Component> mapComponente) {
+        getSmartFormComponentService().aplicareFormulaCalculPortalAtribut(smartFormId,mapComponente);
+
+    }
     public static void aplicareFormulaCalculColoanaPortal( Integer nrRow, AttributeLink attributeLink,LovList lovList,HashMap<Integer, HashMap<Component, AttributeLink>>  mapComponenteRandAtribute) {
         getSmartFormComponentService().aplicareFormulaCalculColoanaPortal(nrRow, attributeLink,lovList,mapComponenteRandAtribute);
 
