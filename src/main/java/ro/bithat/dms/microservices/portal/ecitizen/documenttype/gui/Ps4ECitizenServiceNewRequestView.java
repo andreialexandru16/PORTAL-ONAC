@@ -167,6 +167,8 @@ public class Ps4ECitizenServiceNewRequestView extends ContentContainerView<Ps4EC
                         .registerPresenterNextStepMethod("document.type.service.request.next.step.title", "document.type.service.request.view.confirm.action.label");
                 btnFooterContainer.registerPresenterPreviousStepMethod("document.type.service.request.previous.step.title",
                         serviceName);
+                btnFooterContainer.registerPresenterSaveDraftMethod("document.type.service.request.previous.step.title",
+                        serviceName);
 
             }
         }

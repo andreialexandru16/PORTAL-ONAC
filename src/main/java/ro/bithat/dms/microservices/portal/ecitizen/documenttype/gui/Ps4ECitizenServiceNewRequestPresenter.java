@@ -993,6 +993,24 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
 
     }
 
+    public void onSaveDraftAction(ClickEvent<ClickNotifierAnchor> clickEvent) {
+
+        if (getView().validateSmartForm())
+
+        {
+            //06.01.2022 - CA -ANRE -  swal de loading
+            UI.getCurrent().getPage().executeJs("window.parent.parent.scrollTo(0, 0);");
+            UI.getCurrent().getPage().executeJs("displayLoadingSpinner();").then(Integer.class,value -> saveDraft(clickEvent));
+
+        }
+        else {
+            UI.getCurrent().getPage().executeJs("swal.close()");
+            UI.getCurrent().getPage().executeJs("swalError($0)", I18NProviderStatic.getTranslation("ps4.ecetatean.form.swal.error"));
+            return;
+        }
+
+    }
+
 
     public void savePdf(String pdf) {
         Map<String, Object> filterPageParameters = new HashMap<>();
@@ -1169,6 +1187,69 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
 
                 return 1;
             }
+
+        UI.getCurrent().getPage().executeJs("swal.close()");
+        UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
+
+        return 0;
+    }
+
+    public Integer saveDraft(ClickEvent<ClickNotifierAnchor> clickEvent) {
+        //13.07.2021 - NG - ANRE - resetare contor schimbari facute pentru a nu afisa dialog de confirmare iesire din pagina
+
+        UI.getCurrent().getPage().executeJavaScript("resetChanges();");
+        getLogger().info("on lanseaza comanda");
+        Map<String, Object> filterPageParameters = new HashMap<>();
+        FileData fileData = new FileData();
+        fileData.setId_document(getDocumentId().get());
+        filterPageParameters.put("idUser", SecurityUtils.getUserId());
+        filterPageParameters.put("token", SecurityUtils.getToken());
+        if (!docAttrLinkList.isPresent()) {
+            docAttrLinkList = Optional.of(getView().getDocAttrLinkList());
+        }
+
+
+//            Map<String, Object> filterPageParameters = new HashMap<>();
+//            filterPageParameters.put("tipDocument", getDocumentType());
+//            filterPageParameters.put("document", getDocumentId().get());
+        try {
+            if (docAttrLinkList.get().getDocAttrLink().size() > 0) {
+                if (!getFileId().isPresent()) {
+                    //TODO
+//                        getPs4Service().replaceExistingFileAndSetMetadata()
+                    Integer fileId = getPs4Service().createDummyFileIncepereSolicitareRegistratura(fileData);
+                    requestFileId = Optional.ofNullable(fileId);
+//                        filterPageParameters.put("request", fileId);
+                    if (attrLinkListHidden != null && attrLinkListHidden.size() != 0) {
+                        docAttrLinkList.get().getDocAttrLink().addAll(attrLinkListHidden);
+                    }
+                    getPs4Service().saveDocAttribute(fileId, docAttrLinkList.get());
+                    FileOb fileOb = new FileOb();
+                    fileOb.setFileId(fileId);
+
+                    if (getDocumentType().equals(classReabilitareId)) {
+                        getPs4Service().createProiectFromCerere(fileId, fileOb);
+
+                    }
+                } else {
+                    requestFileId = getFileId();
+//                        filterPageParameters.put("request", getFileId().get());
+                    getPs4Service().saveDocAttribute(getFileId().get(), docAttrLinkList.get());
+                }
+                getView().printSmartFormPdf();
+                UI.getCurrent().getPage().executeJs("swal.close()");
+                UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
+
+                return 0;
+            }
+        } catch (Throwable e) {
+            logger.error(e.getMessage(), e);
+            UI.getCurrent().getPage().executeJs("swal.close()");
+            UI.getCurrent().getPage().executeJs("swalError($0);", "Eroare server DMSWS! Va rugam reincercati!");
+            UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
+
+            return 1;
+        }
 
         UI.getCurrent().getPage().executeJs("swal.close()");
         UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
