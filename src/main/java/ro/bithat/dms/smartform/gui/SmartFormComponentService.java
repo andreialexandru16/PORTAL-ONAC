@@ -1839,12 +1839,16 @@ public class SmartFormComponentService {
                 if (e.getFormulaCalculPortal().contains("[READONLY]")) {
                     Matcher matches = Pattern.compile("\\((.*?)\\)").matcher(e.getFormulaCalculPortal());
                     while (matches.find()) {
-                        String codAtr = matches.group(1);
+                        String[] codAtrs = matches.group(1).split(",");
                         if (e.getName() != null && !mapAtr.get(e.getName()).equals("0")) {
-                            todoReadonly.add(codAtr);
+                            for(String cod : codAtrs){
+                                todoReadonly.add(cod);
 
+                            }
                         } else {
-                            toRemoveReadonly.add(codAtr);
+                            for(String cod : codAtrs){
+                                toRemoveReadonly.add(cod);
+                            }
 
                         }
 
@@ -1853,22 +1857,31 @@ public class SmartFormComponentService {
                 } else if (e.getFormulaCalculPortal().contains("[MANDATORY]")) {
                     Matcher matches = Pattern.compile("\\((.*?)\\)").matcher(e.getFormulaCalculPortal());
                     while (matches.find()) {
-                        String codAtr = matches.group(1);
+                        String[] codAtrs = matches.group(1).split(",");
                         if (mapAtr.get(e.getName()) != null) {
                             if (e.getDataType().equals("BOOLEAN")) {
 
                                 if (mapAtr.get(e.getName()).equals("0")) {
-                                    todoMandatory.add(codAtr);
+                                    for(String cod : codAtrs){
+                                        todoMandatory.add(cod);
+
+                                    }
                                 } else {
-                                    toRemoveMandatory.add(codAtr);
+                                    for(String cod : codAtrs){
+                                        toRemoveMandatory.add(cod);
+                                    }
 
                                 }
                             } else {
                                 if (!mapAtr.get(e.getName()).equals("0")) {
-                                    todoMandatory.add(codAtr);
-                                } else {
-                                    toRemoveMandatory.add(codAtr);
+                                    for(String cod : codAtrs){
+                                        todoMandatory.add(cod);
 
+                                    }
+                                } else {
+                                    for(String cod : codAtrs){
+                                        toRemoveMandatory.add(cod);
+                                    }
                                 }
                             }
 
