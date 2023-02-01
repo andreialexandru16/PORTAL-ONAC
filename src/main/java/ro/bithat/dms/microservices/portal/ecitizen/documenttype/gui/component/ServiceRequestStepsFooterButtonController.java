@@ -16,11 +16,19 @@ public class ServiceRequestStepsFooterButtonController extends FlowViewDivContai
 
     private final static String PRESENTER_NEXT_ACTION = "onNextBtnAction";
 
+    private final static String PRESENTER_SAVE_DRAFT_ACTION = "onSaveDraftAction";
+
     private Strong nextBtnInfoTitle = new Strong();
 
     private Label nextBtnInfoLabel = new Label();
 
+    private Strong saveDraftBtnInfoTitle = new Strong();
+
+    private Label saveDraftBtnInfoLabel = new Label();
+
     private Div nextBtnInfo = new Div(nextBtnInfoTitle, nextBtnInfoLabel);
+
+    private Div saveDraftBtnInfo = new Div(saveDraftBtnInfoTitle, saveDraftBtnInfoLabel);
 
     private Strong previousBtnInfoTitle = new Strong();
 
@@ -32,6 +40,10 @@ public class ServiceRequestStepsFooterButtonController extends FlowViewDivContai
 
     private Div btnInfo = new Div(btnClearfix);
 
+    private HtmlContainer saveDraftBtnIcon = new HtmlContainer("i");
+
+    private ClickNotifierAnchor saveDraftBtn = new ClickNotifierAnchor();
+
     private HtmlContainer nextBtnIcon = new HtmlContainer("i");
 
     private ClickNotifierAnchor nextBtn = new ClickNotifierAnchor();
@@ -40,7 +52,7 @@ public class ServiceRequestStepsFooterButtonController extends FlowViewDivContai
 
     private ClickNotifierAnchor previousBtn = new ClickNotifierAnchor();
 
-    private Div btnContainer = new Div(previousBtn, nextBtn);
+    private Div btnContainer = new Div(previousBtn, nextBtn, saveDraftBtn);
 
     public ServiceRequestStepsFooterButtonController(FlowView view) {
         super(view);
@@ -64,6 +76,11 @@ public class ServiceRequestStepsFooterButtonController extends FlowViewDivContai
         addClassName("btn_footer_container");
         add(btnInfo, btnContainer);
 
+        //save draft
+        saveDraftBtnIcon.addClassNames("fas", "fa-check");
+        saveDraftBtn.addClassNames("btn", "btn_save_draft", "btn_green", "next");
+        saveDraftBtn.setVisible(false);
+
     }
 
     public void registerPresenterPreviousStepMethod(String title, String info) {
@@ -83,6 +100,10 @@ public class ServiceRequestStepsFooterButtonController extends FlowViewDivContai
         registerPresenterNextStepMethod("document.type.service.newrequest.view.next.action.label", title, info);
     }
 
+    public void registerPresenterSaveDraftMethod(String title, String info) {
+        registerPresenterSaveDraftMethod("document.type.service.newrequest.view.save.draft.action.label", title, info);
+    }
+
 
     public void registerPresenterNextStepMethod(String btnLabel, String title, String info) {
         nextBtn.removeAll();
@@ -91,6 +112,15 @@ public class ServiceRequestStepsFooterButtonController extends FlowViewDivContai
         nextBtnInfo.add(new Strong(new Text(title)), new Text(info));
         registerClickEvent(PRESENTER_NEXT_ACTION, nextBtn);
         nextBtn.add(new Text(btnLabel), nextBtnIcon);
+    }
+
+    public void registerPresenterSaveDraftMethod(String btnLabel, String title, String info) {
+        saveDraftBtn.removeAll();
+        saveDraftBtn.setVisible(true);
+        saveDraftBtnInfo.setVisible(true);
+        saveDraftBtnInfo.add(new Strong(new Text(title)), new Text(info));
+        registerClickEvent(PRESENTER_SAVE_DRAFT_ACTION, saveDraftBtn);
+        saveDraftBtn.add(new Text(btnLabel), saveDraftBtnIcon);
     }
 
 }
