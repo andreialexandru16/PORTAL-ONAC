@@ -10,6 +10,7 @@ import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.Document;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.TipDocument;
 import ro.bithat.dms.microservices.portal.ecitizen.portalfile.backend.Ps4ECitizenPortalFileService;
 import ro.bithat.dms.microservices.portal.ecitizen.gui.ContentContainerView;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.FisierDraftExtendedList;
 import ro.bithat.dms.passiveview.QueryParameterUtil;
 import ro.bithat.dms.passiveview.boot.I18NProviderStatic;
 import ro.bithat.dms.passiveview.component.presenter.PrepareModelFlowPresenter;
@@ -145,6 +146,11 @@ public abstract class DocumentTypePresenter<V extends ContentContainerView> exte
         return (portalFile.isPresent() && 
         		portalFile.get().getIdWorkflowStatus() != null &&
         		portalFile.get().getIdWorkflowStatus().equals(idWorkflowStatusChangesRequired));
+    }
+
+    public boolean isDraft(Integer fileId) {
+        FisierDraftExtendedList list = fileService.getDrafts(SecurityUtils.getToken());
+        return (list.getFisierDraftList() !=null && list.getFisierDraftList().stream().anyMatch(e -> e.getIdFisier().equals(fileId)));
     }
     
     public String getPortalFileTitle() {

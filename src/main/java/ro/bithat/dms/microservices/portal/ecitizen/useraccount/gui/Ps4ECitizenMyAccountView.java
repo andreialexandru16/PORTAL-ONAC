@@ -21,6 +21,7 @@ import ro.bithat.dms.microservices.portal.ecitizen.gui.template.WindowResizeObse
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.PersoanaFizicaJuridica;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.gui.component.ColaborationMessagesTableComponent;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.gui.component.EmailInboxComponent;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.FisierDraftExtended;
 import ro.bithat.dms.passiveview.QueryParameterUtil;
 import ro.bithat.dms.passiveview.StreamResourceUtil;
 import ro.bithat.dms.passiveview.VaadinClientUrlUtil;
@@ -45,6 +46,7 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
     private ClickNotifierAnchor anchorButtonAllRequests = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllInvoices = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllDocuments = new ClickNotifierAnchor();
+    private ClickNotifierAnchor anchorButtonAllDrafts = new ClickNotifierAnchor();
     private ClickNotifierAnchor studiiPage = new ClickNotifierAnchor();
     private ClickNotifierAnchor contactePage = new ClickNotifierAnchor();
 
@@ -59,8 +61,10 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
 
     private Div myInvoicesContainer = new Div();
 
+    private Div myDraftsContainer = new Div();
 
-    private Div myAccountDetailsContainerSidebar = new Div( myRequestsContainer,myInvoicesContainer, myDocumentsContainer);
+
+    private Div myAccountDetailsContainerSidebar = new Div( myRequestsContainer,myInvoicesContainer, myDocumentsContainer, myDraftsContainer);
 
     private ColaborationMessagesTableComponent colaborationMessagesTableComponent = new ColaborationMessagesTableComponent(this);
 
@@ -145,6 +149,47 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         anchorButtonAllInvoices.add(iconElementButtonGoToAllRequests);*/
 
         myInvoicesContainer.add(myInvoicesHeader, ulMyRequestsWidgetElements, anchorButtonAllInvoices);
+
+    }
+
+    public void setMyDraftsContainer(List<FisierDraftExtended> myDrafts) {
+
+        Div myDraftsHeader = new Div();
+        Div myDraftsHeaderImage = new Div();
+        Div myDraftsHeaderTitle = new Div();
+        Div myDraftsHeaderNo = new Div();
+       /*HEADER*/
+        myDraftsHeader.addClassName("header");
+        myDraftsHeaderImage.addClassName("image");
+        myDraftsHeaderTitle.addClassName("title");
+        myDraftsHeaderNo.addClassName("no");
+        HtmlContainer iconHeaderImage = new HtmlContainer("i");
+        iconHeaderImage.addClassNames("far", "fa-file-alt");
+
+        myDraftsHeaderImage.add(iconHeaderImage);
+        myDraftsHeaderTitle.add(new Text("ps4.ecetatean.breadcrumb.myaccount.mydrafts.page.title"));
+        myDraftsHeaderNo.add(new Text(String.valueOf(myDrafts.size())));
+
+        myDraftsHeader.add(myDraftsHeaderImage, myDraftsHeaderTitle, myDraftsHeaderNo);
+        /*REQUESTS*/
+        UnorderedList ulMyRequestsWidgetElements = new UnorderedList();
+        ulMyRequestsWidgetElements.addClassName("widget_elements");
+        for (FisierDraftExtended request : myDrafts) {
+            ListItem liMyRequests = createListItemForDrafts(request);
+            ulMyRequestsWidgetElements.add(liMyRequests);
+        }
+
+        /*BUTTON ALL REQUESTS*/
+
+        Div allMyDraftsButton = new Div();
+
+        allMyDraftsButton.addClassName("all_elements");
+        anchorButtonAllDrafts.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.mydrafts.button.all"));
+        anchorButtonAllDrafts.setHref("javascript:void(0);");
+        anchorButtonAllDrafts.addClassNames("btn", "btn_green", "min_width250", "btn-common");
+
+
+        myDraftsContainer.add(myDraftsHeader, ulMyRequestsWidgetElements, anchorButtonAllDrafts);
 
     }
 
@@ -448,6 +493,25 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         return liMyRequests;
     }
 
+    private ListItem createListItemForDrafts(FisierDraftExtended file) {
+        ListItem liMyRequests = new ListItem();
+            /*ELEMENT CONTENT*/
+        Div divElementContent = new Div();
+        divElementContent.addClassName("element_content");
+        HtmlContainer iconElementContent = new HtmlContainer("i");
+        iconElementContent.addClassNames("fas", "fa-file-alt");
+        Strong strongElementContent = new Strong();
+        strongElementContent.setText(file.getNume());
+
+        divElementContent.add(iconElementContent, strongElementContent);
+            /*ELEMENT BUTTONS*/
+        Div divElementButtons = new Div();
+        divElementButtons.addClassName("element_buttons");
+
+        liMyRequests.add(divElementContent, divElementButtons);
+        return liMyRequests;
+    }
+
 
 
     private ListItem createListItemForRequests(PortalFile file) {
@@ -583,6 +647,8 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         myRequestsContainer.addClassNames("sidebar_widget", "my_requests");
         myInvoicesContainer.addClassNames("sidebar_widget", "my_requests");
         myDocumentsContainer.addClassNames("sidebar_widget", "my_documents");
+        myDraftsContainer.addClassNames("sidebar_widget", "my_requests");
+
 
     }
 

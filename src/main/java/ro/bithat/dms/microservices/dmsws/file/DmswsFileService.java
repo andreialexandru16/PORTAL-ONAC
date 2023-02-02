@@ -35,9 +35,7 @@ import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.CreateTipDocFile
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.CreateTipDocFileResponseXml;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.DocObligatoriiResp;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.StandardUploadResponse;
-import ro.bithat.dms.microservices.portal.ecitizen.website.models.DirLinkFoldersAndFiles;
-import ro.bithat.dms.microservices.portal.ecitizen.website.models.RunJasperByTipDocAndSaveReq;
-import ro.bithat.dms.microservices.portal.ecitizen.website.models.RunJasperByTipDocAndSaveResp;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.*;
 import ro.bithat.dms.security.SecurityUtils;
 
 import javax.net.ssl.SSLContext;
@@ -599,5 +597,18 @@ public BaseModel deleteAttachment(@PathVariable String token, @PathVariable Inte
 		return get(BaseModel.class, checkBaseModel(), getDmswsUrl()+"/file/{token}/getInvoiceJasperFileLink/{fileId}",
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token, fileId);
 
+	}
+
+	public StandardResponse saveDraft(String token, Integer fileId){
+		FisierDraft fisierDraft = new FisierDraft();
+		fisierDraft.setIdFisier(fileId);
+
+		return put(fisierDraft, MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, StandardResponse.class, checkStandardResponse(),
+				getDmswsUrl()+"/file_draft/{token}/", token );
+	}
+
+	public FisierDraftExtendedList getDrafts(String token){
+		return get(FisierDraftExtendedList.class, checkStandardResponse(), getDmswsUrl()+"/file_draft/{token}/",
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
 	}
 }

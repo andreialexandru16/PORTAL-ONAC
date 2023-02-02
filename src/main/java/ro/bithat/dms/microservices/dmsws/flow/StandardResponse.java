@@ -9,9 +9,9 @@ public class StandardResponse {
     private String errString;
 
     public boolean isError() {
-    	return !this.status.equalsIgnoreCase("OK");
+    	return !(this.status !=null && this.status.equalsIgnoreCase("OK"));
     }
-    
+
     public String getExtendedStatus() {
         return extendedStatus;
     }
