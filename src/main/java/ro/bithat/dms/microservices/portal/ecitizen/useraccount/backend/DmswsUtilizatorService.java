@@ -17,6 +17,7 @@ import ro.bithat.dms.microservices.dmsws.poi.ProjectInfo;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.LinkUtilList;
 import ro.bithat.dms.microservices.portal.ecitizen.project.backend.bithat.UtilizatorList;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.*;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.FisierDraftExtendedList;
 
 import java.util.Optional;
 

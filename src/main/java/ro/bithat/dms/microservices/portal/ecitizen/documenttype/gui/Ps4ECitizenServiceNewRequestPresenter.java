@@ -26,6 +26,7 @@ import ro.bithat.dms.microservices.portal.ecitizen.gui.component.LoadingSpinner;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsUtilizatorService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.SolicitareService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.ContCurentPortalE;
+import ro.bithat.dms.microservices.portal.ecitizen.useraccount.gui.Ps4ECitizenMyDraftRequestsRoute;
 import ro.bithat.dms.microservices.portal.ecitizen.website.models.RunJasperByTipDocAndSaveReq;
 import ro.bithat.dms.microservices.portal.ecitizen.website.models.RunJasperByTipDocAndSaveResp;
 import ro.bithat.dms.passiveview.QueryParameterUtil;
@@ -80,7 +81,7 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
 
     Optional<Integer> documentTypeId = QueryParameterUtil.getQueryParameter("tipDocument", Integer.class);
 
-
+    private boolean isDraft = false;
 
     @Override
     public void afterPrepareModel(String state) {
@@ -117,9 +118,9 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
 
         Boolean isEmpty = true;
         if (getFileId().isPresent()) {
-            requestFileId=getFileId();
+            requestFileId = getFileId();
             isEmpty = false;
-            if (isPortalFileEditable() || portalFileNeedChanges()) {
+            if (isPortalFileEditable() || portalFileNeedChanges() || isDraft(getFileId().get())) {
 //                if(getPortalFile().get().getIdUser() == SecurityUtils.getUserId().intValue()) {
 
                 getView().buildDmsSmartForm(getPs4Service().getAttributeLinkListByFileId(getFileId().get()),
@@ -373,13 +374,13 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
                                 }
                             } else if (attributeLink.getValoareImplicita() != null && !attributeLink.getValoareImplicita().isEmpty() && attributeLink.getValoareImplicita().equals("PORTAL_CONTEXT_TERT")) {
                                 if (attributeLink.getLovId() != null && attributeLink.getLovId() != 0) {
-                                    if (contCurentPortalE.getTertParinteUserCurent().getIdTert() != null && contCurentPortalE.getTertParinteUserCurent().getIdTert() !=0) {
+                                    if (contCurentPortalE.getTertParinteUserCurent().getIdTert() != null && contCurentPortalE.getTertParinteUserCurent().getIdTert() != 0) {
 
                                         lovList = getPs4Service().getLovListFilteredById(attributeLink.getLovId(), contCurentPortalE.getTertParinteUserCurent().getIdTert().toString()).getLov();
 
                                         attributeLink.setValueForLov(lovList);
                                         attributeLink.setValue(contCurentPortalE.getTertParinteUserCurent().getIdTert().toString());
-                                    } else if (contCurentPortalE.getUserCurent().getIdTert() != null &&contCurentPortalE.getUserCurent().getIdTert() != 0 ) {
+                                    } else if (contCurentPortalE.getUserCurent().getIdTert() != null && contCurentPortalE.getUserCurent().getIdTert() != 0) {
 
                                         lovList = getPs4Service().getLovListFilteredById(attributeLink.getLovId(), contCurentPortalE.getUserCurent().getIdTert().toString()).getLov();
 
@@ -410,7 +411,7 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
                                 } else if (contCurentPortalE.getTertParinteUserCurent().getIdTert() != null) {
                                     sql = sql.replaceAll("PORTAL_CONTEXT_TERT", contCurentPortalE.getTertParinteUserCurent().getIdTert().toString());
 
-                                }else if (contCurentPortalE.getUserCurent().getIdTert() != null) {
+                                } else if (contCurentPortalE.getUserCurent().getIdTert() != null) {
                                     sql = sql.replaceAll("PORTAL_CONTEXT_TERT", contCurentPortalE.getUserCurent().getIdTert().toString());
 
                                 }
@@ -445,10 +446,9 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
                                         } else {
                                             attributeLink.setValue(attributeLink.getValoareImplicita());
                                         }
-                                    }else{
+                                    } else {
                                         attributeLink.setValue(valoareImplicita);
                                     }
-
 
 
                                 }
@@ -462,7 +462,7 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
                                         lovList = getPs4Service().getLovList(attributeLink.getLovId()).getLov();
                                         attributeLink.setValueForLov(lovList);
                                         if (val != null && !val.isEmpty())
-                                        attributeLink.setValue(val);
+                                            attributeLink.setValue(val);
                                     } else {
                                         lovList = getPs4Service().getLovListFilteredById(attributeLink.getLovId(), val).getLov();
 
@@ -952,6 +952,7 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
 
 
     public void onPreviousBtnAction(ClickEvent<ClickNotifierAnchor> clickEvent) {
+        isDraft = false;
         getLogger().info("filter previous button");
         Map<String, Object> filterPageParameters = new HashMap<>();
         filterPageParameters.put("tipDocument", getDocumentType());
@@ -976,38 +977,27 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
     }
 
     public void onNextBtnAction(ClickEvent<ClickNotifierAnchor> clickEvent) {
-
-        if (getView().validateSmartForm())
-
-    {
-        //06.01.2022 - CA -ANRE -  swal de loading
-        UI.getCurrent().getPage().executeJs("window.parent.parent.scrollTo(0, 0);");
-        UI.getCurrent().getPage().executeJs("displayLoadingSpinner();").then(Integer.class,value -> nextStep(clickEvent));
-
-    }
-  else {
-        UI.getCurrent().getPage().executeJs("swal.close()");
-        UI.getCurrent().getPage().executeJs("swalError($0)", I18NProviderStatic.getTranslation("ps4.ecetatean.form.swal.error"));
-        return;
-    }
-
-    }
-
-    public void onSaveDraftAction(ClickEvent<ClickNotifierAnchor> clickEvent) {
+        isDraft = false;
 
         if (getView().validateSmartForm())
 
         {
             //06.01.2022 - CA -ANRE -  swal de loading
             UI.getCurrent().getPage().executeJs("window.parent.parent.scrollTo(0, 0);");
-            UI.getCurrent().getPage().executeJs("displayLoadingSpinner();").then(Integer.class,value -> saveDraft(clickEvent));
+            UI.getCurrent().getPage().executeJs("displayLoadingSpinner();").then(Integer.class, value -> nextStep(clickEvent));
 
-        }
-        else {
+        } else {
             UI.getCurrent().getPage().executeJs("swal.close()");
             UI.getCurrent().getPage().executeJs("swalError($0)", I18NProviderStatic.getTranslation("ps4.ecetatean.form.swal.error"));
             return;
         }
+
+    }
+
+    public void onSaveDraftAction(ClickEvent<ClickNotifierAnchor> clickEvent) {
+        isDraft = true;
+        UI.getCurrent().getPage().executeJs("window.parent.parent.scrollTo(0, 0);");
+        UI.getCurrent().getPage().executeJs("displayLoadingSpinner();").then(Integer.class, value -> saveDraft(clickEvent));
 
     }
 
@@ -1020,12 +1010,8 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
         if (getFromMainScreen().isPresent()) {
             filterPageParameters.put("fromMainScreen", getFromMainScreen().get());
 
-        }//        Byte[] imageDataBytes = Stream.of(image.keys())
-//                .map(key -> {
-//                    int i = Integer.valueOf((image.getNumber(key) + "").replace(".0",""));
-//                    return (byte) i;
-//                })
-//                .collect(Collectors.toList()).toArray(new Byte[image.keys().length]);
+        }
+
         try {
             byte[] pdfData = Base64.getDecoder().decode(pdf);
             CreateTipDocFileResponse resp = fileService.uploadToReplaceExistingFile(SecurityUtils.getToken(), new Long(requestFileId.get()), "cerere.pdf",
@@ -1037,13 +1023,6 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
 
                 }
             }
-//            OutputStream out = new FileOutputStream("cerere_test.pdf");
-//            out.write(pdfData);
-//            ITextRenderer renderer = new ITextRenderer();
-//            renderer.setDocumentFromString(getView().getSmartFormHtml());
-//            renderer.layout();
-//            renderer.createPDF(out);
-//            out.close();
             logger.info("pdf uploaded");
             docAttrLinkList = Optional.empty();
             if (getFromMainScreen().isPresent() && getFromMainScreen().get() != null) {
@@ -1070,18 +1049,21 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
                 } else if (getFromMainScreen().get().equals("COMP")) {
                     UI.getCurrent().getPage().executeJs("swalInfoParam2Top($0, $1,$2);", I18NProviderStatic.getTranslation("request.saved"), getView(), "/PISC/PORTAL/main-screen-operator-compensari.html?&idClasaDoc=" + getDocumentType());
 
-                }else {
+                } else {
                     UI.getCurrent().getPage().executeJs("swalInfoParam2Top($0, $1,$2);", I18NProviderStatic.getTranslation("request.saved"), getView(), "/PISC/PORTAL/main-screen-operator.html?&idClasaDoc=" + getDocumentType());
 
                 }
                 UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
 
             } else {
-
-                if (listaDoc == null || listaDoc.size() == 0) {
-                    VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceRequestReviewRoute.class));
-                } else {
-                    VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceAttacheFileRoute.class));
+                if(isDraft){
+                    VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenMyDraftRequestsRoute.class));
+                }else {
+                    if (listaDoc == null || listaDoc.size() == 0) {
+                        VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceRequestReviewRoute.class));
+                    } else {
+                        VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceAttacheFileRoute.class));
+                    }
                 }
             }
 
@@ -1111,10 +1093,10 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
         RunJasperByTipDocAndSaveReq runJasperByTipDocAndSaveReq = new RunJasperByTipDocAndSaveReq();
         runJasperByTipDocAndSaveReq.setIdDocument(getDocumentId().get());
         runJasperByTipDocAndSaveReq.setMainId(requestFileId.get());
-        String fileName=getDocument().get().getDenumire() + " " + (SecurityUtils.getFullName()) + " " + (new SimpleDateFormat("dd.MM.yyyy").format(new Date()).toString());
+        String fileName = getDocument().get().getDenumire() + " " + (SecurityUtils.getFullName()) + " " + (new SimpleDateFormat("dd.MM.yyyy").format(new Date()).toString());
         runJasperByTipDocAndSaveReq.setOutputName(fileName);
-        RunJasperByTipDocAndSaveResp resp =  fileService.getIdFisierJasper(runJasperByTipDocAndSaveReq);
-        resp.setFileName(fileName+".pdf");
+        RunJasperByTipDocAndSaveResp resp = fileService.getIdFisierJasper(runJasperByTipDocAndSaveReq);
+        resp.setFileName(fileName + ".pdf");
         return resp;
     }
 
@@ -1132,70 +1114,6 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
     }
 
     public Integer nextStep(ClickEvent<ClickNotifierAnchor> clickEvent) {
-        //13.07.2021 - NG - ANRE - resetare contor schimbari facute pentru a nu afisa dialog de confirmare iesire din pagina
-
-        UI.getCurrent().getPage().executeJavaScript("resetChanges();");
-        getLogger().info("on lanseaza comanda");
-        Map<String, Object> filterPageParameters = new HashMap<>();
-            FileData fileData = new FileData();
-            fileData.setId_document(getDocumentId().get());
-            filterPageParameters.put("idUser", SecurityUtils.getUserId());
-            filterPageParameters.put("token", SecurityUtils.getToken());
-            if (!docAttrLinkList.isPresent()) {
-                docAttrLinkList = Optional.of(getView().getDocAttrLinkList());
-            }
-
-
-//            Map<String, Object> filterPageParameters = new HashMap<>();
-//            filterPageParameters.put("tipDocument", getDocumentType());
-//            filterPageParameters.put("document", getDocumentId().get());
-            try {
-                if (docAttrLinkList.get().getDocAttrLink().size() > 0) {
-                    if (!getFileId().isPresent()) {
-                        //TODO
-//                        getPs4Service().replaceExistingFileAndSetMetadata()
-                        Integer fileId = getPs4Service().createDummyFileIncepereSolicitareRegistratura(fileData);
-                        requestFileId = Optional.ofNullable(fileId);
-//                        filterPageParameters.put("request", fileId);
-                        if (attrLinkListHidden != null && attrLinkListHidden.size() != 0) {
-                            docAttrLinkList.get().getDocAttrLink().addAll(attrLinkListHidden);
-                        }
-                        getPs4Service().saveDocAttribute(fileId, docAttrLinkList.get());
-                        FileOb fileOb = new FileOb();
-                        fileOb.setFileId(fileId);
-
-                        if (getDocumentType().equals(classReabilitareId)) {
-                            getPs4Service().createProiectFromCerere(fileId, fileOb);
-
-                        }
-                    } else {
-                        requestFileId = getFileId();
-//                        filterPageParameters.put("request", getFileId().get());
-                        getPs4Service().saveDocAttribute(getFileId().get(), docAttrLinkList.get());
-                    }
-                    getView().printSmartFormPdf();
-                    UI.getCurrent().getPage().executeJs("swal.close()");
-                    UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
-
-                    return 0;
-                }
-            } catch (Throwable e) {
-                logger.error(e.getMessage(), e);
-                UI.getCurrent().getPage().executeJs("swal.close()");
-                UI.getCurrent().getPage().executeJs("swalError($0);", "Eroare server DMSWS! Va rugam reincercati!");
-                UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
-
-                return 1;
-            }
-
-        UI.getCurrent().getPage().executeJs("swal.close()");
-        UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
-
-        return 0;
-    }
-
-    public Integer saveDraft(ClickEvent<ClickNotifierAnchor> clickEvent) {
-        //13.07.2021 - NG - ANRE - resetare contor schimbari facute pentru a nu afisa dialog de confirmare iesire din pagina
 
         UI.getCurrent().getPage().executeJavaScript("resetChanges();");
         getLogger().info("on lanseaza comanda");
@@ -1235,6 +1153,62 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
                     requestFileId = getFileId();
 //                        filterPageParameters.put("request", getFileId().get());
                     getPs4Service().saveDocAttribute(getFileId().get(), docAttrLinkList.get());
+                }
+                getView().printSmartFormPdf();
+                UI.getCurrent().getPage().executeJs("swal.close()");
+                UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
+
+                return 0;
+            }
+        } catch (Throwable e) {
+            logger.error(e.getMessage(), e);
+            UI.getCurrent().getPage().executeJs("swal.close()");
+            UI.getCurrent().getPage().executeJs("swalError($0);", "Eroare server DMSWS! Va rugam reincercati!");
+            UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
+
+            return 1;
+        }
+
+        UI.getCurrent().getPage().executeJs("swal.close()");
+        UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
+
+        return 0;
+    }
+
+    public Integer saveDraft(ClickEvent<ClickNotifierAnchor> clickEvent) {
+
+        UI.getCurrent().getPage().executeJavaScript("resetChanges();");
+        getLogger().info("on lanseaza comanda");
+        Map<String, Object> filterPageParameters = new HashMap<>();
+        FileData fileData = new FileData();
+        fileData.setId_document(getDocumentId().get());
+        filterPageParameters.put("idUser", SecurityUtils.getUserId());
+        filterPageParameters.put("token", SecurityUtils.getToken());
+        if (!docAttrLinkList.isPresent()) {
+            docAttrLinkList = Optional.of(getView().getDocAttrLinkList());
+        }
+
+        try {
+            if (docAttrLinkList.get().getDocAttrLink().size() > 0) {
+                if (!getFileId().isPresent()) {
+                    Integer fileId = getPs4Service().createDummyFileIncepereSolicitareRegistratura(fileData);
+                    requestFileId = Optional.ofNullable(fileId);
+                    if (attrLinkListHidden != null && attrLinkListHidden.size() != 0) {
+                        docAttrLinkList.get().getDocAttrLink().addAll(attrLinkListHidden);
+                    }
+                    getPs4Service().saveDocAttribute(fileId, docAttrLinkList.get());
+                    FileOb fileOb = new FileOb();
+                    fileOb.setFileId(fileId);
+
+                    if (getDocumentType().equals(classReabilitareId)) {
+                        getPs4Service().createProiectFromCerere(fileId, fileOb);
+                    }
+                } else {
+                    requestFileId = getFileId();
+                    getPs4Service().saveDocAttribute(getFileId().get(), docAttrLinkList.get());
+                }
+                if(requestFileId.isPresent()){
+                    fileService.saveDraft(SecurityUtils.getToken(), requestFileId.get());
                 }
                 getView().printSmartFormPdf();
                 UI.getCurrent().getPage().executeJs("swal.close()");

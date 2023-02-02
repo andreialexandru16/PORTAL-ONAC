@@ -290,6 +290,25 @@ class HystrixRestService {
 			throw e;
 		}	
 	}
+
+	public <RESPONSE> RESPONSE delete(Logger logger, Class<RESPONSE> classResp, Predicate<RESPONSE> predicate, String urlWithParams, MediaType contentType, MediaType acceptsType, Object... params) {
+		String loggingPart;
+		logger.info("dmsws requesting over "+ (loggingPart = " DELETE to "+replaceUriVariablesAndParams(urlWithParams, params)));
+		long startTime = System.currentTimeMillis();
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(contentType);
+			List<MediaType> accept = new ArrayList<MediaType>();
+			accept.add(acceptsType);
+			headers.setAccept(accept);
+			HttpEntity<String> entity = new HttpEntity<String>(headers);
+			return checkResponse(logger, "dmsws completed in "+ (System.currentTimeMillis()-startTime)+"ms for " + loggingPart, classResp, predicate,
+					getRestTemplate().exchange(urlWithParams, HttpMethod.DELETE, entity, classResp, params).getBody());
+		}catch(Throwable e) {
+			logger.error("dmsws completed in "+ (System.currentTimeMillis()-startTime)+"ms with error {"+e.getMessage()+"} for " + loggingPart);
+			throw e;
+		}
+	}
 	
 	public void handleError(Throwable t) {
 		logger.error(t.getMessage(), t);
