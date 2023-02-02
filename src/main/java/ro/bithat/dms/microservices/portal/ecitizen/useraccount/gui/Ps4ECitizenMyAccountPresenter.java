@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import ro.bithat.dms.microservices.dmsws.colaboration.AmenziResponse;
 import ro.bithat.dms.microservices.dmsws.email.Email;
+import ro.bithat.dms.microservices.dmsws.file.DmswsFileService;
 import ro.bithat.dms.microservices.dmsws.ps4.paymentintegration.DmswsBankingService;
 import ro.bithat.dms.microservices.portal.ecitizen.documenttype.backend.DmswsControlService;
 import ro.bithat.dms.microservices.portal.ecitizen.documenttype.backend.DmswsPetitiiService;
@@ -54,6 +55,10 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
     @Autowired
     private DmswsBankingService dmswsBankingService;
 
+
+    @Autowired
+    private DmswsFileService dmswsFileService;
+
     @Autowired
     private InboxService inboxService;
 
@@ -88,6 +93,7 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
         getView().setMyRequestsTable(myRequestsService.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
         getView().setMyInvoicesContainer(myRequestsService.getLimitedInvoicesByUser(String.valueOf(noRequestsShown)));
         getView().setMyDocumentsTable(myDocumentsService.getLimitedDocumentsByUser(String.valueOf(noDocumentsShown)));
+        getView().setMyDraftsContainer(dmswsFileService.getDrafts(SecurityUtils.getToken()).getFisierDraftList());
         getView().setInboxTable(inboxService.getSysEmailsByUser(SecurityUtils.getToken(),noEmailsShown.toString(),null));
         getView().setColaborationMessagesTable(colaborationService.getLastColaborationMessagesByUser());
 
@@ -132,6 +138,13 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
         getLogger().info("redirect -> my request");
         VaadinClientUrlUtil.setLocation(RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenMyInvoicesRoute.class));
     }
+
+    @ClickEventPresenterMethod(viewProperty = "anchorButtonAllDrafts")
+    public void onRedirectToMyDraftsClicked(ClickEvent<ClickNotifierAnchor> clickEvent) {
+        getLogger().info("redirect -> my request");
+        VaadinClientUrlUtil.setLocation(RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenMyDraftRequestsRoute.class));
+    }
+
     @ClickEventPresenterMethod(viewProperty = "anchorButtonAllControl")
     public void onRedirectToMyControlClicked(ClickEvent<ClickNotifierAnchor> clickEvent) {
         getLogger().info("redirect -> my control");
