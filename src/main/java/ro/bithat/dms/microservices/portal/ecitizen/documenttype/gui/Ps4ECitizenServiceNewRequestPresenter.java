@@ -1057,7 +1057,9 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
 
             } else {
                 if(isDraft){
-                    VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenMyDraftRequestsRoute.class));
+
+                    UI.getCurrent().getPage().executeJs("swalInfoParam2Top($0, $1,$2);", I18NProviderStatic.getTranslation("draft.saved"), getView(), QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenMyDraftRequestsRoute.class));
+
                 }else {
                     if (listaDoc == null || listaDoc.size() == 0) {
                         VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceRequestReviewRoute.class));
@@ -1213,7 +1215,6 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
                 getView().printSmartFormPdf();
                 UI.getCurrent().getPage().executeJs("swal.close()");
                 UI.getCurrent().getPage().executeJs("hideLoadingSpinner(); toggleDisplayState($0,$1);", "v-system-error", "none");
-
                 return 0;
             }
         } catch (Throwable e) {
