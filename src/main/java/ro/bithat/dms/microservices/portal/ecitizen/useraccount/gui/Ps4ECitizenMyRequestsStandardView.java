@@ -54,7 +54,7 @@ public class Ps4ECitizenMyRequestsStandardView extends ContentContainerView<Ps4E
         }
         //13.07.2021 - NG - ANRE - adaugare camp de cautare
         addComponentAsFirst(filterContainer);
-        setContentPageTile(I18NProviderStatic.getTranslation("ps4.ecetatean.breadcrumb.myaccount.myrequests.page.title"));
+        setContentPageTile(I18NProviderStatic.getTranslation("ps4.ecetatean.breadcrumb.myaccount.myrequestsStandard.page.title"));
         setServicesListHeaderIcon("/icons/document.png");
         formContainer.addClassNames("my_documents", "table_scroll");
 

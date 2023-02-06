@@ -28,7 +28,7 @@ public class Ps4ECitizenMyRequestsStandardRoute extends Ps4ECitizenPortalRoute {
         breadcrumbView.addCrumb("ps4.ecetatean.breadcrumb.home.page.title", RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenAnonymousHomeRoute.class));
 */
         breadcrumbView.addCrumb("ps4.ecetatean.breadcrumb.myaccount.page.title", RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenMyAccountRoute.class));
-        breadcrumbView.setCurrentPageTitle("ps4.ecetatean.breadcrumb.myaccount.myrequests.page.title");
+        breadcrumbView.setCurrentPageTitle("ps4.ecetatean.breadcrumb.myaccount.myrequestsStandard.page.title");
         addContentContainer(myRequestsView);
         return true;
     }
