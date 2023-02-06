@@ -44,6 +44,7 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
     private ClickNotifierAnchor anchorEditBtn = new ClickNotifierAnchor();
     private ClickNotifierAnchor schimbaParolaBtn = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllRequests = new ClickNotifierAnchor();
+    private ClickNotifierAnchor anchorButtonAllRequestsStandard = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllInvoices = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllDocuments = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllDrafts = new ClickNotifierAnchor();
@@ -57,6 +58,9 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
 
     private Div myRequestsContainer = new Div();
 
+
+    private Div myRequestsContainerStandard = new Div();
+
     private Div myDocumentsContainer = new Div();
 
     private Div myInvoicesContainer = new Div();
@@ -64,7 +68,7 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
     private Div myDraftsContainer = new Div();
 
 
-    private Div myAccountDetailsContainerSidebar = new Div( myRequestsContainer,myInvoicesContainer, myDocumentsContainer, myDraftsContainer);
+    private Div myAccountDetailsContainerSidebar = new Div( myRequestsContainer,myRequestsContainerStandard,myInvoicesContainer, myDocumentsContainer, myDraftsContainer);
 
     private ColaborationMessagesTableComponent colaborationMessagesTableComponent = new ColaborationMessagesTableComponent(this);
 
@@ -194,6 +198,49 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
     }
 
 
+
+
+    public void setMyRequestsStandardTable(List<PortalFile> myRequests) {
+
+        Div myRequestsHeader = new Div();
+        Div myRequestsHeaderImage = new Div();
+        Div myRequestsHeaderTitle = new Div();
+        Div myRequestsHeaderNo = new Div();
+       /*HEADER*/
+        myRequestsHeader.addClassName("header");
+        myRequestsHeaderImage.addClassName("image");
+        myRequestsHeaderTitle.addClassName("title");
+        myRequestsHeaderNo.addClassName("no");
+        HtmlContainer iconHeaderImage = new HtmlContainer("i");
+        iconHeaderImage.addClassNames("far", "fa-file-alt");
+
+        myRequestsHeaderImage.add(iconHeaderImage);
+        myRequestsHeaderTitle.add(new Text("ps4.ecetatean.breadcrumb.myaccount.myrequests.page.title"));
+        myRequestsHeaderNo.add(new Text(String.valueOf(myRequests.size())));
+
+        myRequestsHeader.add(myRequestsHeaderImage, myRequestsHeaderTitle, myRequestsHeaderNo);
+        /*REQUESTS*/
+        UnorderedList ulMyRequestsWidgetElements = new UnorderedList();
+        ulMyRequestsWidgetElements.addClassName("widget_elements");
+        for (PortalFile request : myRequests) {
+            ListItem liMyRequests = createListItemForRequests(request);
+            ulMyRequestsWidgetElements.add(liMyRequests);
+        }
+
+        /*BUTTON ALL REQUESTS*/
+
+        Div allMyRequestsButton = new Div();
+
+        allMyRequestsButton.addClassName("all_elements");
+        anchorButtonAllRequestsStandard.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.myrequests.button.all"));
+        anchorButtonAllRequestsStandard.setHref("javascript:void(0);");
+        anchorButtonAllRequestsStandard.addClassNames("btn", "btn_green", "min_width250", "btn-common");
+        /*HtmlContainer iconElementButtonGoToAllRequests = new HtmlContainer("i");
+        iconElementButtonGoToAllRequests.addClassNames("fas","fa-arrow-alt-circle-right");
+        anchorButtonAllRequests.add(iconElementButtonGoToAllRequests);*/
+        myRequestsContainerStandard.add(myRequestsHeader, ulMyRequestsWidgetElements, anchorButtonAllRequestsStandard);
+
+    }
     public void setMyRequestsTable(List<PortalFile> myRequests) {
 
         Div myRequestsHeader = new Div();
@@ -571,10 +618,6 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
 
 
 
-
-
-
-
     private ListItem createListItemForDocuments(PortalFile file) {
         ListItem liMyDocuments = new ListItem();
             /*ELEMENT CONTENT*/
@@ -643,8 +686,8 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
 
     private void setStylesForMyAccountDetailsContainerSidebar() {
         myAccountDetailsContainerSidebar.addClassNames("cold-md-12", "col-xl-4", "sidebar");
-//        myPetitiiContainer.addClassNames("sidebar_widget", "my_petitii");
         myRequestsContainer.addClassNames("sidebar_widget", "my_requests");
+        myRequestsContainerStandard.addClassNames("sidebar_widget", "my_requests");
         myInvoicesContainer.addClassNames("sidebar_widget", "my_requests");
         myDocumentsContainer.addClassNames("sidebar_widget", "my_documents");
         myDraftsContainer.addClassNames("sidebar_widget", "my_requests");

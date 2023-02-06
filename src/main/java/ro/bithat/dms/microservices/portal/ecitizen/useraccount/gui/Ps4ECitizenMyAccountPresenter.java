@@ -89,7 +89,7 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
         }else{
             getView().hideNonstandardButtons();
         }
-
+        getView().setMyRequestsStandardTable(myRequestsService.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
         getView().setMyRequestsTable(myRequestsService.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
         getView().setMyInvoicesContainer(myRequestsService.getLimitedInvoicesByUser(String.valueOf(noRequestsShown)));
         getView().setMyDocumentsTable(myDocumentsService.getLimitedDocumentsByUser(String.valueOf(noDocumentsShown)));
