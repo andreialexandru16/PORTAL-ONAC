@@ -10,6 +10,8 @@ import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.Document;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.TipDocument;
 import ro.bithat.dms.microservices.portal.ecitizen.portalfile.backend.Ps4ECitizenPortalFileService;
 import ro.bithat.dms.microservices.portal.ecitizen.gui.ContentContainerView;
+import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.ContCurentPortalE;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.DrepturiTipDoc;
 import ro.bithat.dms.microservices.portal.ecitizen.website.models.FisierDraftExtendedList;
 import ro.bithat.dms.passiveview.QueryParameterUtil;
 import ro.bithat.dms.passiveview.boot.I18NProviderStatic;
@@ -18,6 +20,7 @@ import ro.bithat.dms.passiveview.mvp.observer.FlowPresenterAfterPrepareModelObse
 import ro.bithat.dms.security.SecurityUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -151,6 +154,14 @@ public abstract class DocumentTypePresenter<V extends ContentContainerView> exte
     public boolean isDraft(Integer fileId) {
         FisierDraftExtendedList list = fileService.getDrafts(SecurityUtils.getToken());
         return (list.getFisierDraftList() !=null && list.getFisierDraftList().stream().anyMatch(e -> e.getIdFisier().equals(fileId)));
+    }
+
+    public boolean isEditable() {
+        List<DrepturiTipDoc> list = SecurityUtils.getContCurentPortalE().getUserCurent().getDrepturiTipDoc();
+        if(list == null) {
+            return false;
+        }
+        return (list.stream().anyMatch(e -> e.getId()!=null && e.getIdDocument().equals(documentId.get()) && e.isEditabil()));
     }
     
     public String getPortalFileTitle() {

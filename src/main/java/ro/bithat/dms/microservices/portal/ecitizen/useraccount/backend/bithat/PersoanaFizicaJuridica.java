@@ -1,8 +1,10 @@
 package ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat;
 
 import ro.bithat.dms.microservices.dmsws.file.BaseModel;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.DrepturiTipDoc;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
 /**
  * Modeleaza persoana din v_persoana
@@ -129,6 +131,7 @@ public class PersoanaFizicaJuridica extends BaseModel{
     private boolean domeniuEnergieElectrica;
     private boolean domeniuGazeNaturale;
     private boolean domeniuEnergieTermica;
+    private List<DrepturiTipDoc> drepturiTipDoc;
 
     public Integer getIdFiliala() {
         return idFiliala;
@@ -1014,6 +1017,14 @@ public class PersoanaFizicaJuridica extends BaseModel{
 
     public void setDomeniuEnergieTermica(boolean domeniuEnergieTermica) {
         this.domeniuEnergieTermica = domeniuEnergieTermica;
+    }
+
+    public List<DrepturiTipDoc> getDrepturiTipDoc() {
+        return drepturiTipDoc;
+    }
+
+    public void setDrepturiTipDoc(List<DrepturiTipDoc> drepturiTipDoc) {
+        this.drepturiTipDoc = drepturiTipDoc;
     }
 }
 

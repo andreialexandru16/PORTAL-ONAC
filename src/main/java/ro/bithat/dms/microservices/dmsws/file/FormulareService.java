@@ -69,4 +69,9 @@ public class FormulareService extends DmswsRestService{
 		return get(FormularList.class, checkStandardResponse(), getDmswsUrl()+"/formulare/{token}/get/{idProcedura}",
 				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token, idProcedura);
 	}
+
+	public DrepturiTipDocList getDrepturi(String token){
+		return get(DrepturiTipDocList.class, checkStandardResponse(), getDmswsUrl()+"/formulare/{token}/get_tip_doc",
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON, token);
+	}
 }

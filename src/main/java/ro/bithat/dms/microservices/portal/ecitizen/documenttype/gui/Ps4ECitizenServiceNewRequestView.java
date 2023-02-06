@@ -164,14 +164,17 @@ public class Ps4ECitizenServiceNewRequestView extends ContentContainerView<Ps4EC
                             serviceName);
                 }
             } else {
-
-                btnFooterContainer
-                        .registerPresenterNextStepMethod("document.type.service.request.next.step.title", "document.type.service.request.view.confirm.action.label");
-                btnFooterContainer.registerPresenterPreviousStepMethod("document.type.service.request.previous.step.title",
-                        serviceName);
-                btnFooterContainer.registerPresenterSaveDraftMethod("document.type.service.request.previous.step.title",
-                        serviceName);
-
+                if(getPresenter().getPortalFile().isPresent() && getPresenter().getPortalFile().get().getTrimisLa()!=null && getPresenter().isEditable()){
+                    btnFooterContainer.registerPresenterSaveFileMethod("document.type.service.request.previous.step.title",
+                            serviceName);
+                }else{
+                    btnFooterContainer
+                            .registerPresenterNextStepMethod("document.type.service.request.next.step.title", "document.type.service.request.view.confirm.action.label");
+                    btnFooterContainer.registerPresenterPreviousStepMethod("document.type.service.request.previous.step.title",
+                            serviceName);
+                    btnFooterContainer.registerPresenterSaveDraftMethod("document.type.service.request.previous.step.title",
+                            serviceName);
+                }
             }
         }
     }

@@ -14,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import ro.bithat.dms.config.LogbackFilter;
+import ro.bithat.dms.microservices.dmsws.file.FormulareService;
 import ro.bithat.dms.microservices.dmsws.file.UserToken;
 import ro.bithat.dms.microservices.dmsws.login.DmswsLoginService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsUtilizatorService;
@@ -32,6 +33,10 @@ public class DmswsAuthenticationProvider implements AuthenticationProvider {
 	private DmswsLoginService loginService;
 	@Autowired
 	private DmswsUtilizatorService dmswsUtilizatorService;
+
+	@Autowired
+	private FormulareService formulareService;
+
 	@Value("${dmsws.anonymous.username}")
 	private String anonymousUsername;
 	
@@ -89,6 +94,7 @@ public class DmswsAuthenticationProvider implements AuthenticationProvider {
         MDC.put(LogbackFilter.USERNAME, userToken.getUsername());
         MDC.put(LogbackFilter.USERID, userToken.getUserId());
 		ContCurentPortalE contCurentPortalE = dmswsUtilizatorService.getContCurentPortalE(userToken.getToken(), Integer.valueOf(userToken.getUserId()), Optional.empty());
+		contCurentPortalE.getUserCurent().setDrepturiTipDoc(formulareService.getDrepturi(userToken.getToken()).getDrepturiTipDoc());
 		SecurityUtils.forceGetAllDocumentTypes(userToken.getToken());
 
 		final UserWithUserToken principal = new UserWithUserToken(userName, password, true, true,

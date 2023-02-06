@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ro.bithat.dms.boot.BeanUtil;
 import ro.bithat.dms.config.LogbackFilter;
+import ro.bithat.dms.microservices.dmsws.file.FormulareService;
 import ro.bithat.dms.microservices.dmsws.file.User;
 import ro.bithat.dms.microservices.dmsws.file.UserToken;
 import ro.bithat.dms.microservices.dmsws.login.DmswsLoginService;
@@ -21,6 +22,7 @@ import ro.bithat.dms.microservices.dmsws.ps4.PS4Service;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsUtilizatorService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.ContCurentPortalE;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.bithat.PersoanaFizicaJuridica;
+import ro.bithat.dms.microservices.portal.ecitizen.website.models.Formular;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +39,9 @@ public class LoginController {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private DmswsUtilizatorService dmswsUtilizatorService;
+
+    @Autowired
+    private FormulareService formulareService;
 
     //PRELUARE VALORI DIN APPLICATION.PROPERTIES
     @Value("${dmsws.anonymous.username}")
@@ -106,6 +111,7 @@ public class LoginController {
             MDC.put(LogbackFilter.USERNAME, userToken.getUsername());
             MDC.put(LogbackFilter.USERID, userToken.getUserId());
             ContCurentPortalE contCurentPortalE = dmswsUtilizatorService.getContCurentPortalE(userToken.getToken(), Integer.valueOf(userToken.getUserId()), Optional.empty());
+            contCurentPortalE.getUserCurent().setDrepturiTipDoc(formulareService.getDrepturi(userToken.getToken()).getDrepturiTipDoc());
             SecurityUtils.forceGetAllDocumentTypes(userToken.getToken());
 
             final UserWithUserToken principal = new UserWithUserToken(userName, password, true, true,

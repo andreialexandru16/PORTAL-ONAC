@@ -21,6 +21,7 @@ import ro.bithat.dms.passiveview.VaadinClientUrlUtil;
 import ro.bithat.dms.passiveview.boot.I18NProviderStatic;
 import ro.bithat.dms.passiveview.component.html.ClickNotifierAnchor;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -168,8 +169,8 @@ public class Ps4ECitizenProcedureFormsView extends ContentContainerView<Ps4ECiti
         int rowIndex = index.getAndIncrement();
 
 
-        HtmlContainer iconEdit = document.isEdit() ? constructIcon("fas", "fa-edit") : constructIcon();
-        HtmlContainer mobIconEdit = document.isEdit() ? constructIcon("fas", "fa-edit") : constructIcon();
+        HtmlContainer iconEdit = (document.isEdit()) ? constructIcon("fas", "fa-edit") : constructIcon();
+        HtmlContainer mobIconEdit = (document.isEdit()) ? constructIcon("fas", "fa-edit") : constructIcon();
         HtmlContainer iconAdd = document.isAdd() ? constructIcon("fas", "fa-plus") : constructIcon();
         HtmlContainer mobIconAdd = document.isAdd() ? constructIcon("fas", "fa-plus") : constructIcon();
 
@@ -202,7 +203,7 @@ public class Ps4ECitizenProcedureFormsView extends ContentContainerView<Ps4ECiti
 
         ClickNotifierAnchor mobEditLink =new ClickNotifierAnchor();
         mobEditLink.add(mobIconEdit);
-        editLink.getElement().setAttribute("title", getTranslation("edit.draft"));
+        editLink.getElement().setAttribute("title", getTranslation("edit"));
         if(document.isEdit()) {
             mobEditLink.addClickListener(e -> {
                 Map<String, Object> filterPageParameters = new HashMap<>();

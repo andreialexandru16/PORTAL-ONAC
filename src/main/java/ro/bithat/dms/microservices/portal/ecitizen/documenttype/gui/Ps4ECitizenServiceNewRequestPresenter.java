@@ -22,6 +22,7 @@ import ro.bithat.dms.microservices.dmsws.metadata.Lov;
 import ro.bithat.dms.microservices.dmsws.ps4.DmswsPS4Service;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.DocObligatoriuExtra;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.CreateTipDocFileResponse;
+import ro.bithat.dms.microservices.portal.ecitizen.documenttype.gui.component.Ps4ECitizenProcedureFormsRoute;
 import ro.bithat.dms.microservices.portal.ecitizen.gui.component.LoadingSpinner;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsUtilizatorService;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.SolicitareService;
@@ -82,6 +83,7 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
     Optional<Integer> documentTypeId = QueryParameterUtil.getQueryParameter("tipDocument", Integer.class);
 
     private boolean isDraft = false;
+    private boolean isSended = false;
 
     @Override
     public void afterPrepareModel(String state) {
@@ -120,7 +122,7 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
         if (getFileId().isPresent()) {
             requestFileId = getFileId();
             isEmpty = false;
-            if (isPortalFileEditable() || portalFileNeedChanges() || isDraft(getFileId().get())) {
+            if (isPortalFileEditable() || portalFileNeedChanges() || isDraft(getFileId().get()) || isEditable()) {
 //                if(getPortalFile().get().getIdUser() == SecurityUtils.getUserId().intValue()) {
 
                 getView().buildDmsSmartForm(getPs4Service().getAttributeLinkListByFileId(getFileId().get()),
@@ -1001,6 +1003,13 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
 
     }
 
+    public void onSaveFileAction(ClickEvent<ClickNotifierAnchor> clickEvent) {
+        isSended = true;
+        UI.getCurrent().getPage().executeJs("window.parent.parent.scrollTo(0, 0);");
+        UI.getCurrent().getPage().executeJs("displayLoadingSpinner();").then(Integer.class, value -> saveDraft(clickEvent));
+
+    }
+
 
     public void savePdf(String pdf) {
         Map<String, Object> filterPageParameters = new HashMap<>();
@@ -1060,14 +1069,17 @@ public class Ps4ECitizenServiceNewRequestPresenter extends DocumentTypePresenter
 
                     UI.getCurrent().getPage().executeJs("swalInfoParam2Top($0, $1,$2);", I18NProviderStatic.getTranslation("draft.saved"), getView(), QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenMyDraftRequestsRoute.class));
 
-                }else {
-                    if (listaDoc == null || listaDoc.size() == 0) {
-                        VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceRequestReviewRoute.class));
-                    } else {
-                        VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceAttacheFileRoute.class));
+                }else if(isSended) {
+                    UI.getCurrent().getPage().executeJs("swalInfoParam2Top($0, $1,$2);", I18NProviderStatic.getTranslation("file.saved"), getView(), QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenProcedureFormsRoute.class));
+                }else{
+                        if (listaDoc == null || listaDoc.size() == 0) {
+                            VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceRequestReviewRoute.class));
+                        } else {
+                            VaadinClientUrlUtil.setLocation(QueryParameterUtil.getRelativePathWithQueryParameters(filterPageParameters, Ps4ECitizenServiceAttacheFileRoute.class));
+                        }
                     }
-                }
             }
+
 
         } catch (Throwable e) {
 

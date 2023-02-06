@@ -18,6 +18,8 @@ public class ServiceRequestStepsFooterButtonController extends FlowViewDivContai
 
     private final static String PRESENTER_SAVE_DRAFT_ACTION = "onSaveDraftAction";
 
+    private final static String PRESENTER_SAVE_FILE_ACTION = "onSaveFileAction";
+
     private Strong nextBtnInfoTitle = new Strong();
 
     private Label nextBtnInfoLabel = new Label();
@@ -104,6 +106,10 @@ public class ServiceRequestStepsFooterButtonController extends FlowViewDivContai
         registerPresenterSaveDraftMethod("document.type.service.newrequest.view.save.draft.action.label", title, info);
     }
 
+    public void registerPresenterSaveFileMethod(String title, String info) {
+        registerPresenterSaveFileMethod("document.type.service.newrequest.view.save.action.label", title, info);
+    }
+
 
     public void registerPresenterNextStepMethod(String btnLabel, String title, String info) {
         nextBtn.removeAll();
@@ -120,6 +126,15 @@ public class ServiceRequestStepsFooterButtonController extends FlowViewDivContai
         saveDraftBtnInfo.setVisible(true);
         saveDraftBtnInfo.add(new Strong(new Text(title)), new Text(info));
         registerClickEvent(PRESENTER_SAVE_DRAFT_ACTION, saveDraftBtn);
+        saveDraftBtn.add(new Text(btnLabel), saveDraftBtnIcon);
+    }
+
+    public void registerPresenterSaveFileMethod(String btnLabel, String title, String info) {
+        saveDraftBtn.removeAll();
+        saveDraftBtn.setVisible(true);
+        saveDraftBtnInfo.setVisible(true);
+        saveDraftBtnInfo.add(new Strong(new Text(title)), new Text(info));
+        registerClickEvent(PRESENTER_SAVE_FILE_ACTION, saveDraftBtn);
         saveDraftBtn.add(new Text(btnLabel), saveDraftBtnIcon);
     }
 

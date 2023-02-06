@@ -3,6 +3,7 @@ package ro.bithat.dms.microservices.portal.ecitizen.website.models;
 
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @XmlRootElement
@@ -10,7 +11,7 @@ public class Formular {
     private Integer id;
     private String nume;
     private String denumireDocument;
-    private Date creatLa;
+    private Timestamp creatLa;
     private boolean perioadaActiva;
     private Integer idDocument;
     private Integer idTipDocument;
@@ -18,9 +19,10 @@ public class Formular {
     private boolean add;
     private boolean edit;
     private String dataTransmitereStr;
-    private Date dataPublicare;
-    private Date dataFinalizare;
-    private Date dataTransmitere;
+    private Timestamp dataPublicare;
+    private Timestamp dataFinalizare;
+    private Timestamp dataTransmitere;
+    private Integer idWorkflowStatus;
 
     public Integer getId() {
         return id;
@@ -46,11 +48,11 @@ public class Formular {
         this.denumireDocument = denumireDocument;
     }
 
-    public Date getCreatLa() {
+    public Timestamp getCreatLa() {
         return creatLa;
     }
 
-    public void setCreatLa(Date creatLa) {
+    public void setCreatLa(Timestamp creatLa) {
         this.creatLa = creatLa;
     }
 
@@ -110,27 +112,35 @@ public class Formular {
         this.dataTransmitereStr = dataTransmitereStr;
     }
 
-    public Date getDataPublicare() {
+    public Timestamp getDataPublicare() {
         return dataPublicare;
     }
 
-    public void setDataPublicare(Date dataPublicare) {
+    public void setDataPublicare(Timestamp dataPublicare) {
         this.dataPublicare = dataPublicare;
     }
 
-    public Date getDataFinalizare() {
+    public Timestamp getDataFinalizare() {
         return dataFinalizare;
     }
 
-    public void setDataFinalizare(Date dataFinalizare) {
+    public void setDataFinalizare(Timestamp dataFinalizare) {
         this.dataFinalizare = dataFinalizare;
     }
 
-    public Date getDataTransmitere() {
+    public Timestamp getDataTransmitere() {
         return dataTransmitere;
     }
 
-    public void setDataTransmitere(Date dataTransmitere) {
+    public void setDataTransmitere(Timestamp dataTransmitere) {
         this.dataTransmitere = dataTransmitere;
+    }
+
+    public Integer getIdWorkflowStatus() {
+        return idWorkflowStatus;
+    }
+
+    public void setIdWorkflowStatus(Integer idWorkflowStatus) {
+        this.idWorkflowStatus = idWorkflowStatus;
     }
 }
