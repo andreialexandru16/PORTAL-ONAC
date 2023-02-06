@@ -21,6 +21,7 @@ import ro.bithat.dms.passiveview.VaadinClientUrlUtil;
 import ro.bithat.dms.passiveview.boot.I18NProviderStatic;
 import ro.bithat.dms.passiveview.component.html.ClickNotifierAnchor;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -42,7 +43,8 @@ public class Ps4ECitizenProcedureFormsView extends ContentContainerView<Ps4ECiti
     private TableContainerDiv serviceDocumentsTable =
             new TableContainerDiv(
                     "document.type.service.request.view.service.index.label",
-                    "my.draft.table.headers.nume",
+                    "my.draft.table.headers.status.label",
+                    "my.draft.table.headers.data.finalizare",
                     "my.draft.table.headers.denumire.document",
                     "my.draft.table.headers.creat.la",
                     "my.draft.table.headers.transmis.la",
@@ -151,12 +153,43 @@ public class Ps4ECitizenProcedureFormsView extends ContentContainerView<Ps4ECiti
         sendAtDetail.addClassName("width_calendar");
         Div mobSendAtDetail=new Div(mobIconSendAt,mobSendAtSpan);
 
+        HtmlContainer iconFinishDate = document.getDataFinalizare() != null ?
+                constructIcon("fas", "fa-calendar-alt") : constructIcon();
+        HtmlContainer mobIconFinishDate = document.getDataFinalizare() != null ?
+                constructIcon("fas", "fa-calendar-alt") : constructIcon();
+        Span finishDateSpan=new Span();
+        Span mobFinishDateSpan=new Span();
+        String finishDateStr = null;
+        if(document.getDataFinalizare() !=null){
+            finishDateStr = sdf.format(document.getDataFinalizare());
+        }
+        finishDateSpan.setText(finishDateStr);
+        mobFinishDateSpan.setText(finishDateStr);
+        Div finishDetail=new Div(iconFinishDate,finishDateSpan);
+        sendAtDetail.addClassName("width_calendar");
+        Div mobFinishDetail=new Div(mobIconFinishDate,mobFinishDateSpan);
+
         Span nume=new Span();
         Span mobNume=new Span();
         nume.setText(document.getNume());
         mobNume.setText(document.getNume());
         Div numeDetail=new Div(nume);
         Div mobNumeDetail=new Div(mobNume);
+
+        Span status=new Span();
+        Span mobStatus=new Span();
+        status.setText(document.getDataFinalizare().before(new Timestamp(System.currentTimeMillis())) ? getTranslation("status.inchis") : getTranslation("status.deschis"));
+        mobStatus.setText(document.getDataFinalizare().before(new Timestamp(System.currentTimeMillis())) ? getTranslation("status.inchis") : getTranslation("status.deschis"));
+        if(document.getDataFinalizare().before(new Timestamp(System.currentTimeMillis()))){
+            status.getElement().getStyle().set("color","red");
+            mobStatus.getElement().getStyle().set("color","red");
+
+        }else{
+            status.getElement().getStyle().set("color","green");
+            mobStatus.getElement().getStyle().set("color","green");
+        }
+        Div statusDetail=new Div(status);
+        Div mobStatusDetail=new Div(mobStatus);
 
         Span documentType=new Span();
         Span mobDocumentType=new Span();
@@ -233,7 +266,8 @@ public class Ps4ECitizenProcedureFormsView extends ContentContainerView<Ps4ECiti
         Div actionDetail=new Div(addLink, editLink);
         Div mobActionDetail=new Div(mobAddLink, mobEditLink);
         serviceDocumentsTable.addRow(new Label( rowIndex + ""),
-                numeDetail,
+                statusDetail,
+                finishDetail,
                 documentTypeDetail,
                 createdAtDetail,
                 sendAtDetail,
@@ -243,7 +277,8 @@ public class Ps4ECitizenProcedureFormsView extends ContentContainerView<Ps4ECiti
 
         Map<String, Component> mobileRowMap = new LinkedHashMap<>();
         mobileRowMap.put("document.type.service.request.view.service.index.label", new Label(rowIndex + ""));
-        mobileRowMap.put("my.draft.table.headers.nume", mobNumeDetail);
+        mobileRowMap.put("my.draft.table.headers.status.label", mobStatusDetail);
+        mobileRowMap.put("my.draft.table.headers.data.finalizare", mobFinishDetail);
         mobileRowMap.put("my.draft.table.headers.denumire.document", mobDocumentTypeDetail);
         mobileRowMap.put("my.draft.table.headers.creat.la", mobCreatedAtDetail);
         mobileRowMap.put("my.draft.table.headers.transmis.la", mobSendAtDetail);
