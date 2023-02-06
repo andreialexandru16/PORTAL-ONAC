@@ -215,7 +215,7 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         iconHeaderImage.addClassNames("far", "fa-file-alt");
 
         myRequestsHeaderImage.add(iconHeaderImage);
-        myRequestsHeaderTitle.add(new Text("ps4.ecetatean.breadcrumb.myaccount.myrequests.page.title"));
+        myRequestsHeaderTitle.add(new Text("ps4.ecetatean.breadcrumb.myaccount.myrequestsStandard.page.title"));
         myRequestsHeaderNo.add(new Text(String.valueOf(myRequests.size())));
 
         myRequestsHeader.add(myRequestsHeaderImage, myRequestsHeaderTitle, myRequestsHeaderNo);

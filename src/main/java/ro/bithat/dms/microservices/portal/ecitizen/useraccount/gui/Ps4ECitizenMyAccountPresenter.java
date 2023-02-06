@@ -46,6 +46,11 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
     @Autowired
     private CereriContController myRequestsService;
 
+
+    @Autowired
+    private DmswsMyRequestsService myRequestsServiceStandard;
+
+
     @Autowired
     private DmswsControlService myControlService;
 
@@ -89,7 +94,7 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
         }else{
             getView().hideNonstandardButtons();
         }
-        getView().setMyRequestsStandardTable(myRequestsService.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
+        getView().setMyRequestsStandardTable(myRequestsServiceStandard.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
         getView().setMyRequestsTable(myRequestsService.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
         getView().setMyInvoicesContainer(myRequestsService.getLimitedInvoicesByUser(String.valueOf(noRequestsShown)));
         getView().setMyDocumentsTable(myDocumentsService.getLimitedDocumentsByUser(String.valueOf(noDocumentsShown)));
