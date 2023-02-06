@@ -360,13 +360,13 @@ public class SmartFormComponentService {
                 return;
             }
         }
-//        if (ComplexTableComponent.class.isAssignableFrom(component.getClass())) {
-//            ComplexTableComponent tableComponent = (ComplexTableComponent) component;
-//            mapComponenteRandAtribute.entrySet().stream().forEach(e -> {
-//                e.getValue().entrySet().stream().forEach(compCompl -> appendPrintableComponent(smartForm, Long.valueOf(compCompl.getValue().getAttributeId()), compCompl.getKey()));
-//            });
-//
-//        }
+        if (ComplexTableComponent.class.isAssignableFrom(component.getClass())) {
+            ComplexTableComponent tableComponent = (ComplexTableComponent) component;
+            mapComponenteRandAtribute.entrySet().stream().forEach(e -> {
+                e.getValue().entrySet().stream().forEach(compCompl -> appendPrintableComponent(smartForm, Long.valueOf(compCompl.getValue().getAttributeId()), compCompl.getKey()));
+            });
+
+        }
         printableComponents.add(component);
         printableComponentsFormMap.get(smartFormComponent.getId().get()).put(sfcId, printableComponents);
 

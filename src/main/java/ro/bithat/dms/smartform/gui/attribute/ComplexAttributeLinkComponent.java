@@ -361,7 +361,6 @@ public class ComplexAttributeLinkComponent extends AttributeLinkGenericComponent
                 }
                 //daca atributul complex are atribut lov cu precompletare -> se precompleteaza tabelul conform valorilor din lov
                 addNewRowAttrPrecompletat(component, listaAtributeAtrComplex, smartFormId, attrComplex);
-
             }
             //2.  Cazul in care primim lista de linii pentru atibutul complex  (ex: la redeschidere cerere SAU revizie finala)
             else {
@@ -422,7 +421,9 @@ public class ComplexAttributeLinkComponent extends AttributeLinkGenericComponent
                 }
 
             }
-
+            mapAtributeComplexe.put(attrComplex.getAttributeId(), attrComplex.getAttrsOfComplex());
+            smartFormComponentService.addAttrListForAttributeComplex(smartFormId, attrComplex, attrComplex.getAttrsOfComplex());
+            smartFormComponentService.setMapComponenteRandAtribute(mapComponenteRandAtribute);
             //se adauga header pentru fiecare atribut al atributului complex
             for (AttributeLink at : listaAtributeAtrComplex) {
                 //se adauga doar daca atributul nu are bifa de ascuns (hidden)
