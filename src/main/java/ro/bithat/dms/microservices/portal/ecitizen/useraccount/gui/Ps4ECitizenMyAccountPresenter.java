@@ -46,6 +46,11 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
     @Autowired
     private CereriContController myRequestsService;
 
+
+    @Autowired
+    private DmswsMyRequestsService myRequestsServiceStandard;
+
+
     @Autowired
     private DmswsControlService myControlService;
 
@@ -89,7 +94,7 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
         }else{
             getView().hideNonstandardButtons();
         }
-
+        getView().setMyRequestsStandardTable(myRequestsServiceStandard.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
         getView().setMyRequestsTable(myRequestsService.getLimitedFilesOnWorkflowByUser(String.valueOf(noRequestsShown)));
         getView().setMyInvoicesContainer(myRequestsService.getLimitedInvoicesByUser(String.valueOf(noRequestsShown)));
         getView().setMyDocumentsTable(myDocumentsService.getLimitedDocumentsByUser(String.valueOf(noDocumentsShown)));
@@ -132,6 +137,12 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
     public void onRedirectToMyRequestsClicked(ClickEvent<ClickNotifierAnchor> clickEvent) {
         getLogger().info("redirect -> my request");
         VaadinClientUrlUtil.setLocation(RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenMyRequestsRoute.class));
+    }
+
+    @ClickEventPresenterMethod(viewProperty = "anchorButtonAllRequestsStandard")
+    public void onRedirectToMyRequestsStandardClicked(ClickEvent<ClickNotifierAnchor> clickEvent) {
+        getLogger().info("redirect -> my request");
+        VaadinClientUrlUtil.setLocation(RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenMyRequestsStandardRoute.class));
     }
     @ClickEventPresenterMethod(viewProperty = "anchorButtonAllInvoices")
     public void onRedirectToMyInvoicesClicked(ClickEvent<ClickNotifierAnchor> clickEvent) {
