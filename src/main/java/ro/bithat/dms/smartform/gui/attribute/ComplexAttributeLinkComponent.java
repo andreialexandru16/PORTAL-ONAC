@@ -2542,8 +2542,11 @@ public class ComplexAttributeLinkComponent extends AttributeLinkGenericComponent
 
                     });
                     attrNumericAdaugat.addValueChangeListener(e -> {
+
                         //calcul atribute by formula_calcul_portal
-                        SmartFormSupport.aplicareFormulaCalculPortal(rowIndex,smartFormId,mapComponenteRandAtribute);
+
+                        editInfoRow(rowIndex,  deleteButton, smartFormId, attrComplex, component,Optional.ofNullable(attributeList));
+                        SmartFormSupport.aplicareFormulaCalculPortal(rowIndex,smartFormId, mapComponenteRandAtribute);
 
 
                     });
