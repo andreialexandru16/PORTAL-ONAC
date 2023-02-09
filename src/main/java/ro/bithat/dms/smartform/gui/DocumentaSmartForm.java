@@ -16,7 +16,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.textfield.TextFieldVariant;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import javafx.scene.control.CheckBox;
 import kotlin.reflect.jvm.internal.impl.util.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import ro.bithat.dms.boot.BeanUtil;
