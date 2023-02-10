@@ -1,46 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="service-name" value="documenta-ocr-review-checkout"/>
-        <appender name="FILEJSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/logdata/logfile.log</file>
-		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp>
-                    <timeZone>GMT+3</timeZone>
-                </timestamp>
-                <arguments/>
-                <pattern>
-                    <pattern>
-                        {
-                        "@hostname":"${HOSTNAME}",
-                        "@type":"service",
-                        "@service-name":"${service-name}",
-                        "@thread-id":"%thread",
-                        "trace-id":"%X{traceid}",
-                        "username":"%X{username}",
-                        "userid":"%X{userid}",
-                        "clientIp": "%X{clientip}",
-                        "logger":"%logger",
-                        "level":"%level",
-                        "message":"%message %ex",                        
-                        "exception":"%ex"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
-        </encoder>
 
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <FileNamePattern>/logdata/logfile-%i.log.zip</FileNamePattern>
-            <MinIndex>1</MinIndex>
-            <MaxIndex>100</MaxIndex>
-        </rollingPolicy>
-
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>90MB</MaxFileSize>
-        </triggeringPolicy>
-
-    </appender>
     
     <appender name="STDOUTJSON" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">        	
@@ -89,7 +50,6 @@
     <springProfile name="!ioio">
         <root level="INFO">
             <appender-ref ref="STDOUTJSON" />
-            <appender-ref ref="FILEJSON" />
         </root>
     </springProfile>
     <springProfile name="ioio">

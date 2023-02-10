@@ -11,12 +11,15 @@ import com.vaadin.flow.router.RouteConfiguration;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.LinkUtil;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.TipDocument;
 import ro.bithat.dms.microservices.portal.ecitizen.documenttype.gui.Ps4ECitizenServiceRoute;
+import ro.bithat.dms.microservices.portal.ecitizen.documenttype.gui.component.Ps4ECitizenProcedureFormsRoute;
 import ro.bithat.dms.microservices.portal.ecitizen.onlineservices.gui.component.SearchContainer;
 import ro.bithat.dms.passiveview.VaadinClientUrlUtil;
 import ro.bithat.dms.passiveview.boot.I18NProviderStatic;
 import ro.bithat.dms.passiveview.component.html.ClickNotifierAnchor;
 import ro.bithat.dms.passiveview.component.view.DivFlowViewBuilder;
+import ro.bithat.dms.security.SecurityUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -24,10 +27,10 @@ import java.util.stream.Collectors;
 public class Ps4ECitizenHomeDocumentClassView extends DivFlowViewBuilder<Ps4ECitizenHomeDocumentClassPresenter> {
 
 
-    private SearchContainer searchFormContainer = new SearchContainer(this);
-    private HtmlContainer filterButton = new HtmlContainer(Tag.INPUT);
+//    private SearchContainer searchFormContainer = new SearchContainer(this);
+//    private HtmlContainer filterButton = new HtmlContainer(Tag.INPUT);
 
-    private Div actionContainerFilter = new Div(filterButton);
+//    private Div actionContainerFilter = new Div(filterButton);
 
 
     private ComboBox<TipDocument> serviceType = new ComboBox<>("");
@@ -35,7 +38,7 @@ public class Ps4ECitizenHomeDocumentClassView extends DivFlowViewBuilder<Ps4ECit
     private Div serviceTypeContainerFilter = new Div(serviceType);
 
 
-    private Div filterContainer = new Div(searchFormContainer);
+//    private Div filterContainer = new Div(searchFormContainer);
 
 
 
@@ -50,7 +53,7 @@ public class Ps4ECitizenHomeDocumentClassView extends DivFlowViewBuilder<Ps4ECit
 
         add(mainDiv);
         categoriesContainer.addClassNames("categorii_homepage", "row");
-        searchFormContainer.addClassName("form_lista_serv");
+//        searchFormContainer.addClassName("form_lista_serv");
 
         serviceType.setItemLabelGenerator(TipDocument::getDenumire);
         serviceType.setAllowCustomValue(false);
@@ -62,21 +65,49 @@ public class Ps4ECitizenHomeDocumentClassView extends DivFlowViewBuilder<Ps4ECit
 
     }
 
-    public SearchContainer getSearchFormContainer() {
-        return searchFormContainer;
-    }
+//    public SearchContainer getSearchFormContainer() {
+//        return searchFormContainer;
+//    }
     public void buildServiceType(List<TipDocument> documentTypes) {
         if(documentTypes != null) {
             serviceType.setItems(documentTypes);
         }
 
     }
-    public void buildDocumentClassRows(List<TipDocument> documentsClasses) {
+    public void buildDocumentClassRows() {
         categoriesContainer.removeAll();
 
         int chunkSize = 6;
 
         AtomicInteger counter = new AtomicInteger();
+        List<TipDocument> documentsClasses = new ArrayList<>();
+        if(!SecurityUtils.getToken().equalsIgnoreCase(getPresenter().getAnonymousToken())) {
+            TipDocument forms = new TipDocument();
+            forms.setDenumire(getTranslation("home.menu.forms"));
+            forms.setCod(getTranslation("FORMS"));
+            forms.setLinkUrl(RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenProcedureFormsRoute.class));
+            documentsClasses.add(forms);
+        }
+        if(!SecurityUtils.getToken().equalsIgnoreCase(getPresenter().getAnonymousToken())) {
+            TipDocument frameworkAgreement = new TipDocument();
+            frameworkAgreement.setDenumire(getTranslation("home.menu.framework.agreement"));
+            frameworkAgreement.setCod(getTranslation("FRAMEWORK-AGREEMENT"));
+            frameworkAgreement.setLinkUrl(getPresenter().getDmsUrl() + "go_get.jsp?ws_token=" + SecurityUtils.getToken() + "&targetPage=acord_cadru_filtrare.jsp?from=CORE");
+            documentsClasses.add(frameworkAgreement);
+        }
+
+
+
+        if(!SecurityUtils.getToken().equalsIgnoreCase(getPresenter().getAnonymousToken())) {
+
+            if(getPresenter().getRequestsClassId() != null && !getPresenter().getRequestsClassId().isEmpty() && SecurityUtils.getAllDocumentTypes().stream().anyMatch(e -> e.getId().toString().equals(getPresenter().getRequestsClassId()))) {
+                TipDocument requests = new TipDocument();
+                requests.setDenumire(getTranslation("home.menu.requests"));
+                requests.setCod(getTranslation("REQUESTS"));
+                requests.setLinkUrl(RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenServiceRoute.class) + "?tipDocument=" + getPresenter().getRequestsClassId());
+                documentsClasses.add(requests);
+            }
+        }
         documentsClasses.stream()
                 .collect(Collectors.groupingBy(it -> counter.getAndIncrement() / chunkSize))
                 .forEach(this::buildDocumentClassRow);
@@ -94,7 +125,7 @@ public class Ps4ECitizenHomeDocumentClassView extends DivFlowViewBuilder<Ps4ECit
         categoriesContainer.add(singleCategoryItem);
         ClickNotifierAnchor documentClassLink = new ClickNotifierAnchor();
         documentClassLink.addClassName("cat_link");
-        String url = RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenServiceRoute.class) + "?tipDocument="+documentClass.getId();
+        String url = documentClass.getLinkUrl();
 
         documentClassLink.getStyle().set("cursor", "pointer");
         documentClassLink.addClickListener(e ->
@@ -178,8 +209,8 @@ public class Ps4ECitizenHomeDocumentClassView extends DivFlowViewBuilder<Ps4ECit
         singleCategoryItem.add(sgCategory);
     }
 
-    public void addSearchFormContainer() {
-        addComponentAsFirst(filterContainer);
-
-    }
+//    public void addSearchFormContainer() {
+//        addComponentAsFirst(filterContainer);
+//
+//    }
 }

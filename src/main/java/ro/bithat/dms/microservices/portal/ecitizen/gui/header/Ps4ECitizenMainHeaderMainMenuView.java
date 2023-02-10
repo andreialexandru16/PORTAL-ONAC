@@ -47,7 +47,8 @@ public class Ps4ECitizenMainHeaderMainMenuView extends DivFlowViewBuilder<Ps4ECi
     @Override
     protected void buildView() {
         if(getPresenter().getShowHeader()){
-            navbarNav.add(homeRouteNavItem, onlineServicesRouteNavItem, faqRouteNavItem, contactRouteNavItem);
+            navbarNav.add(homeRouteNavItem);
+//            , onlineServicesRouteNavItem, faqRouteNavItem, contactRouteNavItem);
         }
         addClassName("col-xl-8");
         mainMenu.addClassName("main_menu");
@@ -60,30 +61,30 @@ public class Ps4ECitizenMainHeaderMainMenuView extends DivFlowViewBuilder<Ps4ECi
                 .equalsIgnoreCase(AnnotatedElementUtils.getMergedAnnotation(Ps4ECitizenAnonymousHomeRoute.class, Route.class).value())) {
             homeRouteNavItem.addClassName("active");
         }
-        onlineServicesRouteNavItem.addClassName("nav-item");
-        onlineServicesRouteNavItemLink.getStyle().set("cursor", "pointer");
-        onlineServicesRouteNavItemLink.setText("main.header.main.menu.view.onlineservices.nav.item.link.text");
-        onlineServicesRouteNavItemLink.addClassName("nav-link");
-        if(VaadinClientUrlUtil.getRouteRelativePath()
-                .equalsIgnoreCase(AnnotatedElementUtils.getMergedAnnotation(Ps4ECitizenOnlineServicesRoute.class, Route.class).value())) {
-            onlineServicesRouteNavItem.addClassName("active");
-        }
-        faqRouteNavItem.addClassName("nav-item");
-        faqServicesRouteNavItemLink.getStyle().set("cursor", "pointer");
-        faqServicesRouteNavItemLink.setText("main.header.main.menu.view.faq.nav.item.link.text");
-        faqServicesRouteNavItemLink.addClassName("nav-link");
-        if(VaadinClientUrlUtil.getRouteRelativePath()
-                .equalsIgnoreCase(AnnotatedElementUtils.getMergedAnnotation(Ps4ECitizenFaqRoute.class, Route.class).value())) {
-            faqRouteNavItem.addClassName("active");
-        }
-        contactRouteNavItem.addClassName("nav-item");
-        contactServicesRouteNavItemLink.getStyle().set("cursor", "pointer");
-        contactServicesRouteNavItemLink.setText("main.header.main.menu.view.contact.nav.item.link.text");
-        contactServicesRouteNavItemLink.addClassName("nav-link");
-        if(VaadinClientUrlUtil.getRouteRelativePath()
-                .equalsIgnoreCase(AnnotatedElementUtils.getMergedAnnotation(Ps4ECitizenContactRoute.class, Route.class).value())) {
-            contactRouteNavItem.addClassName("active");
-        }
+//        onlineServicesRouteNavItem.addClassName("nav-item");
+//        onlineServicesRouteNavItemLink.getStyle().set("cursor", "pointer");
+//        onlineServicesRouteNavItemLink.setText("main.header.main.menu.view.onlineservices.nav.item.link.text");
+//        onlineServicesRouteNavItemLink.addClassName("nav-link");
+//        if(VaadinClientUrlUtil.getRouteRelativePath()
+//                .equalsIgnoreCase(AnnotatedElementUtils.getMergedAnnotation(Ps4ECitizenOnlineServicesRoute.class, Route.class).value())) {
+//            onlineServicesRouteNavItem.addClassName("active");
+//        }
+//        faqRouteNavItem.addClassName("nav-item");
+//        faqServicesRouteNavItemLink.getStyle().set("cursor", "pointer");
+//        faqServicesRouteNavItemLink.setText("main.header.main.menu.view.faq.nav.item.link.text");
+//        faqServicesRouteNavItemLink.addClassName("nav-link");
+//        if(VaadinClientUrlUtil.getRouteRelativePath()
+//                .equalsIgnoreCase(AnnotatedElementUtils.getMergedAnnotation(Ps4ECitizenFaqRoute.class, Route.class).value())) {
+//            faqRouteNavItem.addClassName("active");
+//        }
+//        contactRouteNavItem.addClassName("nav-item");
+//        contactServicesRouteNavItemLink.getStyle().set("cursor", "pointer");
+//        contactServicesRouteNavItemLink.setText("main.header.main.menu.view.contact.nav.item.link.text");
+//        contactServicesRouteNavItemLink.addClassName("nav-link");
+//        if(VaadinClientUrlUtil.getRouteRelativePath()
+//                .equalsIgnoreCase(AnnotatedElementUtils.getMergedAnnotation(Ps4ECitizenContactRoute.class, Route.class).value())) {
+//            contactRouteNavItem.addClassName("active");
+//        }
         add(mainMenu);
         logoutRouteNavItem.addClassName("nav-item");
         logoutServicesRouteNavItemLink.getStyle().set("cursor", "pointer");
