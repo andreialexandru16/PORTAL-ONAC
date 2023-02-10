@@ -18,20 +18,20 @@ public class Ps4ECitizenHomeBannerCarouselSearchView extends DivFlowViewBuilder<
 
     private Optional<Div> currentSlide = Optional.empty();
 
-    private SearchContainer searchFormContainer = new SearchContainer(this);
+//    private SearchContainer searchFormContainer = new SearchContainer(this);
 
     @Override
     protected void buildView() {
         addClassName("main_slide");
         carouselSlides.clear();
-        searchFormContainer.addClassName("home_form_container");
+//        searchFormContainer.addClassName("home_form_container");
         UI.getCurrent().getPage().executeJs("initCarouselSlider($0);", getElement());
         UI.getCurrent().getPage().addJavaScript("frontend/js/voice-to-text.js");
     }
 
-    public SearchContainer getSearchFormContainer() {
-        return searchFormContainer;
-    }
+//    public SearchContainer getSearchFormContainer() {
+//        return searchFormContainer;
+//    }
 
 
     public void addCarouselSlide(String imageUrl) {
@@ -43,19 +43,19 @@ public class Ps4ECitizenHomeBannerCarouselSearchView extends DivFlowViewBuilder<
         carouselSlides.add(singleSlide);
         if(!currentSlide.isPresent()) {
             currentSlide = Optional.of(singleSlide);
-            singleSlide.add(searchFormContainer);
+//            singleSlide.add(searchFormContainer);
         }
     }
 
     @ClientCallable
     public void onCarouselSlideBeforeChange(int nextSlideIdx) {
         currentSlide.get().removeAll();
-        carouselSlides.get(nextSlideIdx).add(searchFormContainer);
+//        carouselSlides.get(nextSlideIdx).add(searchFormContainer);
     }
 
-    @ClientCallable
-    public void afterSpeachToText(String text) {
-    	searchFormContainer.setSearchTextValue(text);
-    }
+//    @ClientCallable
+//    public void afterSpeachToText(String text) {
+//    	searchFormContainer.setSearchTextValue(text);
+//    }
 
 }

@@ -48,7 +48,7 @@ public class Ps4ECitizenHomeBannerCarouselSearchPresenter
         if(showHeader){
             logger.info("presenter state:" + state);
             carouselImagesUrls.forEach(this::addImageOnViewCarousel);
-            getView().getSearchFormContainer().enablePresenterSearchEvents(documentService.getListaTipuriDocumente());
+//            getView().getSearchFormContainer().enablePresenterSearchEvents(documentService.getListaTipuriDocumente());
 
         }
           }
@@ -57,19 +57,19 @@ public class Ps4ECitizenHomeBannerCarouselSearchPresenter
         getView().addCarouselSlide(imageUrl);
     }
 
-    public void onSearchBtnClick(ClickEvent<Input> clickEvent) {
-        logger.info("Search button click searchText:\t" + searchText + "\tlist return:\t"
-                + doSearch(getView().getSearchFormContainer().getSearchTextValue()));
-    }
+//    public void onSearchBtnClick(ClickEvent<Input> clickEvent) {
+//        logger.info("Search button click searchText:\t" + searchText + "\tlist return:\t"
+//                + doSearch(getView().getSearchFormContainer().getSearchTextValue()));
+//    }
 
     public void onSpeakSearchBtnClick(ClickEvent<Input> clickEvent) {
         logger.info("Speak Search button click");
         UI.getCurrent().getPage().executeJs("startMic($0)", getView().getElement());
     }
-    public void onSearchTextChanged(AbstractField.ComponentValueChangeEvent<TextField, String> textChangeEvent) {
-        logger.info("Search text change:\t" + searchText + "\tlist return:\t"
-                + doSearch(getView().getSearchFormContainer().getSearchTextValue()));
-    }
+//    public void onSearchTextChanged(AbstractField.ComponentValueChangeEvent<TextField, String> textChangeEvent) {
+//        logger.info("Search text change:\t" + searchText + "\tlist return:\t"
+//                + doSearch(getView().getSearchFormContainer().getSearchTextValue()));
+//    }
 
     private Integer doSearch(String searchText) {
         List<Document> documents = documentService.getListaTipuriDocumenteFiltered(searchText);
