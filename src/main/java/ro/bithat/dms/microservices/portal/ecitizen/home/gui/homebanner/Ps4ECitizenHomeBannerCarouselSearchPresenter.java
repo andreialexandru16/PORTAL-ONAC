@@ -30,9 +30,9 @@ public class Ps4ECitizenHomeBannerCarouselSearchPresenter
     private List<String> carouselImagesUrls = new ArrayList<>();
 
     {
-        carouselImagesUrls.add("PORTAL/assets/images/home-banner-3.jpeg");
-        carouselImagesUrls.add("PORTAL/assets/images/home-banner-2.jpeg");
-        carouselImagesUrls.add("PORTAL/assets/images/home-banner-1.jpeg");
+//        carouselImagesUrls.add("PORTAL/assets/images/home-banner-3.jpeg");
+//        carouselImagesUrls.add("PORTAL/assets/images/home-banner-2.jpeg");
+        carouselImagesUrls.add("PORTAL/assets/images/home-banner-1.jpg");
     }
 
     private String searchText = "";
@@ -66,10 +66,7 @@ public class Ps4ECitizenHomeBannerCarouselSearchPresenter
         logger.info("Speak Search button click");
         UI.getCurrent().getPage().executeJs("startMic($0)", getView().getElement());
     }
-//    public void onSearchTextChanged(AbstractField.ComponentValueChangeEvent<TextField, String> textChangeEvent) {
-//        logger.info("Search text change:\t" + searchText + "\tlist return:\t"
-//                + doSearch(getView().getSearchFormContainer().getSearchTextValue()));
-//    }
+//    home-banner-1.jpg
 
     private Integer doSearch(String searchText) {
         List<Document> documents = documentService.getListaTipuriDocumenteFiltered(searchText);
