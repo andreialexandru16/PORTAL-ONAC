@@ -61,6 +61,7 @@ public class Ps4ECitizenMainHeaderSecondaryMenuView extends DivFlowViewBuilder<P
 
     @Override
     protected void buildView() {
+        getPresenter().auth();
         Boolean ffI18n = false;
         if(ffI18n) {
             navbarNav.add(i18nSelectorNavItem);
