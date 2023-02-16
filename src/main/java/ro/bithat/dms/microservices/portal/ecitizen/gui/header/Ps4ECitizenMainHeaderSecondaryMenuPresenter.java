@@ -4,11 +4,14 @@ import com.vaadin.flow.component.ClickEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsEmailService;
 import ro.bithat.dms.passiveview.ClickEventPresenterMethod;
+import ro.bithat.dms.passiveview.QueryParameterUtil;
 import ro.bithat.dms.passiveview.boot.UiI18nUtil;
 import ro.bithat.dms.passiveview.component.presenter.PrepareModelFlowPresenter;
+import ro.bithat.dms.security.LoginController;
 import ro.bithat.dms.security.SecurityUtils;
 
 import java.util.Locale;
+import java.util.Optional;
 
 public class Ps4ECitizenMainHeaderSecondaryMenuPresenter extends PrepareModelFlowPresenter<Ps4ECitizenMainHeaderSecondaryMenuView> {
 
@@ -26,6 +29,9 @@ public class Ps4ECitizenMainHeaderSecondaryMenuPresenter extends PrepareModelFlo
     @Autowired
     DmswsEmailService dmswsEmailService;
 
+    @Autowired
+    private LoginController loginController;
+
     @Override
     public void prepareModel(String state) {
         if(hasAuthenticateUser()){
@@ -39,5 +45,11 @@ public class Ps4ECitizenMainHeaderSecondaryMenuPresenter extends PrepareModelFlo
         return !SecurityUtils.getUsername().equalsIgnoreCase("nouser");
     }
 
+    public void auth(){
+        Optional<String> token = QueryParameterUtil.getQueryParameter("token", String.class);
+        if(token.isPresent() && token.get()!=null && !token.get().isEmpty()){
+            loginController.loginWithToken(token.get());
+        }
+    }
 
 }

@@ -146,4 +146,29 @@ public class LoginController {
         return new UserWithUserToken(anonymousUsername, "", true, true,
                 true, true, grantedAuths, dmsToken, new ContCurentPortalE());
     }
+
+    public String loginWithToken(String token){
+        UserToken userToken = loginService.validateToken(token);
+        final List<GrantedAuthority> grantedAuths = new ArrayList<>();
+        grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+        logger.info("user successfully logged in" + userToken.getUsername() + " with userid= " + userToken.getUserId() + " for unitid=" + userToken.getUnitId());
+        if (portalEndpointsAdmin != null && !portalEndpointsAdmin.isEmpty() && portalEndpointsAdmin.contains(userToken.getUsername())) {
+            grantedAuths.add(new SimpleGrantedAuthority("ROLE_ENDPOINT_ADMIN"));
+            logger.info("user successfully logged in with ROLE_ENDPOINT_ADMIN " + userToken.getUsername());
+        }
+
+        MDC.put(LogbackFilter.USERNAME, userToken.getUsername());
+        MDC.put(LogbackFilter.USERID, userToken.getUserId());
+        ContCurentPortalE contCurentPortalE = dmswsUtilizatorService.getContCurentPortalE(userToken.getToken(), Integer.valueOf(userToken.getUserId()), Optional.empty());
+        contCurentPortalE.getUserCurent().setDrepturiTipDoc(formulareService.getDrepturi(userToken.getToken()).getDrepturiTipDoc());
+        SecurityUtils.forceGetAllDocumentTypes(userToken.getToken());
+
+        final UserWithUserToken principal = new UserWithUserToken(userToken.getUsername(), userToken.getToken(), true, true,
+                true, true, grantedAuths, userToken,contCurentPortalE);
+        UsernamePasswordAuthenticationToken  auth = new UsernamePasswordAuthenticationToken(principal, userToken.getToken(), grantedAuths);
+        // {idUser:32321, token:f"da"}
+        String resp = "{\"status\": true, \"error\": \" \",\"id\":\""+userToken.getUserId()+"\",\"token\":\"" + userToken.getToken()+"\",\"prenume\":\""+userToken.getPrenume()+"\",\"expires\":\""+userToken.getExpires()+"\"}";
+
+        return continueAuth(auth,resp);
+    }
 }

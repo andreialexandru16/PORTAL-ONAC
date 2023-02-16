@@ -116,6 +116,19 @@ public class DmswsLoginService {
 		return new Boolean(response.getBody().getValid());
 	}
 
+	public UserToken validateToken(String token) {
+		RestTemplate restTemplate = getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
 
+		List<MediaType> accept = new ArrayList<MediaType>();
+		accept.add(MediaType.APPLICATION_JSON);
+		headers.setAccept(accept);
+
+		HttpEntity<User> request = new HttpEntity<User>(headers);
+
+		ResponseEntity<UserToken> response = restTemplate.exchange(url + "/login/" + token, HttpMethod.GET, request, UserToken.class);
+		return response.getBody();
+	}
 
 }
