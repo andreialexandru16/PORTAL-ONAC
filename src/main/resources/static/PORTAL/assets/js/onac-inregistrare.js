@@ -812,8 +812,65 @@ $( '#register_ac' ).submit( function( e ) {
                             },
                             success: function (resultData) {
                                 swal.close();
-                                window.location.href = '/PORTAL/relatii_terti.html?idCerere=' + resultData;
-
+                                if(resultData == "-33" || resultData == -33){
+                                    $("#register").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailurile introduse pentru institutie,persoana de contact 1 si persoana de contact 2 sunt deja folosite de catre sistem!Va rugam introduceti alte adrese de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-11" || resultData == -11){
+                                    $("#register").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailurile introduse pentru institutie si persoana de contact 1 sunt deja folosite de catre sistem!Va rugam introduceti alte adrese de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-12" || resultData == -12){
+                                    $("#register").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailurile introduse pentru institutie si persoana de contact 2 sunt deja folosite de catre sistem!Va rugam introduceti alte adrese de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-22" || resultData == -22){
+                                    $("#register").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailurile introduse pentru persoana de contact 1 si persoana de contact 2 sunt deja folosite de catre sistem!Va rugam introduceti alte adrese de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-1" || resultData == -1){
+                                    $("#register").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailul introdus pentru institutie este deja folosit de catre sistem!Va rugam introduceti alta adresa de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-2" || resultData == -2){
+                                    $("#register").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailul introdus pentru persoana de contact 1 este deja folosit de catre sistem!Va rugam introduceti alta adresa de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-3" || resultData == -3){
+                                    $("#register").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailul introdus pentru persoana de contact 2 este deja folosit de catre sistem!Va rugam introduceti alta adresa de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else {
+                                    window.location.href = '/PORTAL/relatii_terti.html?idCerere=' + resultData;
+                                }
 
                             },
                             error: function (err) {
@@ -1126,8 +1183,66 @@ $( '#register_oe' ).submit( function( e ) {
                                 $UTIL.waitForLoading();
                             },
                             success: function (resultData) {
-                                swal.close();
-                                window.location.reload();
+                                if(resultData == "-33" || resultData == -33){
+                                    swal.close();
+                                    $("#register2").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailurile introduse pentru institutie,persoana de contact 1 si persoana de contact 2 sunt deja folosite de catre sistem!Va rugam introduceti alte adrese de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-11" || resultData == -11){
+                                    $("#register2").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailurile introduse pentru institutie si persoana de contact 1 sunt deja folosite de catre sistem!Va rugam introduceti alte adrese de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-12" || resultData == -12){
+                                    $("#register2").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailurile introduse pentru institutie si persoana de contact 2 sunt deja folosite de catre sistem!Va rugam introduceti alte adrese de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-22" || resultData == -22){
+                                    $("#register2").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailurile introduse pentru persoana de contact 1 si persoana de contact 2 sunt deja folosite de catre sistem!Va rugam introduceti alte adrese de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-1" || resultData == -1){
+                                    $("#register2").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailul introdus pentru institutie este deja folosit de catre sistem!Va rugam introduceti alta adresa de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-2" || resultData == -2){
+                                    $("#register2").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailul introdus pentru persoana de contact 1 este deja folosit de catre sistem!Va rugam introduceti alta adresa de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else if(resultData == "-3" || resultData == -3){
+                                    $("#register2").removeAttr('disabled');
+                                    Swal.fire({
+                                        icon: 'error',
+                                        html: "Emailul introdus pentru persoana de contact 2 este deja folosit de catre sistem!Va rugam introduceti alta adresa de email!",
+                                        focusConfirm: false,
+                                        confirmButtonText: 'Ok',
+                                    });
+                                }else {
+                                    window.location.reload();
+                                }
                             },
                             error: function (err) {
 //    		    TODO: treat html tag for client side servers with err.responseJSON.status and err.responseJSON.message
@@ -1138,7 +1253,7 @@ $( '#register_oe' ).submit( function( e ) {
                                     focusConfirm: false,
                                     confirmButtonText: 'Ok',
                                 });
-                                $("#register").removeAttr('disabled');
+                                $("#register2").removeAttr('disabled');
 
                             }
                         });
