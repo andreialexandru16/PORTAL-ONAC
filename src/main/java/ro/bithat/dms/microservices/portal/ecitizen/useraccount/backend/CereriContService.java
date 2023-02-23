@@ -167,6 +167,7 @@ public class CereriContService extends DmswsRestService{
 		Integer idFisierDummy = result.getIdFisier();
 		Integer idCerere =  result.getIdCerere();
 		String emailInstitutie = result.getEmailInstitutie();
+		if(idCerere>0){
 		try {
 			fileService.uploadToReplaceExistingFile2(SecurityUtils.getToken(), new Long(idFisierDummy), idUtilizatorAnonimus, "cont.pdf", pdfData);
 		} catch (ServerErrorException | IOException e) {
@@ -186,6 +187,7 @@ public class CereriContService extends DmswsRestService{
 				, emailInstitutie,	"Confirmare email!",
 				"static/website/confirmare-email.html"
 		);
+		}
 
 		logger.info("user added with succes", utilizatorAcOe.getEmail_rp());
 		return idCerere;
