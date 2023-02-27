@@ -737,8 +737,11 @@ public class ComplexAttributeLinkComponent extends AttributeLinkGenericComponent
         deleteButton.addClickListener(e -> deleteInfoRow(row.getRowNumber(), deleteButton, smartFormId, attrComplex, component, newRow, listaAtributeAtrComplex));
         deleteButton.getElement().setAttribute("td-class", "text-center");
 
-        List<DocAttrLink> rowList2=   row.getListaAtribute().stream()
-                .sorted(Comparator.comparing(DocAttrLink::getPosition))
+        Comparator<DocAttrLink> compareByPosition = Comparator
+                .comparing(DocAttrLink::getColoana);
+
+        List<DocAttrLink> rowList2 = row.getListaAtribute().stream()
+                .sorted(compareByPosition)
                 .collect(Collectors.toList());
         //parcurgem fiecare atribut simplu al atributului complex si construim componentele aferenta
         for (DocAttrLink at : rowList2) {
