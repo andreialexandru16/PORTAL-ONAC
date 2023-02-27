@@ -139,10 +139,10 @@ public class Ps4ECitizenMyAccountPresenter extends PrepareModelFlowPresenter<Ps4
         VaadinClientUrlUtil.setLocation(RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenMyRequestsRoute.class));
     }
 
-    @ClickEventPresenterMethod(viewProperty = "anchorButtonAllRequestsStandard")
+    @ClickEventPresenterMethod(viewProperty = "anchorButtonAllRegistrationRequests")
     public void onRedirectToMyRequestsStandardClicked(ClickEvent<ClickNotifierAnchor> clickEvent) {
         getLogger().info("redirect -> my request");
-        VaadinClientUrlUtil.setLocation(RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenMyRequestsStandardRoute.class));
+        VaadinClientUrlUtil.setLocation(RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenMyRegistrationRequestsRoute.class));
     }
     @ClickEventPresenterMethod(viewProperty = "anchorButtonAllInvoices")
     public void onRedirectToMyInvoicesClicked(ClickEvent<ClickNotifierAnchor> clickEvent) {
