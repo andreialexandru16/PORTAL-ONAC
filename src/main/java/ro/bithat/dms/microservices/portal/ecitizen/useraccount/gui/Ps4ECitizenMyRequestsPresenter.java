@@ -9,12 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import ro.bithat.dms.microservices.dmsws.file.PortalFile;
 import ro.bithat.dms.microservices.dmsws.ps4.documents.imported.Document;
 import ro.bithat.dms.microservices.portal.ecitizen.home.gui.Ps4ECitizenHomeRoute;
-import ro.bithat.dms.microservices.portal.ecitizen.onlineservices.gui.Ps4ECitizenOnlineServicesRoute;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.api.CereriContController;
 import ro.bithat.dms.microservices.portal.ecitizen.useraccount.backend.DmswsMyRequestsService;
 import ro.bithat.dms.passiveview.ClickEventPresenterMethod;
-import ro.bithat.dms.passiveview.QueryParameterUtil;
-import ro.bithat.dms.passiveview.VaadinClientUrlUtil;
 import ro.bithat.dms.passiveview.component.html.ClickNotifierAnchor;
 import ro.bithat.dms.passiveview.component.presenter.PrepareModelFlowPresenter;
 
@@ -27,7 +24,7 @@ import java.util.stream.Collectors;
 public class Ps4ECitizenMyRequestsPresenter extends PrepareModelFlowPresenter<Ps4ECitizenMyRequestsView> {
 
     @Autowired
-    private CereriContController myRequestsService;
+    private DmswsMyRequestsService myRequestsService;
     @Value("${wordpress.url}")
     private String wordpressUrl;
 
@@ -61,19 +58,20 @@ public class Ps4ECitizenMyRequestsPresenter extends PrepareModelFlowPresenter<Ps
         String finalSearchText = searchText;
         getView().setMyRequestsTable(userRequests.stream().filter(f->
                 f.getDenumireDocument().toLowerCase().contains(finalSearchText.trim())
-                || (f.getNrInreg()==null?"":f.getNrInreg()).contains(finalSearchText.trim())
-                || (f.getDataInreg()==null?"":f.getDataInreg()).contains(finalSearchText.trim())
-                || (f.getClasaDocument()==null?"":f.getClasaDocument().toLowerCase()).contains(finalSearchText.trim())
-                ||(f.getDenumireDocument()==null?"":f.getDenumireDocument().toLowerCase()).contains(finalSearchText.trim())
-                ||f.getNume().toLowerCase().contains(finalSearchText.trim())
-                ||f.getTrimisLa().contains(finalSearchText.trim())
-                ||(f.getDenumireWorkflowStatus()==null?"":f.getDenumireWorkflowStatus().toLowerCase()).contains(finalSearchText.trim())
+                        || (f.getNrInreg()==null?"":f.getNrInreg()).contains(finalSearchText.trim())
+                        || (f.getDataInreg()==null?"":f.getDataInreg()).contains(finalSearchText.trim())
+                        || (f.getClasaDocument()==null?"":f.getClasaDocument().toLowerCase()).contains(finalSearchText.trim())
+                        ||(f.getDenumireDocument()==null?"":f.getDenumireDocument().toLowerCase()).contains(finalSearchText.trim())
+                        ||f.getNume().toLowerCase().contains(finalSearchText.trim())
+                        ||f.getTrimisLa().contains(finalSearchText.trim())
+                        ||(f.getDenumireWorkflowStatus()==null?"":f.getDenumireWorkflowStatus().toLowerCase()).contains(finalSearchText.trim())
+                        ||f.getValoarePlatita().toString().contains(finalSearchText.trim())
         ).collect(Collectors.toList()));
     }
 
     @ClickEventPresenterMethod(viewProperty = "anchorContainer")
     public void onRedirectToIndexClicked(ClickEvent<ClickNotifierAnchor> clickEvent) {
-    getLogger().info("redirect");
+        getLogger().info("redirect");
         UI.getCurrent().getPage().setLocation(RouteConfiguration.forApplicationScope().getUrl(Ps4ECitizenHomeRoute.class));
     }
 

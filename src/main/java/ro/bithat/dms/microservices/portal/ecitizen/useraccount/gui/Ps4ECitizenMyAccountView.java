@@ -44,7 +44,7 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
     private ClickNotifierAnchor anchorEditBtn = new ClickNotifierAnchor();
     private ClickNotifierAnchor schimbaParolaBtn = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllRequests = new ClickNotifierAnchor();
-    private ClickNotifierAnchor anchorButtonAllRequestsStandard = new ClickNotifierAnchor();
+    private ClickNotifierAnchor anchorButtonAllRegistrationRequests = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllInvoices = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllDocuments = new ClickNotifierAnchor();
     private ClickNotifierAnchor anchorButtonAllDrafts = new ClickNotifierAnchor();
@@ -232,13 +232,13 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         Div allMyRequestsButton = new Div();
 
         allMyRequestsButton.addClassName("all_elements");
-        anchorButtonAllRequestsStandard.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.myrequests.button.all"));
-        anchorButtonAllRequestsStandard.setHref("javascript:void(0);");
-        anchorButtonAllRequestsStandard.addClassNames("btn", "btn_green", "min_width250", "btn-common");
+        anchorButtonAllRequests.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.myrequests.button.all"));
+        anchorButtonAllRequests.setHref("javascript:void(0);");
+        anchorButtonAllRequests.addClassNames("btn", "btn_green", "min_width250", "btn-common");
         /*HtmlContainer iconElementButtonGoToAllRequests = new HtmlContainer("i");
         iconElementButtonGoToAllRequests.addClassNames("fas","fa-arrow-alt-circle-right");
         anchorButtonAllRequests.add(iconElementButtonGoToAllRequests);*/
-        myRequestsContainerStandard.add(myRequestsHeader, ulMyRequestsWidgetElements, anchorButtonAllRequestsStandard);
+        myRequestsContainerStandard.add(myRequestsHeader, ulMyRequestsWidgetElements, anchorButtonAllRequests);
 
     }
     public void setMyRequestsTable(List<PortalFile> myRequests) {
@@ -273,14 +273,14 @@ public class Ps4ECitizenMyAccountView extends DivFlowViewBuilder<Ps4ECitizenMyAc
         Div allMyRequestsButton = new Div();
 
         allMyRequestsButton.addClassName("all_elements");
-        anchorButtonAllRequests.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.myrequests.button.all"));
-        anchorButtonAllRequests.setHref("javascript:void(0);");
-        anchorButtonAllRequests.addClassNames("btn", "btn_green", "min_width250", "btn-common");
+        anchorButtonAllRegistrationRequests.add(new Text("ps4.ecetatean.breadcrumb.myaccount.page.myrequests.button.all"));
+        anchorButtonAllRegistrationRequests.setHref("javascript:void(0);");
+        anchorButtonAllRegistrationRequests.addClassNames("btn", "btn_green", "min_width250", "btn-common");
         /*HtmlContainer iconElementButtonGoToAllRequests = new HtmlContainer("i");
         iconElementButtonGoToAllRequests.addClassNames("fas","fa-arrow-alt-circle-right");
-        anchorButtonAllRequests.add(iconElementButtonGoToAllRequests);*/
+        anchorButtonAllRegistrationRequests.add(iconElementButtonGoToAllRequests);*/
 
-        myRequestsContainer.add(myRequestsHeader, ulMyRequestsWidgetElements, anchorButtonAllRequests);
+        myRequestsContainer.add(myRequestsHeader, ulMyRequestsWidgetElements, anchorButtonAllRegistrationRequests);
 
     }
 
