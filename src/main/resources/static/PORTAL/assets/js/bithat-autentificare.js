@@ -71,7 +71,7 @@ function checkCaptcha(){
 }
 //TODO just on prod
 $( '#login_form' ).submit( function( e ) {
-
+    debugger;
     var response ="true";
     try{
 

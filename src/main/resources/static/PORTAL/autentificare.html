@@ -29,53 +29,139 @@
 
   </head>
   <body>
+  <header id="main-header">
+      <!-- Identitate Vizuala -->
+      <div class="visual_identity">
+          <div class="container">
+              <div class="row">
+                  <div class="col-2 ue">
+                      <a> <!--href="javascript:void(0)" target="_blank"-->
+                          <img src="../PORTAL/assets/images/logos/uniunea-europeana.png" alt="logo uniunea europeana" />
+                      </a>
+                  </div>
+                  <div class="col-3 gov text-center">
+                      <a><!---href="javascript:void(0)" target="_blank"-->
+                          <img src="../PORTAL/assets/images/logos/guvernul-romaniei.png" alt="logo guvernul romaniei" />
+                      </a>
+                  </div>
+                  <div class="col-5 poca text-center">
+                      <a> <!--href="javascript:void(0)" target="_blank"-->
+                          <img src="../PORTAL/assets/images/logos/poca.png" alt="logo programul operational capacitate administrativa" />
+                      </a>
+                  </div>
+                  <div class="col-2 is text-right">
+                      <a><!--href="javascript:void(0)" target="_blank"-->
+                          <img src="../PORTAL/assets/images/logos/instrumente-structurale.png" alt="logo instrumente structurale" />
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
 
-  <!--<a style="float: right;padding:10px;" onclick="$UTIL.redirectToTarget($UTIL.WORDPRESS_URL)" >-->
-      <!--<i class="fas fa-window-close"></i>-->
+      <!-- Main Bar -->
+      <div class="main_header_container">
+          <div class="container">
+              <div class="row">
+                  <!-- Logo -->
+                  <div class="col-8 col-sm-6 col-md-4 col-lg-2 logo">
+                      <a href="../">
+                          <img src="../PORTAL/assets/images/logos/onac_logo.png" alt="logo">
+                      </a>
+                  </div>
+                  <!-- Menu -->
+                  <div class="col-4 col-sm-6 col-md-8 col-lg-10 menu_container">
+                      <nav class="navbar navbar-expand-xl navbar-dark">
 
-  <!--</a>-->
-    <!-- CONTENT -->
-    <div id="main-content" class="authentication_page" style="padding-top:50px">
-
-        <div class="container">
-            <div class="authentication_container cbnp_tbl">
-
-                <!-- Authentication Form -->
-                <div class="login_form cbnp_cell">
-                    <div class="box_title_anre">Introduceti adresa de email si parola</div>
-                    <form id="login_form" method="POST" action="/login">
-                        <div class="form-group cbnp-icon cbnp-user-icon">
-                            <input type="text" name="username" class="form-control" id="username" placeholder="Introduceți adresa de email">
-                        </div>
-                        <div class="form-group cbnp-icon cbnp-key-icon">
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Parola">
-                        </div>
-                        <div class="form-group row no-gutters">
-                            <div class="col-6 new-account text-nowrap">
-                                <a id="createAccount" href='#' target="_blank">Creează cont</a>
-                            </div>
-                            <div class="col-6 forgotten-pwd text-nowrap">
-                                <a id="resetPpass">Recuperează parola</a>
-                            </div>
-                        </div>
-
-
-                       <!--afisare captcha - cu cheie preluata din application.properites: google.recaptcha.secretkey-->
-                        <div id="container_captcha">
-
-                       <!-- se populeaza dinamic din bithat-autentificare.js-->
-
-                        </div>
+                          <!-- Collapse button -->
+                          <div class="empty_element"></div>
+                          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-wrap" aria-controls="menu-wrap" aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                          </button>
+                          <!-- Menu Wrapper -->
+                          <div id="menu-wrap" class="row collapse navbar-collapse">
+                              <!-- Main Menu -->
+                              <div class="col-xl-8">
+                                  <div class="main_menu">
+                                      <ul class="navbar-nav">
+                                          <li class="nav-item active">
+                                              <a href="../" class="nav-link">Acasă</a>
+                                          </li>
 
 
+                                      </ul>
+                                  </div>
+                              </div>
+                              <!-- Secondary Menu -->
+                              <div class="col-xl-4">
+                                  <nav class="secondary_top_menu">
+                                      <ul class="navbar-nav">
+                                          <li class="nav-item">
+                                              <a href="../index" class="nav-link login-icon text-nowrap"><i
+                                                      class="fas fa-user"></i> Autentificare</a>
+                                          </li>
 
+                                      </ul>
+                                  </nav>
+                              </div>
+                          </div>
+                      </nav>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
 
-                        <button type="submit" id="login-btn" class="btn full_width btn_green">Autentificare</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+  <!-- CONTENT -->
+  <div id="main-content" class="authentication_page" style="display: table;table-layout: fixed;width: 100%;">
+      <div class="desktop_cover" style="background-image: url(assets/images/login-cover.jpg);"></div>
+      <div class="container">
+          <div class="authentication_container cbnp_tbl">
+              <!-- Login Intro -->
+              <div class="login_intro cbnp_cell">
+                  <div class="mobile_cover" style="background-image: url(assets/images/login-cover.jpg);"></div>
+                  <div class="auth_content">
+                      <div class="auth_logo">
+                          <img src="../PORTAL/assets/images/logos/onac_logo.png" alt="logo onac" />
+                      </div>
+                      <h2 class="auth_title">Bun găsit</h2>
+                      <div class="sep_white"></div>
+                      <div class="auth_intro">
+                          <p>Intră în cont pentru a putea accesa serviciile electronice</p>
+                      </div>
+                  </div>
+              </div>
+              <!-- Authentication Form -->
+              <div class="login_form cbnp_cell" style="padding-right: 10% !important;width: 45% !important;">
+                  <div class="">
+
+                  </div>
+
+                  <form id="login_form" method="POST" action="/login">
+                      <div class="form-group cbnp-icon cbnp-user-icon">
+                          <input type="text" name="username" class="form-control" id="username" placeholder="Introduceți adresa de email">
+                      </div>
+                      <div class="form-group cbnp-icon cbnp-key-icon">
+                          <input type="password" name="password" class="form-control" id="password" placeholder="Parola">
+                      </div>
+                      <div class="form-group row no-gutters">
+                          <div class="col-6 new-account text-nowrap">
+                              <a href="../PORTAL/onac-inregistrare.html">Creează cont</a>
+                          </div>
+                          <div class="col-6 forgotten-pwd text-nowrap">
+                              <a href="../PORTAL/bithat-resetare-parola.html">Recuperează parola</a>
+                          </div>
+                      </div>
+
+                      <div class="g-recaptcha" data-sitekey="6LevTfwUAAAAAOl9dejxhpc1ChQcQ4DCgzNISplQ"></div>
+                      <button type="submit" id="login-btn" class="btn btn-secondary btn-block font-weight-bold">Autentificare<i class="fas fa-arrow-alt-circle-right"></i></button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- FOOTER -->
+
 
 
 
@@ -102,7 +188,6 @@
     <script src="../PORTAL/assets/js/captcha.js"></script>
 -->
     <!-- Testing Sweet Alerts / autocomplete / etc.  - should be deleted after -->
-    <!--<script src=PORTAL/PS4/assets/js/testing.js"></script>-->
 
   </body>
 </html>
